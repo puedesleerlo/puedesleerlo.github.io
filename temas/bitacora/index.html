@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alejandro Tabares — Bitácora</title>
+<meta name="description" content="Theme option: a river logbook. Dated entries, coordinates in the margin, one course running the length of the page.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23E9EDEC'/><path d='M50 4 C30 30 70 46 46 68 S52 90 50 98' stroke='%232E7A9B' stroke-width='9' fill='none' stroke-linecap='round'/><path d='M12 40 L40 52' stroke='%239A6B3E' stroke-width='6' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Faustina:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDEC; --paper-2:#DFE6E4; --paper-3:#D2DCD9;
+  --ink:#17242B; --ink-2:#4C6069; --ink-3:#78898F;
+  --rule:#C0CBC8; --river:#2E7A9B; --silt:#9A6B3E;
+  --gut:clamp(18px,4.5vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Faustina",Georgia,serif;font-size:18px;line-height:1.66}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--river);color:var(--paper)}
+:focus-visible{outline:2px solid var(--silt);outline-offset:3px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 var(--gut)}
+.lbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+
+/* ruled paper — the one texture, kept faint */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(0deg,transparent 0 31px,rgba(23,36,43,.045) 31px 32px)}
+.wrap{position:relative;z-index:1}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1.5px solid var(--ink);gap:14px;flex-wrap:wrap}
+.back{font-family:"Zilla Slab",serif;font-weight:600;font-size:13px;color:var(--ink-2)}
+.back:hover{color:var(--river)}
+
+.head{padding:clamp(40px,7vw,84px) 0 clamp(26px,4vw,44px)}
+.head h1{font-family:"Zilla Slab",serif;font-weight:700;font-size:clamp(40px,8vw,88px);line-height:1.02;letter-spacing:-.028em}
+.head .sub{font-family:"Zilla Slab",serif;font-weight:400;font-size:clamp(16px,2.2vw,21px);color:var(--ink-2);margin-top:10px}
+.head .thesis{font-size:clamp(19px,2.6vw,25px);max-width:30ch;margin-top:26px;line-height:1.44}
+.head .thesis i{font-style:italic;color:var(--river)}
+.stamp{display:inline-flex;gap:10px;align-items:center;margin-top:26px;padding:7px 13px;
+  border:1.5px solid var(--silt);color:var(--silt);border-radius:2px;transform:rotate(-1.2deg)}
+.stamp span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+/* the course + log */
+.log{display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding-bottom:20px}
+@media(min-width:800px){.log{grid-template-columns:74px minmax(0,1fr)}}
+.course{display:none}
+@media(min-width:800px){.course{display:block;position:relative}}
+.course svg{position:absolute;inset:0;width:100%;height:100%}
+.course path{fill:none;stroke:var(--river);stroke-linecap:round;opacity:.75}
+
+.entries{display:flex;flex-direction:column}
+.entry{padding:clamp(24px,3.4vw,38px) 0;border-bottom:1px solid var(--rule);position:relative}
+.entry:last-child{border-bottom:0}
+.entry__meta{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;margin-bottom:9px}
+.entry__meta .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--silt);font-weight:500}
+.entry h2{font-family:"Zilla Slab",serif;font-weight:600;font-size:clamp(21px,2.8vw,28px);letter-spacing:-.015em;margin-bottom:10px}
+.entry h2 a{border-bottom:2px solid transparent;transition:border-color .18s}
+.entry h2 a:hover{border-color:var(--river)}
+.entry p{max-width:64ch;color:var(--ink-2)}
+.entry p+p{margin-top:.7em}
+.entry .kit{margin-top:14px;display:flex;gap:7px;flex-wrap:wrap}
+.entry .kit span{font-family:"IBM Plex Mono",monospace;font-size:11px;padding:3px 8px;background:var(--paper-2);border:1px solid var(--rule);color:var(--ink-2)}
+.fig{font-family:"Zilla Slab",serif;font-weight:700;color:var(--river)}
+
+/* margin note — handwriting-adjacent aside */
+.note{font-style:italic;color:var(--ink-3);border-left:2px solid var(--silt);padding-left:14px;margin-top:16px;max-width:52ch;font-size:16.5px}
+
+.tail{padding:clamp(44px,6vw,76px) 0 0;border-top:1.5px solid var(--ink);margin-top:24px}
+.tail h2{font-family:"Zilla Slab",serif;font-weight:700;font-size:clamp(22px,3vw,30px);margin-bottom:18px}
+.links{display:grid;gap:2px;max-width:520px}
+.links a{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--rule);
+  font-family:"Zilla Slab",serif;font-weight:600;font-size:16px;transition:padding-left .2s,color .2s}
+.links a:hover{padding-left:9px;color:var(--river)}
+.links a span:last-child{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:12px;color:var(--ink-3)}
+.foot{padding:30px 0 50px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <span class="lbl">Tema 04 · Bitácora</span>
+  <a class="back" href="../">← ver todos los temas</a>
+</div>
+
+<header class="head">
+  <h1>Bitácora de<br>Alejandro Tabares</h1>
+  <div class="sub">Data &amp; knowledge architecture — Medellín, 6°14′N 75°34′W</div>
+  <p class="thesis">I build the apparatus that turns living systems into a record <i>you can read</i>.</p>
+  <div class="stamp"><span>Abierta 2018 · en curso</span></div>
+</header>
+
+<div class="log">
+
+  <div class="course" aria-hidden="true">
+    <svg viewBox="0 0 74 1000" preserveAspectRatio="none">
+      <path d="M40 0 C 20 90, 58 160, 34 250"   stroke-width="2"/>
+      <path d="M34 250 C 14 340, 60 420, 38 530" stroke-width="3.4"/>
+      <path d="M38 530 C 62 640, 18 720, 44 830" stroke-width="4.8"/>
+      <path d="M44 830 C 60 900, 30 950, 40 1000" stroke-width="6.2"/>
+      <path d="M2 214 L33 246"  stroke="var(--silt)" stroke-width="1.6" opacity=".55"/>
+      <path d="M70 392 L40 424" stroke="var(--silt)" stroke-width="1.6" opacity=".55"/>
+      <path d="M4 606 L38 636"  stroke="var(--silt)" stroke-width="1.6" opacity=".55"/>
+      <path d="M70 786 L45 812" stroke="var(--silt)" stroke-width="1.6" opacity=".55"/>
+    </svg>
+  </div>
+
+  <div class="entries">
+
+    <article class="entry">
+      <div class="entry__meta"><span class="d">2025 — en curso</span><span class="lbl">Medellín</span></div>
+      <h2>Ecosistema de datos del Espacio Público</h2>
+      <p>Fifteen years of the agency's operational memory lived in spreadsheets: SharePoint workbooks, Drive
+        sheets, AppSheet captures, contract PDFs. Five repositories now capture it, version every edit,
+        reconcile <span class="fig">34</span> historical standards into one vocabulary, geocode it,
+        anonymise it, and publish it.</p>
+      <p>The part I'd defend hardest: the AI agent that queries all this connects with a database role that
+        has <span class="fig">SELECT</span> on the published schema and an explicit revoke on everything
+        else. A compromised agent still cannot read a single identity document.</p>
+      <div class="kit"><span>dbt</span><span>DuckDB</span><span>Postgres</span><span>MetricFlow</span><span>OWL/SKOS</span></div>
+      <p class="note">Nobody could stop the operation to migrate. So the system had to be built underneath
+        it, while it ran.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry__meta"><span class="d">2026</span><span class="lbl">Nichos ELC</span></div>
+      <h2><a href="https://github.com/puedesleerlo/fitomejoradores-elc">Explorador de nichos para fitomejoramiento</a></h2>
+      <p>Where a cultivar will actually thrive, rendered as a surface a breeder can interrogate rather than a
+        static map. The return to plant breeding after eight years away, carrying everything the detour
+        taught me about provenance.</p>
+      <div class="kit"><span>Python</span><span>Streamlit</span><span>pydeck</span></div>
+    </article>
+
+    <article class="entry">
+      <div class="entry__meta"><span class="d">2025</span><span class="lbl">Geocodificación</span></div>
+      <h2>Geocodificador por niveles</h2>
+      <p>Colombian street addresses written by hand over fifteen years, in every format a person can invent.
+        A nine-stage cascade resolves them — exact nomenclature match, street interpolation, cross-street,
+        axis centroid, reference gazetteer, barrio fallback — and every coordinate keeps a record of which
+        stage produced it, so the map can be honest about its own precision.</p>
+      <p><span class="fig">154K</span> free-text addresses resolved; <span class="fig">86%</span> coverage
+        across 440K location records.</p>
+      <div class="kit"><span>DuckDB spatial</span><span>dbt</span><span>ArcGIS</span></div>
+    </article>
+
+    <article class="entry">
+      <div class="entry__meta"><span class="d">2020 — 2022</span><span class="lbl">Río</span></div>
+      <h2>Bitácora fluvial</h2>
+      <p>A river logbook and the serverless geospatial plumbing beneath it: field capture on unreliable
+        connections, sync, GeoJSON. Where I learned that data quality is decided at the moment of
+        collection and never afterwards.</p>
+      <div class="kit"><span>AWS Lambda</span><span>Vue</span><span>GeoJSON</span></div>
+      <p class="note">This entry is why the whole page is a logbook.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry__meta"><span class="d">2018 — 2019</span><span class="lbl">Máquinas</span></div>
+      <h2>Caronte, y un brazo robótico</h2>
+      <p>Data acquisition for edge-computing devices, CNC controllers, Raspberry Pi telemetry, and JavaScript
+        running on pieces of paper. Instrumentation as a physical craft, before any of it was called data
+        engineering — and where the habit of recording provenance at the point of capture began.</p>
+      <div class="kit"><span>Go</span><span>Python</span><span>Raspberry Pi</span><span>Grbl</span></div>
+    </article>
+
+  </div>
+</div>
+
+<section class="tail">
+  <h2>Contacto</h2>
+  <nav class="links">
+    <a href="mailto:datos@corlide.org"><span>Email</span><span>datos@corlide.org</span></a>
+    <a href="https://github.com/puedesleerlo"><span>GitHub</span><span>@puedesleerlo</span></a>
+  </nav>
+  <div class="foot lbl">Tema 04 · Bitácora — Zilla Slab / Faustina / IBM Plex Mono</div>
+</section>
+
+</div>
+</body>
+</html>

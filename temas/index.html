@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temas — puedesleerlo</title>
+<meta name="description" content="Four design directions for the same content. Pick one.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23151719'/><rect x='14' y='14' width='30' height='30' fill='%23A8672E'/><rect x='56' y='14' width='30' height='30' fill='%232B4C7E'/><rect x='14' y='56' width='30' height='30' fill='%23E0479E'/><rect x='56' y='56' width='30' height='30' fill='%232E7A9B'/></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#151719;--card:#1D2023;--ink:#EDEDE8;--ink2:#989C9E;--rule:#2C3033;--gut:clamp(20px,5vw,56px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid #E0479E;outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--gut)}
+.lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+header{padding:clamp(48px,8vw,96px) 0 clamp(28px,4vw,48px)}
+h1{font-weight:800;font-size:clamp(32px,6vw,60px);letter-spacing:-.035em;line-height:1.02;margin:12px 0 16px}
+header p{color:var(--ink2);max-width:56ch;font-size:17px}
+.grid{display:grid;gap:clamp(14px,2vw,20px);grid-template-columns:repeat(auto-fit,minmax(268px,1fr));padding-bottom:60px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:4px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .22s ease,border-color .22s ease}
+.card:hover{transform:translateY(-4px);border-color:#4A5054}
+.sw{display:flex;height:74px}
+.sw i{flex:1}
+.card__b{padding:20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card h2{font-weight:800;font-size:21px;letter-spacing:-.02em}
+.card p{color:var(--ink2);font-size:15px;flex:1}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#6E7376;line-height:1.75}
+.go{font-weight:600;font-size:14px;color:#E0479E;margin-top:4px}
+.live{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:#6FCF5C;border:1px solid #33553180;padding:2px 7px;border-radius:2px}
+footer{padding:0 0 60px;color:var(--ink2);font-size:15px;max-width:62ch}
+footer code{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--card);padding:2px 6px;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="lbl">puedesleerlo.github.io</div>
+  <h1>Cuatro direcciones</h1>
+  <p>The same content, four ways. Each one is a complete page — not a palette swap — built from a
+     different part of the same work. Pick one and I'll make it the site.</p>
+</header>
+
+<div class="grid">
+
+  <a class="card" href="../">
+    <div class="sw"><i style="background:#E7E6DF"></i><i style="background:#A8672E"></i><i style="background:#2A6560"></i><i style="background:#6E5480"></i><i style="background:#161A18"></i></div>
+    <div class="card__b">
+      <span class="live">En vivo</span>
+      <h2>01 · Levantamiento</h2>
+      <p>A topographic survey sheet. Bilingual field labels, record numbers, and a stratigraphic column of
+         your career hatched like geological units.</p>
+      <div class="meta">Archivo · Spectral · IBM Plex Mono<br>Light · 3 esquemas incluidos</div>
+      <div class="go">Ver →</div>
+    </div>
+  </a>
+
+  <a class="card" href="grafo/">
+    <div class="sw"><i style="background:#F7F7F4"></i><i style="background:#2B4C7E"></i><i style="background:#B5533C"></i><i style="background:#3D7A5C"></i><i style="background:#14161A"></i></div>
+    <div class="card__b">
+      <h2>02 · Grafo</h2>
+      <p>Your career as a knowledge graph. Typed nodes, typed edges, inspectable triples — the same shape
+         the ontology you maintain uses to say what a column means.</p>
+      <div class="meta">Sora · Source Serif 4 · JetBrains Mono<br>Light · interactivo</div>
+      <div class="go">Ver →</div>
+    </div>
+  </a>
+
+  <a class="card" href="camara/">
+    <div class="sw"><i style="background:#0B0D12"></i><i style="background:#E0479E"></i><i style="background:#8B3FA8"></i><i style="background:#6FCF5C"></i><i style="background:#E8EAE6"></i></div>
+    <div class="card__b">
+      <h2>03 · Cámara</h2>
+      <p>A controlled-environment growth chamber. The palette is a real horticultural LED spectrum; projects
+         are wells on a replicate plate; the timeline is a growth curve.</p>
+      <div class="meta">Bricolage Grotesque · Newsreader · IBM Plex Mono<br>Dark</div>
+      <div class="go">Ver →</div>
+    </div>
+  </a>
+
+  <a class="card" href="bitacora/">
+    <div class="sw"><i style="background:#E9EDEC"></i><i style="background:#2E7A9B"></i><i style="background:#9A6B3E"></i><i style="background:#C0CBC8"></i><i style="background:#17242B"></i></div>
+    <div class="card__b">
+      <h2>04 · Bitácora</h2>
+      <p>A river logbook, from <em>bitacora-fluvial</em>. Dated entries, coordinates in the margin, and one
+         course running the length of the page, widening as tributaries join.</p>
+      <div class="meta">Zilla Slab · Faustina · IBM Plex Mono<br>Light · con textura</div>
+      <div class="go">Ver →</div>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  These live under <code>/temas/</code> so they don't touch the main site. Tell me which one wins and I'll
+  promote it to the root, move the current one here, and delete the rest.
+</footer>
+</div>
+</body>
+</html>

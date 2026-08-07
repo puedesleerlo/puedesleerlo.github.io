@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alejandro Tabares — Grafo</title>
+<meta name="description" content="Theme option: the career as a knowledge graph. Typed nodes, typed edges, inspectable triples.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F7F7F4'/><circle cx='30' cy='34' r='11' fill='%232B4C7E'/><circle cx='72' cy='24' r='8' fill='%23B5533C'/><circle cx='66' cy='72' r='8' fill='%233D7A5C'/><path d='M30 34 72 24M30 34 66 72' stroke='%23A8A8A0' stroke-width='3'/></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F7F4; --panel:#FFFFFF; --ink:#14161A; --ink-2:#5A5F66; --ink-3:#8B9099;
+  --rule:#DFDFD8;
+  --person:#2B4C7E; --work:#B5533C; --tool:#3D7A5C; --edge:#B4B4AC;
+  --gut:clamp(20px,5vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--work);outline-offset:3px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.01em}
+.lbl{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.dsp{font-family:"Sora",system-ui,sans-serif;font-weight:700;letter-spacing:-.03em}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule);gap:14px;flex-wrap:wrap}
+.back{font-family:"Sora",sans-serif;font-weight:600;font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:2px}
+.back:hover{color:var(--work);border-color:var(--work)}
+
+.hero{padding:clamp(38px,6vw,72px) 0 clamp(20px,3vw,34px)}
+.hero h1{font-family:"Sora",sans-serif;font-weight:700;font-size:clamp(38px,7vw,80px);line-height:1;letter-spacing:-.04em}
+.hero .sub{font-family:"Sora",sans-serif;font-weight:400;font-size:clamp(15px,2vw,19px);color:var(--ink-2);margin-top:14px;max-width:52ch}
+.hero .sub b{color:var(--ink);font-weight:600}
+
+/* graph */
+.graphwrap{border:1px solid var(--rule);background:var(--panel);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.graph{display:block;width:100%;height:auto;touch-action:pan-y}
+.n{cursor:pointer}
+.n circle{transition:r .2s ease,opacity .2s ease}
+.n text{font-family:"Sora",sans-serif;font-weight:600;font-size:13px;fill:var(--ink);pointer-events:none}
+.e{stroke:var(--edge);stroke-width:1.4;transition:stroke .2s ease,stroke-width .2s ease,opacity .2s ease}
+.et{font-family:"JetBrains Mono",monospace;font-size:9.5px;fill:var(--ink-3);opacity:0;transition:opacity .2s ease;pointer-events:none}
+.dim{opacity:.18}
+.hot{stroke:var(--ink);stroke-width:2.2}
+.hot+.et,.et.on{opacity:1}
+
+.readout{border:1px solid var(--rule);background:var(--panel);border-radius:3px;padding:clamp(16px,2.5vw,24px);min-height:150px}
+.readout h3{font-family:"Sora",sans-serif;font-weight:600;font-size:20px;letter-spacing:-.015em;margin-bottom:4px}
+.readout .type{display:inline-block;padding:2px 7px;border-radius:2px;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:#fff;margin-bottom:12px}
+.triples{display:grid;gap:5px;margin-top:12px}
+.tr{display:grid;grid-template-columns:auto auto 1fr;gap:10px;align-items:baseline;font-family:"JetBrains Mono",monospace;font-size:12px;padding:5px 0;border-bottom:1px dotted var(--rule)}
+.tr .p{color:var(--tool)}
+.tr .o{color:var(--ink-2);font-family:"Source Serif 4",serif;font-size:15px}
+.hint{color:var(--ink-3);font-style:italic}
+
+/* sections */
+.sec{padding:clamp(46px,7vw,84px) 0;border-top:1px solid var(--rule)}
+.sec h2{font-family:"Sora",sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);letter-spacing:-.025em;margin-bottom:26px}
+.ent{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.ent article{background:var(--panel);padding:clamp(18px,2.6vw,26px)}
+.ent h3{font-family:"Sora",sans-serif;font-weight:600;font-size:19px;letter-spacing:-.015em;margin-bottom:8px}
+.ent p{color:var(--ink-2);max-width:66ch;font-size:16px}
+.props{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-family:"JetBrains Mono",monospace;font-size:11px;padding:3px 8px;border:1px solid var(--rule);border-radius:2px;color:var(--ink-2)}
+
+.links{display:grid;gap:2px;max-width:520px}
+.links a{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--rule);font-family:"Sora",sans-serif;font-weight:600;font-size:16px;transition:padding-left .18s}
+.links a:hover{padding-left:8px;color:var(--work)}
+.links a span:last-child{font-family:"JetBrains Mono",monospace;font-weight:400;font-size:12px;color:var(--ink-3)}
+.foot{padding:26px 0 46px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:640px){.hero h1{font-size:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <span class="lbl">Tema 02 · Grafo</span>
+  <a class="back" href="../">← ver todos los temas</a>
+</div>
+
+<section class="hero">
+  <h1>Alejandro Tabares</h1>
+  <p class="sub">Everything here is an <b>entity</b>, and every claim is a <b>typed edge</b>.
+    Hover a node to read its triples — the same shape the ontology I maintain uses to say
+    what a column means.</p>
+</section>
+
+<div class="graphwrap">
+<svg class="graph" viewBox="0 0 900 520" role="img" aria-label="Knowledge graph of projects, tools and the person who built them">
+  <g id="edges" fill="none">
+    <g><path class="e" data-a="me" data-b="ep"   d="M170 262 L392 128"/><text class="et" x="270" y="187">construyó</text></g>
+    <g><path class="e" data-a="me" data-b="geo"  d="M172 266 L406 254"/><text class="et" x="278" y="253">construyó</text></g>
+    <g><path class="e" data-a="me" data-b="pal"  d="M170 274 L392 378"/><text class="et" x="268" y="335">construyó</text></g>
+    <g><path class="e" data-a="me" data-b="fito" d="M158 284 L300 452"/><text class="et" x="212" y="378">construyó</text></g>
+    <g><path class="e" data-a="me" data-b="car"  d="M150 240 L246 92"/><text class="et" x="182" y="166">construyó</text></g>
+    <g><path class="e" data-a="car" data-b="ep"  d="M262 96 L396 118"/><text class="et" x="312" y="99">derivó_en</text></g>
+    <g><path class="e" data-a="ep" data-b="dbt"  d="M436 122 L678 96"/><text class="et" x="546" y="102">usa</text></g>
+    <g><path class="e" data-a="ep" data-b="duck" d="M438 130 L724 186"/><text class="et" x="566" y="150">usa</text></g>
+    <g><path class="e" data-a="ep" data-b="owl"  d="M436 136 L664 396"/><text class="et" x="530" y="262">usa</text></g>
+    <g><path class="e" data-a="geo" data-b="duck" d="M448 250 L722 190"/><text class="et" x="580" y="211">usa</text></g>
+    <g><path class="e" data-a="pal" data-b="mf"  d="M436 376 L698 306"/><text class="et" x="556" y="333">usa</text></g>
+    <g><path class="e" data-a="pal" data-b="py"  d="M428 390 L602 462"/><text class="et" x="504" y="432">usa</text></g>
+    <g><path class="e" data-a="fito" data-b="py" d="M330 464 L596 470"/><text class="et" x="450" y="461">usa</text></g>
+    <g><path class="e" data-a="ep" data-b="mf"   d="M440 140 L700 296"/><text class="et" x="576" y="223">usa</text></g>
+  </g>
+  <g id="nodes">
+    <g class="n" data-id="me" tabindex="0"><circle cx="150" cy="262" r="26" fill="var(--person)"/><text x="150" y="312" text-anchor="middle">Alejandro</text></g>
+    <g class="n" data-id="ep"   tabindex="0"><circle cx="412" cy="124" r="18" fill="var(--work)"/><text x="412" y="96"  text-anchor="middle">Espacio Público</text></g>
+    <g class="n" data-id="geo"  tabindex="0"><circle cx="428" cy="252" r="16" fill="var(--work)"/><text x="428" y="284" text-anchor="middle">Geocoder</text></g>
+    <g class="n" data-id="pal"  tabindex="0"><circle cx="412" cy="380" r="16" fill="var(--work)"/><text x="412" y="412" text-anchor="middle">Palimpsest</text></g>
+    <g class="n" data-id="fito" tabindex="0"><circle cx="308" cy="462" r="15" fill="var(--work)"/><text x="308" y="494" text-anchor="middle">Nichos ELC</text></g>
+    <g class="n" data-id="car"  tabindex="0"><circle cx="252" cy="84"  r="14" fill="var(--work)"/><text x="252" y="58"  text-anchor="middle">Caronte</text></g>
+    <g class="n" data-id="dbt"  tabindex="0"><circle cx="692" cy="94"  r="12" fill="var(--tool)"/><text x="716" y="99"  text-anchor="start">dbt</text></g>
+    <g class="n" data-id="duck" tabindex="0"><circle cx="738" cy="188" r="12" fill="var(--tool)"/><text x="762" y="193" text-anchor="start">DuckDB</text></g>
+    <g class="n" data-id="mf"   tabindex="0"><circle cx="712" cy="302" r="12" fill="var(--tool)"/><text x="736" y="307" text-anchor="start">MetricFlow</text></g>
+    <g class="n" data-id="owl"  tabindex="0"><circle cx="676" cy="402" r="12" fill="var(--tool)"/><text x="700" y="407" text-anchor="start">OWL / SKOS</text></g>
+    <g class="n" data-id="py"   tabindex="0"><circle cx="612" cy="466" r="12" fill="var(--tool)"/><text x="636" y="471" text-anchor="start">Python</text></g>
+  </g>
+</svg>
+</div>
+
+<div class="readout" id="out">
+  <p class="hint">Hover or focus any node to inspect it.</p>
+</div>
+
+<section class="sec">
+  <h2>Entities</h2>
+  <div class="ent">
+    <article><h3>Espacio Público data ecosystem</h3>
+      <p>Five repositories that capture, version, clean, anonymise and publish the operational memory of a
+        municipal agency — served to public dashboards and to an AI agent that physically cannot reach
+        personal data.</p>
+      <div class="props"><span class="chip">34 standards</span><span class="chip">440K locations</span><span class="chip">2025—</span></div></article>
+    <article><h3>Tiered address geocoder</h3>
+      <p>Nine stages from exact nomenclature match to barrio fallback, each coordinate carrying a record of
+        which stage produced it.</p>
+      <div class="props"><span class="chip">86% coverage</span><span class="chip">154K resolved</span></div></article>
+    <article><h3>Palimpsest</h3>
+      <p>Open-source reconstruction on synthetic data, with an evaluation harness that measures whether a
+        semantic layer makes an agent more accurate — with confidence intervals, not adjectives.</p>
+      <div class="props"><span class="chip">in progress</span><span class="chip">agent evaluation</span></div></article>
+    <article><h3>Explorador de Nichos ELC</h3>
+      <p>Ecological niche exploration for plant-breeding programmes: where a cultivar will actually thrive,
+        as a surface a breeder can interrogate.</p>
+      <div class="props"><span class="chip">2026</span><span class="chip">Streamlit · pydeck</span></div></article>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Contact</h2>
+  <nav class="links">
+    <a href="mailto:datos@corlide.org"><span>Email</span><span>datos@corlide.org</span></a>
+    <a href="https://github.com/puedesleerlo"><span>GitHub</span><span>@puedesleerlo</span></a>
+  </nav>
+</section>
+
+<div class="foot lbl">Tema 02 · Grafo — Sora / Source Serif 4 / JetBrains Mono</div>
+</div>
+
+<script>
+(function(){
+  var D={
+    me:{t:'Person',c:'var(--person)',n:'Alejandro Tabares',tr:[['rdf:type','foaf:Person'],['ubicación','Medellín, Colombia'],['campo','Data &amp; knowledge architecture'],['activo desde','2018']]},
+    ep:{t:'Work',c:'var(--work)',n:'Espacio Público data ecosystem',tr:[['rdf:type','Sistema de datos'],['estándares','34 fuentes históricas'],['escala','440K registros de lugar'],['publica','capa anonimizada + API']]},
+    geo:{t:'Work',c:'var(--work)',n:'Tiered address geocoder',tr:[['rdf:type','Pipeline geoespacial'],['etapas','9 niveles en cascada'],['cobertura','86% de 440K registros'],['resuelve','154K direcciones libres']]},
+    pal:{t:'Work',c:'var(--work)',n:'Palimpsest',tr:[['rdf:type','Proyecto abierto'],['estado','en curso'],['mide','exactitud de agentes'],['método','ablación con intervalos']]},
+    fito:{t:'Work',c:'var(--work)',n:'Explorador de Nichos ELC',tr:[['rdf:type','Modelo espacial'],['dominio','fitomejoramiento'],['año','2026']]},
+    car:{t:'Work',c:'var(--work)',n:'Caronte',tr:[['rdf:type','Software de adquisición'],['dominio','edge computing'],['año','2019'],['derivó_en','la costumbre de registrar procedencia']]},
+    dbt:{t:'Tool',c:'var(--tool)',n:'dbt',tr:[['rdf:type','Transformación'],['usado en','Espacio Público, Palimpsest']]},
+    duck:{t:'Tool',c:'var(--tool)',n:'DuckDB',tr:[['rdf:type','Motor analítico'],['usado en','warehouse local + spatial']]},
+    mf:{t:'Tool',c:'var(--tool)',n:'MetricFlow',tr:[['rdf:type','Capa semántica'],['función','única interfaz del agente']]},
+    owl:{t:'Tool',c:'var(--tool)',n:'OWL / SKOS',tr:[['rdf:type','Ontología'],['función','identidad permanente por columna']]},
+    py:{t:'Tool',c:'var(--tool)',n:'Python',tr:[['rdf:type','Lenguaje'],['desde','2018']]}
+  };
+  var out=document.getElementById('out'), nodes=document.querySelectorAll('.n'),
+      edges=document.querySelectorAll('.e'), lbls=document.querySelectorAll('.et');
+
+  function clear(){
+    nodes.forEach(function(n){n.classList.remove('dim')});
+    edges.forEach(function(e){e.classList.remove('dim','hot')});
+    lbls.forEach(function(l){l.classList.remove('on','dim')});
+  }
+  function show(id){
+    var d=D[id]; if(!d) return;
+    var near={}; near[id]=1;
+    edges.forEach(function(e){
+      var a=e.dataset.a,b=e.dataset.b, lab=e.parentNode.querySelector('.et');
+      if(a===id||b===id){e.classList.add('hot');lab.classList.add('on');near[a]=1;near[b]=1;}
+      else {e.classList.add('dim');lab.classList.remove('on');}
+    });
+    nodes.forEach(function(n){ if(!near[n.dataset.id]) n.classList.add('dim') });
+    out.innerHTML='<span class="type" style="background:'+d.c+'">'+d.t+'</span>'+
+      '<h3>'+d.n+'</h3><div class="triples">'+
+      d.tr.map(function(t){return '<div class="tr"><span class="s">:'+id+'</span><span class="p">'+t[0]+'</span><span class="o">'+t[1]+'</span></div>'}).join('')+
+      '</div>';
+  }
+  nodes.forEach(function(n){
+    n.addEventListener('mouseenter',function(){clear();show(n.dataset.id)});
+    n.addEventListener('focus',function(){clear();show(n.dataset.id)});
+  });
+  document.querySelector('.graphwrap').addEventListener('mouseleave',function(){
+    clear(); out.innerHTML='<p class="hint">Hover or focus any node to inspect it.</p>';
+  });
+})();
+</script>
+</body>
+</html>

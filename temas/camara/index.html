@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alejandro Tabares — Cámara</title>
+<meta name="description" content="Theme option: a controlled-environment growth chamber. Horticultural LED spectrum, replicate plate, growth curve.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230B0D12'/><rect y='8' width='100' height='9' fill='%23E0479E'/><circle cx='34' cy='58' r='14' fill='none' stroke='%236FCF5C' stroke-width='5'/><circle cx='70' cy='72' r='10' fill='none' stroke='%236FCF5C' stroke-width='5'/></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0D12; --bg2:#12151C; --panel:#161A22;
+  --ink:#E8EAE6; --ink-2:#98A09A; --ink-3:#6B736E;
+  --rule:#262B34;
+  --grow:#E0479E; --far:#8B3FA8; --chloro:#6FCF5C;
+  --gut:clamp(20px,5vw,60px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:17.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--grow);color:#fff}
+:focus-visible{outline:2px solid var(--chloro);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+.lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.dsp{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+
+/* the light bar — real horticultural LED spectrum */
+.spectrum{height:5px;background:linear-gradient(90deg,var(--far) 0%,var(--grow) 22%,#C0468C 38%,var(--grow) 55%,#F0645C 72%,var(--chloro) 100%);
+  box-shadow:0 0 34px -4px var(--grow)}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule);gap:14px;flex-wrap:wrap}
+.back{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:2px}
+.back:hover{color:var(--chloro);border-color:var(--chloro)}
+
+.hero{padding:clamp(52px,9vw,116px) 0 clamp(34px,5vw,60px);position:relative}
+.hero::before{content:"";position:absolute;inset:-40% -20% auto 30%;height:420px;
+  background:radial-gradient(ellipse at top,rgba(224,71,158,.16),transparent 62%);pointer-events:none}
+.hero h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(42px,9vw,104px);
+  line-height:.94;letter-spacing:-.035em;position:relative}
+.hero h1 em{font-style:normal;color:var(--grow)}
+.hero .role{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--chloro);margin:20px 0 26px}
+.hero p{font-size:clamp(19px,2.6vw,26px);line-height:1.42;max-width:27ch;color:var(--ink);position:relative}
+.hero p span{color:var(--ink-2)}
+
+.readings{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(34px,5vw,54px)}
+.readings div{background:var(--bg2);padding:15px 16px}
+.readings b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:25px;color:var(--chloro);letter-spacing:-.02em;margin-top:5px}
+
+.sec{padding:clamp(52px,8vw,100px) 0;border-top:1px solid var(--rule)}
+.sec h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,36px);letter-spacing:-.03em;margin-bottom:10px}
+.sec .intro{color:var(--ink-2);max-width:60ch;margin-bottom:clamp(28px,4vw,44px)}
+
+/* replicate plate */
+.plate{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:clamp(14px,2vw,20px)}
+.well{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:clamp(18px,2.4vw,26px);
+  position:relative;overflow:hidden;transition:border-color .25s ease,transform .25s ease}
+.well:hover{border-color:var(--grow);transform:translateY(-3px)}
+.well::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--fill,var(--chloro))}
+.disc{width:44px;height:44px;border-radius:50%;border:2px solid var(--fill,var(--chloro));
+  display:grid;place-items:center;margin-bottom:15px;
+  background:radial-gradient(circle at 34% 30%,color-mix(in srgb,var(--fill,var(--chloro)) 40%,transparent),transparent 70%)}
+.disc span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--fill,var(--chloro))}
+.well h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;letter-spacing:-.015em;margin-bottom:8px}
+.well p{font-size:15.5px;color:var(--ink-2)}
+.well .kit{margin-top:13px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);line-height:1.7}
+
+/* growth curve */
+.curve{width:100%;height:auto;display:block;border:1px solid var(--rule);background:var(--bg2);border-radius:3px}
+.curve .grid{stroke:var(--rule);stroke-width:1}
+.curve .line{fill:none;stroke:var(--chloro);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.curve .pt{fill:var(--grow)}
+.curve .yr{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--ink-3)}
+.curve .cap{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:12.5px;fill:var(--ink)}
+
+.eras{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:18px}
+.eras div{background:var(--bg2);padding:17px 20px;display:grid;grid-template-columns:minmax(0,1fr);gap:5px}
+@media(min-width:720px){.eras div{grid-template-columns:130px minmax(0,1fr);gap:22px;align-items:baseline}}
+.eras h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;margin-bottom:3px}
+.eras p{font-size:15.5px;color:var(--ink-2);max-width:64ch}
+
+.links{display:grid;gap:2px;max-width:540px}
+.links a{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rule);
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;transition:padding-left .2s,color .2s}
+.links a:hover{padding-left:9px;color:var(--grow)}
+.links a span:last-child{font-family:"IBM Plex Mono",monospace;font-weight:400;font-size:12px;color:var(--ink-3)}
+.foot{padding:26px 0 48px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.curve .line{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div class="spectrum"></div>
+<div class="wrap">
+
+<div class="top">
+  <span class="lbl">Tema 03 · Cámara</span>
+  <a class="back" href="../">← ver todos los temas</a>
+</div>
+
+<section class="hero">
+  <h1>Alejandro<br><em>Tabares</em></h1>
+  <div class="role">Data &amp; knowledge architecture · Medellín</div>
+  <p>I build the apparatus that turns living systems into a record <span>you can read.</span></p>
+
+  <div class="readings">
+    <div><span class="lbl">Fuentes</span><b>34</b></div>
+    <div><span class="lbl">Lugares</span><b>440K</b></div>
+    <div><span class="lbl">Cobertura geo</span><b>86%</b></div>
+    <div><span class="lbl">Anonimizados</span><b>415K</b></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Placa de réplicas</h2>
+  <p class="intro">Five things I've grown. The ring shows how far along each one is — filled is shipped,
+    open is still under light.</p>
+  <div class="plate">
+
+    <article class="well" style="--fill:var(--chloro)">
+      <div class="disc"><span>R1</span></div>
+      <h3>Espacio Público</h3>
+      <p>Five repositories turning fifteen years of spreadsheets into a governed warehouse — anonymised,
+         versioned, and queryable by an agent that cannot reach personal data.</p>
+      <div class="kit">dbt · DuckDB · Postgres · MetricFlow</div>
+    </article>
+
+    <article class="well" style="--fill:var(--chloro)">
+      <div class="disc"><span>R2</span></div>
+      <h3>Geocodificador por niveles</h3>
+      <p>Nine stages from exact nomenclature match to barrio fallback. Every coordinate remembers which
+         stage produced it.</p>
+      <div class="kit">DuckDB spatial · dbt · ArcGIS</div>
+    </article>
+
+    <article class="well" style="--fill:var(--grow)">
+      <div class="disc"><span>R3</span></div>
+      <h3>Nichos ELC</h3>
+      <p>Where a cultivar will actually thrive, as a surface a breeder can interrogate rather than a
+         static map.</p>
+      <div class="kit">Python · Streamlit · pydeck</div>
+    </article>
+
+    <article class="well" style="--fill:var(--far)">
+      <div class="disc"><span>R4</span></div>
+      <h3>Palimpsest</h3>
+      <p>Open-source, on synthetic data: does a semantic layer actually make an agent more accurate?
+         Measured with confidence intervals, not adjectives.</p>
+      <div class="kit">Python · dbt · MetricFlow · Anthropic API</div>
+    </article>
+
+    <article class="well" style="--fill:var(--ink-3)">
+      <div class="disc"><span>R5</span></div>
+      <h3>Caronte</h3>
+      <p>Data acquisition for edge devices, 2019. Where the habit of recording provenance at the moment
+         of capture started.</p>
+      <div class="kit">Go · Python · Raspberry Pi</div>
+    </article>
+
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Curva de crecimiento</h2>
+  <p class="intro">Each point is a subject I was learning to instrument. The scale on the left is not
+    rigorous — it's how much of a system I could hold at once.</p>
+
+  <svg class="curve" viewBox="0 0 880 300" role="img" aria-label="Growth curve of work periods from 2018 to present">
+    <g class="grid">
+      <line x1="60" y1="250" x2="850" y2="250"/><line x1="60" y1="185" x2="850" y2="185"/>
+      <line x1="60" y1="120" x2="850" y2="120"/><line x1="60" y1="55"  x2="850" y2="55"/>
+      <line x1="60" y1="30"  x2="60"  y2="250"/>
+    </g>
+    <path class="line" d="M110 236 C 220 228, 250 196, 320 190 S 450 168, 500 132 S 640 96, 700 72 S 800 56, 830 48"/>
+    <g class="pt">
+      <circle cx="110" cy="236" r="5"/><circle cx="320" cy="190" r="5"/><circle cx="500" cy="132" r="5"/>
+      <circle cx="700" cy="72" r="5"/><circle cx="830" cy="48" r="5"/>
+    </g>
+    <g class="yr">
+      <text x="110" y="270" text-anchor="middle">2018</text><text x="320" y="270" text-anchor="middle">2020</text>
+      <text x="500" y="270" text-anchor="middle">2022</text><text x="700" y="270" text-anchor="middle">2024</text>
+      <text x="830" y="270" text-anchor="middle">2026</text>
+    </g>
+    <g class="cap">
+      <text x="110" y="222" text-anchor="middle">máquinas</text><text x="320" y="176" text-anchor="middle">ríos</text>
+      <text x="500" y="118" text-anchor="middle">poblaciones</text><text x="700" y="58" text-anchor="middle">lenguaje</text>
+      <text x="830" y="34" text-anchor="end">una ciudad</text>
+    </g>
+  </svg>
+
+  <div class="eras">
+    <div><h3>2025 —</h3><p>Public-sector data governance at municipal scale, and a return to plant breeding.
+      The two turn out to be the same problem: a heterogeneous historical record and a decision that has
+      to be defensible.</p></div>
+    <div><h3>2024 — 2025</h3><p>Retrieval over public tenders, knowledge-graph embeddings, agent frameworks.
+      Learning where a language model is load-bearing and where it's an expensive <code>GROUP BY</code>.</p></div>
+    <div><h3>2021 — 2023</h3><p>Genomics documentation, applied data science, geospatial visualisation. The
+      work is rarely the model — it's establishing that two rows refer to the same organism.</p></div>
+    <div><h3>2020 — 2022</h3><p>A fluvial logbook and the serverless plumbing beneath it. Data quality is
+      decided at collection, not in the warehouse.</p></div>
+    <div><h3>2018 — 2019</h3><p>A robotic arm, CNC controllers, Raspberry Pi telemetry. Instrumentation as a
+      physical craft, before it was called data engineering.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Contacto</h2>
+  <nav class="links">
+    <a href="mailto:datos@corlide.org"><span>Email</span><span>datos@corlide.org</span></a>
+    <a href="https://github.com/puedesleerlo"><span>GitHub</span><span>@puedesleerlo</span></a>
+  </nav>
+</section>
+
+<div class="foot lbl">Tema 03 · Cámara — Bricolage Grotesque / Newsreader / IBM Plex Mono</div>
+</div>
+</body>
+</html>
