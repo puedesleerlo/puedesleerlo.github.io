@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alejandro Tabares — Académico</title>
+<meta name="description" content="Theme option: academic CV structure, risograph print execution. Filterable interests, bracketed links, and an errata section.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23FBFAF6'/><circle cx='42' cy='46' r='26' fill='%23FF48B0'/><circle cx='58' cy='54' r='26' fill='%230078BF' opacity='.72'/></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;900&family=Literata:opsz,wght@7..72,400;7..72,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF6; --ink:#1C1C1A; --ink-2:#57574F; --ink-3:#8A8A80;
+  --rule:#DEDDD4;
+  --pink:#FF48B0; --blue:#0078BF; --yellow:#FFE800; --green:#00A95C;
+  --gut:clamp(18px,4.5vw,52px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Literata",Georgia,serif;font-size:17px;line-height:1.66}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--yellow);color:var(--ink)}
+:focus-visible{outline:2.5px solid var(--blue);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:"Space Mono",monospace}
+.dsp{font-family:"Gabarito",system-ui,sans-serif}
+
+/* halftone — one texture, very faint */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(var(--rule) .8px,transparent .9px);background-size:7px 7px}
+.wrap{position:relative;z-index:1}
+
+/* ---- header ---- */
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:12px;flex-wrap:wrap}
+.back{font-family:"Space Mono",monospace;font-size:12px;color:var(--ink-2);border-bottom:1.5px solid var(--rule)}
+.back:hover{color:var(--pink);border-color:var(--pink)}
+.tag-top{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
+.bio{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,3vw,34px);
+  padding:clamp(28px,5vw,56px) 0 clamp(24px,4vw,40px);align-items:start}
+@media(min-width:700px){.bio{grid-template-columns:158px minmax(0,1fr)}}
+
+/* riso avatar — two misregistered ink layers, no photo needed */
+.mug{width:158px;height:158px;position:relative;flex:0 0 auto}
+.mug i{position:absolute;inset:0;border-radius:50%;mix-blend-mode:multiply}
+.mug i:nth-child(1){background:var(--pink);transform:translate(-5px,-4px)}
+.mug i:nth-child(2){background:var(--blue);transform:translate(5px,4px);opacity:.86}
+.mug span{position:absolute;inset:0;display:grid;place-items:center;font-family:"Gabarito",sans-serif;
+  font-weight:900;font-size:52px;color:var(--paper);letter-spacing:-.04em;z-index:2}
+
+.bio h1{font-family:"Gabarito",sans-serif;font-weight:900;font-size:clamp(38px,6.6vw,64px);
+  line-height:1.02;letter-spacing:-.035em;position:relative}
+.bio h1::before{content:attr(data-t);position:absolute;left:-4px;top:3px;color:var(--pink);z-index:-1}
+.bio .sub{font-family:"Gabarito",sans-serif;font-weight:500;font-size:clamp(16px,2.2vw,20px);
+  color:var(--ink-2);margin-top:10px}
+.bio .sub b{color:var(--ink);font-weight:700}
+.bio .contact{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+
+/* the bracketed-link tic, made tactile */
+.br{font-family:"Space Mono",monospace;font-size:12.5px;color:var(--blue);
+  border-bottom:1.5px solid transparent;transition:all .16s ease;display:inline-block}
+.br::before{content:"["}.br::after{content:"]"}
+.br:hover{color:var(--pink);border-color:var(--pink);transform:translateY(-1.5px)}
+
+/* ---- nav ---- */
+nav{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:11px 0;
+  display:flex;gap:18px;flex-wrap:wrap;position:sticky;top:0;background:var(--paper);z-index:5}
+nav a{font-family:"Space Mono",monospace;font-size:12.5px;color:var(--ink-2)}
+nav a:hover{color:var(--pink)}
+nav a b{color:var(--ink-3);font-weight:400}
+
+/* ---- sections ---- */
+.sec{padding:clamp(40px,6vw,72px) 0 clamp(20px,3vw,32px)}
+.sec h2{font-family:"Gabarito",sans-serif;font-weight:900;font-size:clamp(24px,3.6vw,38px);
+  letter-spacing:-.03em;position:relative;margin-bottom:6px}
+.sec h2::before{content:attr(data-t);position:absolute;left:-3px;top:2.5px;color:var(--yellow);z-index:-1}
+.sec .num{font-family:"Space Mono",monospace;font-size:12px;color:var(--pink);display:block;margin-bottom:4px}
+.sec .intro{color:var(--ink-2);max-width:62ch;margin-bottom:26px}
+
+/* ---- interests: the filter ---- */
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tags button{font-family:"Space Mono",monospace;font-size:12.5px;padding:6px 12px;cursor:pointer;
+  background:var(--paper);border:1.5px solid var(--ink);border-radius:100px;color:var(--ink);
+  transition:all .16s ease}
+.tags button:hover{transform:translateY(-2px)}
+.tags button[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:var(--paper)}
+.tags button.all[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
+.count{font-family:"Space Mono",monospace;font-size:12px;color:var(--ink-3);margin-top:12px}
+
+/* ---- entries: academic publication format ---- */
+.entries{margin-top:22px}
+.ent{padding:20px 0;border-top:1px solid var(--rule);transition:opacity .28s ease}
+.ent[hidden]{display:none}
+.ent .t{font-family:"Gabarito",sans-serif;font-weight:700;font-size:19.5px;letter-spacing:-.012em;margin-bottom:3px}
+.ent .who{font-size:15.5px;color:var(--ink-2)}
+.ent .who b{color:var(--ink);font-weight:600}
+.ent .venue{font-style:italic;color:var(--ink-2);font-size:15.5px}
+.ent .desc{margin-top:7px;color:var(--ink-2);max-width:66ch;font-size:16px}
+.ent .desc mark{background:linear-gradient(transparent 58%,var(--yellow) 58%);padding:0 1px}
+.ent .row{margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ent .chips{display:flex;gap:6px;flex-wrap:wrap}
+.ent .chip{font-family:"Space Mono",monospace;font-size:10.5px;color:var(--ink-3);
+  border:1px solid var(--rule);padding:2px 7px;border-radius:100px}
+
+/* ---- two-col lists ---- */
+.two{display:grid;gap:clamp(22px,4vw,44px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:720px){.two{grid-template-columns:1fr 1fr}}
+.two h3{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:12px}
+.item{padding:12px 0;border-top:1px solid var(--rule)}
+.item .a{font-family:"Gabarito",sans-serif;font-weight:700;font-size:16.5px}
+.item .b{font-size:15px;color:var(--ink-2)}
+.item .c{font-family:"Space Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.ph{background:var(--yellow);padding:0 4px;font-family:"Space Mono",monospace;font-size:13px}
+
+/* ---- toolkit ---- */
+.kit{display:flex;gap:7px;flex-wrap:wrap}
+.kit span{font-family:"Space Mono",monospace;font-size:13px;padding:5px 11px;border:1.5px solid var(--ink);
+  border-radius:100px;transition:transform .14s ease,background .14s ease}
+.kit span:hover{transform:rotate(-2.5deg) translateY(-2px);background:var(--yellow)}
+
+/* ---- errata: the playful one ---- */
+.errata{border:2px solid var(--ink);background:var(--paper);padding:clamp(20px,3vw,30px);
+  box-shadow:7px 7px 0 var(--blue)}
+.errata ol{list-style:none;counter-reset:e}
+.errata li{counter-increment:e;padding:13px 0;border-top:1px dashed var(--rule);display:grid;
+  grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start}
+.errata li:first-child{border-top:0}
+.errata li::before{content:"E" counter(e);font-family:"Space Mono",monospace;font-size:12px;
+  color:var(--pink);padding-top:3px}
+.errata .was{color:var(--ink-2)}
+.errata .now{font-family:"Gabarito",sans-serif;font-weight:700;display:block;margin-top:2px}
+
+footer{padding:44px 0 60px;border-top:2px solid var(--ink);margin-top:44px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer span{font-family:"Space Mono",monospace;font-size:11.5px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <span class="tag-top">Tema 05 · Académico</span>
+  <a class="back" href="../">← ver todos los temas</a>
+</div>
+
+<!-- ============ BIO ============ -->
+<header class="bio">
+  <div class="mug" aria-hidden="true"><i></i><i></i><span>AT</span></div>
+  <div>
+    <h1 data-t="Alejandro Tabares">Alejandro Tabares</h1>
+    <p class="sub"><b>Data &amp; knowledge architecture.</b> I build the apparatus that turns living
+      systems — rivers, plants, cities — into a record you can read.</p>
+    <p class="sub" style="font-size:16px;margin-top:8px">Medellín, Colombia · Universidad Nacional de Colombia</p>
+    <div class="contact">
+      <a class="br" href="mailto:datos@corlide.org">email</a>
+      <a class="br" href="https://github.com/puedesleerlo">github</a>
+      <a class="br" href="#">scholar</a>
+      <a class="br" href="#">cv</a>
+      <a class="br" href="#">linkedin</a>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#about"><b>§1</b> About</a>
+  <a href="#interests"><b>§2</b> Interests</a>
+  <a href="#work"><b>§3</b> Selected work</a>
+  <a href="#background"><b>§4</b> Background</a>
+  <a href="#toolkit"><b>§5</b> Toolkit</a>
+  <a href="#errata"><b>§6</b> Errata</a>
+</nav>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec" id="about">
+  <span class="num">§1</span>
+  <h2 data-t="About">About</h2>
+  <p class="intro">I'm the data architect for the Subsecretaría de Espacio Público in Medellín, turning
+    fifteen years of spreadsheets into a governed warehouse without stopping the operation for a day.
+    Before that: river logbooks, plant-breeding niche models, edge data-acquisition boards, and a
+    robotic arm. The subject keeps changing. The job doesn't — find the living system, build the
+    instrument, leave a record someone else can check.</p>
+  <p class="intro" style="margin-bottom:0">I care most about the boring half of that sentence: the record
+    someone else can check. Most of what I build is provenance.</p>
+</section>
+
+<!-- ============ INTERESTS / FILTER ============ -->
+<section class="sec" id="interests">
+  <span class="num">§2</span>
+  <h2 data-t="Research interests">Research interests</h2>
+  <p class="intro">Pick one and §3 filters itself. These are the six things I keep circling back to.</p>
+  <div class="tags" role="group" aria-label="Filter selected work by interest">
+    <button type="button" class="all" data-tag="all" aria-pressed="true">todo</button>
+    <button type="button" data-tag="geo" aria-pressed="false">geoespacial</button>
+    <button type="button" data-tag="gov" aria-pressed="false">gobernanza de datos</button>
+    <button type="button" data-tag="ai" aria-pressed="false">agentes &amp; evaluación</button>
+    <button type="button" data-tag="onto" aria-pressed="false">ontologías</button>
+    <button type="button" data-tag="bio" aria-pressed="false">fitomejoramiento</button>
+    <button type="button" data-tag="edge" aria-pressed="false">sistemas embebidos</button>
+  </div>
+  <p class="count" id="count">Mostrando 6 de 6.</p>
+</section>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="sec" id="work">
+  <span class="num">§3</span>
+  <h2 data-t="Selected work">Selected work</h2>
+  <p class="intro">Formatted the way a publication list is, because that's the format that makes claims
+    checkable. No papers yet — these are systems, and the links go to the code.</p>
+
+  <div class="entries" id="entries">
+
+    <article class="ent" data-tags="gov onto geo ai">
+      <div class="t">Ecosistema de datos del Espacio Público</div>
+      <div class="who"><b>A. Tabares</b> · Subsecretaría de Espacio Público, Alcaldía de Medellín</div>
+      <div class="venue">Five repositories, in production. 2025 — present.</div>
+      <p class="desc">Versioned ingestion with fingerprints and diffs, a metadata contract with rollback,
+        an OWL/SKOS ontology giving every column a permanent IRI, and a published layer an AI agent can
+        query but never escape. <mark>34 historical standards</mark> reconciled into one vocabulary.</p>
+      <div class="row"><div class="chips"><span class="chip">dbt</span><span class="chip">DuckDB</span><span class="chip">Postgres</span><span class="chip">MetricFlow</span></div></div>
+    </article>
+
+    <article class="ent" data-tags="geo gov">
+      <div class="t">Geocodificador en cascada de nueve niveles</div>
+      <div class="who"><b>A. Tabares</b></div>
+      <div class="venue">Component of the above. 2025.</div>
+      <p class="desc">Exact nomenclature match → street interpolation → cross-street → axis centroid →
+        reference gazetteer → barrio fallback, with every coordinate carrying the tier that produced it,
+        so the map is honest about its own precision. <mark>154K free-text addresses resolved</mark>;
+        86% coverage across 440K location records.</p>
+      <div class="row"><div class="chips"><span class="chip">DuckDB spatial</span><span class="chip">ArcGIS</span><span class="chip">dbt</span></div></div>
+    </article>
+
+    <article class="ent" data-tags="ai gov">
+      <div class="t">Palimpsest — measuring whether a semantic layer makes an agent correct</div>
+      <div class="who"><b>A. Tabares</b></div>
+      <div class="venue">Open source, in progress. 2026.</div>
+      <p class="desc">A synthetic messy-spreadsheet generator, a contract-driven cleaning pipeline, and an
+        evaluation harness whose ground truth is <em>generated</em> rather than hand-labelled. Ablates
+        semantic layer vs. raw SQL and reports <mark>paired confidence intervals</mark>, not adjectives.</p>
+      <div class="row"><a class="br" href="#">code</a><div class="chips"><span class="chip">Python</span><span class="chip">MetricFlow</span><span class="chip">Anthropic API</span></div></div>
+    </article>
+
+    <article class="ent" data-tags="bio geo">
+      <div class="t">Explorador de Nichos ELC</div>
+      <div class="who"><b>A. Tabares</b></div>
+      <div class="venue">Open source. 2026.</div>
+      <p class="desc">Ecological niche exploration for plant-breeding programmes: where a cultivar will
+        actually thrive, as an interactive surface a breeder can interrogate rather than a static map.</p>
+      <div class="row"><a class="br" href="https://github.com/puedesleerlo/fitomejoradores-elc">code</a><div class="chips"><span class="chip">Streamlit</span><span class="chip">pydeck</span></div></div>
+    </article>
+
+    <article class="ent" data-tags="geo edge">
+      <div class="t">Bitácora fluvial</div>
+      <div class="who"><b>A. Tabares</b></div>
+      <div class="venue">Field system. 2020 — 2022.</div>
+      <p class="desc">A river logbook and the serverless geospatial plumbing beneath it — field capture over
+        unreliable connections, sync, GeoJSON. Where I learned that data quality is decided at collection
+        and never afterwards.</p>
+      <div class="row"><div class="chips"><span class="chip">AWS Lambda</span><span class="chip">Vue</span><span class="chip">GeoJSON</span></div></div>
+    </article>
+
+    <article class="ent" data-tags="edge">
+      <div class="t">Caronte — adquisición de datos para dispositivos edge</div>
+      <div class="who"><b>A. Tabares</b></div>
+      <div class="venue">2019.</div>
+      <p class="desc">Data acquisition for high-level edge-computing devices, alongside CNC controllers and
+        a robotic arm. Instrumentation as a physical craft, before any of it was called data engineering.</p>
+      <div class="row"><div class="chips"><span class="chip">Go</span><span class="chip">Raspberry Pi</span><span class="chip">Grbl</span></div></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ BACKGROUND ============ -->
+<section class="sec" id="background">
+  <span class="num">§4</span>
+  <h2 data-t="Background">Background</h2>
+  <div class="two">
+    <div>
+      <h3>Education</h3>
+      <div class="item"><div class="a"><span class="ph">[grado]</span></div>
+        <div class="b">Universidad Nacional de Colombia</div><div class="c">[año] — [año] · Medellín</div></div>
+      <div class="item"><div class="a"><span class="ph">[programa / certificación]</span></div>
+        <div class="b"><span class="ph">[institución]</span></div><div class="c">[año]</div></div>
+    </div>
+    <div>
+      <h3>Experience</h3>
+      <div class="item"><div class="a">Arquitecto de datos</div>
+        <div class="b">Corlide · Subsecretaría de Espacio Público, Medellín</div><div class="c">2025 — presente</div></div>
+      <div class="item"><div class="a"><span class="ph">[cargo anterior]</span></div>
+        <div class="b"><span class="ph">[organización]</span></div><div class="c">[años]</div></div>
+      <div class="item"><div class="a">Desarrollo de sistemas embebidos y geoespaciales</div>
+        <div class="b">Proyectos independientes</div><div class="c">2018 — 2023</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLKIT ============ -->
+<section class="sec" id="toolkit">
+  <span class="num">§5</span>
+  <h2 data-t="Toolkit">Toolkit</h2>
+  <p class="intro">Things I reach for without looking them up.</p>
+  <div class="kit">
+    <span>Python</span><span>SQL</span><span>dbt</span><span>DuckDB</span><span>PostgreSQL</span>
+    <span>PostGIS</span><span>MetricFlow</span><span>OWL / SKOS</span><span>SHACL</span><span>Go</span>
+    <span>FastAPI</span><span>Streamlit</span><span>pydeck</span><span>Temporal</span><span>Docker</span>
+    <span>AWS Lambda</span><span>Anthropic API</span><span>Git</span>
+  </div>
+</section>
+
+<!-- ============ ERRATA ============ -->
+<section class="sec" id="errata">
+  <span class="num">§6</span>
+  <h2 data-t="Errata">Errata</h2>
+  <p class="intro">Things I believed and then stopped believing. A CV lists what went right; this is the
+    other column, and it's usually where the actual learning is.</p>
+
+  <div class="errata">
+    <ol>
+      <li><div><span class="was">Thought the hard part of a data platform was the modelling.</span>
+        <span class="now">It's identity. Deciding that two rows describe the same person is most of the work.</span></div></li>
+      <li><div><span class="was">Cleaned data in views over the raw tables, because it was reversible.</span>
+        <span class="now">Reversible also means silently broken the day someone adds a column. Anonymisation belongs in the transformation.</span></div></li>
+      <li><div><span class="was">Assumed an LLM with database access needed a good system prompt to stay safe.</span>
+        <span class="now">It needs a database role. Behaviour is measured; permissions are guaranteed.</span></div></li>
+      <li><div><span class="was">Counted a geocoder's coverage as its quality.</span>
+        <span class="now">Half those coordinates arrived from a GPS device. Coverage without provenance is a number about the source, not the method.</span></div></li>
+      <li><div><span class="was">Built the pipeline first and the question bank afterwards.</span>
+        <span class="now">Backwards. The questions are the acceptance criteria — a mart should exist because something needs answering.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <span>Alejandro Tabares · Medellín · <span class="ph">actualizado [fecha]</span></span>
+  <span>Tema 05 · Gabarito / Literata / Space Mono</span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.tags button'),
+      ents=document.querySelectorAll('.ent'),
+      count=document.getElementById('count'),
+      total=ents.length;
+
+  function filter(tag){
+    var shown=0;
+    ents.forEach(function(e){
+      var ok = tag==='all' || e.dataset.tags.split(' ').indexOf(tag)>-1;
+      e.hidden=!ok; if(ok) shown++;
+    });
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.tag===tag))});
+    count.textContent = tag==='all'
+      ? 'Mostrando '+total+' de '+total+'.'
+      : 'Mostrando '+shown+' de '+total+'. '+(shown===0?'Nada aquí todavía.':'');
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      filter(b.getAttribute('aria-pressed')==='true' && b.dataset.tag!=='all' ? 'all' : b.dataset.tag);
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(ev){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t){ev.preventDefault();t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})}
+    });
+  });
+})();
+</script>
+</body>
+</html>
