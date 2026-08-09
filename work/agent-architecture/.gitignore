@@ -1,0 +1,19 @@
+# Local build scaffolding for the agent-architecture case study.
+# Only index.html is published — it is fully self-contained (verified: renders
+# standalone with none of the files below present).
+
+# Design-system bundle emitted by the builder — inlined into index.html already
+_ds/
+support.js
+.thumbnail
+*.dc.html
+
+# Duplicate of index.html emitted one directory too deep
+work/
+
+# SOURCE DOCUMENTS — DO NOT PUBLISH.
+# informe-arquitectura-ep.pdf is the INTERNAL architecture report. It contains
+# database role names, schema names, loopback ports, auth scheme and VM detail.
+# The case study itself states that in a privacy system the configuration is
+# part of the attack surface; publishing this PDF would contradict that.
+uploads/
