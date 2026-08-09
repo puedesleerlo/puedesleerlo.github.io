@@ -1,55 +1,74 @@
 # puedesleerlo.github.io
 
-Personal site. Single self-contained `index.html` — no build step, no dependencies
-beyond three Google Fonts. Edit and push; GitHub Pages redeploys.
+Personal site for Mario Alejandro Tabares Arango — AI/ML engineer.
+
+Single self-contained `index.html`: no build step, no framework, no dependencies
+beyond three Google Fonts. Edit, commit, push; GitHub Pages redeploys.
+
+## Structure
+
+```
+index.html                              the whole site
+assets/Mario_Alejandro_Tabares_Arango_CV.pdf   linked from the hero and contact block
+```
+
+## The through-line
+
+The site is organised around one argument, not around a job history: *how should a
+decision be made when the evidence cannot settle it?* The **The question** section
+(`#story`) is a five-movement essay — physics, philosophy, risk, governance, and
+what remains unresolved. Everything else on the page is evidence for it:
+
+- the hero states the question
+- each Experience entry opens with a `.frame` line tying the role back to a movement
+- Selected work reports what each system was *measured against*, not just what it did
+- Education is presented as three chapters chosen in a deliberate order
+
+If you edit one part, keep the argument consistent across the others.
 
 ## Design
 
-**"Levantamiento"** — the page is laid out as a survey sheet. The structural
-devices are borrowed from topographic maps and herbarium labels because that is
-the actual vernacular of the work: bilingual field labels (`Localidad / Locality`),
-record numbers, a determination, a list of instruments.
+Conventional single-column layout optimised for a fast scan: hero with headline
+metrics → the question (essay) → experience → selected work → skills → education →
+research, teaching and awards → contact.
 
-- **Display type** is a grotesque (Archivo), not a serif — map lettering is sans.
-- **Body** is Spectral, a serif drawn for screen reading.
-- **Data and labels** are IBM Plex Mono.
-- **The signature element** is the *Strata* section: a stratigraphic column where
-  each layer is a period of work, hatched like a geological unit and thickest where
-  the learning was slowest. It reads bottom-up, the way a real column does.
+- **Headings** Source Serif 4
+- **Body and UI** Inter
+- **Dates, labels, tags** JetBrains Mono
+- Accent is a deep teal (`--accent`), with a burnt-orange secondary (`--accent-2`)
+  used only for card category labels.
 
-Three colour schemes ship with it, switchable in the top bar and remembered in
-`localStorage`:
+## Bilingual
 
-| Scheme | Feel |
-|---|---|
-| `levantamiento` | survey linen, ochre + hydrographic teal (default) |
-| `herbario` | warmer specimen paper, botanical olive and pressed rust |
-| `nocturno` | night chart — deep indigo, amber, lifted teal |
+English is primary. Every translatable node carries `data-en` and `data-es`
+attributes; a small script swaps `innerHTML` and updates `<html lang>`.
 
-Pick one and delete the other two blocks in `:root[data-theme=...]` plus the
-`.themes` markup if you'd rather not offer the switcher.
+To edit copy, change **both** the `data-en` and `data-es` attributes. The visible
+text inside the element is the English fallback for users without JavaScript —
+keep it in sync with `data-en`.
 
-## ⚠️ Placeholders to replace
+```html
+<h2 data-en="Experience" data-es="Experiencia">Experience</h2>
+```
 
-Everything below is either invented or unverified. Fix before sharing widely.
+Language choice persists in `localStorage` under `site-lang`. On first visit the
+site defaults to Spanish if the browser locale starts with `es`, English otherwise.
 
-| Where | What | Status |
-|---|---|---|
-| Contact → LinkedIn | dead link, marked `data-placeholder` | **add URL** |
-| Contact → CV | dead link, marked `data-placeholder` | **add PDF** |
-| `REC 004` Palimpsest | described as "in progress" — true today, update when it ships | check |
-| `REC 005` Caronte stack | `Go · Python · Raspberry Pi` inferred from repo names | **verify** |
-| Strata → tool lists | inferred from public repos, not from memory of what you used | **verify** |
-| Strata → 2020–2022 "Rivers" | narrative framing of `bitacora-fluvial`; the lesson quoted is invented | **rewrite in your words** |
-| Strata → 2024–2025 "Language" | ditto for `licitai` / `pykeen` / `crewAI` | **rewrite** |
-| Title block → "Data & knowledge architecture" | a role label I chose, not one you gave me | **confirm** |
-| `<meta name="description">` | mirrors the thesis line | fine if the thesis stays |
+## Theme
 
-Verified against the warehouse and the architecture report, safe to keep:
+Light by default, dark available via the `◐` button, respecting
+`prefers-color-scheme` on first visit. Persisted as `site-theme`. All colours are
+CSS custom properties in `:root` / `:root[data-theme="dark"]`.
 
-- 34 source standards, 440K location records, 86% geocode coverage,
-  154K free-text addresses resolved, 415K anonymised locations
-- five repositories, OWL/SKOS ontology, MetricFlow semantic layer
+## Content accuracy
+
+Every claim on the page is drawn from the CV in `assets/`. When the CV changes,
+update the PDF and the corresponding section here — the two should never disagree.
+
+Live figures currently on the page: 230+ credit-risk models, 8 audit cycles with
+zero material findings, USD 14B credit exposure across four countries, 2.5M+
+residents, 65,000+ individuals protected by the PII pipeline, 34 historical data
+standards, 96-question agent benchmark.
 
 ## Local preview
 
