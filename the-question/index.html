@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Question — Four Notations, One Problem</title>
+<meta name="description" content="Physics, philosophy, credit risk and public-sector governance as four notations for one question: how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?">
+<meta name="author" content="Alejandro Tabares">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Question — Four Notations, One Problem">
+<meta property="og:description" content="Five movements on decision-making under uncertainty — and the part I still have not answered.">
+<meta property="og:url" content="https://puedesleerlo.github.io/the-question/">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://puedesleerlo.github.io/the-question/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
+
+<link rel="stylesheet" href="../_ds/tabares/styles.css">
+<link rel="stylesheet" href="../_ds/site.css">
+
+<script>
+(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+
+<body class="ds-paper ds-paper--fixed">
+<a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
+
+<header class="bar">
+  <div class="bar__in">
+    <a class="brand" href="../">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
+    <nav>
+      <a href="../" data-en="← Portfolio" data-es="← Portafolio">← Portfolio</a>
+      <a href="#i"   data-en="Physics"    data-es="Física">Physics</a>
+      <a href="#ii"  data-en="Philosophy" data-es="Filosofía">Philosophy</a>
+      <a href="#iii" data-en="Risk"       data-es="Riesgo">Risk</a>
+      <a href="#iv"  data-en="Governance" data-es="Gobernanza">Governance</a>
+      <a href="#v"   data-en="What I don't know" data-es="Lo que no sé">What I don't know</a>
+    </nav>
+    <div class="controls">
+      <div class="langgroup" role="group" aria-label="Language / Idioma">
+        <button class="ctl" data-lang="en" aria-pressed="true">EN</button>
+        <button class="ctl" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button class="ctl" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═══════════════ MASTHEAD ═══════════════ -->
+<section class="masthead wrap">
+  <div class="dateline">
+    <span class="ds-label lead" data-en="Note · Decision-making under uncertainty" data-es="Nota · Decisiones bajo incertidumbre">Note · Decision-making under uncertainty</span>
+    <span class="ds-label" data-en="Five movements" data-es="Cinco movimientos">Five movements</span>
+    <span class="ds-label" data-en="Written 2026" data-es="Escrita en 2026">Written 2026</span>
+  </div>
+  <div class="rule-pair" role="presentation"></div>
+
+  <h1 class="ds-title title-hand"
+      data-en="Four Notations,<br>One Problem<span class='thin'>The question I have been circling since high school</span>"
+      data-es="Cuatro notaciones,<br>un solo problema<span class='thin'>La pregunta que llevo rondando desde el colegio</span>">
+    Four Notations,<br>One Problem<span class="thin">The question I have been circling since high school</span>
+  </h1>
+
+  <p class="deck"
+     data-en="Every role on my CV is the same question written in a different notation — <em>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</em>"
+     data-es="Cada cargo de mi hoja de vida es la misma pregunta escrita en otra notación — <em>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla, y el costo de equivocarse recae sobre quienes no la eligieron?</em>">
+    Every role on my CV is the same question written in a different notation — <em>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</em>
+  </p>
+
+  <div class="byline">
+    <span class="ds-label" data-en="By <b>Alejandro Tabares</b>" data-es="Por <b>Alejandro Tabares</b>">By <b>Alejandro Tabares</b></span>
+    <span class="ds-label" data-en="MS student, <b>Carnegie Mellon</b>" data-es="Estudiante de maestría, <b>Carnegie Mellon</b>">MS student, <b>Carnegie Mellon</b></span>
+  </div>
+
+  <!-- la maraña: the problem space, before it has a shape -->
+  <div class="claim-strip">
+    <span class="glyph-slot" id="fig-glyph" aria-hidden="true"></span>
+    <p data-en="It is why I chose the degrees I chose, <b>in the order I chose them.</b>"
+       data-es="Es la razón por la que elegí las carreras que elegí, <b>y en ese orden.</b>">It is why I chose the degrees I chose, <b>in the order I chose them.</b></p>
+  </div>
+</section>
+
+<!-- ═══════════════ THE DIVISION ═══════════════ -->
+<section class="sec" id="division">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">§</span>
+      <span class="rail-name" data-en="The division" data-es="La división">The division</span>
+      <span class="ds-note" data-en="Where the uncertainty sits is what divides the four." data-es="Dónde está la incertidumbre es lo que divide a las cuatro.">Where the uncertainty sits is what divides the four.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="One question, divided twice" data-es="Una pregunta, dividida dos veces">One question, divided twice</h2>
+
+      <p class="lead-in" style="margin-top:var(--sp-5)"
+         data-en="The four are not four interests. They are one question cut by a single property: whether the uncertainty is in the world, where a mechanism exists but has not been measured, or in the evidence, where no mechanism settles it at all."
+         data-es="Las cuatro no son cuatro intereses. Son una pregunta cortada por una sola propiedad: si la incertidumbre está en el mundo, donde hay un mecanismo que no se ha medido, o en la evidencia, donde ningún mecanismo la resuelve.">
+        The four are not four interests. They are one question cut by a single property: whether the uncertainty is in the world, where a mechanism exists but has not been measured, or in the evidence, where no mechanism settles it at all.
+      </p>
+
+      <div class="figure-slot" id="fig-division">
+        <p class="fallback" data-en="Figure 1 — a Ramist bracket dividing “deciding under uncertainty” first by where the uncertainty sits: in the world (physics, credit risk) or in what counts as evidence (philosophy, governance)."
+           data-es="Figura 1 — un corchete ramista que divide «decidir bajo incertidumbre» primero por dónde está la incertidumbre: en el mundo (física, riesgo de crédito) o en qué cuenta como evidencia (filosofía, gobernanza).">Figure 1 — a Ramist bracket dividing “deciding under uncertainty” first by where the uncertainty sits: in the world (physics, credit risk) or in what counts as evidence (philosophy, governance).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ I — PHYSICS ═══════════════ -->
+<section class="sec" id="i">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">I</span>
+      <span class="rail-name" data-en="Physics" data-es="Física">Physics</span>
+      <span class="ds-note" data-en="The mathematics does not care about the substrate." data-es="A las matemáticas no les importa el sustrato.">The mathematics does not care about the substrate.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Mechanisms are portable" data-es="Los mecanismos son portátiles">Mechanisms are portable</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="I studied Physics Engineering to learn how systems evolve in time. What turned out to matter was not any particular system but a structural fact: <strong>the mathematics does not care about the substrate.</strong> A Markov process is indifferent to whether its state is a particle or a borrower. A diffusion equation does not know whether it is describing heat or the spread of a default."
+           data-es="Estudié Ingeniería Física para aprender cómo evolucionan los sistemas en el tiempo. Lo que terminó importando no fue ningún sistema en particular, sino un hecho estructural: <strong>a las matemáticas no les importa el sustrato.</strong> A un proceso de Markov le da igual que su estado sea una partícula o un deudor. Una ecuación de difusión no sabe si describe calor o la propagación de un incumplimiento.">
+          I studied Physics Engineering to learn how systems evolve in time. What turned out to matter was not any particular system but a structural fact: <strong>the mathematics does not care about the substrate.</strong> A Markov process is indifferent to whether its state is a particle or a borrower. A diffusion equation does not know whether it is describing heat or the spread of a default.
+        </p>
+        <p data-en="So when I later found Markov processes and diffusion models sitting at the center of credit risk, it read less as a surprise than as a confirmation. The mechanisms we already understand are transferable, and building real applications on top of mathematics that is already solved is itself a way of learning what decision-making is made of."
+           data-es="Por eso, cuando más tarde encontré procesos de Markov y modelos de difusión en el centro del riesgo de crédito, no lo leí tanto como una sorpresa sino como una confirmación. Los mecanismos que ya entendemos son transferibles, y construir aplicaciones reales sobre matemáticas ya resueltas es, en sí mismo, una forma de aprender de qué está hecha la toma de decisiones.">
+          So when I later found Markov processes and diffusion models sitting at the center of credit risk, it read less as a surprise than as a confirmation. The mechanisms we already understand are transferable, and building real applications on top of mathematics that is already solved is itself a way of learning what decision-making is made of.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ II — PHILOSOPHY ═══════════════ -->
+<section class="sec" id="ii">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">II</span>
+      <span class="rail-name" data-en="Philosophy" data-es="Filosofía">Philosophy</span>
+      <span class="ds-note" data-en="A narrow, stubborn question: what actually counts as evidence?" data-es="Una pregunta estrecha y terca: ¿qué cuenta realmente como evidencia?">A narrow, stubborn question: what actually counts as evidence?</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="What counts as evidence" data-es="Qué cuenta como evidencia">What counts as evidence</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="I went back for a second degree, in philosophy, to work on epistemology: Popper and falsification, evolutionary epistemology, history and philosophy of science, philosophy of mind, logic. In my second semester I ran into a decision-making course and it never let go of me. The question I cared about was narrow and stubborn — <strong>what actually counts as evidence for or against a theory?</strong> History of science supplied the other half: how decisions about technology get made, and how technologies get built out of those decisions."
+           data-es="Volví a la universidad por un segundo pregrado, en filosofía, para trabajar en epistemología: Popper y la falsación, epistemología evolutiva, historia y filosofía de la ciencia, filosofía de la mente, lógica. En segundo semestre me crucé con un curso de toma de decisiones y ya no me soltó. La pregunta que me importaba era estrecha y terca — <strong>¿qué cuenta realmente como evidencia a favor o en contra de una teoría?</strong> La historia de la ciencia aportó la otra mitad: cómo se toman las decisiones sobre tecnología, y cómo las tecnologías se construyen a partir de esas decisiones.">
+          I went back for a second degree, in philosophy, to work on epistemology: Popper and falsification, evolutionary epistemology, history and philosophy of science, philosophy of mind, logic. In my second semester I ran into a decision-making course and it never let go of me. The question I cared about was narrow and stubborn — <strong>what actually counts as evidence for or against a theory?</strong> History of science supplied the other half: how decisions about technology get made, and how technologies get built out of those decisions.
+        </p>
+        <p data-en="My thesis took the hardest version of the problem: how do you decide about a technology when no evidence is available, no science can predict the outcome, and the potential human cost is large? My answer was that nobody can forecast the impact of a technology, so <strong>ethics and principles have to lead rather than follow the evidence</strong> — but as falsifiable commitments that are actually tested, not as a rulebook you comply with."
+           data-es="Mi tesis tomó la versión más difícil del problema: ¿cómo se decide sobre una tecnología cuando no hay evidencia disponible, ninguna ciencia puede predecir el resultado y el costo humano potencial es alto? Mi respuesta fue que nadie puede pronosticar el impacto de una tecnología, así que <strong>la ética y los principios deben ir por delante de la evidencia, no detrás</strong> — pero como compromisos falsables que efectivamente se ponen a prueba, no como un reglamento que se cumple.">
+          My thesis took the hardest version of the problem: how do you decide about a technology when no evidence is available, no science can predict the outcome, and the potential human cost is large? My answer was that nobody can forecast the impact of a technology, so <strong>ethics and principles have to lead rather than follow the evidence</strong> — but as falsifiable commitments that are actually tested, not as a rulebook you comply with.
+        </p>
+      </div>
+
+      <figure class="ds-pullquote" style="margin-top:var(--sp-6)">
+        <p class="ds-pullquote__q" data-en="A principle that cannot fail is not a principle. It is decoration."
+           data-es="Un principio que no puede fallar no es un principio. Es decoración.">A principle that cannot fail is not a principle. It is decoration.</p>
+        <figcaption class="ds-pullquote__cite ds-label" data-en="Thesis — “How to Say No: Modeling the Precautionary Principle”, 2023 · Honorable Mention" data-es="Tesis — «Cómo decir no: modelando el principio de precaución», 2023 · Mención de Honor">Thesis — “How to Say No: Modeling the Precautionary Principle”, 2023 · Honorable Mention</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ III — RISK ═══════════════ -->
+<section class="sec" id="iii">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">III</span>
+      <span class="rail-name" data-en="Risk" data-es="Riesgo">Risk</span>
+      <span class="ds-note" data-en="As close to a laboratory as this question gets — and where it broke." data-es="Lo más cerca de un laboratorio a lo que llega esta pregunta — y donde se rompió.">As close to a laboratory as this question gets — and where it broke.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Where it broke" data-es="Donde se rompió">Where it broke</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="Banking is where I put that to work. Credit risk is decision-making under uncertainty with the uncertainty made explicit and priced, which is as close to a laboratory as this question gets. Two things happened there."
+           data-es="En la banca puse todo eso a trabajar. El riesgo de crédito es toma de decisiones bajo incertidumbre con la incertidumbre hecha explícita y valorada, que es lo más cerca de un laboratorio a lo que llega esta pregunta. Allí pasaron dos cosas.">
+          Banking is where I put that to work. Credit risk is decision-making under uncertainty with the uncertainty made explicit and priced, which is as close to a laboratory as this question gets. Two things happened there.
+        </p>
+        <p data-en="The first confirmed the physics intuition. Models built for physical systems do describe behavioral and economic data, and the real craft is <strong>reconciling the macro world</strong> — macroeconomic variables — <strong>with the micro world</strong> — longitudinal, month-by-month client-loan tracking. Two resolutions of a single object."
+           data-es="La primera confirmó la intuición de la física. Los modelos construidos para sistemas físicos sí describen datos conductuales y económicos, y el oficio real está en <strong>reconciliar el mundo macro</strong> — variables macroeconómicas — <strong>con el mundo micro</strong> — seguimiento longitudinal, mes a mes, de cada cliente y cada crédito. Dos resoluciones de un mismo objeto.">
+          The first confirmed the physics intuition. Models built for physical systems do describe behavioral and economic data, and the real craft is <strong>reconciling the macro world</strong> — macroeconomic variables — <strong>with the micro world</strong> — longitudinal, month-by-month client-loan tracking. Two resolutions of a single object.
+        </p>
+        <p data-en="The second was the pandemic, and it is the reason I am still working on this. COVID moved micro and macro behavior in ways that did not correlate. Relief programs hit the two levels differently — yet they were two versions of the same behavior, produced by a single cause, and they should have been explainable together. <strong>Instead the models were evaluated the way they always were: context-free, on their metrics.</strong> Decisions were made without an account of the endogenous dynamics driving them. And where a financial explanation and a machine-learning explanation of the same outcome competed, the ML counterpart tended to win — because it carried the name of science."
+           data-es="La segunda fue la pandemia, y es la razón por la que sigo en esto. La COVID movió el comportamiento micro y el macro de maneras que no correlacionaban. Los alivios financieros golpearon los dos niveles de forma distinta — y sin embargo eran dos versiones del mismo comportamiento, producidas por una sola causa, y deberían haberse podido explicar juntas. <strong>En cambio, los modelos se evaluaron como siempre: sin contexto, contra sus métricas.</strong> Se tomaron decisiones sin dar cuenta de las dinámicas endógenas que las movían. Y cuando competían una explicación financiera y una de aprendizaje automático sobre el mismo resultado, tendía a ganar la segunda — porque llevaba el nombre de la ciencia.">
+          The second was the pandemic, and it is the reason I am still working on this. COVID moved micro and macro behavior in ways that did not correlate. Relief programs hit the two levels differently — yet they were two versions of the same behavior, produced by a single cause, and they should have been explainable together. <strong>Instead the models were evaluated the way they always were: context-free, on their metrics.</strong> Decisions were made without an account of the endogenous dynamics driving them. And where a financial explanation and a machine-learning explanation of the same outcome competed, the ML counterpart tended to win — because it carried the name of science.
+        </p>
+        <p data-en="Philosophy had already told me why that is wrong. <mark class='ds-hl'>Technical metrics are not conclusive once the evidence base has gone.</mark> This is the problem of induction wearing a crisis as a costume: the past has quietly stopped being a guide, and no amount of backtesting will tell you so, because backtesting is made of the past."
+           data-es="La filosofía ya me había dicho por qué eso está mal. <mark class='ds-hl'>Las métricas técnicas no son concluyentes cuando la base de evidencia desapareció.</mark> Es el problema de la inducción disfrazado de crisis: el pasado dejó de ser guía sin avisar, y ningún backtesting te lo va a decir, porque el backtesting está hecho de pasado.">
+          Philosophy had already told me why that is wrong. <mark class="ds-hl">Technical metrics are not conclusive once the evidence base has gone.</mark> This is the problem of induction wearing a crisis as a costume: the past has quietly stopped being a guide, and no amount of backtesting will tell you so, because backtesting is made of the past.
+        </p>
+        <p data-en="I answered with what I had: experimentation and simulation, backtesting coverage pushed from <span class='ds-num'>20%</span> to <span class='ds-num'>90%</span>, Monte Carlo, thousands of model runs a week. I still have not found the answer. I had to report an expected risk; the expected risk could not be honestly derived from the evidence. <em>Decision-making under uncertainty</em> is the correct name for the problem, but no formal framework I could find actually handles decisions this complex inside an organization that expects evidence-based management."
+           data-es="Respondí con lo que tenía: experimentación y simulación, cobertura de backtesting llevada del <span class='ds-num'>20%</span> al <span class='ds-num'>90%</span>, Monte Carlo, miles de corridas de modelos por semana. Todavía no encontré la respuesta. Tenía que reportar un riesgo esperado; el riesgo esperado no podía derivarse honestamente de la evidencia. <em>Toma de decisiones bajo incertidumbre</em> es el nombre correcto del problema, pero ningún marco formal que haya encontrado resuelve decisiones de esta complejidad dentro de una organización que espera gestión basada en evidencia.">
+          I answered with what I had: experimentation and simulation, backtesting coverage pushed from <span class="ds-num">20%</span> to <span class="ds-num">90%</span>, Monte Carlo, thousands of model runs a week. I still have not found the answer. I had to report an expected risk; the expected risk could not be honestly derived from the evidence. <em>Decision-making under uncertainty</em> is the correct name for the problem, but no formal framework I could find actually handles decisions this complex inside an organization that expects evidence-based management.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ IV — GOVERNANCE ═══════════════ -->
+<section class="sec" id="iv">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">IV</span>
+      <span class="rail-name" data-en="Governance" data-es="Gobernanza">Governance</span>
+      <span class="ds-note" data-en="If metrics cannot validate themselves, what is missing sits around them." data-es="Si las métricas no pueden validarse solas, lo que falta está alrededor de ellas.">If metrics cannot validate themselves, what is missing sits around them.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Building the layer" data-es="Construir la capa">Building the layer</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="That is where I stopped being only a builder. If technical decisions cannot be validated by their own metrics, then what is missing sits <em>around</em> them: <strong>a feedback and control loop bound to actual outcomes and aware of context, not just to metrics.</strong> A monitoring layer over technical decision-making, whatever the algorithms underneath happen to be."
+           data-es="Ahí dejé de ser sólo constructor. Si las decisiones técnicas no pueden validarse con sus propias métricas, lo que falta está <em>alrededor</em> de ellas: <strong>un ciclo de retroalimentación y control atado a resultados reales y consciente del contexto, no sólo a métricas.</strong> Una capa de monitoreo sobre la decisión técnica, sean cuales sean los algoritmos que haya debajo.">
+          That is where I stopped being only a builder. If technical decisions cannot be validated by their own metrics, then what is missing sits <em>around</em> them: <strong>a feedback and control loop bound to actual outcomes and aware of context, not just to metrics.</strong> A monitoring layer over technical decision-making, whatever the algorithms underneath happen to be.
+        </p>
+        <p data-en="I moved into public-space governance to build one, and to have the leadership and autonomy to test the idea on something real. Public space asks micro and macro questions under uncertainty constantly. I wanted a system where information was integrated and ground truth established — where you could see in real time what was actually happening, with artificial agency, explicit context, and ontologies doing the work of holding meaning steady across <span class='ds-num'>34</span> incompatible historical standards."
+           data-es="Me pasé a la gobernanza del espacio público para construir una, y para tener el liderazgo y la autonomía de probar la idea en algo real. El espacio público plantea preguntas micro y macro bajo incertidumbre todo el tiempo. Quería un sistema donde la información estuviera integrada y la verdad de base establecida — donde se pudiera ver en tiempo real qué estaba pasando de verdad, con agencia artificial, contexto explícito y ontologías sosteniendo el significado a través de <span class='ds-num'>34</span> estándares históricos incompatibles.">
+          I moved into public-space governance to build one, and to have the leadership and autonomy to test the idea on something real. Public space asks micro and macro questions under uncertainty constantly. I wanted a system where information was integrated and ground truth established — where you could see in real time what was actually happening, with artificial agency, explicit context, and ontologies doing the work of holding meaning steady across <span class="ds-num">34</span> incompatible historical standards.
+        </p>
+        <p data-en="On its own terms the project was a considerable success. <strong>I still did not get the answer.</strong>"
+           data-es="En sus propios términos el proyecto fue un éxito considerable. <strong>Aun así, no obtuve la respuesta.</strong>">
+          On its own terms the project was a considerable success. <strong>I still did not get the answer.</strong>
+        </p>
+      </div>
+
+      <div style="margin-top:var(--sp-6)">
+        <div class="ds-metrics">
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">2.5M</span><span class="ds-label ds-metric__label" data-en="residents served" data-es="habitantes servidos">residents served</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">240×</span><span class="ds-label ds-metric__label" data-en="faster spatial answers" data-es="respuestas espaciales más rápidas">faster spatial answers</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">34</span><span class="ds-label ds-metric__label" data-en="standards reconciled" data-es="estándares reconciliados">standards reconciled</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">65 000+</span><span class="ds-label ds-metric__label" data-en="individuals protected" data-es="personas protegidas">individuals protected</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ V — WHAT I DON'T KNOW ═══════════════ -->
+<section class="sec" id="v">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">V</span>
+      <span class="rail-name" data-en="What I don't know yet" data-es="Lo que todavía no sé">What I don't know yet</span>
+      <span class="ds-note" data-en="The honest reason I am at Carnegie Mellon." data-es="La razón honesta por la que estoy en Carnegie Mellon.">The honest reason I am at Carnegie Mellon.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="I ran out of formal apparatus" data-es="Se me acabó el aparato formal">I ran out of formal apparatus</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="That is the honest reason I am at Carnegie Mellon. I ran out of formal apparatus, and I needed better tools than the ones I had taught myself."
+           data-es="Esa es la razón honesta por la que estoy en Carnegie Mellon. Se me acabó el aparato formal y necesitaba mejores herramientas que las que me había enseñado a mí mismo.">
+          That is the honest reason I am at Carnegie Mellon. I ran out of formal apparatus, and I needed better tools than the ones I had taught myself.
+        </p>
+        <p data-en="I am now fairly convinced that the relation between governance and decision-making is a genuinely technical problem, and a hard one. It involves desires, coordination and evaluation at the same time, and it does not dissolve by choosing better metrics. What I want to understand is <strong>how to build trust, and how to build environments that produce good decisions, precisely where the human cost is high and the evidence is thin.</strong>"
+           data-es="A estas alturas estoy bastante convencido de que la relación entre gobernanza y toma de decisiones es un problema genuinamente técnico, y difícil. Involucra deseos, coordinación y evaluación al mismo tiempo, y no se disuelve eligiendo mejores métricas. Lo que quiero entender es <strong>cómo se construye confianza, y cómo se construyen entornos que produzcan buenas decisiones, justo donde el costo humano es alto y la evidencia es escasa.</strong>">
+          I am now fairly convinced that the relation between governance and decision-making is a genuinely technical problem, and a hard one. It involves desires, coordination and evaluation at the same time, and it does not dissolve by choosing better metrics. What I want to understand is <strong>how to build trust, and how to build environments that produce good decisions, precisely where the human cost is high and the evidence is thin.</strong>
+        </p>
+        <p data-en="I do not have it yet. That is what the next few years are for. Concretely, the next step is a <strong>Summer 2027 internship</strong> — somewhere this question is live, on AI/ML engineering, applied research, or AI governance and model risk treated as a technical discipline rather than a compliance function."
+           data-es="Todavía no la tengo. Para eso son los próximos años. En concreto, el siguiente paso es una <strong>pasantía para el verano de 2027</strong> — en algún lugar donde esta pregunta esté viva: ingeniería de IA/ML, investigación aplicada, o gobernanza de IA y riesgo de modelos entendidos como disciplina técnica y no como función de cumplimiento.">
+          I do not have it yet. That is what the next few years are for. Concretely, the next step is a <strong>Summer 2027 internship</strong> — somewhere this question is live, on AI/ML engineering, applied research, or AI governance and model risk treated as a technical discipline rather than a compliance function.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ONWARD ═══════════════ -->
+<section class="sec" id="onward">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">→</span>
+      <span class="rail-name" data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
+    </div>
+    <div class="grid-cards">
+      <a class="ds-card" href="../work/agent-architecture/">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Case study" data-es="Caso de estudio">Case study</span></div>
+        <h3 class="ds-card__title" data-en="An agent that cannot write SQL" data-es="Un agente que no puede escribir SQL">An agent that cannot write SQL</h3>
+        <p class="ds-card__body" data-en="Movement IV in practice — capability as an architectural property, so a correct answer never depends on a model behaving well."
+           data-es="El movimiento IV en la práctica — la capacidad como propiedad arquitectónica, para que una respuesta correcta nunca dependa de que un modelo se porte bien.">Movement IV in practice — capability as an architectural property, so a correct answer never depends on a model behaving well.</p>
+        <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
+      </a>
+      <a class="ds-card" href="../work/anonymization-pipeline/">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Case study" data-es="Caso de estudio">Case study</span></div>
+        <h3 class="ds-card__title" data-en="The data the AI cannot reach" data-es="Los datos que la IA no puede alcanzar">The data the AI cannot reach</h3>
+        <p class="ds-card__body" data-en="Privacy as an architectural property — a guarantee built into the data rather than into the permissions around it."
+           data-es="La privacidad como propiedad arquitectónica — una garantía construida dentro de los datos y no en los permisos que los rodean.">Privacy as an architectural property — a guarantee built into the data rather than into the permissions around it.</p>
+        <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
+      </a>
+      <a class="ds-card" href="../">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Main site" data-es="Sitio principal">Main site</span></div>
+        <h3 class="ds-card__title" data-en="Portfolio" data-es="Portafolio">Portfolio</h3>
+        <p class="ds-card__body" data-en="Experience, selected work, research and teaching — the record this note is the argument behind."
+           data-es="Experiencia, proyectos, investigación y docencia — el registro del que esta nota es el argumento.">Experience, selected work, research and teaching — the record this note is the argument behind.</p>
+        <span class="ds-card__link" data-en="Go to portfolio →" data-es="Ir al portafolio →">Go to portfolio →</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site wrap">
+  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
+  <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+</footer>
+
+<script>
+window.SITE_FIGURES = [
+  {
+    slot: 'fig-glyph',
+    render: function (DS, R) {
+      /* la maraña — the problem space, before it has a shape */
+      return R.createElement(DS.HandGlyph, { name: 'marana', size: 54, label: null });
+    }
+  },
+  {
+    slot: 'fig-division',
+    render: function (DS, R, lang) {
+      var en = {
+        title: 'Four careers divide one question, not four questions',
+        subtitle: 'fig. 1 · Ramist bracket · division by successive differences',
+        anatomy: 'anatomy — each brace claims its children exhaustively divide the parent · each differentia names the property doing the dividing · a branch you cannot state a differentia for is not a principled division',
+        ariaLabel: 'A Ramist bracket dividing deciding under uncertainty. It divides first by where the uncertainty sits. Uncertainty in the world divides into physics, where a mechanism is portable across substrates, and credit risk, where the mechanism is priced. Uncertainty in the evidence divides into philosophy, which asks what counts as evidence at all, and governance, which asks who bears the cost of being wrong.',
+        root: {
+          label: 'deciding under uncertainty',
+          children: [
+            {
+              label: 'uncertainty in the world',
+              differentia: 'a mechanism exists, unmeasured',
+              children: [
+                { label: 'physics', differentia: 'the mechanism is portable' },
+                { label: 'credit risk', differentia: 'the mechanism is priced' }
+              ]
+            },
+            {
+              label: 'uncertainty in the evidence',
+              differentia: 'no mechanism settles it',
+              children: [
+                { label: 'philosophy', differentia: 'what counts as evidence' },
+                { label: 'governance', differentia: 'who bears being wrong' }
+              ]
+            }
+          ]
+        }
+      };
+      var es = {
+        title: 'Cuatro carreras dividen una pregunta, no cuatro preguntas',
+        subtitle: 'fig. 1 · corchete ramista · división por diferencias sucesivas',
+        anatomy: 'anatomía — cada llave afirma que sus hijos dividen exhaustivamente al padre · cada diferencia nombra la propiedad que divide · una rama sin diferencia enunciable no es una división con principio',
+        ariaLabel: 'Un corchete ramista que divide el decidir bajo incertidumbre según dónde está la incertidumbre: en el mundo, que se divide en física y riesgo de crédito; o en la evidencia, que se divide en filosofía y gobernanza.',
+        root: {
+          label: 'decidir bajo incertidumbre',
+          children: [
+            {
+              label: 'incertidumbre en el mundo',
+              differentia: 'hay mecanismo, sin medir',
+              children: [
+                { label: 'física', differentia: 'el mecanismo es portátil' },
+                { label: 'riesgo de crédito', differentia: 'el mecanismo tiene precio' }
+              ]
+            },
+            {
+              label: 'incertidumbre en la evidencia',
+              differentia: 'ningún mecanismo la resuelve',
+              children: [
+                { label: 'filosofía', differentia: 'qué cuenta como evidencia' },
+                { label: 'gobernanza', differentia: 'quién paga el error' }
+              ]
+            }
+          ]
+        }
+      };
+      return R.createElement(DS.DivisionTree, lang === 'es' ? es : en);
+    }
+  }
+];
+</script>
+
+<script src="../_ds/tabares/react.umd.js" defer></script>
+<script src="../_ds/tabares/react-dom.umd.js" defer></script>
+<script src="../_ds/tabares/_ds_bundle.js" defer></script>
+<script src="../_ds/site.js" defer></script>
+</body>
+</html>

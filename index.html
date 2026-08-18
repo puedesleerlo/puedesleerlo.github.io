@@ -3,342 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mario Alejandro Tabares Arango — Decision-making under uncertainty</title>
-<meta name="description" content="Physics, philosophy, credit risk and public-sector governance — four notations for one question: how should a decision be made when the evidence cannot settle it? AI/ML engineer, MS in AI Systems Management at Carnegie Mellon.">
-<meta name="author" content="Mario Alejandro Tabares Arango">
+<title>Alejandro Tabares — Decision-making under uncertainty</title>
+<meta name="description" content="Physics, philosophy, credit risk and public-sector governance — four notations for one question: how should a decision be made when the evidence cannot settle it? AI/ML engineer and MS student in AI Systems Management at Carnegie Mellon, seeking a Summer 2027 internship.">
+<meta name="author" content="Alejandro Tabares">
 
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Mario Alejandro Tabares Arango — Decision-making under uncertainty">
-<meta property="og:description" content="Four notations for one question: how should a decision be made when the evidence cannot settle it?">
+<meta property="og:title" content="Alejandro Tabares — Decision-making under uncertainty">
+<meta property="og:description" content="Four notations for one question: how should a decision be made when the evidence cannot settle it? Carnegie Mellon MS student seeking a Summer 2027 internship.">
 <meta property="og:url" content="https://puedesleerlo.github.io/">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://puedesleerlo.github.io/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23111827'/><text x='50' y='68' font-family='Georgia,serif' font-size='56' font-weight='700' fill='%23ffffff' text-anchor='middle'>T</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Tabares design system: tokens, faces, component rules -->
+<link rel="stylesheet" href="_ds/tabares/styles.css">
+<link rel="stylesheet" href="_ds/site.css">
 
-<style>
-/* ============================================================
-   puedesleerlo.github.io
-   Personal site — Mario Alejandro Tabares Arango
-   Single self-contained file. No build step.
-   ============================================================ */
-
-:root{
-  --bg:#FCFCFB;
-  --bg-2:#F4F4F1;
-  --card:#FFFFFF;
-  --ink:#15181C;
-  --ink-2:#4B5561;
-  --ink-3:#7A8592;
-  --rule:#E2E2DD;
-  --accent:#1F5F5B;
-  --accent-2:#B25B29;
-  --shadow:0 1px 2px rgba(21,24,28,.04),0 8px 24px rgba(21,24,28,.05);
-  --maxw:940px;
-  --gut:clamp(20px,5vw,40px);
-}
-:root[data-theme="dark"]{
-  --bg:#0F1317;
-  --bg-2:#161B21;
-  --card:#171D23;
-  --ink:#E9ECEA;
-  --ink-2:#A3AEB8;
-  --ink-3:#7C8792;
-  --rule:#28313A;
-  --accent:#5FB3AC;
-  --accent-2:#DB8B54;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Inter",system-ui,-apple-system,sans-serif;
-  font-size:16.5px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  transition:background .3s ease,color .3s ease;
-}
-::selection{background:var(--accent);color:#fff}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
-
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
-
-.skip{
-  position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;
-  padding:10px 16px;z-index:100;border-radius:0 0 4px 0;
-}
-.skip:focus{left:0}
-
-/* ---------- top bar ---------- */
-.bar{
-  position:sticky;top:0;z-index:50;
-  background:var(--bg);
-  background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:saturate(160%) blur(10px);
-  -webkit-backdrop-filter:saturate(160%) blur(10px);
-  border-bottom:1px solid var(--rule);
-}
-.bar__in{
-  max-width:var(--maxw);margin:0 auto;padding:11px var(--gut);
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-}
-.brand{
-  font-weight:700;font-size:14.5px;letter-spacing:-.01em;
-}
-.brand span{color:var(--ink-3);font-weight:500}
-.bar nav{display:flex;gap:20px;align-items:center}
-.bar nav a{
-  font-size:13.5px;color:var(--ink-2);font-weight:500;
-  border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s,border-color .15s;
-}
-.bar nav a:hover{color:var(--ink);border-color:var(--accent)}
-@media (max-width:760px){.bar nav{display:none}}
-
-.controls{display:flex;gap:6px;align-items:center}
-.ctl{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.06em;
-  background:transparent;color:var(--ink-3);
-  border:1px solid var(--rule);border-radius:5px;
-  padding:5px 9px;cursor:pointer;line-height:1;
-  transition:all .15s ease;
-}
-.ctl:hover{color:var(--ink);border-color:var(--ink-3)}
-.ctl[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.langgroup{display:flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden}
-.langgroup .ctl{border:0;border-radius:0}
-.langgroup .ctl+.ctl{border-left:1px solid var(--rule)}
-
-/* ---------- hero ---------- */
-.hero{padding:clamp(52px,9vw,92px) 0 clamp(38px,6vw,60px)}
-.eyebrow{
-  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:16px;
-}
-.hero h1{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:clamp(34px,6vw,54px);line-height:1.08;letter-spacing:-.025em;
-  font-weight:600;margin-bottom:14px;
-}
-.hero .tagline{
-  font-size:clamp(17px,2.4vw,21px);color:var(--ink-2);
-  max-width:60ch;margin-bottom:26px;line-height:1.5;
-}
-.hero .tagline strong{color:var(--ink);font-weight:600}
-
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:38px}
-.btn{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:14px;font-weight:500;
-  padding:9px 16px;border-radius:6px;
-  border:1px solid var(--rule);color:var(--ink-2);
-  background:var(--card);transition:all .15s ease;
-}
-.btn:hover{color:var(--ink);border-color:var(--ink-3);transform:translateY(-1px)}
-.btn--primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.btn--primary:hover{color:var(--bg);opacity:.88;border-color:var(--ink)}
-.btn svg{width:15px;height:15px;flex:none}
-
-/* metric strip */
-.metrics{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;
-}
-.metric{background:var(--card);padding:16px 18px}
-.metric b{
-  display:block;font-family:"Source Serif 4",serif;font-size:26px;font-weight:600;
-  letter-spacing:-.02em;line-height:1.1;margin-bottom:4px;
-}
-.metric small{font-size:12.5px;color:var(--ink-3);line-height:1.35;display:block}
-
-/* ---------- sections ---------- */
-.sec{padding:clamp(46px,7vw,76px) 0;border-top:1px solid var(--rule)}
-.sec__head{margin-bottom:clamp(24px,4vw,34px)}
-.sec__head h2{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:clamp(23px,3.2vw,30px);font-weight:600;letter-spacing:-.02em;
-}
-.sec__head p{color:var(--ink-3);font-size:15px;margin-top:6px;max-width:62ch}
-
-.prose p{max-width:68ch;color:var(--ink-2);margin-bottom:16px}
-.prose p:last-child{margin-bottom:0}
-.prose strong{color:var(--ink);font-weight:600}
-.prose em{font-style:italic;color:var(--ink)}
-
-/* ---------- story / essay ---------- */
-.essay{max-width:70ch}
-.essay .lede{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:clamp(19px,2.6vw,24px);line-height:1.48;color:var(--ink);
-  padding-bottom:8px;margin-bottom:30px;border-bottom:1px solid var(--rule);
-}
-.essay .lede em{font-style:italic;color:var(--accent)}
-.movement{margin-bottom:38px}
-.movement:last-child{margin-bottom:0}
-.movement h3{
-  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;
-  letter-spacing:.11em;text-transform:uppercase;color:var(--accent-2);
-  margin-bottom:12px;display:flex;align-items:baseline;gap:10px;
-}
-.movement h3::after{content:"";flex:1;height:1px;background:var(--rule)}
-.movement p{color:var(--ink-2);margin-bottom:15px;line-height:1.68}
-.movement p:last-child{margin-bottom:0}
-.movement strong{color:var(--ink);font-weight:600}
-.movement em{font-style:italic;color:var(--ink)}
-.movement blockquote{
-  border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin:20px 0;
-  font-family:"Source Serif 4",Georgia,serif;font-size:18.5px;line-height:1.5;color:var(--ink);
-}
-
-/* framing line under a job title */
-.job .frame{
-  font-family:"Source Serif 4",Georgia,serif;font-style:italic;
-  font-size:14.5px;color:var(--ink-3);margin:-6px 0 13px;line-height:1.45;
-}
-
-/* ---------- experience ---------- */
-.job{
-  display:grid;grid-template-columns:150px 1fr;gap:0 28px;
-  padding:26px 0;border-bottom:1px solid var(--rule);
-}
-.job:last-child{border-bottom:0;padding-bottom:0}
-.job__when{
-  font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-3);
-  padding-top:4px;line-height:1.5;
-}
-.job__when em{display:block;font-style:normal;color:var(--ink-3);opacity:.8;margin-top:3px}
-.job h3{font-size:17.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:3px}
-.job .org{font-size:14.5px;color:var(--accent);font-weight:500;margin-bottom:12px}
-.job .org span{color:var(--ink-3);font-weight:400}
-.job ul{list-style:none;display:grid;gap:9px}
-.job li{
-  position:relative;padding-left:18px;font-size:15px;color:var(--ink-2);line-height:1.55;
-}
-.job li::before{
-  content:"";position:absolute;left:2px;top:9px;
-  width:5px;height:5px;border-radius:50%;background:var(--rule);
-}
-.job li strong{color:var(--ink);font-weight:600}
-@media (max-width:700px){
-  .job{grid-template-columns:1fr;gap:0}
-  .job__when{padding-top:0;margin-bottom:8px}
-  .job__when em{display:inline;margin-left:8px}
-}
-
-/* ---------- cards ---------- */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.card{
-  background:var(--card);border:1px solid var(--rule);border-radius:9px;
-  padding:22px;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
-}
-a.card:hover{border-color:var(--ink-3);transform:translateY(-2px);box-shadow:var(--shadow)}
-.card__tag{
-  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--accent-2);margin-bottom:9px;
-}
-.card h3{font-size:16.5px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
-.card p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
-.card .stack{
-  margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);
-  font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);
-}
-.card .more{
-  display:inline-block;margin-top:12px;font-size:13.5px;color:var(--accent);font-weight:500;
-}
-
-/* ---------- skills ---------- */
-.skills{display:grid;gap:18px}
-.skillrow{
-  display:grid;grid-template-columns:190px 1fr;gap:0 24px;align-items:start;
-}
-.skillrow h3{
-  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.07em;
-  text-transform:uppercase;color:var(--ink-3);font-weight:500;padding-top:5px;
-}
-.tags{display:flex;flex-wrap:wrap;gap:7px}
-.tag{
-  font-size:13px;padding:4px 10px;border-radius:20px;
-  border:1px solid var(--rule);color:var(--ink-2);background:var(--card);
-}
-@media (max-width:640px){
-  .skillrow{grid-template-columns:1fr;gap:8px}
-  .skillrow h3{padding-top:0}
-}
-
-/* ---------- lists (publications, teaching, awards) ---------- */
-.entries{display:grid;gap:0}
-.entry{
-  padding:16px 0;border-bottom:1px solid var(--rule);
-  display:grid;grid-template-columns:150px 1fr;gap:0 28px;
-}
-.entry:last-child{border-bottom:0}
-.entry .when{
-  font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-3);padding-top:2px;
-}
-.entry h3{font-size:15.5px;font-weight:600;margin-bottom:3px;letter-spacing:-.005em}
-.entry p{font-size:14.5px;color:var(--ink-2)}
-@media (max-width:700px){
-  .entry{grid-template-columns:1fr;gap:4px}
-}
-
-/* ---------- education ---------- */
-.edu{display:grid;gap:14px}
-.edu__item{
-  background:var(--card);border:1px solid var(--rule);border-radius:9px;padding:20px 22px;
-}
-.edu__item .top{
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;
-  margin-bottom:5px;
-}
-.edu__item h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
-.edu__item .date{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-3)}
-.edu__item .deg{font-size:15px;color:var(--accent);font-weight:500;margin-bottom:7px}
-.edu__item p{font-size:14.5px;color:var(--ink-2)}
-
-/* ---------- contact ---------- */
-.contact{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
-  background:var(--rule);border:1px solid var(--rule);border-radius:9px;overflow:hidden;
-}
-.contact a,.contact div{
-  background:var(--card);padding:18px 20px;display:block;transition:background .15s ease;
-}
-.contact a:hover{background:var(--bg-2)}
-.contact .lbl{
-  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
-}
-.contact .val{font-size:14.5px;color:var(--ink);word-break:break-word}
-
-/* ---------- footer ---------- */
-footer{
-  border-top:1px solid var(--rule);padding:26px 0 40px;
-  font-size:13px;color:var(--ink-3);
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
-}
-footer a{border-bottom:1px solid var(--rule)}
-footer a:hover{color:var(--ink)}
-
-/* language visibility handled by JS text swap; no CSS needed */
-</style>
+<script>
+/* Stamp the theme before first paint so no reader sees the wrong ground. */
+(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
 </head>
 
-<body>
+<body class="ds-paper ds-paper--fixed">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
   <div class="bar__in">
-    <a class="brand" href="#top">Tabares&nbsp;Arango <span>· AI/ML</span></a>
+    <a class="brand" href="#top">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
     <nav>
       <a href="#story"      data-en="The question" data-es="La pregunta">The question</a>
       <a href="#experience" data-en="Experience"   data-es="Experiencia">Experience</a>
@@ -359,585 +52,573 @@ footer a:hover{color:var(--ink)}
 <main id="main">
 <div id="top"></div>
 
-<!-- ================= HERO ================= -->
+<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero wrap">
-  <div class="eyebrow" data-en="AI/ML Engineer · Physics · Philosophy · Carnegie Mellon" data-es="Ingeniero de IA/ML · Física · Filosofía · Carnegie Mellon">AI/ML Engineer · Physics · Philosophy · Carnegie Mellon</div>
-  <h1>Mario Alejandro<br>Tabares Arango</h1>
-  <p class="tagline"
-     data-en="I have been working on one question since high school: <strong>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</strong> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer."
-     data-es="Llevo desde el colegio trabajando en una sola pregunta: <strong>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla, y el costo de equivocarse recae sobre quienes no la eligieron?</strong> La física, la filosofía, el riesgo de crédito y la gobernanza pública han sido, cada una, un intento de respuesta.">
-    I have been working on one question since high school: <strong>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</strong> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer.
+  <div class="ds-label" data-en="AI/ML Engineer · Physics · Philosophy · Carnegie Mellon" data-es="Ingeniero de IA/ML · Física · Filosofía · Carnegie Mellon">AI/ML Engineer · Physics · Philosophy · Carnegie Mellon</div>
+
+  <h1 class="ds-title" style="margin-top:var(--sp-3)">Alejandro Tabares</h1>
+
+  <p class="ds-claim" style="margin-top:var(--sp-6)"
+     data-en="I have been working on one question since high school: <mark class='ds-hl'>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer."
+     data-es="Llevo desde el colegio trabajando en una sola pregunta: <mark class='ds-hl'>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla, y el costo de equivocarse recae sobre quienes no la eligieron?</mark> La física, la filosofía, el riesgo de crédito y la gobernanza pública han sido, cada una, un intento de respuesta.">
+    I have been working on one question since high school: <mark class="ds-hl">how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer.
+  </p>
+
+  <p class="availability">
+    <span class="dot" aria-hidden="true"></span>
+    <span data-en="<strong>Seeking a Summer 2027 internship</strong> — AI/ML engineering, applied research, or AI governance and model risk. MS student at Carnegie Mellon, Heinz College; graduating December 2027."
+          data-es="<strong>Busco una pasantía para el verano de 2027</strong> — ingeniería de IA/ML, investigación aplicada, o gobernanza de IA y riesgo de modelos. Estudiante de maestría en Carnegie Mellon, Heinz College; grado en diciembre de 2027."><strong>Seeking a Summer 2027 internship</strong> — AI/ML engineering, applied research, or AI governance and model risk. MS student at Carnegie Mellon, Heinz College; graduating December 2027.</span>
   </p>
 
   <div class="actions">
     <a class="btn btn--primary" href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       <span data-en="Download CV" data-es="Descargar CV">Download CV</span>
     </a>
     <a class="btn" href="mailto:atabares@andrew.cmu.edu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
       Email
     </a>
     <a class="btn" href="https://www.linkedin.com/in/mario-alejandro-tabares-arango" rel="noopener" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg>
       LinkedIn
     </a>
     <a class="btn" href="https://github.com/puedesleerlo" rel="noopener" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
       GitHub
     </a>
   </div>
 
-  <div class="metrics">
-    <div class="metric">
-      <b>230+</b>
-      <small data-en="production credit-risk models built and defended" data-es="modelos de riesgo de crédito construidos y defendidos">production credit-risk models built and defended</small>
-    </div>
-    <div class="metric">
-      <b>8 / 0</b>
-      <small data-en="audit cycles closed with zero material findings" data-es="ciclos de auditoría cerrados sin hallazgos materiales">audit cycles closed with zero material findings</small>
-    </div>
-    <div class="metric">
-      <b>USD 14B</b>
-      <small data-en="credit exposure across four countries" data-es="exposición crediticia en cuatro países">credit exposure across four countries</small>
-    </div>
-    <div class="metric">
-      <b>2.5M</b>
-      <small data-en="residents served by government AI systems I led" data-es="habitantes servidos por los sistemas de IA que lideré">residents served by government AI systems I led</small>
+  <!-- the instrument readout -->
+  <div style="margin-top:clamp(32px,4vw,56px)" id="fig-metrics">
+    <div class="ds-metrics">
+      <div class="ds-metric">
+        <span class="ds-num ds-num--hero ds-metric__value">230+</span>
+        <span class="ds-label ds-metric__label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span>
+      </div>
+      <div class="ds-metric">
+        <span class="ds-num ds-num--hero ds-metric__value">8 / 0</span>
+        <span class="ds-label ds-metric__label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span>
+      </div>
+      <div class="ds-metric">
+        <span class="ds-num ds-num--hero ds-metric__value">USD 14B</span>
+        <span class="ds-label ds-metric__label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span>
+      </div>
+      <div class="ds-metric">
+        <span class="ds-num ds-num--hero ds-metric__value">2.5M</span>
+        <span class="ds-label ds-metric__label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= STORY ================= -->
+<!-- ═══════════════ THE QUESTION ═══════════════ -->
 <section class="sec" id="story">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="The question" data-es="La pregunta">The question</h2>
-      <p data-en="Physics, philosophy, risk, governance. Four notations, one problem."
-         data-es="Física, filosofía, riesgo, gobernanza. Cuatro notaciones, un solo problema.">Physics, philosophy, risk, governance. Four notations, one problem.</p>
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">I</span>
+      <span class="rail-name" data-en="The question" data-es="La pregunta">The question</span>
+      <span class="ds-note" data-en="Physics, philosophy, risk, governance. Four notations, one problem." data-es="Física, filosofía, riesgo, gobernanza. Cuatro notaciones, un solo problema.">Physics, philosophy, risk, governance. Four notations, one problem.</span>
     </div>
 
-    <div class="essay">
-      <p class="lede"
-         data-en="Every role on this page is the same question written in a different notation: <em>how should a decision be made when the evidence cannot settle it?</em> I have been circling it since high school. It is why I chose the degrees I chose, in the order I chose them."
-         data-es="Cada cargo de esta página es la misma pregunta escrita en otra notación: <em>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla?</em> Llevo dándole vueltas desde el colegio. Es la razón por la que elegí las carreras que elegí, y en ese orden.">
-        Every role on this page is the same question written in a different notation: <em>how should a decision be made when the evidence cannot settle it?</em> I have been circling it since high school. It is why I chose the degrees I chose, in the order I chose them.
+    <div>
+      <h2 class="h-sec" data-en="Four notations, one problem" data-es="Cuatro notaciones, un solo problema">Four notations, one problem</h2>
+
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="Every role on this page is the same question written in a different notation. <strong>Physics</strong> taught me that the mathematics does not care about the substrate — a Markov process is indifferent to whether its state is a particle or a borrower. <strong>Philosophy</strong> taught me the harder half: what counts as evidence at all, and how to decide about a technology when no evidence exists and the human cost is high."
+           data-es="Cada cargo de esta página es la misma pregunta escrita en otra notación. La <strong>física</strong> me enseñó que a las matemáticas no les importa el sustrato — a un proceso de Markov le da igual que su estado sea una partícula o un deudor. La <strong>filosofía</strong> me enseñó la mitad más difícil: qué cuenta como evidencia, y cómo decidir sobre una tecnología cuando no hay evidencia y el costo humano es alto.">
+          Every role on this page is the same question written in a different notation. <strong>Physics</strong> taught me that the mathematics does not care about the substrate — a Markov process is indifferent to whether its state is a particle or a borrower. <strong>Philosophy</strong> taught me the harder half: what counts as evidence at all, and how to decide about a technology when no evidence exists and the human cost is high.
+        </p>
+        <p data-en="<strong>Credit risk</strong> was the laboratory — uncertainty made explicit and priced. Then the pandemic moved micro and macro behavior in ways that did not correlate, and the models were still judged the way they always were: context-free, on their metrics. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> I answered with what I had — simulation, backtesting coverage pushed <span class='ds-num'>20%→90%</span>, thousands of runs a week — and still had to report an expected risk that could not be honestly derived from the evidence."
+           data-es="El <strong>riesgo de crédito</strong> fue el laboratorio — la incertidumbre hecha explícita y valorada. Luego la pandemia movió el comportamiento micro y macro de maneras que no correlacionaban, y los modelos se siguieron juzgando como siempre: sin contexto, contra sus métricas. <strong>Las métricas técnicas no son concluyentes cuando la base de evidencia desapareció.</strong> Respondí con lo que tenía — simulación, cobertura de backtesting llevada del <span class='ds-num'>20%→90%</span>, miles de corridas por semana — y aun así tuve que reportar un riesgo esperado que no podía derivarse honestamente de la evidencia.">
+          <strong>Credit risk</strong> was the laboratory — uncertainty made explicit and priced. Then the pandemic moved micro and macro behavior in ways that did not correlate, and the models were still judged the way they always were: context-free, on their metrics. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> I answered with what I had — simulation, backtesting coverage pushed <span class="ds-num">20%→90%</span>, thousands of runs a week — and still had to report an expected risk that could not be honestly derived from the evidence.
+        </p>
+        <p data-en="So I moved into <strong>public-sector governance</strong> to build the layer that was missing — a feedback and control loop bound to outcomes and context, not just to metrics — and built it for a city of <span class='ds-num'>2.5M</span>. On its own terms it worked. I still did not get the answer, which is the honest reason I am at Carnegie Mellon: I ran out of formal apparatus. What I want to understand is how to build environments that produce good decisions precisely where the human cost is high and the evidence is thin."
+           data-es="Así que me pasé a la <strong>gobernanza pública</strong> para construir la capa que faltaba — un ciclo de retroalimentación y control atado a resultados y contexto, no sólo a métricas — y la construí para una ciudad de <span class='ds-num'>2,5M</span>. En sus propios términos funcionó. Aun así no obtuve la respuesta, que es la razón honesta por la que estoy en Carnegie Mellon: se me acabó el aparato formal. Lo que quiero entender es cómo construir entornos que produzcan buenas decisiones justo donde el costo humano es alto y la evidencia es escasa.">
+          So I moved into <strong>public-sector governance</strong> to build the layer that was missing — a feedback and control loop bound to outcomes and context, not just to metrics — and built it for a city of <span class="ds-num">2.5M</span>. On its own terms it worked. I still did not get the answer, which is the honest reason I am at Carnegie Mellon: I ran out of formal apparatus. What I want to understand is how to build environments that produce good decisions precisely where the human cost is high and the evidence is thin.
+        </p>
+      </div>
+
+      <!-- fig. 1 — the division the four careers make -->
+      <div class="figure-slot" id="fig-division">
+        <p class="fallback" data-en="Figure 1 — a Ramist bracket dividing “deciding under uncertainty” first by where the uncertainty sits: in the world (physics, credit risk) or in what counts as evidence (philosophy, governance)."
+           data-es="Figura 1 — un corchete ramista que divide «decidir bajo incertidumbre» primero por dónde está la incertidumbre: en el mundo (física, riesgo de crédito) o en qué cuenta como evidencia (filosofía, gobernanza).">Figure 1 — a Ramist bracket dividing “deciding under uncertainty” first by where the uncertainty sits: in the world (physics, credit risk) or in what counts as evidence (philosophy, governance).</p>
+      </div>
+
+      <p style="margin-top:var(--sp-5)">
+        <a class="btn" href="the-question/">
+          <span data-en="Read the full note — five movements" data-es="Leer la nota completa — cinco movimientos">Read the full note — five movements</span>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<section class="sec" id="experience">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">II</span>
+      <span class="rail-name" data-en="Experience" data-es="Experiencia">Experience</span>
+      <span class="ds-note" data-en="Each role is one of the movements above, with a budget attached." data-es="Cada cargo es uno de los movimientos de arriba, con presupuesto encima.">Each role is one of the movements above, with a budget attached.</span>
+    </div>
+
+    <div>
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Jan 2025 — Jul 2026" data-es="Ene 2025 — Jul 2026">Jan 2025 — Jul 2026</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Associate Director of Data and Technology" data-es="Director Asociado de Datos y Tecnología">Associate Director of Data and Technology</h3>
+          <div class="org"><b>CORLIDE — Corporación Libertad y Democracia</b>
+            <span data-en="· Colombian nonprofit for institutional transparency" data-es="· ONG colombiana de transparencia institucional">· Colombian nonprofit for institutional transparency</span>
+          </div>
+          <p class="frame"
+             data-en="Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it."
+             data-es="Movimiento IV — construir la capa de monitoreo: información integrada, verdad de base establecida y contexto lo bastante explícito como para que un agente de IA pudiera razonar sobre él.">Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it.</p>
+          <ul class="bullets">
+            <li data-en="Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class='ds-num'>15</span> business days) from <span class='ds-num'>300+</span> to <span class='ds-num'>0</span> per month"
+                data-es="Construí un <strong>sistema de graph RAG</strong> con Neo4j, Pinecone y LightRAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, reduciendo las respuestas vencidas (&gt;<span class='ds-num'>15</span> días hábiles) de más de <span class='ds-num'>300</span> a <span class='ds-num'>0</span> al mes">Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class="ds-num">15</span> business days) from <span class="ds-num">300+</span> to <span class="ds-num">0</span> per month</li>
+            <li data-en="Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean"
+                data-es="Diseñé una <strong>ontología de dominio publicada como activo público</strong>, estandarizando entidades y relaciones como la capa semántica contra la que los sistemas de IA resuelven las preguntas, de modo que un término signifique una sola cosa en todo el ecosistema y no lo que un modelo infiera">Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean</li>
+            <li data-en="Cut complex spatial-question turnaround from one analyst-week to <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class='ds-num'>96</span>-question execution-accuracy benchmark spanning <span class='ds-num'>34</span> historical data standards"
+                data-es="Reduje el tiempo de respuesta a preguntas espaciales complejas de una semana-analista a <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> desplegando agentes geoespaciales de IA, validados contra un benchmark propio de <span class='ds-num'>96</span> preguntas de precisión de ejecución sobre <span class='ds-num'>34</span> estándares históricos de datos">Cut complex spatial-question turnaround from one analyst-week to <strong><span class="ds-num">10 min</span> (<span class="ds-num">240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class="ds-num">96</span>-question execution-accuracy benchmark spanning <span class="ds-num">34</span> historical data standards</li>
+            <li data-en="Created a <strong>PII anonymization pipeline</strong> protecting <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses, stripping <span class='ds-num'>13</span> sensitive fields via irreversible hashing (SHA-256), suppression and generalization"
+                data-es="Creé una <strong>tubería de anonimización de PII</strong> que protege a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones, eliminando <span class='ds-num'>13</span> campos sensibles mediante hashing irreversible (SHA-256), supresión y generalización">Created a <strong>PII anonymization pipeline</strong> protecting <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses, stripping <span class="ds-num">13</span> sensitive fields via irreversible hashing (SHA-256), suppression and generalization</li>
+            <li data-en="Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class='ds-num'>2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class='ds-num'>250+</span> data sources"
+                data-es="Lideré la gobernanza de datos e IA de la Subsecretaría de Espacio Público, Alcaldía de Medellín (<span class='ds-num'>2,5M+</span> habitantes), implementando DAMA-DMBOK e ITIL para depurar e integrar más de <span class='ds-num'>250</span> fuentes de datos">Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class="ds-num">2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class="ds-num">250+</span> data sources</li>
+            <li data-en="Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy"
+                data-es="Coordiné con la <strong>Open Government Partnership</strong>, la Presidencia de Colombia y universidades colombianas (Externado, Los Andes) un modelo nacional de gobernanza de IA; y con el FCDO del Reino Unido la estrategia de Gobierno Abierto Local de Medellín">Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Jul 2020 — Jan 2025" data-es="Jul 2020 — Ene 2025">Jul 2020 — Jan 2025</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Senior Data Scientist" data-es="Científico de Datos Senior">Senior Data Scientist</h3>
+          <div class="org"><b>Bancolombia (Grupo Cibest)</b>
+            <span data-en="· Colombia's largest bank, NYSE: CIB" data-es="· el banco más grande de Colombia, NYSE: CIB">· Colombia's largest bank, NYSE: CIB</span>
+          </div>
+          <p class="frame"
+             data-en="Movements I and III — physical mathematics applied to behavioral data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid."
+             data-es="Movimientos I y III — matemáticas físicas aplicadas a datos conductuales, y la pandemia enseñándome que una métrica no puede avisarte cuándo la evidencia que la sostiene dejó de ser válida.">Movements I and III — physical mathematics applied to behavioral data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid.</p>
+          <ul class="bullets">
+            <li data-en="Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class='ds-num'>8</span> audit cycles covering <span class='ds-num'>230+</span> credit risk models — closed every cycle with <span class='ds-num'>0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)"
+                data-es="Contraparte técnica principal ante <strong>PwC México, Auditoría Interna, Revisoría Fiscal y reguladores bancarios colombianos</strong> en <span class='ds-num'>8</span> ciclos de auditoría sobre más de <span class='ds-num'>230</span> modelos de riesgo de crédito — cerré cada ciclo con <span class='ds-num'>0</span> hallazgos materiales, en un entorno listado en NYSE y reportante ante la SEC (Form 20-F)">Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class="ds-num">8</span> audit cycles covering <span class="ds-num">230+</span> credit risk models — closed every cycle with <span class="ds-num">0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)</li>
+            <li data-en="Designed and built <strong><span class='ds-num'>230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class='ds-num'>3</span> on evaluation and data-cleaning methodology"
+                data-es="Diseñé y construí <strong>más de <span class='ds-num'>230</span> modelos de provisiones</strong> (pérdida esperada de por vida) bajo NIIF 9 — la contraparte internacional del CECL estadounidense — usando modelos multiestado de Aalen-Johansen con covariables dependientes del tiempo, riesgos proporcionales de Cox y cadenas multiestado semi-Markov; lideré un equipo de <span class='ds-num'>3</span> en metodología de evaluación y depuración de datos">Designed and built <strong><span class="ds-num">230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class="ds-num">3</span> on evaluation and data-cleaning methodology</li>
+            <li data-en="Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class='ds-num'>COP 56T</span> (<span class='ds-num'>USD 14B</span>) in credit exposure and <span class='ds-num'>14M+</span> borrower records"
+                data-es="Fui responsable del portafolio de modelos de provisiones en <strong>cuatro países</strong> (Colombia, Panamá, El Salvador, Guatemala), cubriendo ~<span class='ds-num'>COP 56B</span> (<span class='ds-num'>USD 14B</span>) de exposición crediticia y más de <span class='ds-num'>14M</span> de registros de deudores">Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class="ds-num">COP 56T</span> (<span class="ds-num">USD 14B</span>) in credit exposure and <span class="ds-num">14M+</span> borrower records</li>
+            <li data-en="Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class='ds-num'>20%</span> to <span class='ds-num'>90%</span>"
+                data-es="Apliqué simulación Monte Carlo y basada en Bernoulli para evaluar comportamiento de pérdidas y riesgo de concentración, ampliando la cobertura de backtesting (S2+) del <span class='ds-num'>20%</span> al <span class='ds-num'>90%</span>">Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class="ds-num">20%</span> to <span class="ds-num">90%</span></li>
+            <li data-en="Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class='ds-num'>1 TB</span> of borrower history into <span class='ds-num'>16 GB</span> and eliminating a <span class='ds-num'>3-hour</span> dataset rebuild per model"
+                data-es="Rediseñé la capa de datos de desarrollo de modelos como un <strong>feature store basado en cambios</strong>: extracción desde Impala sobre el warehouse corporativo, persistiendo sólo transiciones de estado en InfluxDB, comprimiendo ~<span class='ds-num'>1 TB</span> de historia de deudores a <span class='ds-num'>16 GB</span> y eliminando una reconstrucción de dataset de <span class='ds-num'>3 horas</span> por modelo">Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class="ds-num">1 TB</span> of borrower history into <span class="ds-num">16 GB</span> and eliminating a <span class="ds-num">3-hour</span> dataset rebuild per model</li>
+            <li data-en="Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class='ds-num'>2,000</span> runs/week vs. <span class='ds-num'>20</span>/month; resulting specifications cut PD prediction error from <span class='ds-num'>30%→5%</span> (natural-person) and ~<span class='ds-num'>50%→&lt;10%</span> (large-corporate)"
+                data-es="Construí un <strong>registro de experimentos</strong> ligero — archivos SQLite de estado por corrida versionados con DVC, métricas en MLflow — habilitando <span class='ds-num'>2.000</span> corridas/semana frente a <span class='ds-num'>20</span>/mes; las especificaciones resultantes redujeron el error de predicción de PD de <span class='ds-num'>30%→5%</span> (persona natural) y de ~<span class='ds-num'>50%→&lt;10%</span> (gran empresa)">Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class="ds-num">2,000</span> runs/week vs. <span class="ds-num">20</span>/month; resulting specifications cut PD prediction error from <span class="ds-num">30%→5%</span> (natural-person) and ~<span class="ds-num">50%→&lt;10%</span> (large-corporate)</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Mar 2019 — Jul 2020" data-es="Mar 2019 — Jul 2020">Mar 2019 — Jul 2020</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</h3>
+          <div class="org"><b>Telemetrik</b></div>
+          <p class="frame"
+             data-en="First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about."
+             data-es="Primer encuentro con la versión práctica del problema: una decisión sólo vale lo que vale el instrumento que observó aquello sobre lo que decide.">First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about.</p>
+          <ul class="bullets">
+            <li data-en="Led a data-architecture transformation enabling real-time analytics for <strong><span class='ds-num'>2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context"
+                data-es="Lideré una transformación de arquitectura de datos que habilitó analítica en tiempo real para <strong>más de <span class='ds-num'>2.000</span> dispositivos IoT</strong> (sensores de agua, alumbrado público, seguimiento de barrido) y tableros automatizados, reduciendo el monitoreo manual de interrupciones de servicio en un contexto de Ciudad Inteligente">Led a data-architecture transformation enabling real-time analytics for <strong><span class="ds-num">2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context</li>
+            <li data-en="Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class='ds-num'>10+</span> data streams"
+                data-es="Implementé controles automáticos de calidad de datos — validaciones de rango, monitoreo de nulos, detección estadística de atípicos — para identificar fallas de sensores y corrupción de datos en más de <span class='ds-num'>10</span> flujos">Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class="ds-num">10+</span> data streams</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SELECTED WORK ═══════════════ -->
+<section class="sec" id="work">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">III</span>
+      <span class="rail-name" data-en="Selected work" data-es="Proyectos">Selected work</span>
+      <span class="ds-note" data-en="Systems I designed and built, and — because the argument above demands it — what each was actually measured against." data-es="Sistemas que diseñé y construí y, porque el argumento de arriba lo exige, contra qué se midió realmente cada uno.">Systems I designed and built, and — because the argument above demands it — what each was actually measured against.</span>
+    </div>
+
+    <div>
+      <h2 class="h-sec" data-en="Seven systems, two case studies" data-es="Siete sistemas, dos casos de estudio">Seven systems, two case studies</h2>
+
+      <div class="grid-cards" style="margin-top:var(--sp-6)">
+        <a class="ds-card" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">
+          <div class="ds-card__meta">
+            <span class="ds-label" data-en="Public asset · Ontology" data-es="Activo público · Ontología">Public asset · Ontology</span>
+          </div>
+          <h3 class="ds-card__title" data-en="Public Space domain ontology" data-es="Ontología de dominio de Espacio Público">Public Space domain ontology</h3>
+          <p class="ds-card__body" data-en="A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean."
+             data-es="Una ontología de dominio publicada que estandariza entidades y relaciones en los datos municipales de espacio público, actuando como capa semántica bajo los sistemas de IA — de modo que una pregunta se resuelva contra definiciones fijas y no contra lo que un modelo suponga que significa un término.">A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean.</p>
+          <p class="ds-card__finding ds-label">OWL · SKOS · Ontology design</p>
+          <span class="ds-card__link" data-en="View the ontology →" data-es="Ver la ontología →">View the ontology →</span>
+        </a>
+
+        <div class="ds-card">
+          <div class="ds-card__meta"><span class="ds-label">Graph RAG</span></div>
+          <h3 class="ds-card__title" data-en="Citizen petition retrieval system" data-es="Sistema de recuperación de peticiones">Citizen petition retrieval system</h3>
+          <p class="ds-card__body" data-en="Graph RAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class='ds-num'>15</span>-business-day legal limit went from <span class='ds-num'>300+</span> per month to <span class='ds-num'>0</span>."
+             data-es="Graph RAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, combinando un grafo de propiedades con recuperación densa. Las respuestas vencidas más allá del límite legal de <span class='ds-num'>15</span> días hábiles pasaron de más de <span class='ds-num'>300</span> al mes a <span class='ds-num'>0</span>.">Graph RAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class="ds-num">15</span>-business-day legal limit went from <span class="ds-num">300+</span> per month to <span class="ds-num">0</span>.</p>
+          <p class="ds-card__finding ds-label">Neo4j · Pinecone · LightRAG · Python</p>
+        </div>
+
+        <a class="ds-card" href="work/agent-architecture/">
+          <div class="ds-card__meta">
+            <span class="ds-label" data-en="Agent architecture · Case study" data-es="Arquitectura de agentes · Caso">Agent architecture · Case study</span>
+          </div>
+          <h3 class="ds-card__title" data-en="Municipal analytics agent" data-es="Agente analítico municipal">Municipal analytics agent</h3>
+          <p class="ds-card__body" data-en="An agent that answers complex spatial questions across <span class='ds-num'>34</span> historical data standards, cutting turnaround from an analyst-week to <span class='ds-num'>10 min</span> — and that cannot write SQL, hold a database credential, or sit in the request path of any platform."
+             data-es="Un agente que responde preguntas espaciales complejas sobre <span class='ds-num'>34</span> estándares históricos de datos, reduciendo el tiempo de respuesta de una semana-analista a <span class='ds-num'>10 min</span> — y que no puede escribir SQL, ni tener una credencial de base de datos, ni situarse en la ruta de petición de ninguna plataforma.">An agent that answers complex spatial questions across <span class="ds-num">34</span> historical data standards, cutting turnaround from an analyst-week to <span class="ds-num">10 min</span> — and that cannot write SQL, hold a database credential, or sit in the request path of any platform.</p>
+          <p class="ds-card__finding ds-label">Semantic layer · LLM agents · Python</p>
+          <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
+        </a>
+
+        <div class="ds-card">
+          <div class="ds-card__meta"><span class="ds-label" data-en="Agent evaluation" data-es="Evaluación de agentes">Agent evaluation</span></div>
+          <h3 class="ds-card__title" data-en="Execution-accuracy benchmark" data-es="Benchmark de precisión de ejecución">Execution-accuracy benchmark</h3>
+          <p class="ds-card__body" data-en="A purpose-built <span class='ds-num'>96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke."
+             data-es="Un benchmark propio de <span class='ds-num'>96</span> preguntas que valida el sistema de agentes contra preguntas de negocio reales, no contra impresiones — y que además funciona como suite de regresión: si una pregunta deja de poder responderse, la capa semántica se rompió.">A purpose-built <span class="ds-num">96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke.</p>
+          <p class="ds-card__finding ds-label">Python · Evaluation · Regression testing</p>
+        </div>
+
+        <a class="ds-card" href="work/anonymization-pipeline/">
+          <div class="ds-card__meta">
+            <span class="ds-label" data-en="Privacy engineering · Case study" data-es="Ingeniería de privacidad · Caso">Privacy engineering · Case study</span>
+          </div>
+          <h3 class="ds-card__title" data-en="PII anonymization pipeline" data-es="Tubería de anonimización de PII">PII anonymization pipeline</h3>
+          <p class="ds-card__body" data-en="Protects <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses by stripping <span class='ds-num'>13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data."
+             data-es="Protege a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones eliminando <span class='ds-num'>13</span> campos sensibles mediante hashing irreversible SHA-256, supresión y generalización — de modo que la capa de IA encima estructuralmente no puede alcanzar datos personales.">Protects <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses by stripping <span class="ds-num">13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data.</p>
+          <p class="ds-card__finding ds-label">Python · SHA-256 · Data governance</p>
+          <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
+        </a>
+
+        <div class="ds-card">
+          <div class="ds-card__meta"><span class="ds-label" data-en="ML infrastructure" data-es="Infraestructura de ML">ML infrastructure</span></div>
+          <h3 class="ds-card__title" data-en="Change-based feature store" data-es="Feature store basado en cambios">Change-based feature store</h3>
+          <p class="ds-card__body" data-en="Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class='ds-num'>1 TB</span> into <span class='ds-num'>16 GB</span> and removed a <span class='ds-num'>3-hour</span> dataset rebuild from every single model run."
+             data-es="En lugar de materializar la historia completa de cada deudor por modelo, persistir sólo transiciones de estado. Comprimió ~<span class='ds-num'>1 TB</span> a <span class='ds-num'>16 GB</span> y eliminó una reconstrucción de dataset de <span class='ds-num'>3 horas</span> en cada corrida.">Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class="ds-num">1 TB</span> into <span class="ds-num">16 GB</span> and removed a <span class="ds-num">3-hour</span> dataset rebuild from every single model run.</p>
+          <p class="ds-card__finding ds-label">Impala · InfluxDB · Hadoop · SQL</p>
+        </div>
+
+        <div class="ds-card">
+          <div class="ds-card__meta"><span class="ds-label" data-en="Experiment tracking" data-es="Seguimiento de experimentos">Experiment tracking</span></div>
+          <h3 class="ds-card__title" data-en="Lightweight experiment registry" data-es="Registro ligero de experimentos">Lightweight experiment registry</h3>
+          <p class="ds-card__body" data-en="Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling <span class='ds-num'>2,000</span> runs/week against a previous <span class='ds-num'>20</span>/month. The resulting specifications cut PD prediction error <span class='ds-num'>30%→5%</span> for natural persons."
+             data-es="Archivos SQLite de estado por corrida versionados con DVC y métricas en MLflow, habilitando <span class='ds-num'>2.000</span> corridas/semana frente a <span class='ds-num'>20</span>/mes. Las especificaciones resultantes redujeron el error de predicción de PD <span class='ds-num'>30%→5%</span> en persona natural.">Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling <span class="ds-num">2,000</span> runs/week against a previous <span class="ds-num">20</span>/month. The resulting specifications cut PD prediction error <span class="ds-num">30%→5%</span> for natural persons.</p>
+          <p class="ds-card__finding ds-label">DVC · MLflow · SQLite · Python</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SKILLS & EDUCATION ═══════════════ -->
+<section class="sec" id="skills">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">IV</span>
+      <span class="rail-name" data-en="Apparatus" data-es="Aparato">Apparatus</span>
+      <span class="ds-note" data-en="Tools and training. Three degrees, chosen in this order for the reason above." data-es="Herramientas y formación. Tres títulos, elegidos en este orden por la razón de arriba.">Tools and training. Three degrees, chosen in this order for the reason above.</span>
+    </div>
+
+    <div>
+      <h2 class="h-sec" data-en="Skills" data-es="Competencias">Skills</h2>
+
+      <div style="margin-top:var(--sp-6)">
+        <div class="skillrow">
+          <span class="ds-label" data-en="AI systems" data-es="Sistemas de IA">AI systems</span>
+          <div class="tags">
+            <span class="tag">RAG</span><span class="tag" data-en="Knowledge Graphs" data-es="Grafos de conocimiento">Knowledge Graphs</span>
+            <span class="tag">Neo4j</span><span class="tag">Pinecone</span><span class="tag">LightRAG</span>
+            <span class="tag" data-en="Ontology Design" data-es="Diseño de ontologías">Ontology Design</span>
+            <span class="tag" data-en="Machine Learning" data-es="Aprendizaje automático">Machine Learning</span>
+            <span class="tag">SHAP</span><span class="tag" data-en="Explainable AI" data-es="IA explicable">Explainable AI</span>
+          </div>
+        </div>
+        <div class="skillrow">
+          <span class="ds-label" data-en="Programming &amp; data" data-es="Programación y datos">Programming &amp; data</span>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Apache Spark</span>
+            <span class="tag">Impala</span><span class="tag">Hive</span><span class="tag">Hadoop</span>
+            <span class="tag">dbt</span><span class="tag">Git</span><span class="tag">MLflow</span><span class="tag">DVC</span>
+          </div>
+        </div>
+        <div class="skillrow">
+          <span class="ds-label" data-en="Model &amp; AI risk" data-es="Riesgo de modelos e IA">Model &amp; AI risk</span>
+          <div class="tags">
+            <span class="tag" data-en="Model Risk Management" data-es="Gestión de riesgo de modelos">Model Risk Management</span>
+            <span class="tag" data-en="Model Validation" data-es="Validación de modelos">Model Validation</span>
+            <span class="tag" data-en="Model Monitoring" data-es="Monitoreo de modelos">Model Monitoring</span>
+            <span class="tag" data-en="AI Governance" data-es="Gobernanza de IA">AI Governance</span>
+            <span class="tag" data-en="Statistical Modeling" data-es="Modelación estadística">Statistical Modeling</span>
+            <span class="tag" data-en="IFRS 9" data-es="NIIF 9">IFRS 9</span>
+            <span class="tag">SOX</span>
+          </div>
+        </div>
+        <div class="skillrow">
+          <span class="ds-label" data-en="Languages" data-es="Idiomas">Languages</span>
+          <div class="tags">
+            <span class="tag" data-en="Spanish — Native" data-es="Español — Nativo">Spanish — Native</span>
+            <span class="tag" data-en="English — Full professional (IELTS C1)" data-es="Inglés — Profesional pleno (IELTS C1)">English — Full professional (IELTS C1)</span>
+            <span class="tag" data-en="French — Full professional (DELF B2)" data-es="Francés — Profesional pleno (DELF B2)">French — Full professional (DELF B2)</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="h-sec" style="margin-top:clamp(40px,5vw,72px)" data-en="Education" data-es="Formación">Education</h2>
+
+      <div class="edu" style="margin-top:var(--sp-6)">
+        <div class="edu__item">
+          <span class="ds-label" data-en="Expected Dec 2027 · Pittsburgh, PA" data-es="Grado previsto dic. 2027 · Pittsburgh, PA">Expected Dec 2027 · Pittsburgh, PA</span>
+          <h3 class="h-min" style="margin-top:var(--sp-2)">Carnegie Mellon University, Heinz College</h3>
+          <div class="deg" data-en="MS, Artificial Intelligence Systems Management" data-es="Maestría en Gestión de Sistemas de Inteligencia Artificial">MS, Artificial Intelligence Systems Management</div>
+          <p data-en="Coursework: Machine Learning · Causal Inference &amp; Program Evaluation · Applied Econometrics · AI Governance &amp; Risk Management · Data-Driven Decision Making"
+             data-es="Cursos: Aprendizaje automático · Inferencia causal y evaluación de programas · Econometría aplicada · Gobernanza y gestión de riesgos de IA · Toma de decisiones basada en datos">Coursework: Machine Learning · Causal Inference &amp; Program Evaluation · Applied Econometrics · AI Governance &amp; Risk Management · Data-Driven Decision Making</p>
+        </div>
+        <div class="edu__item">
+          <span class="ds-label" data-en="Dec 2024 · Medellín, Colombia" data-es="Dic. 2024 · Medellín, Colombia">Dec 2024 · Medellín, Colombia</span>
+          <h3 class="h-min" style="margin-top:var(--sp-2)" data-en="University of Antioquia" data-es="Universidad de Antioquia">University of Antioquia</h3>
+          <div class="deg" data-en="BS, Philosophy" data-es="Pregrado en Filosofía">BS, Philosophy</div>
+          <p data-en="Epistemology, philosophy and history of science, philosophy of mind, logic. Thesis: “How to Say No: Modeling the Precautionary Principle” — how to decide about a technology when no evidence exists and the human cost is high. Honorable Mention, Nov 2023."
+             data-es="Epistemología, filosofía e historia de la ciencia, filosofía de la mente, lógica. Tesis: «Cómo decir no: modelando el principio de precaución» — cómo decidir sobre una tecnología cuando no existe evidencia y el costo humano es alto. Mención de Honor, nov. 2023.">Epistemology, philosophy and history of science, philosophy of mind, logic. Thesis: “How to Say No: Modeling the Precautionary Principle” — how to decide about a technology when no evidence exists and the human cost is high. Honorable Mention, Nov 2023.</p>
+        </div>
+        <div class="edu__item">
+          <span class="ds-label" data-en="Sep 2019 · Medellín, Colombia" data-es="Sep. 2019 · Medellín, Colombia">Sep 2019 · Medellín, Colombia</span>
+          <h3 class="h-min" style="margin-top:var(--sp-2)" data-en="National University of Colombia" data-es="Universidad Nacional de Colombia">National University of Colombia</h3>
+          <div class="deg" data-en="BS, Physics Engineering" data-es="Pregrado en Ingeniería Física">BS, Physics Engineering</div>
+          <p data-en="Thesis: “Computational Spaces”" data-es="Tesis: «Espacios computacionales»">Thesis: “Computational Spaces”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ RESEARCH ═══════════════ -->
+<section class="sec" id="research">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">V</span>
+      <span class="rail-name" data-en="Research" data-es="Investigación">Research</span>
+      <span class="ds-note" data-en="Publications, teaching and the things somebody else decided were worth marking." data-es="Publicaciones, docencia y aquello que alguien más decidió que valía la pena señalar.">Publications, teaching and the things somebody else decided were worth marking.</span>
+    </div>
+
+    <div>
+      <h2 class="h-sec" data-en="Research &amp; publications" data-es="Investigación y publicaciones">Research &amp; publications</h2>
+      <div class="entries" style="margin-top:var(--sp-6)">
+        <div class="entry">
+          <span class="ds-label">2026</span>
+          <div>
+            <h3 class="h-min">“Zombie Governance”</h3>
+            <p data-en="Extended abstract accepted for presentation, Data for Policy 2026 — international conference on data science and public policy"
+               data-es="Resumen extendido aceptado para presentación, Data for Policy 2026 — conferencia internacional sobre ciencia de datos y política pública">Extended abstract accepted for presentation, Data for Policy 2026 — international conference on data science and public policy</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label">2023</span>
+          <div>
+            <h3 class="h-min" data-en="“How to Say No: Participatory Deliberation in the Precautionary Principle”" data-es="«Cómo decir no: deliberación participativa en el principio de precaución»">“How to Say No: Participatory Deliberation in the Precautionary Principle”</h3>
+            <p data-en="Presented, International Congress of Philosophy: Justice, Recognition and Peace, August 2023"
+               data-es="Presentado en el Congreso Internacional de Filosofía: Justicia, Reconocimiento y Paz, agosto de 2023">Presented, International Congress of Philosophy: Justice, Recognition and Peace, August 2023</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label" data-en="2020 — present" data-es="2020 — presente">2020 — present</span>
+          <div>
+            <h3 class="h-min" data-en="Researcher — Knowledge, Philosophy, Science, History and Society" data-es="Investigador — Conocimiento, Filosofía, Ciencia, Historia y Sociedad">Researcher — Knowledge, Philosophy, Science, History and Society</h3>
+            <p data-en="Research group, University of Antioquia" data-es="Grupo de investigación, Universidad de Antioquia">Research group, University of Antioquia</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="h-sec" style="margin-top:clamp(40px,5vw,64px)" data-en="Teaching" data-es="Docencia">Teaching</h2>
+      <div class="entries" style="margin-top:var(--sp-6)">
+        <div class="entry">
+          <span class="ds-label" data-en="Jan — Jun 2025" data-es="Ene — Jun 2025">Jan — Jun 2025</span>
+          <div>
+            <h3 class="h-min" data-en="Faculty, Data Science — University of Antioquia" data-es="Docente, Ciencia de Datos — Universidad de Antioquia">Faculty, Data Science — University of Antioquia</h3>
+            <p data-en="Faculty of Economics. Taught a <span class='ds-num'>20</span>-student undergraduate Data Science course; developed exams and assignments and reviewed curriculum for accreditation standards."
+               data-es="Facultad de Ciencias Económicas. Dicté un curso de pregrado de Ciencia de Datos para <span class='ds-num'>20</span> estudiantes; desarrollé exámenes y trabajos, y revisé el currículo frente a estándares de acreditación.">Faculty of Economics. Taught a <span class="ds-num">20</span>-student undergraduate Data Science course; developed exams and assignments and reviewed curriculum for accreditation standards.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label" data-en="Jul — Dec 2024" data-es="Jul — Dic 2024">Jul — Dec 2024</span>
+          <div>
+            <h3 class="h-min" data-en="Faculty, Big Data Engineering — National University of Colombia" data-es="Docente, Ingeniería de Big Data — Universidad Nacional de Colombia">Faculty, Big Data Engineering — National University of Colombia</h3>
+            <p data-en="Faculty of Humanities. Taught Apache Spark, the Hadoop ecosystem and Impala within an undergraduate Big Data Engineering course for <span class='ds-num'>60</span> students."
+               data-es="Facultad de Ciencias Humanas. Enseñé Apache Spark, el ecosistema Hadoop e Impala dentro de un curso de pregrado de Ingeniería de Big Data para <span class='ds-num'>60</span> estudiantes.">Faculty of Humanities. Taught Apache Spark, the Hadoop ecosystem and Impala within an undergraduate Big Data Engineering course for <span class="ds-num">60</span> students.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="h-sec" style="margin-top:clamp(40px,5vw,64px)" data-en="Awards &amp; certifications" data-es="Reconocimientos y certificaciones">Awards &amp; certifications</h2>
+      <div class="entries" style="margin-top:var(--sp-6)">
+        <div class="entry">
+          <span class="ds-label">2024</span>
+          <div>
+            <h3 class="h-min" data-en="“Being EXTRAordinary” Team Recognition" data-es="Reconocimiento de equipo «Ser EXTRAordinario»">“Being EXTRAordinary” Team Recognition</h3>
+            <p data-en="For leading performance — Grupo Cibest (NYSE: CIB)" data-es="Por desempeño destacado — Grupo Cibest (NYSE: CIB)">For leading performance — Grupo Cibest (NYSE: CIB)</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label">2023</span>
+          <div>
+            <h3 class="h-min" data-en="Honorable Mention, Philosophy Thesis" data-es="Mención de Honor, tesis de Filosofía">Honorable Mention, Philosophy Thesis</h3>
+            <p data-en="University of Antioquia" data-es="Universidad de Antioquia">University of Antioquia</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label">2019</span>
+          <div>
+            <h3 class="h-min">Data Science for All (DS4All)</h3>
+            <p data-en="Correlation One · <span class='ds-num'>375+</span> hours" data-es="Correlation One · más de <span class='ds-num'>375</span> horas">Correlation One · <span class="ds-num">375+</span> hours</p>
+          </div>
+        </div>
+        <div class="entry">
+          <span class="ds-label">2018</span>
+          <div>
+            <h3 class="h-min">Emerging Leaders in the Americas Program (ELAP)</h3>
+            <p data-en="Government of Canada Scholarship" data-es="Beca del Gobierno de Canadá">Government of Canada Scholarship</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="sec" id="contact">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">→</span>
+      <span class="rail-name" data-en="Contact" data-es="Contacto">Contact</span>
+    </div>
+
+    <div>
+      <h2 class="h-sec" data-en="Get in touch" data-es="Escríbame">Get in touch</h2>
+
+      <p class="lead-in" style="margin-top:var(--sp-5)"
+         data-en="<mark class='ds-hl'>I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it."
+         data-es="<mark class='ds-hl'>Busco una pasantía para el verano de 2027.</mark> Si algo de lo anterior es también un problema en el que usted trabaja — decisiones bajo incertidumbre, riesgo de modelos, gobernanza de IA como disciplina técnica — me gustaría saberlo.">
+        <mark class="ds-hl">I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it.
       </p>
 
-      <div class="movement">
-        <h3 data-en="I · Physics — mechanisms are portable" data-es="I · Física — los mecanismos son portátiles">I · Physics — mechanisms are portable</h3>
-        <p data-en="I studied Physics Engineering to learn how systems evolve in time. What turned out to matter was not any particular system but a structural fact: <strong>the mathematics does not care about the substrate.</strong> A Markov process is indifferent to whether its state is a particle or a borrower. A diffusion equation does not know whether it is describing heat or the spread of a default."
-           data-es="Estudié Ingeniería Física para aprender cómo evolucionan los sistemas en el tiempo. Lo que terminó importando no fue ningún sistema en particular, sino un hecho estructural: <strong>a las matemáticas no les importa el sustrato.</strong> A un proceso de Markov le da igual que su estado sea una partícula o un deudor. Una ecuación de difusión no sabe si describe calor o la propagación de un incumplimiento.">
-          I studied Physics Engineering to learn how systems evolve in time. What turned out to matter was not any particular system but a structural fact: <strong>the mathematics does not care about the substrate.</strong> A Markov process is indifferent to whether its state is a particle or a borrower. A diffusion equation does not know whether it is describing heat or the spread of a default.
-        </p>
-        <p data-en="So when I later found Markov processes and diffusion models sitting at the centre of credit risk, it read less as a surprise than as a confirmation. The mechanisms we already understand are transferable, and building real applications on top of mathematics that is already solved is itself a way of learning what decision-making is made of."
-           data-es="Por eso, cuando más tarde encontré procesos de Markov y modelos de difusión en el centro del riesgo de crédito, no lo leí tanto como una sorpresa sino como una confirmación. Los mecanismos que ya entendemos son transferibles, y construir aplicaciones reales sobre matemáticas ya resueltas es, en sí mismo, una forma de aprender de qué está hecha la toma de decisiones.">
-          So when I later found Markov processes and diffusion models sitting at the centre of credit risk, it read less as a surprise than as a confirmation. The mechanisms we already understand are transferable, and building real applications on top of mathematics that is already solved is itself a way of learning what decision-making is made of.
-        </p>
+      <div class="contact" style="margin-top:var(--sp-6)">
+        <a href="mailto:atabares@andrew.cmu.edu">
+          <span class="ds-label">Email</span>
+          <span class="val">atabares@andrew.cmu.edu</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mario-alejandro-tabares-arango" rel="noopener" target="_blank">
+          <span class="ds-label">LinkedIn</span>
+          <span class="val">/in/mario-alejandro-tabares-arango</span>
+        </a>
+        <a href="https://github.com/puedesleerlo" rel="noopener" target="_blank">
+          <span class="ds-label">GitHub</span>
+          <span class="val">@puedesleerlo</span>
+        </a>
+        <a href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
+          <span class="ds-label">CV</span>
+          <span class="val" data-en="Download PDF" data-es="Descargar PDF">Download PDF</span>
+        </a>
       </div>
-
-      <div class="movement">
-        <h3 data-en="II · Philosophy — what counts as evidence" data-es="II · Filosofía — qué cuenta como evidencia">II · Philosophy — what counts as evidence</h3>
-        <p data-en="I went back for a second degree, in philosophy, to work on epistemology: Popper and falsification, evolutionary epistemology, history and philosophy of science, philosophy of mind, logic. In my second semester I ran into a decision-making course and it never let go of me. The question I cared about was narrow and stubborn — <strong>what actually counts as evidence for or against a theory?</strong> History of science supplied the other half: how decisions about technology get made, and how technologies get built out of those decisions."
-           data-es="Volví a la universidad por un segundo pregrado, en filosofía, para trabajar en epistemología: Popper y la falsación, epistemología evolutiva, historia y filosofía de la ciencia, filosofía de la mente, lógica. En segundo semestre me crucé con un curso de toma de decisiones y ya no me soltó. La pregunta que me importaba era estrecha y terca — <strong>¿qué cuenta realmente como evidencia a favor o en contra de una teoría?</strong> La historia de la ciencia aportó la otra mitad: cómo se toman las decisiones sobre tecnología, y cómo las tecnologías se construyen a partir de esas decisiones.">
-          I went back for a second degree, in philosophy, to work on epistemology: Popper and falsification, evolutionary epistemology, history and philosophy of science, philosophy of mind, logic. In my second semester I ran into a decision-making course and it never let go of me. The question I cared about was narrow and stubborn — <strong>what actually counts as evidence for or against a theory?</strong> History of science supplied the other half: how decisions about technology get made, and how technologies get built out of those decisions.
-        </p>
-        <p data-en="My thesis took the hardest version of the problem: how do you decide about a technology when no evidence is available, no science can predict the outcome, and the potential human cost is large? My answer was that nobody can forecast the impact of a technology, so <strong>ethics and principles have to lead rather than follow the evidence</strong> — but as falsifiable commitments that are actually tested, not as a rulebook you comply with."
-           data-es="Mi tesis tomó la versión más difícil del problema: ¿cómo se decide sobre una tecnología cuando no hay evidencia disponible, ninguna ciencia puede predecir el resultado y el costo humano potencial es alto? Mi respuesta fue que nadie puede pronosticar el impacto de una tecnología, así que <strong>la ética y los principios deben ir por delante de la evidencia, no detrás</strong> — pero como compromisos falsables que efectivamente se ponen a prueba, no como un reglamento que se cumple.">
-          My thesis took the hardest version of the problem: how do you decide about a technology when no evidence is available, no science can predict the outcome, and the potential human cost is large? My answer was that nobody can forecast the impact of a technology, so <strong>ethics and principles have to lead rather than follow the evidence</strong> — but as falsifiable commitments that are actually tested, not as a rulebook you comply with.
-        </p>
-        <blockquote data-en="A principle that cannot fail is not a principle. It is decoration."
-                    data-es="Un principio que no puede fallar no es un principio. Es decoración.">A principle that cannot fail is not a principle. It is decoration.</blockquote>
-      </div>
-
-      <div class="movement">
-        <h3 data-en="III · Risk — where it broke" data-es="III · Riesgo — donde se rompió">III · Risk — where it broke</h3>
-        <p data-en="Banking is where I put that to work. Credit risk is decision-making under uncertainty with the uncertainty made explicit and priced, which is as close to a laboratory as this question gets. Two things happened there."
-           data-es="En la banca puse todo eso a trabajar. El riesgo de crédito es toma de decisiones bajo incertidumbre con la incertidumbre hecha explícita y valorada, que es lo más cerca de un laboratorio a lo que llega esta pregunta. Allí pasaron dos cosas.">
-          Banking is where I put that to work. Credit risk is decision-making under uncertainty with the uncertainty made explicit and priced, which is as close to a laboratory as this question gets. Two things happened there.
-        </p>
-        <p data-en="The first confirmed the physics intuition. Models built for physical systems do describe behavioural and economic data, and the real craft is <strong>reconciling the macro world</strong> — macroeconomic variables — <strong>with the micro world</strong> — longitudinal, month-by-month client-loan tracking. Two resolutions of a single object."
-           data-es="La primera confirmó la intuición de la física. Los modelos construidos para sistemas físicos sí describen datos conductuales y económicos, y el oficio real está en <strong>reconciliar el mundo macro</strong> — variables macroeconómicas — <strong>con el mundo micro</strong> — seguimiento longitudinal, mes a mes, de cada cliente y cada crédito. Dos resoluciones de un mismo objeto.">
-          The first confirmed the physics intuition. Models built for physical systems do describe behavioural and economic data, and the real craft is <strong>reconciling the macro world</strong> — macroeconomic variables — <strong>with the micro world</strong> — longitudinal, month-by-month client-loan tracking. Two resolutions of a single object.
-        </p>
-        <p data-en="The second was the pandemic, and it is the reason I am still working on this. COVID moved micro and macro behaviour in ways that did not correlate. Relief programmes hit the two levels differently — yet they were two versions of the same behaviour, produced by a single cause, and they should have been explainable together. <strong>Instead the models were evaluated the way they always were: context-free, on their metrics.</strong> Decisions were made without an account of the endogenous dynamics driving them. And where a financial explanation and a machine-learning explanation of the same outcome competed, the ML counterpart tended to win — because it carried the name of science."
-           data-es="La segunda fue la pandemia, y es la razón por la que sigo en esto. La COVID movió el comportamiento micro y el macro de maneras que no correlacionaban. Los alivios financieros golpearon los dos niveles de forma distinta — y sin embargo eran dos versiones del mismo comportamiento, producidas por una sola causa, y deberían haberse podido explicar juntas. <strong>En cambio, los modelos se evaluaron como siempre: sin contexto, contra sus métricas.</strong> Se tomaron decisiones sin dar cuenta de las dinámicas endógenas que las movían. Y cuando competían una explicación financiera y una de aprendizaje automático sobre el mismo resultado, tendía a ganar la segunda — porque llevaba el nombre de la ciencia.">
-          The second was the pandemic, and it is the reason I am still working on this. COVID moved micro and macro behaviour in ways that did not correlate. Relief programmes hit the two levels differently — yet they were two versions of the same behaviour, produced by a single cause, and they should have been explainable together. <strong>Instead the models were evaluated the way they always were: context-free, on their metrics.</strong> Decisions were made without an account of the endogenous dynamics driving them. And where a financial explanation and a machine-learning explanation of the same outcome competed, the ML counterpart tended to win — because it carried the name of science.
-        </p>
-        <p data-en="Philosophy had already told me why that is wrong. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> This is the problem of induction wearing a crisis as a costume: the past has quietly stopped being a guide, and no amount of backtesting will tell you so, because backtesting is made of the past."
-           data-es="La filosofía ya me había dicho por qué eso está mal. <strong>Las métricas técnicas no son concluyentes cuando la base de evidencia desapareció.</strong> Es el problema de la inducción disfrazado de crisis: el pasado dejó de ser guía sin avisar, y ningún backtesting te lo va a decir, porque el backtesting está hecho de pasado.">
-          Philosophy had already told me why that is wrong. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> This is the problem of induction wearing a crisis as a costume: the past has quietly stopped being a guide, and no amount of backtesting will tell you so, because backtesting is made of the past.
-        </p>
-        <p data-en="I answered with what I had: experimentation and simulation, backtesting coverage pushed from 20% to 90%, Monte Carlo, thousands of model runs a week. I still have not found the answer. I had to report an expected risk; the expected risk could not be honestly derived from the evidence. <em>Decision-making under uncertainty</em> is the correct name for the problem, but no formal framework I could find actually handles decisions this complex inside an organisation that expects evidence-based management."
-           data-es="Respondí con lo que tenía: experimentación y simulación, cobertura de backtesting llevada del 20% al 90%, Monte Carlo, miles de corridas de modelos por semana. Todavía no encontré la respuesta. Tenía que reportar un riesgo esperado; el riesgo esperado no podía derivarse honestamente de la evidencia. <em>Toma de decisiones bajo incertidumbre</em> es el nombre correcto del problema, pero ningún marco formal que haya encontrado resuelve decisiones de esta complejidad dentro de una organización que espera gestión basada en evidencia.">
-          I answered with what I had: experimentation and simulation, backtesting coverage pushed from 20% to 90%, Monte Carlo, thousands of model runs a week. I still have not found the answer. I had to report an expected risk; the expected risk could not be honestly derived from the evidence. <em>Decision-making under uncertainty</em> is the correct name for the problem, but no formal framework I could find actually handles decisions this complex inside an organisation that expects evidence-based management.
-        </p>
-      </div>
-
-      <div class="movement">
-        <h3 data-en="IV · Governance — building the layer" data-es="IV · Gobernanza — construir la capa">IV · Governance — building the layer</h3>
-        <p data-en="That is where I stopped being only a builder. If technical decisions cannot be validated by their own metrics, then what is missing sits <em>around</em> them: <strong>a feedback and control loop bound to actual outcomes and aware of context, not just to metrics.</strong> A monitoring layer over technical decision-making, whatever the algorithms underneath happen to be."
-           data-es="Ahí dejé de ser sólo constructor. Si las decisiones técnicas no pueden validarse con sus propias métricas, lo que falta está <em>alrededor</em> de ellas: <strong>un ciclo de retroalimentación y control atado a resultados reales y consciente del contexto, no sólo a métricas.</strong> Una capa de monitoreo sobre la decisión técnica, sean cuales sean los algoritmos que haya debajo.">
-          That is where I stopped being only a builder. If technical decisions cannot be validated by their own metrics, then what is missing sits <em>around</em> them: <strong>a feedback and control loop bound to actual outcomes and aware of context, not just to metrics.</strong> A monitoring layer over technical decision-making, whatever the algorithms underneath happen to be.
-        </p>
-        <p data-en="I moved into public-space governance to build one, and to have the leadership and autonomy to test the idea on something real. Public space asks micro and macro questions under uncertainty constantly. I wanted a system where information was integrated and ground truth established — where you could see in real time what was actually happening, with artificial agency, explicit context, and ontologies doing the work of holding meaning steady across thirty-four incompatible historical standards."
-           data-es="Me pasé a la gobernanza del espacio público para construir una, y para tener el liderazgo y la autonomía de probar la idea en algo real. El espacio público plantea preguntas micro y macro bajo incertidumbre todo el tiempo. Quería un sistema donde la información estuviera integrada y la verdad de base establecida — donde se pudiera ver en tiempo real qué estaba pasando de verdad, con agencia artificial, contexto explícito y ontologías sosteniendo el significado a través de treinta y cuatro estándares históricos incompatibles.">
-          I moved into public-space governance to build one, and to have the leadership and autonomy to test the idea on something real. Public space asks micro and macro questions under uncertainty constantly. I wanted a system where information was integrated and ground truth established — where you could see in real time what was actually happening, with artificial agency, explicit context, and ontologies doing the work of holding meaning steady across thirty-four incompatible historical standards.
-        </p>
-        <p data-en="On its own terms the project was a considerable success. The numbers are further down this page. <strong>I still did not get the answer.</strong>"
-           data-es="En sus propios términos el proyecto fue un éxito considerable. Las cifras están más abajo en esta página. <strong>Aun así, no obtuve la respuesta.</strong>">
-          On its own terms the project was a considerable success. The numbers are further down this page. <strong>I still did not get the answer.</strong>
-        </p>
-      </div>
-
-      <div class="movement">
-        <h3 data-en="V · What I don't know yet" data-es="V · Lo que todavía no sé">V · What I don't know yet</h3>
-        <p data-en="That is the honest reason I am at Carnegie Mellon. I ran out of formal apparatus, and I needed better tools than the ones I had taught myself."
-           data-es="Esa es la razón honesta por la que estoy en Carnegie Mellon. Se me acabó el aparato formal y necesitaba mejores herramientas que las que me había enseñado a mí mismo.">
-          That is the honest reason I am at Carnegie Mellon. I ran out of formal apparatus, and I needed better tools than the ones I had taught myself.
-        </p>
-        <p data-en="I am now fairly convinced that the relation between governance and decision-making is a genuinely technical problem, and a hard one. It involves desires, coordination and evaluation at the same time, and it does not dissolve by choosing better metrics. What I want to understand is <strong>how to build trust, and how to build environments that produce good decisions, precisely where the human cost is high and the evidence is thin.</strong>"
-           data-es="A estas alturas estoy bastante convencido de que la relación entre gobernanza y toma de decisiones es un problema genuinamente técnico, y difícil. Involucra deseos, coordinación y evaluación al mismo tiempo, y no se disuelve eligiendo mejores métricas. Lo que quiero entender es <strong>cómo se construye confianza, y cómo se construyen entornos que produzcan buenas decisiones, justo donde el costo humano es alto y la evidencia es escasa.</strong>">
-          I am now fairly convinced that the relation between governance and decision-making is a genuinely technical problem, and a hard one. It involves desires, coordination and evaluation at the same time, and it does not dissolve by choosing better metrics. What I want to understand is <strong>how to build trust, and how to build environments that produce good decisions, precisely where the human cost is high and the evidence is thin.</strong>
-        </p>
-        <p data-en="I do not have it yet. That is what the next few years are for."
-           data-es="Todavía no la tengo. Para eso son los próximos años.">
-          I do not have it yet. That is what the next few years are for.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= EXPERIENCE ================= -->
-<section class="sec" id="experience">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Experience" data-es="Experiencia">Experience</h2>
-    </div>
-
-    <article class="job">
-      <div class="job__when">
-        <span data-en="Jan 2025 — Jul 2026" data-es="Ene 2025 — Jul 2026">Jan 2025 — Jul 2026</span>
-        <em data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</em>
-      </div>
-      <div>
-        <h3 data-en="Associate Director of Data and Technology" data-es="Director Asociado de Datos y Tecnología">Associate Director of Data and Technology</h3>
-        <div class="org">CORLIDE — Corporación Libertad y Democracia
-          <span data-en="· Colombian nonprofit for institutional transparency" data-es="· ONG colombiana de transparencia institucional">· Colombian nonprofit for institutional transparency</span>
-        </div>
-        <p class="frame"
-           data-en="Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it."
-           data-es="Movimiento IV — construir la capa de monitoreo: información integrada, verdad de base establecida y contexto lo bastante explícito como para que un agente de IA pudiera razonar sobre él.">Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it.</p>
-        <ul>
-          <li data-en="Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of 500+ anonymised citizen petitions, driving overdue responses (&gt;15 business days) from 300+ to zero per month"
-              data-es="Construí un <strong>sistema de graph RAG</strong> con Neo4j, Pinecone y LightRAG sobre tres años de más de 500 peticiones ciudadanas anonimizadas, reduciendo las respuestas vencidas (&gt;15 días hábiles) de más de 300 a cero al mes">Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of 500+ anonymised citizen petitions, driving overdue responses (&gt;15 business days) from 300+ to zero per month</li>
-          <li data-en="Designed a <strong>domain ontology released as a public asset</strong>, standardising entities and relationships as a semantic layer for downstream AI systems — cutting hallucinations from conceptual misunderstanding from 55% to 25%"
-              data-es="Diseñé una <strong>ontología de dominio publicada como activo público</strong>, estandarizando entidades y relaciones como capa semántica para sistemas de IA — reduciendo las alucinaciones por malentendidos conceptuales del 55% al 25%">Designed a <strong>domain ontology released as a public asset</strong>, standardising entities and relationships as a semantic layer for downstream AI systems — cutting hallucinations from conceptual misunderstanding from 55% to 25%</li>
-          <li data-en="Cut complex spatial-question turnaround from one analyst-week to <strong>10 minutes (240×)</strong> by deploying geospatial AI agents, validated against a purpose-built 96-question execution-accuracy benchmark spanning 34 historical data standards"
-              data-es="Reduje el tiempo de respuesta a preguntas espaciales complejas de una semana-analista a <strong>10 minutos (240×)</strong> desplegando agentes geoespaciales de IA, validados contra un benchmark propio de 96 preguntas de precisión de ejecución sobre 34 estándares históricos de datos">Cut complex spatial-question turnaround from one analyst-week to <strong>10 minutes (240×)</strong> by deploying geospatial AI agents, validated against a purpose-built 96-question execution-accuracy benchmark spanning 34 historical data standards</li>
-          <li data-en="Created a <strong>PII anonymisation pipeline</strong> protecting 65,000+ individuals and 400,000+ addresses, stripping 13 sensitive fields via irreversible hashing (SHA-256), suppression and generalisation"
-              data-es="Creé una <strong>tubería de anonimización de PII</strong> que protege a más de 65.000 personas y 400.000 direcciones, eliminando 13 campos sensibles mediante hashing irreversible (SHA-256), supresión y generalización">Created a <strong>PII anonymisation pipeline</strong> protecting 65,000+ individuals and 400,000+ addresses, stripping 13 sensitive fields via irreversible hashing (SHA-256), suppression and generalisation</li>
-          <li data-en="Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (2.5M+ residents), implementing DAMA-DMBOK and ITIL to clean and integrate 250+ data sources"
-              data-es="Lideré la gobernanza de datos e IA de la Subsecretaría de Espacio Público, Alcaldía de Medellín (2,5M+ habitantes), implementando DAMA-DMBOK e ITIL para depurar e integrar más de 250 fuentes de datos">Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (2.5M+ residents), implementing DAMA-DMBOK and ITIL to clean and integrate 250+ data sources</li>
-          <li data-en="Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy"
-              data-es="Coordiné con la <strong>Open Government Partnership</strong>, la Presidencia de Colombia y universidades colombianas (Externado, Los Andes) un modelo nacional de gobernanza de IA; y con el FCDO del Reino Unido la estrategia de Gobierno Abierto Local de Medellín">Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy</li>
-        </ul>
-      </div>
-    </article>
-
-    <article class="job">
-      <div class="job__when">
-        <span data-en="Jul 2020 — Jan 2025" data-es="Jul 2020 — Ene 2025">Jul 2020 — Jan 2025</span>
-        <em data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</em>
-      </div>
-      <div>
-        <h3 data-en="Senior Data Scientist" data-es="Científico de Datos Senior">Senior Data Scientist</h3>
-        <div class="org">Bancolombia (Grupo Cibest)
-          <span data-en="· Colombia's largest bank, NYSE: CIB" data-es="· el banco más grande de Colombia, NYSE: CIB">· Colombia's largest bank, NYSE: CIB</span>
-        </div>
-        <p class="frame"
-           data-en="Movements I and III — physical mathematics applied to behavioural data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid."
-           data-es="Movimientos I y III — matemáticas físicas aplicadas a datos conductuales, y la pandemia enseñándome que una métrica no puede avisarte cuándo la evidencia que la sostiene dejó de ser válida.">Movements I and III — physical mathematics applied to behavioural data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid.</p>
-        <ul>
-          <li data-en="Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across 8 audit cycles covering 230+ credit risk models — closed every cycle with zero material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)"
-              data-es="Contraparte técnica principal ante <strong>PwC México, Auditoría Interna, Revisoría Fiscal y reguladores bancarios colombianos</strong> en 8 ciclos de auditoría sobre más de 230 modelos de riesgo de crédito — cerré cada ciclo sin hallazgos materiales, en un entorno listado en NYSE y reportante ante la SEC (Form 20-F)">Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across 8 audit cycles covering 230+ credit risk models — closed every cycle with zero material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)</li>
-          <li data-en="Designed and built <strong>230+ loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of 3 on evaluation and data-cleaning methodology"
-              data-es="Diseñé y construí <strong>más de 230 modelos de provisiones</strong> (pérdida esperada de por vida) bajo NIIF 9 — la contraparte internacional del CECL estadounidense — usando modelos multiestado de Aalen-Johansen con covariables dependientes del tiempo, riesgos proporcionales de Cox y cadenas multiestado semi-Markov; lideré un equipo de 3 en metodología de evaluación y depuración de datos">Designed and built <strong>230+ loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of 3 on evaluation and data-cleaning methodology</li>
-          <li data-en="Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~COP 56T (USD 14B) in credit exposure and 14M+ borrower records"
-              data-es="Fui responsable del portafolio de modelos de provisiones en <strong>cuatro países</strong> (Colombia, Panamá, El Salvador, Guatemala), cubriendo ~COP 56 billones (USD 14B) de exposición crediticia y más de 14M de registros de deudores">Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~COP 56T (USD 14B) in credit exposure and 14M+ borrower records</li>
-          <li data-en="Applied Monte Carlo and Bernoulli-based simulation to assess loss behaviour and concentration risk, expanding backtesting (S2+) coverage from 20% to 90%"
-              data-es="Apliqué simulación Monte Carlo y basada en Bernoulli para evaluar comportamiento de pérdidas y riesgo de concentración, ampliando la cobertura de backtesting (S2+) del 20% al 90%">Applied Monte Carlo and Bernoulli-based simulation to assess loss behaviour and concentration risk, expanding backtesting (S2+) coverage from 20% to 90%</li>
-          <li data-en="Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~1 TB of borrower history into 16 GB and eliminating a 3-hour dataset rebuild per model"
-              data-es="Rediseñé la capa de datos de desarrollo de modelos como un <strong>feature store basado en cambios</strong>: extracción desde Impala sobre el warehouse corporativo, persistiendo sólo transiciones de estado en InfluxDB, comprimiendo ~1 TB de historia de deudores a 16 GB y eliminando una reconstrucción de dataset de 3 horas por modelo">Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~1 TB of borrower history into 16 GB and eliminating a 3-hour dataset rebuild per model</li>
-          <li data-en="Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling 2,000 runs/week vs. 20/month; resulting specifications cut PD prediction error from 30% to 5% (natural-person) and ~50% to under 10% (large-corporate)"
-              data-es="Construí un <strong>registro de experimentos</strong> ligero — archivos SQLite de estado por corrida versionados con DVC, métricas en MLflow — habilitando 2.000 corridas/semana frente a 20/mes; las especificaciones resultantes redujeron el error de predicción de PD del 30% al 5% (persona natural) y de ~50% a menos del 10% (gran empresa)">Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling 2,000 runs/week vs. 20/month; resulting specifications cut PD prediction error from 30% to 5% (natural-person) and ~50% to under 10% (large-corporate)</li>
-        </ul>
-      </div>
-    </article>
-
-    <article class="job">
-      <div class="job__when">
-        <span data-en="Mar 2019 — Jul 2020" data-es="Mar 2019 — Jul 2020">Mar 2019 — Jul 2020</span>
-        <em data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</em>
-      </div>
-      <div>
-        <h3 data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</h3>
-        <div class="org">Telemetrik</div>
-        <p class="frame"
-           data-en="First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about."
-           data-es="Primer encuentro con la versión práctica del problema: una decisión sólo vale lo que vale el instrumento que observó aquello sobre lo que decide.">First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about.</p>
-        <ul>
-          <li data-en="Led a data-architecture transformation enabling real-time analytics for <strong>2,000+ IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context"
-              data-es="Lideré una transformación de arquitectura de datos que habilitó analítica en tiempo real para <strong>más de 2.000 dispositivos IoT</strong> (sensores de agua, alumbrado público, seguimiento de barrido) y tableros automatizados, reduciendo el monitoreo manual de interrupciones de servicio en un contexto de Ciudad Inteligente">Led a data-architecture transformation enabling real-time analytics for <strong>2,000+ IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context</li>
-          <li data-en="Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across 10+ data streams"
-              data-es="Implementé controles automáticos de calidad de datos — validaciones de rango, monitoreo de nulos, detección estadística de atípicos — para identificar fallas de sensores y corrupción de datos en más de 10 flujos">Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across 10+ data streams</li>
-        </ul>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ================= SELECTED WORK ================= -->
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Selected work" data-es="Proyectos seleccionados">Selected work</h2>
-      <p data-en="Systems I designed and built, and — because the argument above demands it — what each was actually measured against. Two of them open into full case studies."
-         data-es="Sistemas que diseñé y construí y, porque el argumento de arriba lo exige, contra qué se midió realmente cada uno. Dos de ellos abren casos de estudio completos.">Systems I designed and built, and — because the argument above demands it — what each was actually measured against. Two of them open into full case studies.</p>
-    </div>
-
-    <div class="grid">
-      <a class="card" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">
-        <div class="card__tag" data-en="Public asset · Ontology" data-es="Activo público · Ontología">Public asset · Ontology</div>
-        <h3 data-en="Public Space domain ontology" data-es="Ontología de dominio de Espacio Público">Public Space domain ontology</h3>
-        <p data-en="A published domain ontology standardising entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems. Reduced hallucinations arising from conceptual misunderstanding from 55% to 25%."
-           data-es="Una ontología de dominio publicada que estandariza entidades y relaciones en los datos municipales de espacio público, actuando como capa semántica bajo los sistemas de IA. Redujo las alucinaciones por malentendidos conceptuales del 55% al 25%.">A published domain ontology standardising entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems. Reduced hallucinations arising from conceptual misunderstanding from 55% to 25%.</p>
-        <div class="stack">OWL · SKOS · Ontology design</div>
-        <span class="more" data-en="View the ontology →" data-es="Ver la ontología →">View the ontology →</span>
-      </a>
-
-      <div class="card">
-        <div class="card__tag" data-en="Graph RAG" data-es="Graph RAG">Graph RAG</div>
-        <h3 data-en="Citizen petition retrieval system" data-es="Sistema de recuperación de peticiones ciudadanas">Citizen petition retrieval system</h3>
-        <p data-en="Graph RAG over three years of 500+ anonymised citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the 15-business-day legal limit went from 300+ per month to zero."
-           data-es="Graph RAG sobre tres años de más de 500 peticiones ciudadanas anonimizadas, combinando un grafo de propiedades con recuperación densa. Las respuestas vencidas más allá del límite legal de 15 días hábiles pasaron de más de 300 al mes a cero.">Graph RAG over three years of 500+ anonymised citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the 15-business-day legal limit went from 300+ per month to zero.</p>
-        <div class="stack">Neo4j · Pinecone · LightRAG · Python</div>
-      </div>
-
-      <a class="card" href="work/agent-architecture/">
-        <div class="card__tag" data-en="Agent architecture · Case study" data-es="Arquitectura de agentes · Caso de estudio">Agent architecture · Case study</div>
-        <h3 data-en="Municipal analytics agent" data-es="Agente analítico municipal">Municipal analytics agent</h3>
-        <p data-en="An agent that answers complex spatial questions across 34 historical data standards, cutting turnaround from an analyst-week to 10 minutes — and that cannot write SQL, hold a database credential, or sit in the request path of any platform."
-           data-es="Un agente que responde preguntas espaciales complejas sobre 34 estándares históricos de datos, reduciendo el tiempo de respuesta de una semana-analista a 10 minutos — y que no puede escribir SQL, ni tener una credencial de base de datos, ni situarse en la ruta de petición de ninguna plataforma.">An agent that answers complex spatial questions across 34 historical data standards, cutting turnaround from an analyst-week to 10 minutes — and that cannot write SQL, hold a database credential, or sit in the request path of any platform.</p>
-        <div class="stack">Semantic layer · LLM agents · Python</div>
-        <span class="more" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
-      </a>
-
-      <div class="card">
-        <div class="card__tag" data-en="Agent evaluation" data-es="Evaluación de agentes">Agent evaluation</div>
-        <h3 data-en="Execution-accuracy benchmark" data-es="Benchmark de precisión de ejecución">Execution-accuracy benchmark</h3>
-        <p data-en="A purpose-built 96-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke."
-           data-es="Un benchmark propio de 96 preguntas que valida el sistema de agentes contra preguntas de negocio reales, no contra impresiones — y que además funciona como suite de regresión: si una pregunta deja de poder responderse, la capa semántica se rompió.">A purpose-built 96-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke.</p>
-        <div class="stack">Python · Evaluation · Regression testing</div>
-      </div>
-
-      <a class="card" href="work/anonymization-pipeline/">
-        <div class="card__tag" data-en="Privacy engineering · Case study" data-es="Ingeniería de privacidad · Caso de estudio">Privacy engineering · Case study</div>
-        <h3 data-en="PII anonymisation pipeline" data-es="Tubería de anonimización de PII">PII anonymisation pipeline</h3>
-        <p data-en="Protects 65,000+ individuals and 400,000+ addresses by stripping 13 sensitive fields through irreversible SHA-256 hashing, suppression and generalisation — so the AI layer above it structurally cannot reach personal data."
-           data-es="Protege a más de 65.000 personas y 400.000 direcciones eliminando 13 campos sensibles mediante hashing irreversible SHA-256, supresión y generalización — de modo que la capa de IA encima estructuralmente no puede alcanzar datos personales.">Protects 65,000+ individuals and 400,000+ addresses by stripping 13 sensitive fields through irreversible SHA-256 hashing, suppression and generalisation — so the AI layer above it structurally cannot reach personal data.</p>
-        <div class="stack">Python · SHA-256 · Data governance</div>
-        <span class="more" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
-      </a>
-
-      <div class="card">
-        <div class="card__tag" data-en="ML infrastructure" data-es="Infraestructura de ML">ML infrastructure</div>
-        <h3 data-en="Change-based feature store" data-es="Feature store basado en cambios">Change-based feature store</h3>
-        <p data-en="Rather than materialising full borrower history per model, persist only state transitions. Compressed ~1 TB into 16 GB and removed a 3-hour dataset rebuild from every single model run."
-           data-es="En lugar de materializar la historia completa de cada deudor por modelo, persistir sólo transiciones de estado. Comprimió ~1 TB a 16 GB y eliminó una reconstrucción de dataset de 3 horas en cada corrida.">Rather than materialising full borrower history per model, persist only state transitions. Compressed ~1 TB into 16 GB and removed a 3-hour dataset rebuild from every single model run.</p>
-        <div class="stack">Impala · InfluxDB · Hadoop · SQL</div>
-      </div>
-
-      <div class="card">
-        <div class="card__tag" data-en="Experiment tracking" data-es="Seguimiento de experimentos">Experiment tracking</div>
-        <h3 data-en="Lightweight experiment registry" data-es="Registro ligero de experimentos">Lightweight experiment registry</h3>
-        <p data-en="Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling 2,000 runs/week against a previous 20/month. The resulting specifications cut PD prediction error from 30% to 5% for natural persons."
-           data-es="Archivos SQLite de estado por corrida versionados con DVC y métricas en MLflow, habilitando 2.000 corridas/semana frente a 20/mes. Las especificaciones resultantes redujeron el error de predicción de PD del 30% al 5% en persona natural.">Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling 2,000 runs/week against a previous 20/month. The resulting specifications cut PD prediction error from 30% to 5% for natural persons.</p>
-        <div class="stack">DVC · MLflow · SQLite · Python</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SKILLS ================= -->
-<section class="sec" id="skills">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Skills" data-es="Competencias">Skills</h2>
-    </div>
-    <div class="skills">
-      <div class="skillrow">
-        <h3 data-en="AI systems" data-es="Sistemas de IA">AI systems</h3>
-        <div class="tags">
-          <span class="tag">RAG</span><span class="tag" data-en="Knowledge Graphs" data-es="Grafos de conocimiento">Knowledge Graphs</span>
-          <span class="tag">Neo4j</span><span class="tag">Pinecone</span><span class="tag">LightRAG</span>
-          <span class="tag" data-en="Ontology Design" data-es="Diseño de ontologías">Ontology Design</span>
-          <span class="tag" data-en="Machine Learning" data-es="Aprendizaje automático">Machine Learning</span>
-          <span class="tag">SHAP</span><span class="tag" data-en="Explainable AI" data-es="IA explicable">Explainable AI</span>
-        </div>
-      </div>
-      <div class="skillrow">
-        <h3 data-en="Programming &amp; data" data-es="Programación y datos">Programming &amp; data</h3>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Apache Spark</span>
-          <span class="tag">Impala</span><span class="tag">Hive</span><span class="tag">Hadoop</span>
-          <span class="tag">dbt</span><span class="tag">Git</span><span class="tag">MLflow</span><span class="tag">DVC</span>
-        </div>
-      </div>
-      <div class="skillrow">
-        <h3 data-en="Model &amp; AI risk" data-es="Riesgo de modelos e IA">Model &amp; AI risk</h3>
-        <div class="tags">
-          <span class="tag" data-en="Model Risk Management" data-es="Gestión de riesgo de modelos">Model Risk Management</span>
-          <span class="tag" data-en="Model Validation" data-es="Validación de modelos">Model Validation</span>
-          <span class="tag" data-en="Model Monitoring" data-es="Monitoreo de modelos">Model Monitoring</span>
-          <span class="tag" data-en="AI Governance" data-es="Gobernanza de IA">AI Governance</span>
-          <span class="tag" data-en="Statistical Modeling" data-es="Modelación estadística">Statistical Modeling</span>
-          <span class="tag" data-en="IFRS 9" data-es="NIIF 9">IFRS 9</span>
-          <span class="tag">SOX</span>
-        </div>
-      </div>
-      <div class="skillrow">
-        <h3 data-en="Languages" data-es="Idiomas">Languages</h3>
-        <div class="tags">
-          <span class="tag" data-en="Spanish — Native" data-es="Español — Nativo">Spanish — Native</span>
-          <span class="tag" data-en="English — Full professional (IELTS C1)" data-es="Inglés — Profesional pleno (IELTS C1)">English — Full professional (IELTS C1)</span>
-          <span class="tag" data-en="French — Full professional (DELF B2)" data-es="Francés — Profesional pleno (DELF B2)">French — Full professional (DELF B2)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= EDUCATION ================= -->
-<section class="sec" id="education">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Education" data-es="Formación">Education</h2>
-      <p data-en="Three degrees, chosen in this order for the reason described above."
-         data-es="Tres títulos, elegidos en este orden por la razón descrita arriba.">Three degrees, chosen in this order for the reason described above.</p>
-    </div>
-    <div class="edu">
-      <div class="edu__item">
-        <div class="top">
-          <h3>Carnegie Mellon University, Heinz College</h3>
-          <div class="date" data-en="Expected Dec 2027 · Pittsburgh, PA" data-es="Grado previsto dic. 2027 · Pittsburgh, PA">Expected Dec 2027 · Pittsburgh, PA</div>
-        </div>
-        <div class="deg" data-en="MS, Artificial Intelligence Systems Management" data-es="Maestría en Gestión de Sistemas de Inteligencia Artificial">MS, Artificial Intelligence Systems Management</div>
-        <p data-en="Coursework: Machine Learning · Causal Inference &amp; Program Evaluation · Applied Econometrics · AI Governance &amp; Risk Management · Data-Driven Decision Making"
-           data-es="Cursos: Aprendizaje automático · Inferencia causal y evaluación de programas · Econometría aplicada · Gobernanza y gestión de riesgos de IA · Toma de decisiones basada en datos">Coursework: Machine Learning · Causal Inference &amp; Program Evaluation · Applied Econometrics · AI Governance &amp; Risk Management · Data-Driven Decision Making</p>
-      </div>
-      <div class="edu__item">
-        <div class="top">
-          <h3 data-en="University of Antioquia" data-es="Universidad de Antioquia">University of Antioquia</h3>
-          <div class="date" data-en="Dec 2024 · Medellín, Colombia" data-es="Dic. 2024 · Medellín, Colombia">Dec 2024 · Medellín, Colombia</div>
-        </div>
-        <div class="deg" data-en="BS, Philosophy" data-es="Pregrado en Filosofía">BS, Philosophy</div>
-        <p data-en="Epistemology, philosophy and history of science, philosophy of mind, logic. Thesis: “How to Say No: Modeling the Precautionary Principle” — how to decide about a technology when no evidence exists and the human cost is high. Honorable Mention, Nov 2023."
-           data-es="Epistemología, filosofía e historia de la ciencia, filosofía de la mente, lógica. Tesis: «Cómo decir no: modelando el principio de precaución» — cómo decidir sobre una tecnología cuando no existe evidencia y el costo humano es alto. Mención de Honor, nov. 2023.">Epistemology, philosophy and history of science, philosophy of mind, logic. Thesis: “How to Say No: Modeling the Precautionary Principle” — how to decide about a technology when no evidence exists and the human cost is high. Honorable Mention, Nov 2023.</p>
-      </div>
-      <div class="edu__item">
-        <div class="top">
-          <h3 data-en="National University of Colombia" data-es="Universidad Nacional de Colombia">National University of Colombia</h3>
-          <div class="date" data-en="Sep 2019 · Medellín, Colombia" data-es="Sep. 2019 · Medellín, Colombia">Sep 2019 · Medellín, Colombia</div>
-        </div>
-        <div class="deg" data-en="BS, Physics Engineering" data-es="Pregrado en Ingeniería Física">BS, Physics Engineering</div>
-        <p data-en="Thesis: “Computational Spaces”" data-es="Tesis: «Espacios computacionales»">Thesis: “Computational Spaces”</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= RESEARCH & TEACHING ================= -->
-<section class="sec" id="research">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Research &amp; publications" data-es="Investigación y publicaciones">Research &amp; publications</h2>
-    </div>
-    <div class="entries">
-      <div class="entry">
-        <div class="when">2026</div>
-        <div>
-          <h3>“Zombie Governance”</h3>
-          <p data-en="Extended abstract accepted for presentation, Data for Policy 2026 — international conference on data science and public policy"
-             data-es="Resumen extendido aceptado para presentación, Data for Policy 2026 — conferencia internacional sobre ciencia de datos y política pública">Extended abstract accepted for presentation, Data for Policy 2026 — international conference on data science and public policy</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when">2023</div>
-        <div>
-          <h3 data-en="“How to Say No: Participatory Deliberation in the Precautionary Principle”" data-es="«Cómo decir no: deliberación participativa en el principio de precaución»">“How to Say No: Participatory Deliberation in the Precautionary Principle”</h3>
-          <p data-en="Presented, International Congress of Philosophy: Justice, Recognition and Peace, August 2023"
-             data-es="Presentado en el Congreso Internacional de Filosofía: Justicia, Reconocimiento y Paz, agosto de 2023">Presented, International Congress of Philosophy: Justice, Recognition and Peace, August 2023</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when" data-en="2020 — present" data-es="2020 — presente">2020 — present</div>
-        <div>
-          <h3 data-en="Researcher — Knowledge, Philosophy, Science, History and Society" data-es="Investigador — Conocimiento, Filosofía, Ciencia, Historia y Sociedad">Researcher — Knowledge, Philosophy, Science, History and Society</h3>
-          <p data-en="Research group, University of Antioquia" data-es="Grupo de investigación, Universidad de Antioquia">Research group, University of Antioquia</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec__head" style="margin-top:52px">
-      <h2 data-en="Teaching" data-es="Docencia">Teaching</h2>
-    </div>
-    <div class="entries">
-      <div class="entry">
-        <div class="when" data-en="Jan — Jun 2025" data-es="Ene — Jun 2025">Jan — Jun 2025</div>
-        <div>
-          <h3 data-en="Faculty, Data Science — University of Antioquia" data-es="Docente, Ciencia de Datos — Universidad de Antioquia">Faculty, Data Science — University of Antioquia</h3>
-          <p data-en="Faculty of Economics. Taught a 20-student undergraduate Data Science course; developed exams and assignments and reviewed curriculum for accreditation standards."
-             data-es="Facultad de Ciencias Económicas. Dicté un curso de pregrado de Ciencia de Datos para 20 estudiantes; desarrollé exámenes y trabajos, y revisé el currículo frente a estándares de acreditación.">Faculty of Economics. Taught a 20-student undergraduate Data Science course; developed exams and assignments and reviewed curriculum for accreditation standards.</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when" data-en="Jul — Dec 2024" data-es="Jul — Dic 2024">Jul — Dec 2024</div>
-        <div>
-          <h3 data-en="Faculty, Big Data Engineering — National University of Colombia" data-es="Docente, Ingeniería de Big Data — Universidad Nacional de Colombia">Faculty, Big Data Engineering — National University of Colombia</h3>
-          <p data-en="Faculty of Humanities. Taught Apache Spark, the Hadoop ecosystem and Impala within an undergraduate Big Data Engineering course for 60 students."
-             data-es="Facultad de Ciencias Humanas. Enseñé Apache Spark, el ecosistema Hadoop e Impala dentro de un curso de pregrado de Ingeniería de Big Data para 60 estudiantes.">Faculty of Humanities. Taught Apache Spark, the Hadoop ecosystem and Impala within an undergraduate Big Data Engineering course for 60 students.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec__head" style="margin-top:52px">
-      <h2 data-en="Awards &amp; certifications" data-es="Reconocimientos y certificaciones">Awards &amp; certifications</h2>
-    </div>
-    <div class="entries">
-      <div class="entry">
-        <div class="when">2024</div>
-        <div>
-          <h3 data-en="“Being EXTRAordinary” Team Recognition" data-es="Reconocimiento de equipo «Ser EXTRAordinario»">“Being EXTRAordinary” Team Recognition</h3>
-          <p data-en="For leading performance — Grupo Cibest (NYSE: CIB)" data-es="Por desempeño destacado — Grupo Cibest (NYSE: CIB)">For leading performance — Grupo Cibest (NYSE: CIB)</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when">2023</div>
-        <div>
-          <h3 data-en="Honorable Mention, Philosophy Thesis" data-es="Mención de Honor, tesis de Filosofía">Honorable Mention, Philosophy Thesis</h3>
-          <p data-en="University of Antioquia" data-es="Universidad de Antioquia">University of Antioquia</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when">2019</div>
-        <div>
-          <h3>Data Science for All (DS4All)</h3>
-          <p data-en="Correlation One · 375+ hours" data-es="Correlation One · más de 375 horas">Correlation One · 375+ hours</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="when">2018</div>
-        <div>
-          <h3>Emerging Leaders in the Americas Program (ELAP)</h3>
-          <p data-en="Government of Canada Scholarship" data-es="Beca del Gobierno de Canadá">Government of Canada Scholarship</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CONTACT ================= -->
-<section class="sec" id="contact">
-  <div class="wrap">
-    <div class="sec__head">
-      <h2 data-en="Contact" data-es="Contacto">Contact</h2>
-      <p data-en="If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it."
-         data-es="Si algo de lo anterior es también un problema en el que usted trabaja — decisiones bajo incertidumbre, riesgo de modelos, gobernanza de IA como disciplina técnica — me gustaría saberlo.">If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it.</p>
-    </div>
-    <div class="contact">
-      <a href="mailto:atabares@andrew.cmu.edu">
-        <div class="lbl">Email</div>
-        <div class="val">atabares@andrew.cmu.edu</div>
-      </a>
-      <a href="https://www.linkedin.com/in/mario-alejandro-tabares-arango" rel="noopener" target="_blank">
-        <div class="lbl">LinkedIn</div>
-        <div class="val">/in/mario-alejandro-tabares-arango</div>
-      </a>
-      <a href="https://github.com/puedesleerlo" rel="noopener" target="_blank">
-        <div class="lbl">GitHub</div>
-        <div class="val">@puedesleerlo</div>
-      </a>
-      <a href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
-        <div class="lbl">CV</div>
-        <div class="val" data-en="Download PDF" data-es="Descargar PDF">Download PDF</div>
-      </a>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="wrap">
-  <div>© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
-  <div data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+<footer class="site wrap">
+  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
+  <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
 </footer>
 
 <script>
-(function(){
-  var root = document.documentElement;
-
-  /* ---------- language ---------- */
-  var nodes = document.querySelectorAll('[data-en]');
-  var langBtns = document.querySelectorAll('[data-lang]');
-
-  function setLang(lang){
-    if(lang !== 'es') lang = 'en';
-    nodes.forEach(function(n){
-      var v = n.getAttribute('data-' + lang);
-      if(v !== null) n.innerHTML = v;
-    });
-    root.setAttribute('lang', lang);
-    langBtns.forEach(function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-    });
-    try{ localStorage.setItem('site-lang', lang); }catch(e){}
+/* Figure specifications. Prose is static; these are the only parts
+   that need the design system's React components — the logotype and
+   the idea diagram, which draws itself from structured props. */
+window.SITE_FIGURES = [
+  {
+    slot: 'fig-division',
+    render: function (DS, R, lang) {
+      var en = {
+        title: 'Four careers divide one question, not four questions',
+        subtitle: 'fig. 1 · Ramist bracket · division by successive differences',
+        anatomy: 'anatomy — each brace claims its children exhaustively divide the parent · each differentia names the property doing the dividing · a branch you cannot state a differentia for is not a principled division',
+        ariaLabel: 'A Ramist bracket dividing deciding under uncertainty. It divides first by where the uncertainty sits. Uncertainty in the world divides into physics, where a mechanism is portable across substrates, and credit risk, where the mechanism is priced. Uncertainty in the evidence divides into philosophy, which asks what counts as evidence at all, and governance, which asks who bears the cost of being wrong.',
+        root: {
+          label: 'deciding under uncertainty',
+          children: [
+            {
+              label: 'uncertainty in the world',
+              differentia: 'a mechanism exists, unmeasured',
+              children: [
+                { label: 'physics', differentia: 'the mechanism is portable' },
+                { label: 'credit risk', differentia: 'the mechanism is priced' }
+              ]
+            },
+            {
+              label: 'uncertainty in the evidence',
+              differentia: 'no mechanism settles it',
+              children: [
+                { label: 'philosophy', differentia: 'what counts as evidence' },
+                { label: 'governance', differentia: 'who bears being wrong' }
+              ]
+            }
+          ]
+        }
+      };
+      var es = {
+        title: 'Cuatro carreras dividen una pregunta, no cuatro preguntas',
+        subtitle: 'fig. 1 · corchete ramista · división por diferencias sucesivas',
+        anatomy: 'anatomía — cada llave afirma que sus hijos dividen exhaustivamente al padre · cada diferencia nombra la propiedad que divide · una rama sin diferencia enunciable no es una división con principio',
+        ariaLabel: 'Un corchete ramista que divide el decidir bajo incertidumbre según dónde está la incertidumbre: en el mundo, que se divide en física y riesgo de crédito; o en la evidencia, que se divide en filosofía y gobernanza.',
+        root: {
+          label: 'decidir bajo incertidumbre',
+          children: [
+            {
+              label: 'incertidumbre en el mundo',
+              differentia: 'hay mecanismo, sin medir',
+              children: [
+                { label: 'física', differentia: 'el mecanismo es portátil' },
+                { label: 'riesgo de crédito', differentia: 'el mecanismo tiene precio' }
+              ]
+            },
+            {
+              label: 'incertidumbre en la evidencia',
+              differentia: 'ningún mecanismo la resuelve',
+              children: [
+                { label: 'filosofía', differentia: 'qué cuenta como evidencia' },
+                { label: 'gobernanza', differentia: 'quién paga el error' }
+              ]
+            }
+          ]
+        }
+      };
+      return R.createElement(DS.DivisionTree, lang === 'es' ? es : en);
+    }
   }
-
-  langBtns.forEach(function(b){
-    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
-  });
-
-  var savedLang = null;
-  try{ savedLang = localStorage.getItem('site-lang'); }catch(e){}
-  if(!savedLang && navigator.language && navigator.language.toLowerCase().indexOf('es') === 0){
-    savedLang = 'es';
-  }
-  if(savedLang) setLang(savedLang);
-
-  /* ---------- theme ---------- */
-  var themeBtn = document.getElementById('themeBtn');
-
-  function setTheme(t){
-    if(t === 'dark') root.setAttribute('data-theme','dark');
-    else root.removeAttribute('data-theme');
-    try{ localStorage.setItem('site-theme', t); }catch(e){}
-  }
-
-  var savedTheme = null;
-  try{ savedTheme = localStorage.getItem('site-theme'); }catch(e){}
-  if(!savedTheme){
-    savedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  setTheme(savedTheme);
-
-  themeBtn.addEventListener('click', function(){
-    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-
-  /* ---------- year ---------- */
-  document.getElementById('yr').textContent = new Date().getFullYear();
-})();
+];
 </script>
+
+<script src="_ds/tabares/react.umd.js" defer></script>
+<script src="_ds/tabares/react-dom.umd.js" defer></script>
+<script src="_ds/tabares/_ds_bundle.js" defer></script>
+<script src="_ds/site.js" defer></script>
 </body>
 </html>

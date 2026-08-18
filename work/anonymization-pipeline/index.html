@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Data the AI Cannot Reach — A Municipal PII Anonymization Pipeline</title>
 <meta name="description" content="Privacy as an architectural property, not a policy promise. How I designed a production PII anonymization pipeline for municipal public-space data in Medellín, so that everything built above it is structurally unable to reach an identity.">
-<meta name="author" content="Mario Alejandro Tabares Arango">
+<meta name="author" content="Alejandro Tabares">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Data the AI Cannot Reach — A Municipal PII Anonymization Pipeline">
@@ -14,398 +14,22 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://puedesleerlo.github.io/work/anonymization-pipeline/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23111827'/><text x='50' y='68' font-family='Georgia,serif' font-size='56' font-weight='700' fill='%23ffffff' text-anchor='middle'>T</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_ds/tabares/styles.css">
+<link rel="stylesheet" href="../../_ds/site.css">
 
 <script>
-/* Set the theme before first paint so dark readers never see a light flash. */
-(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-
-<style>
-/* ============================================================
-   puedesleerlo.github.io / work / anonymization-pipeline
-   Case study — single self-contained file, no build step.
-   Layout: broadsheet. Tokens inherited from the main site so
-   this page reads as a sibling, not a separate property.
-   ============================================================ */
-
-:root{
-  --bg:#FCFCFB;
-  --bg-2:#F4F4F1;
-  --card:#FFFFFF;
-  --ink:#15181C;
-  --ink-2:#4B5561;
-  --ink-3:#7A8592;
-  --rule:#E2E2DD;
-  --rule-2:#C9C9C1;
-  --accent:#1F5F5B;
-  --accent-2:#B25B29;
-  --band:#EDF1F0;
-  --frame:1160px;
-  --measure:66ch;
-  --rail:150px;
-  --gut:clamp(20px,5vw,44px);
-}
-:root[data-theme="dark"]{
-  --bg:#0F1317;
-  --bg-2:#161B21;
-  --card:#171D23;
-  --ink:#E9ECEA;
-  --ink-2:#A3AEB8;
-  --ink-3:#7C8792;
-  --rule:#28313A;
-  --rule-2:#3A4550;
-  --accent:#5FB3AC;
-  --accent-2:#DB8B54;
-  --band:#16231F;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}
-  *{animation-duration:.001ms !important;transition-duration:.001ms !important}}
-
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Inter",system-ui,-apple-system,sans-serif;
-  font-size:16.5px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  transition:background .3s ease,color .3s ease;
-}
-::selection{background:var(--accent);color:#fff}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-
-.wrap{max-width:var(--frame);margin:0 auto;padding:0 var(--gut)}
-
-.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;padding:10px 16px;z-index:100}
-.skip:focus{left:0}
-
-/* utility face, used as the page's structural furniture */
-.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
-
-/* ---------- utility bar (carried over from the main site) ---------- */
-.bar{
-  position:sticky;top:0;z-index:50;
-  background:color-mix(in srgb,var(--bg) 90%,transparent);
-  backdrop-filter:saturate(160%) blur(10px);
-  -webkit-backdrop-filter:saturate(160%) blur(10px);
-  border-bottom:1px solid var(--rule);
-}
-.bar__in{
-  max-width:var(--frame);margin:0 auto;padding:9px var(--gut);
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-}
-.brand{font-weight:700;font-size:14px;letter-spacing:-.01em}
-.brand span{color:var(--ink-3);font-weight:500}
-.bar nav{display:flex;gap:18px;align-items:center}
-.bar nav a{
-  font-size:13px;color:var(--ink-2);font-weight:500;
-  border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s,border-color .15s;
-}
-.bar nav a:hover{color:var(--ink);border-color:var(--accent)}
-@media (max-width:820px){.bar nav{display:none}}
-
-.controls{display:flex;gap:6px;align-items:center}
-.ctl{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;font-weight:500;letter-spacing:.06em;
-  background:transparent;color:var(--ink-3);
-  border:1px solid var(--rule);
-  padding:5px 9px;cursor:pointer;line-height:1;transition:all .15s ease;
-}
-.ctl:hover{color:var(--ink);border-color:var(--ink-3)}
-.ctl[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.langgroup{display:flex;border:1px solid var(--rule)}
-.langgroup .ctl{border:0}
-.langgroup .ctl+.ctl{border-left:1px solid var(--rule)}
-
-/* ---------- masthead ---------- */
-.masthead{padding-top:26px}
-.dateline{
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--ink-3);padding-bottom:9px;
-}
-.dateline .lead{color:var(--accent)}
-.rule-double{border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);height:4px}
-
-.masthead h1{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-variation-settings:"opsz" 60;
-  font-size:clamp(38px,7.2vw,80px);
-  line-height:.99;letter-spacing:-.032em;font-weight:700;
-  margin:clamp(26px,4vw,44px) 0 0;
-  max-width:19ch;
-}
-.masthead h1 .thin{font-weight:400;color:var(--ink-2);display:block;font-size:.52em;letter-spacing:-.018em;line-height:1.12;margin-top:.34em}
-.deck{
-  font-family:"Source Serif 4",Georgia,serif;font-style:italic;
-  font-size:clamp(18px,2.3vw,24px);line-height:1.44;color:var(--ink-2);
-  max-width:56ch;margin-top:22px;
-}
-.deck em{font-style:normal;color:var(--ink)}
-.byline{
-  margin-top:22px;padding-top:12px;border-top:1px solid var(--rule);
-  display:flex;gap:10px 26px;flex-wrap:wrap;
-  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;
-  letter-spacing:.06em;color:var(--ink-3);
-}
-.byline b{color:var(--ink-2);font-weight:500}
-
-/* the page's one recurring device: a one-way boundary drawn as a rule */
-.boundary{
-  margin:clamp(30px,5vw,46px) 0 0;
-  border-top:1px solid var(--rule);
-  padding-top:14px;
-}
-.boundary__bar{
-  height:7px;background:var(--ink);position:relative;
-}
-.boundary__bar::after{
-  content:"";position:absolute;right:26px;top:-13px;
-  border-left:7px solid transparent;border-right:7px solid transparent;
-  border-bottom:9px solid var(--accent-2);
-}
-.boundary__t{
-  margin-top:10px;
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
-}
-.boundary__t b{color:var(--ink);font-weight:500}
-
-/* ---------- ruled sections with a marginal rail ---------- */
-.sec{
-  border-top:1px solid var(--rule);
-  /* padding-block only — a `padding` shorthand here would silently
-     cancel the horizontal gutters .wrap sets on the same element */
-  padding-block:clamp(40px,5.5vw,64px);
-  display:grid;grid-template-columns:var(--rail) minmax(0,1fr);gap:0 clamp(24px,3.4vw,52px);
-}
-.sec--open{border-top:0}
-.rail{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);line-height:1.55;
-}
-.rail .num{
-  display:block;font-family:"Source Serif 4",Georgia,serif;
-  font-size:34px;line-height:1;letter-spacing:-.02em;font-weight:400;
-  color:var(--rule-2);margin-bottom:8px;
-}
-.rail .note{display:block;margin-top:14px;color:var(--ink-3);opacity:.85;text-transform:none;letter-spacing:.02em;font-size:11px;line-height:1.6}
-.sec h2{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:clamp(25px,3.3vw,36px);font-weight:600;letter-spacing:-.022em;
-  line-height:1.12;margin-bottom:20px;max-width:22ch;
-}
-@media (max-width:860px){
-  .sec{grid-template-columns:minmax(0,1fr);gap:0}
-  .rail{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;
-        border-bottom:1px solid var(--rule);padding-bottom:9px}
-  .rail .num{font-size:19px;margin-bottom:0}
-  .rail .note{display:none}
-}
-
-/* ---------- prose ---------- */
-.prose{max-width:var(--measure)}
-.prose p{color:var(--ink-2);margin-bottom:17px}
-.prose p:last-child{margin-bottom:0}
-.prose strong{color:var(--ink);font-weight:600}
-.prose em{font-style:italic;color:var(--ink)}
-.prose a.inl{color:var(--accent);border-bottom:1px solid var(--rule-2)}
-.prose a.inl:hover{border-color:var(--accent)}
-
-.dropcap::first-letter{
-  font-family:"Source Serif 4",Georgia,serif;font-weight:600;
-  float:left;font-size:3.45em;line-height:.84;
-  padding:5px 10px 0 0;color:var(--ink);
-}
-
-.prose .kicker{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:clamp(18px,2.1vw,21.5px);line-height:1.5;color:var(--ink);
-  border-left:3px solid var(--accent);padding:3px 0 3px 20px;
-  margin:28px 0;max-width:52ch;
-}
-
-/* threat model — set in newspaper columns where there is room */
-.cols{max-width:var(--measure)}
-@media (min-width:1000px){
-  .cols{max-width:none;columns:2;column-gap:52px;column-rule:1px solid var(--rule)}
-  .cols p{break-inside:avoid}
-}
-.threat{margin-bottom:16px}
-.threat b{
-  display:block;font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:11px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--accent-2);font-weight:500;margin-bottom:3px;
-}
-.threat span{color:var(--ink-2);display:block}
-
-/* ---------- figure ---------- */
-figure{margin:0;min-width:0}
-.figbox{
-  border:1px solid var(--rule);background:var(--card);
-  padding:clamp(14px,2.4vw,26px);
-  /* the diagram keeps a legible floor and pans inside this box —
-     min-width:0 stops that floor from widening the page itself */
-  overflow-x:auto;min-width:0;
-}
-.figbox svg{display:block;width:100%;min-width:412px;max-width:560px;height:auto;margin:0 auto}
-figcaption{
-  margin-top:14px;display:grid;gap:0;
-  border-top:1px solid var(--rule);
-}
-.legend{
-  display:grid;grid-template-columns:158px minmax(0,1fr);gap:0 20px;
-  padding:12px 0;border-bottom:1px solid var(--rule);
-}
-.legend:last-child{border-bottom:0}
-.legend dt{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
-  padding-top:3px;
-}
-.legend dd{font-size:14.5px;color:var(--ink-2);line-height:1.55}
-@media (max-width:640px){
-  .legend{grid-template-columns:1fr;gap:4px}
-}
-
-/* diagram internals */
-.d-zone{fill:var(--bg-2);stroke:var(--rule);stroke-width:1}
-.d-box{fill:var(--card);stroke:var(--rule-2);stroke-width:1}
-.d-gate{fill:var(--card);stroke:var(--accent);stroke-width:1.6}
-.d-band{fill:var(--band);stroke:var(--ink);stroke-width:1.4}
-.d-flow{fill:none;stroke:var(--ink-3);stroke-width:1.3}
-.d-rail{fill:none;stroke:var(--rule-2);stroke-width:1.2}
-.d-block{fill:none;stroke:var(--accent-2);stroke-width:1.3;stroke-dasharray:4 4}
-.d-x{fill:none;stroke:var(--accent-2);stroke-width:1.6}
-.d-t{fill:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:15px;font-weight:600}
-.d-s{fill:var(--ink-3);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.6px}
-.d-tag{fill:var(--accent);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.6px;letter-spacing:.1em}
-.d-band-t{fill:var(--ink);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.11em;font-weight:500}
-.d-note{fill:var(--accent-2);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.4px;letter-spacing:.05em}
-
-/* ---------- decisions matrix ---------- */
-.matrix{border-top:2px solid var(--ink)}
-.mhead{
-  display:grid;grid-template-columns:1.06fr 1fr 1fr;gap:0 32px;
-  padding:9px 0;border-bottom:1px solid var(--ink);
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);
-}
-.row{
-  display:grid;grid-template-columns:1.06fr 1fr 1fr;gap:0 32px;
-  padding:24px 0;border-bottom:1px solid var(--rule);
-}
-.row:last-child{border-bottom:0}
-.row h3{
-  font-family:"Source Serif 4",Georgia,serif;
-  font-size:21px;font-weight:600;letter-spacing:-.015em;line-height:1.2;margin-bottom:9px;
-}
-.row h3 .mk{
-  display:block;font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.13em;color:var(--accent-2);font-weight:500;margin-bottom:6px;
-}
-.row p{font-size:14.6px;line-height:1.58;color:var(--ink-2)}
-.row p+p{margin-top:11px}
-.row strong{color:var(--ink);font-weight:600}
-.row em{font-style:italic;color:var(--ink)}
-.row .lbl{
-  display:none;font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);
-  margin-bottom:5px;
-}
-@media (max-width:860px){
-  .mhead{display:none}
-  .row{grid-template-columns:1fr;gap:16px;padding:22px 0}
-  .row .lbl{display:block}
-}
-
-/* ---------- results ---------- */
-.results{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(152px,1fr));
-  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
-}
-.res{padding:20px 22px 20px 0;border-right:1px solid var(--rule)}
-.res:last-child{border-right:0}
-.res b{
-  display:block;font-family:"Source Serif 4",Georgia,serif;
-  font-variation-settings:"opsz" 40;
-  font-size:clamp(28px,3.4vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1;
-  margin-bottom:8px;
-}
-.res small{
-  display:block;font-size:12.5px;line-height:1.45;color:var(--ink-3);
-}
-@media (max-width:640px){
-  .res{border-right:0;border-bottom:1px solid var(--rule);padding:16px 0}
-  .res:last-child{border-bottom:0}
-}
-
-/* ---------- colophon ---------- */
-.colophon{
-  border:1px solid var(--ink);padding:clamp(20px,3vw,30px);
-  max-width:var(--measure);
-}
-.colophon .redact{
-  display:inline-block;background:var(--ink);color:transparent;
-  border-radius:1px;height:1em;vertical-align:-.14em;user-select:none;
-}
-.colophon p{font-size:15px;color:var(--ink-2);line-height:1.62}
-.colophon p+p{margin-top:14px}
-.colophon .hd{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-2);
-  margin-bottom:12px;
-}
-
-/* ---------- onward links ---------- */
-.onward{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--ink)}
-.onward a{
-  padding:22px 24px 22px 0;border-right:1px solid var(--rule);
-  transition:background .15s ease;
-}
-.onward a:last-child{border-right:0}
-.onward a:hover{background:var(--bg-2)}
-.onward .k{
-  font-family:"JetBrains Mono",ui-monospace,monospace;
-  font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;
-}
-.onward .v{font-family:"Source Serif 4",Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:5px}
-.onward .d{font-size:13.5px;color:var(--ink-2);line-height:1.5}
-.onward .go{display:inline-block;margin-top:9px;font-size:13px;color:var(--accent);font-weight:500}
-@media (max-width:640px){
-  .onward a{border-right:0;border-bottom:1px solid var(--rule);padding:18px 0}
-  .onward a:last-child{border-bottom:0}
-}
-
-footer{
-  border-top:1px solid var(--rule);margin-top:clamp(40px,6vw,64px);
-  padding:22px 0 44px;font-size:12.5px;color:var(--ink-3);
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:.05em;
-}
-footer a{border-bottom:1px solid var(--rule)}
-footer a:hover{color:var(--ink)}
-</style>
 </head>
 
-<body>
+<body class="ds-paper ds-paper--fixed">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
   <div class="bar__in">
-    <a class="brand" href="../../">Tabares&nbsp;Arango <span>· AI/ML</span></a>
+    <a class="brand" href="../../">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
     <nav>
       <a href="../../" data-en="← Portfolio" data-es="← Portafolio">← Portfolio</a>
       <a href="#problem"   data-en="The problem"  data-es="El problema">The problem</a>
@@ -429,15 +53,16 @@ footer a:hover{color:var(--ink)}
 <!-- ═══════════════ MASTHEAD ═══════════════ -->
 <section class="masthead wrap">
   <div class="dateline">
-    <span class="lead" data-en="Case study · Privacy engineering" data-es="Caso de estudio · Ingeniería de privacidad">Case study · Privacy engineering</span>
-    <span data-en="Public space · Mayor's Office of Medellín" data-es="Espacio público · Alcaldía de Medellín">Public space · Mayor's Office of Medellín</span>
-    <span data-en="Designed and built 2025—2026" data-es="Diseñada y construida 2025—2026">Designed and built 2025—2026</span>
+    <span class="ds-label lead" data-en="Case study · Privacy engineering" data-es="Caso de estudio · Ingeniería de privacidad">Case study · Privacy engineering</span>
+    <span class="ds-label" data-en="Public space · Mayor's Office of Medellín" data-es="Espacio público · Alcaldía de Medellín">Public space · Mayor's Office of Medellín</span>
+    <span class="ds-label" data-en="Designed and built 2025—2026" data-es="Diseñada y construida 2025—2026">Designed and built 2025—2026</span>
   </div>
-  <div class="rule-double" role="presentation"></div>
+  <div class="rule-pair" role="presentation"></div>
 
-  <h1 data-en="The Data the AI<br>Cannot Reach<span class='thin'>A Municipal PII Anonymization Pipeline</span>"
+  <h1 class="ds-title title-hand"
+      data-en="The Data the AI<br>Cannot Reach<span class='thin'>A municipal PII anonymization pipeline</span>"
       data-es="Los datos que la IA<br>no puede alcanzar<span class='thin'>Una tubería municipal de anonimización de datos personales</span>">
-    The Data the AI<br>Cannot Reach<span class="thin">A Municipal PII Anonymization Pipeline</span>
+    The Data the AI<br>Cannot Reach<span class="thin">A municipal PII anonymization pipeline</span>
   </h1>
 
   <p class="deck"
@@ -447,384 +72,326 @@ footer a:hover{color:var(--ink)}
   </p>
 
   <div class="byline">
-    <span data-en="By <b>Mario Alejandro Tabares Arango</b>" data-es="Por <b>Mario Alejandro Tabares Arango</b>">By <b>Mario Alejandro Tabares Arango</b></span>
-    <span data-en="Associate Director of Data &amp; Technology, <b>CORLIDE</b>" data-es="Director Asociado de Datos y Tecnología, <b>CORLIDE</b>">Associate Director of Data &amp; Technology, <b>CORLIDE</b></span>
-    <span data-en="City of <b>2.5M residents</b>" data-es="Ciudad de <b>2,5M de habitantes</b>">City of <b>2.5M residents</b></span>
+    <span class="ds-label" data-en="By <b>Alejandro Tabares</b>" data-es="Por <b>Alejandro Tabares</b>">By <b>Alejandro Tabares</b></span>
+    <span class="ds-label" data-en="Associate Director of Data &amp; Technology, <b>CORLIDE</b>" data-es="Director Asociado de Datos y Tecnología, <b>CORLIDE</b>">Associate Director of Data &amp; Technology, <b>CORLIDE</b></span>
+    <span class="ds-label" data-en="City of <b>2.5M residents</b>" data-es="Ciudad de <b>2,5M de habitantes</b>">City of <b>2.5M residents</b></span>
   </div>
 
-  <div class="boundary">
-    <div class="boundary__bar" role="presentation"></div>
-    <div class="boundary__t">
-      <span data-en="Above this line: the semantic layer, retrieval, agents." data-es="Sobre esta línea: la capa semántica, la recuperación, los agentes.">Above this line: the semantic layer, retrieval, agents.</span>
-      <span data-en="Below it: <b>data no consumer can name.</b>" data-es="Debajo: <b>datos que ningún consumidor puede nombrar.</b>">Below it: <b>data no consumer can name.</b></span>
-    </div>
+  <!-- la flecha: reference, touching the boundary it refers to -->
+  <div class="claim-strip">
+    <span class="glyph-slot" id="fig-glyph" aria-hidden="true"></span>
+    <p data-en="Above the line: the semantic layer, retrieval, agents. Below it: <b>data no consumer can name.</b>"
+       data-es="Sobre la línea: la capa semántica, la recuperación, los agentes. Debajo: <b>datos que ningún consumidor puede nombrar.</b>">Above the line: the semantic layer, retrieval, agents. Below it: <b>data no consumer can name.</b></p>
   </div>
 </section>
 
 <!-- ═══════════════ I — THE DESIGN PROBLEM ═══════════════ -->
-<section class="sec sec--open wrap" id="problem" style="border-top:0;padding-top:clamp(34px,4.5vw,52px)">
-  <div class="rail">
-    <span class="num">I</span>
-    <span data-en="The design problem" data-es="El problema de diseño">The design problem</span>
-    <span class="note" data-en="Two legal mandates and one system that must never be able to comply with the wrong one." data-es="Dos mandatos legales y un sistema que nunca debe poder cumplir el equivocado.">Two legal mandates and one system that must never be able to comply with the wrong one.</span>
-  </div>
-  <div>
-    <h2 data-en="Access policies fail open. Absent data does not." data-es="Las políticas de acceso fallan abriéndose. Los datos ausentes no.">Access policies fail open. Absent data does not.</h2>
-    <div class="prose">
-      <p class="dropcap"
-         data-en="Three years of citizen petitions and municipal records sat in front of me, and every one of them was about a person: a name, a document number, an address precise enough to knock on. The law required the office to answer each petition within fifteen business days. It also required the office to analyse the whole corpus in order to govern public space at all. Both mandates were real, and both required the data. Above them, a third constraint: an AI layer was going to be built on this — retrieval, agents, a semantic layer — and it must never be able to reach an identity."
-         data-es="Tres años de peticiones ciudadanas y registros municipales estaban frente a mí, y cada uno de ellos trataba sobre una persona: un nombre, un número de documento, una dirección lo bastante precisa como para tocar la puerta. La ley obligaba a la entidad a responder cada petición en quince días hábiles. También la obligaba a analizar el corpus completo para poder gobernar el espacio público. Ambos mandatos eran reales, y ambos requerían los datos. Encima de ellos, una tercera restricción: sobre esto se iba a construir una capa de IA — recuperación, agentes, una capa semántica — y esa capa nunca debía poder alcanzar una identidad.">
-        Three years of citizen petitions and municipal records sat in front of me, and every one of them was about a person: a name, a document number, an address precise enough to knock on. The law required the office to answer each petition within fifteen business days. It also required the office to analyse the whole corpus in order to govern public space at all. Both mandates were real, and both required the data. Above them, a third constraint: an AI layer was going to be built on this — retrieval, agents, a semantic layer — and it must never be able to reach an identity.
-      </p>
-      <p data-en="The conventional answer is access control. Scope the role, filter the queries, write the policy, review it quarterly. I did not trust it, for reasons that have nothing to do with the quality of anyone's policy. <strong>Access policies fail open.</strong> They fail open under pressure — a director needs an answer tonight, a permission is widened for an afternoon and never narrowed again. They fail open under misconfiguration — one grant to the wrong identity, one export written to a shared folder. And they fail open under a consumer that is, by design, inventive about reaching everything it is permitted to reach."
-         data-es="La respuesta convencional es el control de acceso. Se acota el rol, se filtran las consultas, se escribe la política, se revisa cada trimestre. No confié en eso, por razones que nada tienen que ver con la calidad de la política de nadie. <strong>Las políticas de acceso fallan abriéndose.</strong> Fallan abriéndose bajo presión — un director necesita una respuesta esta noche, un permiso se amplía por una tarde y nunca se vuelve a cerrar. Fallan abriéndose por error de configuración — un permiso otorgado a la identidad equivocada, una exportación escrita en una carpeta compartida. Y fallan abriéndose ante un consumidor que, por diseño, es ingenioso para alcanzar todo aquello que se le permite alcanzar.">
-        The conventional answer is access control. Scope the role, filter the queries, write the policy, review it quarterly. I did not trust it, for reasons that have nothing to do with the quality of anyone's policy. <strong>Access policies fail open.</strong> They fail open under pressure — a director needs an answer tonight, a permission is widened for an afternoon and never narrowed again. They fail open under misconfiguration — one grant to the wrong identity, one export written to a shared folder. And they fail open under a consumer that is, by design, inventive about reaching everything it is permitted to reach.
-      </p>
-      <p class="kicker"
-         data-en="The only privacy guarantee an AI system upstream cannot erode is data that no longer contains the information. Not data it is forbidden to read — data that does not have the answer."
-         data-es="La única garantía de privacidad que un sistema de IA aguas arriba no puede erosionar son datos que ya no contienen la información. No datos que tiene prohibido leer — datos que no tienen la respuesta.">
-        The only privacy guarantee an AI system upstream cannot erode is data that no longer contains the information. Not data it is forbidden to read — data that does not have the answer.
-      </p>
-      <p data-en="So I built the guarantee into the data rather than into the permissions around it. Guarantee by construction, not by permission. Everything below follows from that one commitment."
-         data-es="Así que construí la garantía dentro de los datos y no en los permisos que los rodean. Garantía por construcción, no por permiso. Todo lo que sigue se deriva de ese único compromiso.">
-        So I built the guarantee into the data rather than into the permissions around it. Guarantee by construction, not by permission. Everything below follows from that one commitment.
-      </p>
+<section class="sec" id="problem">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">I</span>
+      <span class="rail-name" data-en="The design problem" data-es="El problema de diseño">The design problem</span>
+      <span class="ds-note" data-en="Two legal mandates and one system that must never be able to comply with the wrong one." data-es="Dos mandatos legales y un sistema que nunca debe poder cumplir el equivocado.">Two legal mandates and one system that must never be able to comply with the wrong one.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Access policies fail open. Absent data does not." data-es="Las políticas de acceso fallan abriéndose. Los datos ausentes no.">Access policies fail open. Absent data does not.</h2>
+
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="Three years of citizen petitions and municipal records sat in front of me, and every one of them was about a person: a name, a document number, an address precise enough to knock on. The law required the office to answer each petition within <span class='ds-num'>15</span> business days. It also required the office to analyze the whole corpus in order to govern public space at all. Both mandates were real, and both required the data. Above them, a third constraint: an AI layer was going to be built on this — retrieval, agents, a semantic layer — and it must never be able to reach an identity."
+           data-es="Tres años de peticiones ciudadanas y registros municipales estaban frente a mí, y cada uno de ellos trataba sobre una persona: un nombre, un número de documento, una dirección lo bastante precisa como para tocar la puerta. La ley obligaba a la entidad a responder cada petición en <span class='ds-num'>15</span> días hábiles. También la obligaba a analizar el corpus completo para poder gobernar el espacio público. Ambos mandatos eran reales, y ambos requerían los datos. Encima de ellos, una tercera restricción: sobre esto se iba a construir una capa de IA — recuperación, agentes, una capa semántica — y esa capa nunca debía poder alcanzar una identidad.">
+          Three years of citizen petitions and municipal records sat in front of me, and every one of them was about a person: a name, a document number, an address precise enough to knock on. The law required the office to answer each petition within <span class="ds-num">15</span> business days. It also required the office to analyze the whole corpus in order to govern public space at all. Both mandates were real, and both required the data. Above them, a third constraint: an AI layer was going to be built on this — retrieval, agents, a semantic layer — and it must never be able to reach an identity.
+        </p>
+        <p data-en="The conventional answer is access control. Scope the role, filter the queries, write the policy, review it quarterly. I did not trust it, for reasons that have nothing to do with the quality of anyone's policy. <strong>Access policies fail open.</strong> They fail open under pressure — a director needs an answer tonight, a permission is widened for an afternoon and never narrowed again. They fail open under misconfiguration — one grant to the wrong identity, one export written to a shared folder. And they fail open under a consumer that is, by design, inventive about reaching everything it is permitted to reach."
+           data-es="La respuesta convencional es el control de acceso. Se acota el rol, se filtran las consultas, se escribe la política, se revisa cada trimestre. No confié en eso, por razones que nada tienen que ver con la calidad de la política de nadie. <strong>Las políticas de acceso fallan abriéndose.</strong> Fallan abriéndose bajo presión — un director necesita una respuesta esta noche, un permiso se amplía por una tarde y nunca se vuelve a cerrar. Fallan abriéndose por error de configuración — un permiso otorgado a la identidad equivocada, una exportación escrita en una carpeta compartida. Y fallan abriéndose ante un consumidor que, por diseño, es ingenioso para alcanzar todo aquello que se le permite alcanzar.">
+          The conventional answer is access control. Scope the role, filter the queries, write the policy, review it quarterly. I did not trust it, for reasons that have nothing to do with the quality of anyone's policy. <strong>Access policies fail open.</strong> They fail open under pressure — a director needs an answer tonight, a permission is widened for an afternoon and never narrowed again. They fail open under misconfiguration — one grant to the wrong identity, one export written to a shared folder. And they fail open under a consumer that is, by design, inventive about reaching everything it is permitted to reach.
+        </p>
+      </div>
+
+      <figure class="ds-pullquote" style="margin:var(--sp-6) 0">
+        <p class="ds-pullquote__q"
+           data-en="The only privacy guarantee an AI system upstream cannot erode is data that no longer contains the information. Not data it is forbidden to read — data that does not have the answer."
+           data-es="La única garantía de privacidad que un sistema de IA aguas arriba no puede erosionar son datos que ya no contienen la información. No datos que tiene prohibido leer — datos que no tienen la respuesta.">The only privacy guarantee an AI system upstream cannot erode is data that no longer contains the information. Not data it is forbidden to read — data that does not have the answer.</p>
+      </figure>
+
+      <div class="prose">
+        <p data-en="So I built the guarantee into the data rather than into the permissions around it. <mark class='ds-hl'>Guarantee by construction, not by permission.</mark> Everything below follows from that one commitment."
+           data-es="Así que construí la garantía dentro de los datos y no en los permisos que los rodean. <mark class='ds-hl'>Garantía por construcción, no por permiso.</mark> Todo lo que sigue se deriva de ese único compromiso.">
+          So I built the guarantee into the data rather than into the permissions around it. <mark class="ds-hl">Guarantee by construction, not by permission.</mark> Everything below follows from that one commitment.
+        </p>
+      </div>
+
+      <div class="figure-slot" id="fig-sets">
+        <p class="fallback" data-en="Figure 1 — two sets: the released layer and what identifies a person. Their intersection is empty by construction. Outside both sits the auxiliary data held elsewhere in the world, which no release controls."
+           data-es="Figura 1 — dos conjuntos: la capa publicada y lo que identifica a una persona. Su intersección es vacía por construcción. Fuera de ambos están los datos auxiliares que existen en el resto del mundo, que ninguna publicación controla.">Figure 1 — two sets: the released layer and what identifies a person. Their intersection is empty by construction. Outside both sits the auxiliary data held elsewhere in the world, which no release controls.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ II — THREAT MODEL ═══════════════ -->
-<section class="sec wrap" id="threat">
-  <div class="rail">
-    <span class="num">II</span>
-    <span data-en="Threat model" data-es="Modelo de amenaza">Threat model</span>
-    <span class="note" data-en="Stated as patterns. Four ways a release becomes a person again." data-es="Enunciado como patrones. Cuatro maneras en que una publicación vuelve a ser una persona.">Stated as patterns. Four ways a release becomes a person again.</span>
-  </div>
-  <div>
-    <h2 data-en="What the pipeline is defending against" data-es="Contra qué defiende la tubería">What the pipeline is defending against</h2>
-    <div class="cols">
-      <div class="threat">
-        <b data-en="Re-identification from quasi-identifiers" data-es="Reidentificación por cuasi-identificadores">Re-identification from quasi-identifiers</b>
-        <span data-en="No direct identifier present, and yet enough incidental structure — a place, a date, an exact value — to narrow a population down to one person."
-              data-es="Ningún identificador directo presente y, aun así, suficiente estructura incidental — un lugar, una fecha, un valor exacto — para reducir una población a una sola persona.">No direct identifier present, and yet enough incidental structure — a place, a date, an exact value — to narrow a population down to one person.</span>
+<section class="sec" id="threat">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">II</span>
+      <span class="rail-name" data-en="Threat model" data-es="Modelo de amenaza">Threat model</span>
+      <span class="ds-note" data-en="Stated as patterns. Four ways a release becomes a person again." data-es="Enunciado como patrones. Cuatro maneras en que una publicación vuelve a ser una persona.">Stated as patterns. Four ways a release becomes a person again.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="What the pipeline is defending against" data-es="Contra qué defiende la tubería">What the pipeline is defending against</h2>
+
+      <div class="cols" style="margin-top:var(--sp-6)">
+        <div class="cell">
+          <b class="h-min" data-en="Re-identification from quasi-identifiers" data-es="Reidentificación por cuasi-identificadores">Re-identification from quasi-identifiers</b>
+          <span data-en="No direct identifier present, and yet enough incidental structure — a place, a date, an exact value — to narrow a population down to one person."
+                data-es="Ningún identificador directo presente y, aun así, suficiente estructura incidental — un lugar, una fecha, un valor exacto — para reducir una población a una sola persona.">No direct identifier present, and yet enough incidental structure — a place, a date, an exact value — to narrow a population down to one person.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="Linkage across datasets" data-es="Enlace entre conjuntos de datos">Linkage across datasets</b>
+          <span data-en="Two releases that are each harmless, joined on a column they happen to share, becoming an identity that neither contained on its own."
+                data-es="Dos publicaciones inofensivas por separado que, unidas por una columna que comparten, producen una identidad que ninguna contenía por sí sola.">Two releases that are each harmless, joined on a column they happen to share, becoming an identity that neither contained on its own.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="An over-capable or compromised consumer" data-es="Un consumidor demasiado capaz o comprometido">An over-capable or compromised consumer</b>
+          <span data-en="An agent that composes queries nobody anticipated, or one whose instructions have been shaped by the very content it retrieved."
+                data-es="Un agente que compone consultas que nadie anticipó, o uno cuyas instrucciones fueron moldeadas por el mismo contenido que recuperó.">An agent that composes queries nobody anticipated, or one whose instructions have been shaped by the very content it retrieved.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="Human error in query construction" data-es="Error humano al construir consultas">Human error in query construction</b>
+          <span data-en="The most common failure by far, and the least dramatic: an analyst joins the wrong two tables and produces a file nobody meant to exist."
+                data-es="La falla más común con diferencia, y la menos dramática: un analista cruza las dos tablas equivocadas y produce un archivo que nadie quiso que existiera.">The most common failure by far, and the least dramatic: an analyst joins the wrong two tables and produces a file nobody meant to exist.</span>
+        </div>
       </div>
-      <div class="threat">
-        <b data-en="Linkage across datasets" data-es="Enlace entre conjuntos de datos">Linkage across datasets</b>
-        <span data-en="Two releases that are each harmless, joined on a column they happen to share, becoming an identity that neither contained on its own."
-              data-es="Dos publicaciones inofensivas por separado que, unidas por una columna que comparten, producen una identidad que ninguna contenía por sí sola.">Two releases that are each harmless, joined on a column they happen to share, becoming an identity that neither contained on its own.</span>
-      </div>
-      <div class="threat">
-        <b data-en="An over-capable or compromised consumer" data-es="Un consumidor demasiado capaz o comprometido">An over-capable or compromised consumer</b>
-        <span data-en="An agent that composes queries nobody anticipated, or one whose instructions have been shaped by the very content it retrieved."
-              data-es="Un agente que compone consultas que nadie anticipó, o uno cuyas instrucciones fueron moldeadas por el mismo contenido que recuperó.">An agent that composes queries nobody anticipated, or one whose instructions have been shaped by the very content it retrieved.</span>
-      </div>
-      <div class="threat">
-        <b data-en="Human error in query construction" data-es="Error humano al construir consultas">Human error in query construction</b>
-        <span data-en="The most common failure by far, and the least dramatic: an analyst joins the wrong two tables and produces a file nobody meant to exist."
-              data-es="La falla más común con diferencia, y la menos dramática: un analista cruza las dos tablas equivocadas y produce un archivo que nadie quiso que existiera.">The most common failure by far, and the least dramatic: an analyst joins the wrong two tables and produces a file nobody meant to exist.</span>
-      </div>
-      <p data-en="The downstream AI is treated as an untrusted consumer, deliberately. Not because I expect it to misbehave, but because <strong>a privacy guarantee that depends on a language model behaving as expected is not a guarantee. It is a forecast.</strong>"
-         data-es="La IA aguas abajo se trata como un consumidor no confiable, deliberadamente. No porque espere que se porte mal, sino porque <strong>una garantía de privacidad que depende de que un modelo de lenguaje se comporte como se espera no es una garantía. Es un pronóstico.</strong>"
-         style="color:var(--ink-2);margin-top:4px">
-        The downstream AI is treated as an untrusted consumer, deliberately. Not because I expect it to misbehave, but because <strong>a privacy guarantee that depends on a language model behaving as expected is not a guarantee. It is a forecast.</strong>
-      </p>
+
+      <p class="ds-note" style="margin-top:var(--sp-5);max-width:62ch;color:var(--muted-ink);font-size:var(--fs-sm)"
+         data-en="The downstream AI is treated as an untrusted consumer, deliberately. Not because I expect it to misbehave, but because a privacy guarantee that depends on a language model behaving as expected is not a guarantee. It is a forecast."
+         data-es="La IA aguas abajo se trata como un consumidor no confiable, deliberadamente. No porque espere que se porte mal, sino porque una garantía de privacidad que depende de que un modelo de lenguaje se comporte como se espera no es una garantía. Es un pronóstico.">The downstream AI is treated as an untrusted consumer, deliberately. Not because I expect it to misbehave, but because a privacy guarantee that depends on a language model behaving as expected is not a guarantee. It is a forecast.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ III — PIPELINE ═══════════════ -->
-<section class="sec wrap" id="pipeline">
-  <div class="rail">
-    <span class="num">III</span>
-    <span data-en="The pipeline" data-es="La tubería">The pipeline</span>
-    <span class="note" data-en="Read it from the bottom up. The direction is the argument." data-es="Léase de abajo hacia arriba. La dirección es el argumento.">Read it from the bottom up. The direction is the argument.</span>
-  </div>
-  <div>
-    <h2 data-en="One direction of travel" data-es="Un solo sentido de circulación">One direction of travel</h2>
-    <div class="prose" style="margin-bottom:26px">
-      <p data-en="The pipeline has one job: produce a released layer safe enough to hand to anything, and make the boundary between raw and released a one-way street. The diagram is drawn the way the system is stacked — raw at the bottom, the AI layer at the top, everything flowing upward and nothing coming back down."
-         data-es="La tubería tiene un solo trabajo: producir una capa publicada lo bastante segura como para entregársela a cualquier cosa, y convertir la frontera entre lo crudo y lo publicado en una calle de un solo sentido. El diagrama está dibujado como está apilado el sistema — lo crudo abajo, la capa de IA arriba, todo fluyendo hacia arriba y nada de regreso.">
-        The pipeline has one job: produce a released layer safe enough to hand to anything, and make the boundary between raw and released a one-way street. The diagram is drawn the way the system is stacked — raw at the bottom, the AI layer at the top, everything flowing upward and nothing coming back down.
-      </p>
+<section class="sec" id="pipeline">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">III</span>
+      <span class="rail-name" data-en="The pipeline" data-es="La tubería">The pipeline</span>
+      <span class="ds-note" data-en="Read it from the bottom up. The direction is the argument." data-es="Léase de abajo hacia arriba. La dirección es el argumento.">Read it from the bottom up. The direction is the argument.</span>
     </div>
+    <div>
+      <h2 class="h-sec" data-en="One direction of travel" data-es="Un solo sentido de circulación">One direction of travel</h2>
 
-    <figure>
-      <div class="figbox">
-        <svg viewBox="0 0 500 800" role="img" aria-labelledby="digT digD" preserveAspectRatio="xMidYMid meet">
-          <title id="digT" data-en="Anonymization pipeline, drawn bottom to top" data-es="Tubería de anonimización, dibujada de abajo hacia arriba">Anonymization pipeline, drawn bottom to top</title>
-          <desc id="digD" data-en="Raw governed intake is classified, then transformed by one of three techniques — irreversible hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary."
-                data-es="La entrada cruda gobernada se clasifica, luego se transforma con una de tres técnicas — hashing irreversible, supresión o generalización — y se verifica en una compuerta de validación. Solo lo que pasa la compuerta cruza una frontera de un solo sentido hacia la capa publicada anonimizada, única superficie que la capa semántica, la recuperación y los agentes pueden leer. Ningún camino regresa a través de la frontera.">Raw governed intake is classified, then transformed by one of three techniques, and checked at a validation gate. Only what passes crosses a one-way boundary into the released layer, which is the only surface the AI layer can read.</desc>
-
-          <defs>
-            <marker id="ah" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto">
-              <path d="M0,0 L8.5,3.5 L0,7 Z" fill="var(--ink-3)"/>
-            </marker>
-          </defs>
-
-          <!-- ── RELEASED ZONE (top) ── -->
-          <rect class="d-zone" x="8" y="8" width="484" height="236"/>
-          <text class="d-tag" x="24" y="30" data-en="RELEASED · ANONYMIZED" data-es="PUBLICADO · ANONIMIZADO">RELEASED · ANONYMIZED</text>
-
-          <rect class="d-box" x="64" y="44" width="372" height="52"/>
-          <text class="d-t" x="250" y="66" text-anchor="middle" data-en="Models built on top" data-es="Modelos construidos encima">Models built on top</text>
-          <text class="d-s" x="250" y="84" text-anchor="middle" data-en="derived only from released data" data-es="derivados solo de datos publicados">derived only from released data</text>
-
-          <path class="d-flow" d="M250,108 L250,96" marker-end="url(#ah)"/>
-
-          <rect class="d-box" x="64" y="108" width="372" height="52"/>
-          <text class="d-t" x="250" y="130" text-anchor="middle" data-en="Semantic layer · retrieval · agents" data-es="Capa semántica · recuperación · agentes">Semantic layer · retrieval · agents</text>
-          <text class="d-s" x="250" y="148" text-anchor="middle" data-en="untrusted consumers, by design" data-es="consumidores no confiables, por diseño">untrusted consumers, by design</text>
-
-          <path class="d-flow" d="M250,172 L250,160" marker-end="url(#ah)"/>
-
-          <rect class="d-box" x="64" y="172" width="372" height="52"/>
-          <text class="d-t" x="250" y="194" text-anchor="middle" data-en="Released anonymized layer" data-es="Capa publicada anonimizada">Released anonymized layer</text>
-          <text class="d-s" x="250" y="212" text-anchor="middle" data-en="the only surface anything above can read" data-es="única superficie legible desde arriba">the only surface anything above can read</text>
-
-          <!-- ── ONE-WAY BOUNDARY ── -->
-          <path class="d-flow" d="M250,258 L250,224" marker-end="url(#ah)"/>
-          <rect class="d-band" x="8" y="258" width="484" height="36"/>
-          <text class="d-band-t" x="232" y="281" text-anchor="middle" data-en="ONE-WAY BOUNDARY · NOTHING CROSSES BACK" data-es="FRONTERA DE UN SOLO SENTIDO · NADA REGRESA">ONE-WAY BOUNDARY · NOTHING CROSSES BACK</text>
-          <path class="d-block" d="M422,236 L422,267"/>
-          <circle class="d-x" cx="422" cy="276" r="9"/>
-          <path class="d-x" d="M418,272 L426,280 M426,272 L418,280"/>
-
-          <!-- ── RESTRICTED ZONE (bottom) ── -->
-          <rect class="d-zone" x="8" y="308" width="484" height="484"/>
-          <text class="d-tag" x="24" y="330" data-en="RESTRICTED · RAW" data-es="RESTRINGIDO · CRUDO">RESTRICTED · RAW</text>
-
-          <path class="d-flow" d="M250,344 L250,294" marker-end="url(#ah)"/>
-          <path class="d-gate" d="M114,344 L386,344 L400,370 L386,396 L114,396 L100,370 Z"/>
-          <text class="d-t" x="250" y="366" text-anchor="middle" data-en="Validation gate" data-es="Compuerta de validación">Validation gate</text>
-          <text class="d-s" x="250" y="384" text-anchor="middle" data-en="residual identifiers · linkage risk" data-es="identificadores · riesgo de enlace">residual identifiers · linkage risk</text>
-
-          <path class="d-rail" d="M420,464 L452,464 M420,528 L452,528 M420,592 L452,592"/>
-          <path class="d-flow" d="M452,592 L452,410 L250,410 L250,396" marker-end="url(#ah)"/>
-
-          <rect class="d-box" x="80" y="438" width="340" height="52"/>
-          <text class="d-t" x="250" y="460" text-anchor="middle" data-en="Irreversible hashing" data-es="Hashing irreversible">Irreversible hashing</text>
-          <text class="d-s" x="250" y="478" text-anchor="middle" data-en="linkage survives · identity does not" data-es="el enlace sobrevive · la identidad no">linkage survives · identity does not</text>
-
-          <rect class="d-box" x="80" y="502" width="340" height="52"/>
-          <text class="d-t" x="250" y="524" text-anchor="middle" data-en="Suppression" data-es="Supresión">Suppression</text>
-          <text class="d-s" x="250" y="542" text-anchor="middle" data-en="no analytic value · not published" data-es="sin valor analítico · no se publica">no analytic value · not published</text>
-
-          <rect class="d-box" x="80" y="566" width="340" height="52"/>
-          <text class="d-t" x="250" y="588" text-anchor="middle" data-en="Generalization" data-es="Generalización">Generalization</text>
-          <text class="d-s" x="250" y="606" text-anchor="middle" data-en="distribution kept · exact value dropped" data-es="se conserva la distribución · no el valor">distribution kept · exact value dropped</text>
-
-          <path class="d-rail" d="M250,660 L250,636 L48,636 L48,464"/>
-          <path class="d-flow" d="M48,464 L80,464" marker-end="url(#ah)"/>
-          <path class="d-flow" d="M48,528 L80,528" marker-end="url(#ah)"/>
-          <path class="d-flow" d="M48,592 L80,592" marker-end="url(#ah)"/>
-
-          <rect class="d-box" x="80" y="660" width="340" height="48"/>
-          <text class="d-t" x="250" y="682" text-anchor="middle" data-en="Classification of attributes" data-es="Clasificación de atributos">Classification of attributes</text>
-          <text class="d-s" x="250" y="699" text-anchor="middle" data-en="technique chosen per attribute class" data-es="técnica elegida por clase de atributo">technique chosen per attribute class</text>
-
-          <path class="d-flow" d="M250,730 L250,708" marker-end="url(#ah)"/>
-
-          <rect class="d-box" x="110" y="730" width="280" height="48"/>
-          <text class="d-t" x="250" y="752" text-anchor="middle" data-en="Raw governed intake" data-es="Entrada cruda gobernada">Raw governed intake</text>
-          <text class="d-s" x="250" y="769" text-anchor="middle" data-en="never leaves this side" data-es="nunca sale de este lado">never leaves this side</text>
-        </svg>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="The pipeline has one job: produce a released layer safe enough to hand to anything, and make the boundary between raw and released a one-way street. The diagram is drawn the way the system is stacked — raw at the bottom, the AI layer at the top, everything flowing upward and nothing coming back down."
+           data-es="La tubería tiene un solo trabajo: producir una capa publicada lo bastante segura como para entregársela a cualquier cosa, y convertir la frontera entre lo crudo y lo publicado en una calle de un solo sentido. El diagrama está dibujado como está apilado el sistema — lo crudo abajo, la capa de IA arriba, todo fluyendo hacia arriba y nada de regreso.">
+          The pipeline has one job: produce a released layer safe enough to hand to anything, and make the boundary between raw and released a one-way street. The diagram is drawn the way the system is stacked — raw at the bottom, the AI layer at the top, everything flowing upward and nothing coming back down.
+        </p>
       </div>
 
-      <figcaption>
-        <dl class="legend">
-          <dt data-en="No bypass" data-es="Sin atajo">No bypass</dt>
+      <div class="figure-slot" id="fig-pipeline">
+        <p class="fallback" data-en="Figure 2 — raw governed intake is classified, transformed by one of three techniques (irreversible hashing, suppression, generalization) and checked at a validation gate. Only what passes crosses a one-way boundary into the released layer, the only surface the AI layer can read."
+           data-es="Figura 2 — la entrada cruda gobernada se clasifica, se transforma con una de tres técnicas (hashing irreversible, supresión, generalización) y se verifica en una compuerta. Solo lo que pasa cruza una frontera de un solo sentido hacia la capa publicada, única superficie legible por la capa de IA.">Figure 2 — raw governed intake is classified, transformed by one of three techniques and checked at a validation gate. Only what passes crosses a one-way boundary into the released layer, the only surface the AI layer can read.</p>
+      </div>
+
+      <div class="legend-grid" style="margin-top:var(--sp-5)">
+        <dl>
+          <dt class="ds-label" data-en="No bypass" data-es="Sin atajo">No bypass</dt>
           <dd data-en="Transformation is unconditional on the released side. There is no override flag, no per-run exception and no “just this once” path — because a bypass that exists is a bypass that will be used."
               data-es="La transformación es incondicional del lado publicado. No hay bandera de anulación, ni excepción por corrida, ni camino de «solo por esta vez» — porque un atajo que existe es un atajo que se va a usar.">Transformation is unconditional on the released side. There is no override flag, no per-run exception and no “just this once” path — because a bypass that exists is a bypass that will be used.</dd>
         </dl>
-        <dl class="legend">
-          <dt data-en="Gate, not audit" data-es="Compuerta, no auditoría">Gate, not audit</dt>
+        <dl>
+          <dt class="ds-label" data-en="Gate, not audit" data-es="Compuerta, no auditoría">Gate, not audit</dt>
           <dd data-en="The check runs before release. A failure stops the release; it does not file a finding about one."
               data-es="La verificación corre antes de publicar. Una falla detiene la publicación; no levanta un hallazgo sobre ella.">The check runs before release. A failure stops the release; it does not file a finding about one.</dd>
         </dl>
-        <dl class="legend">
-          <dt data-en="Closed upward" data-es="Cerrado hacia arriba">Closed upward</dt>
+        <dl>
+          <dt class="ds-label" data-en="Closed upward" data-es="Cerrado hacia arriba">Closed upward</dt>
           <dd data-en="Anything the AI layer builds is derived from released data and lands above the boundary. The property survives whatever gets composed on top of it."
               data-es="Todo lo que la capa de IA construye se deriva de datos publicados y queda por encima de la frontera. La propiedad sobrevive a lo que sea que se componga encima.">Anything the AI layer builds is derived from released data and lands above the boundary. The property survives whatever gets composed on top of it.</dd>
         </dl>
-      </figcaption>
-    </figure>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════════ IV — DECISIONS ═══════════════ -->
-<section class="sec wrap" id="decisions">
-  <div class="rail">
-    <span class="num">IV</span>
-    <span data-en="Four design decisions" data-es="Cuatro decisiones de diseño">Four design decisions</span>
-    <span class="note" data-en="Each one is a bet about how the system fails, not about how it works." data-es="Cada una es una apuesta sobre cómo falla el sistema, no sobre cómo funciona.">Each one is a bet about how the system fails, not about how it works.</span>
-  </div>
-  <div>
-    <h2 data-en="Four decisions, and what each one is buying" data-es="Cuatro decisiones, y qué compra cada una">Four decisions, and what each one is buying</h2>
+<section class="sec" id="decisions">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">IV</span>
+      <span class="rail-name" data-en="Four design decisions" data-es="Cuatro decisiones">Four design decisions</span>
+      <span class="ds-note" data-en="Each one is a bet about how the system fails, not about how it works." data-es="Cada una es una apuesta sobre cómo falla el sistema, no sobre cómo funciona.">Each one is a bet about how the system fails, not about how it works.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Four decisions, and what each one is buying" data-es="Cuatro decisiones, y qué compra cada una">Four decisions, and what each one is buying</h2>
 
-    <div class="matrix">
-      <div class="mhead">
-        <span data-en="Decision" data-es="Decisión">Decision</span>
-        <span data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
-        <span data-en="What would go wrong without it" data-es="Qué saldría mal sin ella">What would go wrong without it</span>
+      <div class="matrix" style="margin-top:var(--sp-6)">
+        <div class="mhead">
+          <span class="ds-label" data-en="Decision" data-es="Decisión">Decision</span>
+          <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+          <span class="ds-label" data-en="What would go wrong without it" data-es="Qué saldría mal sin ella">What would go wrong without it</span>
+        </div>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision A" data-es="Decisión A">Decision A</span>
+              <span class="h-min" data-en="Irreversibility over encryption" data-es="Irreversibilidad en vez de cifrado">Irreversibility over encryption</span>
+            </h3>
+            <p data-en="Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere."
+               data-es="Donde la identidad debe destruirse pero el enlace debe sobrevivir, aplico hashing irreversible con <strong>SHA-256</strong> en lugar de cifrar o tokenizar mediante un mapeo reversible. La misma persona produce el mismo token en cada corrida, así que los cruces y la deduplicación siguen funcionando — mientras que el valor en sí no lleva a ninguna parte.">Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Encryption <em>moves</em> the secret rather than removing it. If a key exists, a decrypt path exists — and therefore something to steal, to escalate to, to be compelled to produce. A reversible token vault is the same exposure with a database in front of it."
+               data-es="El cifrado <em>traslada</em> el secreto en lugar de eliminarlo. Si existe una llave, existe una ruta de descifrado — y por tanto algo que robar, a lo que escalar, que alguien puede exigir. Una bóveda de tokens reversibles es la misma exposición con una base de datos delante.">Encryption <em>moves</em> the secret rather than removing it. If a key exists, a decrypt path exists — and therefore something to steal, to escalate to, to be compelled to produce. A reversible token vault is the same exposure with a database in front of it.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong>"
+               data-es="La capa publicada serían datos personales con una tapa delgada. Todo sistema aguas abajo hereda la obligación de custodiar datos personales, y una sola llave filtrada desanonimiza retroactivamente toda publicación jamás hecha. El hashing no tiene ese modo de falla: <strong>no hay nada que filtrar, y nadie — yo incluido — puede revertir una publicación.</strong>">The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong></p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision B" data-es="Decisión B">Decision B</span>
+              <span class="h-min" data-en="One technique per attribute class" data-es="Una técnica por clase de atributo">One technique per attribute class</span>
+            </h3>
+            <p data-en="Three techniques, chosen by what an attribute is <em>for</em>: hashing where a join depends on it, suppression where the field carries no analytic value, generalization where the distribution matters and the individual value does not. The classification is the design work; the transformation is the easy part."
+               data-es="Tres técnicas, elegidas según para qué <em>sirve</em> el atributo: hashing donde un cruce depende de él, supresión donde el campo no aporta valor analítico, generalización donde importa la distribución y no el valor individual. La clasificación es el trabajo de diseño; la transformación es la parte fácil.">Three techniques, chosen by what an attribute is <em>for</em>: hashing where a join depends on it, suppression where the field carries no analytic value, generalization where the distribution matters and the individual value does not. The classification is the design work; the transformation is the easy part.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Uniform treatment, in either direction. Blanket suppression destroys the analysis the legal mandate requires. Blanket hashing preserves fields that should simply not exist downstream, and quietly turns high-cardinality attributes into near-unique keys — a re-identification vector wearing the costume of a pseudonym."
+               data-es="El tratamiento uniforme, en cualquiera de los dos sentidos. La supresión indiscriminada destruye el análisis que exige el mandato legal. El hashing indiscriminado conserva campos que sencillamente no deberían existir aguas abajo, y convierte en silencio atributos de alta cardinalidad en llaves casi únicas — un vector de reidentificación disfrazado de seudónimo.">Uniform treatment, in either direction. Blanket suppression destroys the analysis the legal mandate requires. Blanket hashing preserves fields that should simply not exist downstream, and quietly turns high-cardinality attributes into near-unique keys — a re-identification vector wearing the costume of a pseudonym.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="You get one of two failures, both common. Either the released layer is useless and people route around it — and <strong>the real privacy failure in a public institution is a shadow copy on somebody's laptop</strong> — or it stays expressive enough to re-identify, because everything survived in some form."
+               data-es="Se obtiene una de dos fallas, ambas comunes. O la capa publicada es inútil y la gente la esquiva — y <strong>la verdadera falla de privacidad en una entidad pública es una copia en la sombra en el portátil de alguien</strong> — o queda lo bastante expresiva como para reidentificar, porque todo sobrevivió de alguna forma.">You get one of two failures, both common. Either the released layer is useless and people route around it — and <strong>the real privacy failure in a public institution is a shadow copy on somebody's laptop</strong> — or it stays expressive enough to re-identify, because everything survived in some form.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision C" data-es="Decisión C">Decision C</span>
+              <span class="h-min" data-en="Placed below the AI layer" data-es="Ubicada por debajo de la capa de IA">Placed below the AI layer</span>
+            </h3>
+            <p data-en="The transformation happens in the data layer, beneath the semantic layer, retrieval and agents. Above the boundary, isolation is <strong>double</strong>: the consumer identity holds read access to the released layer and no grant whatsoever on the restricted side, so the engine refuses even hand-written queries — and the AI workspace only ever declares released tables, so restricted models are not <em>nameable</em> in it. One barrier is enforcement; the other makes the mistake unwriteable."
+               data-es="La transformación ocurre en la capa de datos, por debajo de la capa semántica, la recuperación y los agentes. Sobre la frontera, el aislamiento es <strong>doble</strong>: la identidad consumidora tiene lectura sobre la capa publicada y ningún permiso sobre el lado restringido, así que el motor rechaza incluso consultas escritas a mano — y el espacio de trabajo de la IA solo declara tablas publicadas, de modo que los modelos restringidos no son <em>nombrables</em> allí. Una barrera es cumplimiento; la otra vuelve el error imposible de escribir.">The transformation happens in the data layer, beneath the semantic layer, retrieval and agents. Above the boundary, isolation is <strong>double</strong>: the consumer identity holds read access to the released layer and no grant whatsoever on the restricted side, so the engine refuses even hand-written queries — and the AI workspace only ever declares released tables, so restricted models are not <em>nameable</em> in it. One barrier is enforcement; the other makes the mistake unwriteable.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Privacy implemented at the model boundary — system prompts, output filters, guardrails, “the agent has been instructed not to reveal.” Those are properties of a model's <em>behavior</em>, and behavior is precisely the thing you cannot bound. It is also the layer an attacker gets to write to."
+               data-es="La privacidad implementada en la frontera del modelo — instrucciones de sistema, filtros de salida, barandas, «al agente se le indicó no revelar». Eso son propiedades del <em>comportamiento</em> de un modelo, y el comportamiento es justamente lo que no se puede acotar. Es además la capa sobre la que un atacante puede escribir.">Privacy implemented at the model boundary — system prompts, output filters, guardrails, “the agent has been instructed not to reveal.” Those are properties of a model's <em>behavior</em>, and behavior is precisely the thing you cannot bound. It is also the layer an attacker gets to write to.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="The guarantee would depend on prompt design, on which model was swapped in last week, on whether a retrieved document happened to contain instructions. It would need re-validation on every model change and would degrade silently between them. Placed below, <strong>the guarantee is invariant to all of it</strong> — I can change model, framework or agent design freely, because none of them alters what is in the data."
+               data-es="La garantía dependería del diseño de los prompts, de qué modelo se cambió la semana pasada, de si un documento recuperado traía instrucciones. Habría que revalidarla en cada cambio de modelo y se degradaría en silencio entre uno y otro. Ubicada debajo, <strong>la garantía es invariante a todo eso</strong> — puedo cambiar modelo, framework o diseño de agente libremente, porque ninguno altera lo que hay en los datos.">The guarantee would depend on prompt design, on which model was swapped in last week, on whether a retrieved document happened to contain instructions. It would need re-validation on every model change and would degrade silently between them. Placed below, <strong>the guarantee is invariant to all of it</strong> — I can change model, framework or agent design freely, because none of them alters what is in the data.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision D" data-es="Decisión D">Decision D</span>
+              <span class="h-min" data-en="Validation as a gate, not an audit" data-es="La validación como compuerta, no como auditoría">Validation as a gate, not an audit</span>
+            </h3>
+            <p data-en="Every release is checked for residual identifiers and linkage risk <em>before</em> anything downstream can consume it, and a failure blocks the release. The gate and the transformation are written against the same definition of what counts as an identifier, so a released value that trips the gate is a defect in the transform — not a disagreement between two teams' rules."
+               data-es="Cada publicación se verifica en busca de identificadores residuales y riesgo de enlace <em>antes</em> de que algo aguas abajo pueda consumirla, y una falla bloquea la publicación. La compuerta y la transformación se escriben contra la misma definición de qué cuenta como identificador, así que un valor publicado que dispara la compuerta es un defecto de la transformación — no un desacuerdo entre las reglas de dos equipos.">Every release is checked for residual identifiers and linkage risk <em>before</em> anything downstream can consume it, and a failure blocks the release. The gate and the transformation are written against the same definition of what counts as an identifier, so a released value that trips the gate is a defect in the transform — not a disagreement between two teams' rules.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Audit after the fact. An audit tells you that personal data was published; it cannot un-publish it. In the interval between publication and detection the data has been retrieved, embedded, cached, and quite possibly answered with."
+               data-es="La auditoría posterior. Una auditoría te informa que se publicaron datos personales; no puede despublicarlos. En el intervalo entre publicación y detección, los datos ya fueron recuperados, indexados, almacenados en caché y probablemente usados para responder algo.">Audit after the fact. An audit tells you that personal data was published; it cannot un-publish it. In the interval between publication and detection the data has been retrieved, embedded, cached, and quite possibly answered with.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="Leaks would be found by whoever found them, on their schedule. And the case the gate actually catches is never the designed path — that one is correct by construction. It is the undesigned one: free text, where a person typed an identifier into a box meant for a description. <strong>One dataset remains unpublished today for exactly this reason.</strong> It will cross when it is transformed, and not before."
+               data-es="Las fugas las encontraría quien las encontrara, cuando le pasara. Y el caso que la compuerta realmente atrapa nunca es el camino diseñado — ese es correcto por construcción. Es el no diseñado: el texto libre, donde una persona escribió un identificador en una casilla pensada para una descripción. <strong>Un conjunto de datos sigue hoy sin publicarse exactamente por esto.</strong> Cruzará cuando esté transformado, y no antes.">Leaks would be found by whoever found them, on their schedule. And the case the gate actually catches is never the designed path — that one is correct by construction. It is the undesigned one: free text, where a person typed an identifier into a box meant for a description. <strong>One dataset remains unpublished today for exactly this reason.</strong> It will cross when it is transformed, and not before.</p>
+          </div>
+        </article>
       </div>
-
-      <!-- a -->
-      <article class="row">
-        <div>
-          <h3><span class="mk" data-en="Decision A" data-es="Decisión A">Decision A</span>
-            <span data-en="Irreversibility over encryption" data-es="Irreversibilidad en vez de cifrado">Irreversibility over encryption</span></h3>
-          <p data-en="Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere."
-             data-es="Donde la identidad debe destruirse pero el enlace debe sobrevivir, aplico hashing irreversible con <strong>SHA-256</strong> en lugar de cifrar o tokenizar mediante un mapeo reversible. La misma persona produce el mismo token en cada corrida, así que los cruces y la deduplicación siguen funcionando — mientras que el valor en sí no lleva a ninguna parte.">Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</div>
-          <p data-en="Encryption <em>moves</em> the secret rather than removing it. If a key exists, a decrypt path exists — and therefore something to steal, to escalate to, to be compelled to produce. A reversible token vault is the same exposure with a database in front of it."
-             data-es="El cifrado <em>traslada</em> el secreto en lugar de eliminarlo. Si existe una llave, existe una ruta de descifrado — y por tanto algo que robar, a lo que escalar, que alguien puede exigir. Una bóveda de tokens reversibles es la misma exposición con una base de datos delante.">Encryption <em>moves</em> the secret rather than removing it. If a key exists, a decrypt path exists — and therefore something to steal, to escalate to, to be compelled to produce. A reversible token vault is the same exposure with a database in front of it.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Without it" data-es="Sin ella">Without it</div>
-          <p data-en="The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong>"
-             data-es="La capa publicada serían datos personales con una tapa delgada. Todo sistema aguas abajo hereda la obligación de custodiar datos personales, y una sola llave filtrada desanonimiza retroactivamente toda publicación jamás hecha. El hashing no tiene ese modo de falla: <strong>no hay nada que filtrar, y nadie — yo incluido — puede revertir una publicación.</strong>">The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong></p>
-        </div>
-      </article>
-
-      <!-- b -->
-      <article class="row">
-        <div>
-          <h3><span class="mk" data-en="Decision B" data-es="Decisión B">Decision B</span>
-            <span data-en="One technique per attribute class" data-es="Una técnica por clase de atributo">One technique per attribute class</span></h3>
-          <p data-en="Three techniques, chosen by what an attribute is <em>for</em>: hashing where a join depends on it, suppression where the field carries no analytic value, generalization where the distribution matters and the individual value does not. The classification is the design work; the transformation is the easy part."
-             data-es="Tres técnicas, elegidas según para qué <em>sirve</em> el atributo: hashing donde un cruce depende de él, supresión donde el campo no aporta valor analítico, generalización donde importa la distribución y no el valor individual. La clasificación es el trabajo de diseño; la transformación es la parte fácil.">Three techniques, chosen by what an attribute is <em>for</em>: hashing where a join depends on it, suppression where the field carries no analytic value, generalization where the distribution matters and the individual value does not. The classification is the design work; the transformation is the easy part.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</div>
-          <p data-en="Uniform treatment, in either direction. Blanket suppression destroys the analysis the legal mandate requires. Blanket hashing preserves fields that should simply not exist downstream, and quietly turns high-cardinality attributes into near-unique keys — a re-identification vector wearing the costume of a pseudonym."
-             data-es="El tratamiento uniforme, en cualquiera de los dos sentidos. La supresión indiscriminada destruye el análisis que exige el mandato legal. El hashing indiscriminado conserva campos que sencillamente no deberían existir aguas abajo, y convierte en silencio atributos de alta cardinalidad en llaves casi únicas — un vector de reidentificación disfrazado de seudónimo.">Uniform treatment, in either direction. Blanket suppression destroys the analysis the legal mandate requires. Blanket hashing preserves fields that should simply not exist downstream, and quietly turns high-cardinality attributes into near-unique keys — a re-identification vector wearing the costume of a pseudonym.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Without it" data-es="Sin ella">Without it</div>
-          <p data-en="You get one of two failures, both common. Either the released layer is useless and people route around it — and <strong>the real privacy failure in a public institution is a shadow copy on somebody's laptop</strong> — or it stays expressive enough to re-identify, because everything survived in some form."
-             data-es="Se obtiene una de dos fallas, ambas comunes. O la capa publicada es inútil y la gente la esquiva — y <strong>la verdadera falla de privacidad en una entidad pública es una copia en la sombra en el portátil de alguien</strong> — o queda lo bastante expresiva como para reidentificar, porque todo sobrevivió de alguna forma.">You get one of two failures, both common. Either the released layer is useless and people route around it — and <strong>the real privacy failure in a public institution is a shadow copy on somebody's laptop</strong> — or it stays expressive enough to re-identify, because everything survived in some form.</p>
-        </div>
-      </article>
-
-      <!-- c -->
-      <article class="row">
-        <div>
-          <h3><span class="mk" data-en="Decision C" data-es="Decisión C">Decision C</span>
-            <span data-en="Placed below the AI layer" data-es="Ubicada por debajo de la capa de IA">Placed below the AI layer</span></h3>
-          <p data-en="The transformation happens in the data layer, beneath the semantic layer, retrieval and agents. Above the boundary, isolation is <strong>double</strong>: the consumer identity holds read access to the released layer and no grant whatsoever on the restricted side, so the engine refuses even hand-written queries — and the AI workspace only ever declares released tables, so restricted models are not <em>nameable</em> in it. One barrier is enforcement; the other makes the mistake unwriteable."
-             data-es="La transformación ocurre en la capa de datos, por debajo de la capa semántica, la recuperación y los agentes. Sobre la frontera, el aislamiento es <strong>doble</strong>: la identidad consumidora tiene lectura sobre la capa publicada y ningún permiso sobre el lado restringido, así que el motor rechaza incluso consultas escritas a mano — y el espacio de trabajo de la IA solo declara tablas publicadas, de modo que los modelos restringidos no son <em>nombrables</em> allí. Una barrera es cumplimiento; la otra vuelve el error imposible de escribir.">The transformation happens in the data layer, beneath the semantic layer, retrieval and agents. Above the boundary, isolation is <strong>double</strong>: the consumer identity holds read access to the released layer and no grant whatsoever on the restricted side, so the engine refuses even hand-written queries — and the AI workspace only ever declares released tables, so restricted models are not <em>nameable</em> in it. One barrier is enforcement; the other makes the mistake unwriteable.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</div>
-          <p data-en="Privacy implemented at the model boundary — system prompts, output filters, guardrails, “the agent has been instructed not to reveal.” Those are properties of a model's <em>behaviour</em>, and behaviour is precisely the thing you cannot bound. It is also the layer an attacker gets to write to."
-             data-es="La privacidad implementada en la frontera del modelo — instrucciones de sistema, filtros de salida, barandas, «al agente se le indicó no revelar». Eso son propiedades del <em>comportamiento</em> de un modelo, y el comportamiento es justamente lo que no se puede acotar. Es además la capa sobre la que un atacante puede escribir.">Privacy implemented at the model boundary — system prompts, output filters, guardrails, “the agent has been instructed not to reveal.” Those are properties of a model's <em>behaviour</em>, and behaviour is precisely the thing you cannot bound. It is also the layer an attacker gets to write to.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Without it" data-es="Sin ella">Without it</div>
-          <p data-en="The guarantee would depend on prompt design, on which model was swapped in last week, on whether a retrieved document happened to contain instructions. It would need re-validation on every model change and would degrade silently between them. Placed below, <strong>the guarantee is invariant to all of it</strong> — I can change model, framework or agent design freely, because none of them alters what is in the data."
-             data-es="La garantía dependería del diseño de los prompts, de qué modelo se cambió la semana pasada, de si un documento recuperado traía instrucciones. Habría que revalidarla en cada cambio de modelo y se degradaría en silencio entre uno y otro. Ubicada debajo, <strong>la garantía es invariante a todo eso</strong> — puedo cambiar modelo, framework o diseño de agente libremente, porque ninguno altera lo que hay en los datos.">The guarantee would depend on prompt design, on which model was swapped in last week, on whether a retrieved document happened to contain instructions. It would need re-validation on every model change and would degrade silently between them. Placed below, <strong>the guarantee is invariant to all of it</strong> — I can change model, framework or agent design freely, because none of them alters what is in the data.</p>
-        </div>
-      </article>
-
-      <!-- d -->
-      <article class="row">
-        <div>
-          <h3><span class="mk" data-en="Decision D" data-es="Decisión D">Decision D</span>
-            <span data-en="Validation as a gate, not an audit" data-es="La validación como compuerta, no como auditoría">Validation as a gate, not an audit</span></h3>
-          <p data-en="Every release is checked for residual identifiers and linkage risk <em>before</em> anything downstream can consume it, and a failure blocks the release. The gate and the transformation are written against the same definition of what counts as an identifier, so a released value that trips the gate is a defect in the transform — not a disagreement between two teams' rules."
-             data-es="Cada publicación se verifica en busca de identificadores residuales y riesgo de enlace <em>antes</em> de que algo aguas abajo pueda consumirla, y una falla bloquea la publicación. La compuerta y la transformación se escriben contra la misma definición de qué cuenta como identificador, así que un valor publicado que dispara la compuerta es un defecto de la transformación — no un desacuerdo entre las reglas de dos equipos.">Every release is checked for residual identifiers and linkage risk <em>before</em> anything downstream can consume it, and a failure blocks the release. The gate and the transformation are written against the same definition of what counts as an identifier, so a released value that trips the gate is a defect in the transform — not a disagreement between two teams' rules.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</div>
-          <p data-en="Audit after the fact. An audit tells you that personal data was published; it cannot un-publish it. In the interval between publication and detection the data has been retrieved, embedded, cached, and quite possibly answered with."
-             data-es="La auditoría posterior. Una auditoría te informa que se publicaron datos personales; no puede despublicarlos. En el intervalo entre publicación y detección, los datos ya fueron recuperados, indexados, almacenados en caché y probablemente usados para responder algo.">Audit after the fact. An audit tells you that personal data was published; it cannot un-publish it. In the interval between publication and detection the data has been retrieved, embedded, cached, and quite possibly answered with.</p>
-        </div>
-        <div>
-          <div class="lbl" data-en="Without it" data-es="Sin ella">Without it</div>
-          <p data-en="Leaks would be found by whoever found them, on their schedule. And the case the gate actually catches is never the designed path — that one is correct by construction. It is the undesigned one: free text, where a person typed an identifier into a box meant for a description. <strong>One dataset remains unpublished today for exactly this reason.</strong> It will cross when it is transformed, and not before."
-             data-es="Las fugas las encontraría quien las encontrara, cuando le pasara. Y el caso que la compuerta realmente atrapa nunca es el camino diseñado — ese es correcto por construcción. Es el no diseñado: el texto libre, donde una persona escribió un identificador en una casilla pensada para una descripción. <strong>Un conjunto de datos sigue hoy sin publicarse exactamente por esto.</strong> Cruzará cuando esté transformado, y no antes.">Leaks would be found by whoever found them, on their schedule. And the case the gate actually catches is never the designed path — that one is correct by construction. It is the undesigned one: free text, where a person typed an identifier into a box meant for a description. <strong>One dataset remains unpublished today for exactly this reason.</strong> It will cross when it is transformed, and not before.</p>
-        </div>
-      </article>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ V — RESULTS ═══════════════ -->
-<section class="sec wrap" id="results">
-  <div class="rail">
-    <span class="num">V</span>
-    <span data-en="In production" data-es="En producción">In production</span>
-    <span class="note" data-en="Running against live municipal data, feeding the agent system above it." data-es="Corriendo sobre datos municipales en vivo, alimentando el sistema de agentes que tiene encima.">Running against live municipal data, feeding the agent system above it.</span>
-  </div>
-  <div>
-    <h2 data-en="What it covers" data-es="Qué cubre">What it covers</h2>
-    <div class="results">
-      <div class="res">
-        <b>65,000+</b>
-        <small data-en="individuals protected" data-es="personas protegidas">individuals protected</small>
+<section class="sec" id="results">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">V</span>
+      <span class="rail-name" data-en="In production" data-es="En producción">In production</span>
+      <span class="ds-note" data-en="Running against live municipal data, feeding the agent system above it." data-es="Corriendo sobre datos municipales en vivo, alimentando el sistema de agentes que tiene encima.">Running against live municipal data, feeding the agent system above it.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="What it covers" data-es="Qué cubre">What it covers</h2>
+
+      <div style="margin-top:var(--sp-6)">
+        <div class="ds-metrics">
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">65 000+</span><span class="ds-label ds-metric__label" data-en="individuals protected" data-es="personas protegidas">individuals protected</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">400 000+</span><span class="ds-label ds-metric__label" data-en="addresses" data-es="direcciones">addresses</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">13</span><span class="ds-label ds-metric__label" data-en="sensitive field classes" data-es="clases de campos sensibles">sensitive field classes</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">0</span><span class="ds-label ds-metric__label" data-en="personal-data incidents" data-es="incidentes con datos personales">personal-data incidents</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">2.5M</span><span class="ds-label ds-metric__label" data-en="residents served downstream" data-es="habitantes servidos aguas abajo">residents served downstream</span></div>
+        </div>
       </div>
-      <div class="res">
-        <b>400,000+</b>
-        <small data-en="addresses" data-es="direcciones">addresses</small>
-      </div>
-      <div class="res">
-        <b>13</b>
-        <small data-en="sensitive field classes transformed" data-es="clases de campos sensibles transformadas">sensitive field classes transformed</small>
-      </div>
-      <div class="res">
-        <b>0</b>
-        <small data-en="personal-data incidents" data-es="incidentes con datos personales">personal-data incidents</small>
-      </div>
-      <div class="res">
-        <b>2.5M</b>
-        <small data-en="residents served by the agent system it feeds" data-es="habitantes servidos por el sistema de agentes que alimenta">residents served by the agent system it feeds</small>
-      </div>
+
+      <p class="ds-footnote" style="margin-top:var(--sp-6)">
+        <span class="ds-footnote__mark">[1]</span>
+        <span data-en="Counts are of records covered by the released layer at the time of writing, not of records processed. Incidents are personal-data incidents attributable to the released layer; the gate has blocked releases, which is the mechanism working rather than an incident."
+              data-es="Las cifras cuentan los registros cubiertos por la capa publicada al momento de escribir, no los procesados. Los incidentes son incidentes de datos personales atribuibles a la capa publicada; la compuerta ha bloqueado publicaciones, que es el mecanismo funcionando y no un incidente.">Counts are of records covered by the released layer at the time of writing, not of records processed. Incidents are personal-data incidents attributable to the released layer; the gate has blocked releases, which is the mechanism working rather than an incident.</span>
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ VI — WHAT I'D PROBE NEXT ═══════════════ -->
-<section class="sec wrap" id="next">
-  <div class="rail">
-    <span class="num">VI</span>
-    <span data-en="What I'd probe next" data-es="Qué indagaría a continuación">What I'd probe next</span>
-    <span class="note" data-en="Three things I would not defend as finished." data-es="Tres cosas que no defendería como terminadas.">Three things I would not defend as finished.</span>
-  </div>
-  <div>
-    <h2 data-en="Where I think this is still weak" data-es="Dónde creo que esto sigue siendo débil">Where I think this is still weak</h2>
-    <div class="prose">
-      <p data-en="<strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies."
-         data-es="<strong>El tratamiento es a nivel de campo.</strong> Razona sobre los atributos de uno en uno, y los ataques de reidentificación más filosos no — trabajan sobre combinaciones. Una garantía formal tipo <em>k</em>-anonimato o ℓ-diversidad sobre conjuntos de cuasi-identificadores diría algo que el diseño actual solo insinúa.">
-        <strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies.
-      </p>
-      <p data-en="<strong>Risk drifts even when the release does not.</strong> Re-identification risk is not a property of my release; it is a property of my release joined to every other dataset in the world, and that set keeps growing. What is safe against today's auxiliary data is not thereby safe. I have no mechanism that notices when that stops being true."
-         data-es="<strong>El riesgo se desplaza aunque la publicación no cambie.</strong> El riesgo de reidentificación no es una propiedad de mi publicación; es una propiedad de mi publicación cruzada con todos los demás conjuntos de datos del mundo, y ese conjunto no deja de crecer. Lo seguro frente a los datos auxiliares de hoy no queda seguro por ello. No tengo ningún mecanismo que note cuándo eso deja de ser cierto.">
-        <strong>Risk drifts even when the release does not.</strong> Re-identification risk is not a property of my release; it is a property of my release joined to every other dataset in the world, and that set keeps growing. What is safe against today's auxiliary data is not thereby safe. I have no mechanism that notices when that stops being true.
-      </p>
-      <p data-en="<strong>The gate encodes judgement that ought to be quantitative</strong> — release criteria argued from a risk model rather than set by an engineer who has thought about it carefully. Formalising those criteria is the piece I would build next, and the piece I would most want someone to argue with me about."
-         data-es="<strong>La compuerta codifica un juicio que debería ser cuantitativo</strong> — criterios de publicación argumentados desde un modelo de riesgo y no fijados por un ingeniero que lo pensó con cuidado. Formalizar esos criterios es lo próximo que construiría, y sobre lo que más me gustaría que alguien me discutiera.">
-        <strong>The gate encodes judgement that ought to be quantitative</strong> — release criteria argued from a risk model rather than set by an engineer who has thought about it carefully. Formalising those criteria is the piece I would build next, and the piece I would most want someone to argue with me about.
-      </p>
+<section class="sec" id="next">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">VI</span>
+      <span class="rail-name" data-en="What I'd probe next" data-es="Qué indagaría">What I'd probe next</span>
+      <span class="ds-note" data-en="Three things I would not defend as finished." data-es="Tres cosas que no defendería como terminadas.">Three things I would not defend as finished.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Where I think this is still weak" data-es="Dónde creo que esto sigue siendo débil">Where I think this is still weak</h2>
+
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="<strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies."
+           data-es="<strong>El tratamiento es a nivel de campo.</strong> Razona sobre los atributos de uno en uno, y los ataques de reidentificación más filosos no — trabajan sobre combinaciones. Una garantía formal tipo <em>k</em>-anonimato o ℓ-diversidad sobre conjuntos de cuasi-identificadores diría algo que el diseño actual solo insinúa.">
+          <strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies.
+        </p>
+        <p data-en="<strong>Risk drifts even when the release does not.</strong> Re-identification risk is not a property of my release; it is a property of my release joined to every other dataset in the world, and that set keeps growing. What is safe against today's auxiliary data is not thereby safe. I have no mechanism that notices when that stops being true."
+           data-es="<strong>El riesgo se desplaza aunque la publicación no cambie.</strong> El riesgo de reidentificación no es una propiedad de mi publicación; es una propiedad de mi publicación cruzada con todos los demás conjuntos de datos del mundo, y ese conjunto no deja de crecer. Lo seguro frente a los datos auxiliares de hoy no queda seguro por ello. No tengo ningún mecanismo que note cuándo eso deja de ser cierto.">
+          <strong>Risk drifts even when the release does not.</strong> Re-identification risk is not a property of my release; it is a property of my release joined to every other dataset in the world, and that set keeps growing. What is safe against today's auxiliary data is not thereby safe. I have no mechanism that notices when that stops being true.
+        </p>
+        <p data-en="<strong>The gate encodes judgment that ought to be quantitative</strong> — release criteria argued from a risk model rather than set by an engineer who has thought about it carefully. Formalizing those criteria is the piece I would build next, and the piece I would most want someone to argue with me about."
+           data-es="<strong>La compuerta codifica un juicio que debería ser cuantitativo</strong> — criterios de publicación argumentados desde un modelo de riesgo y no fijados por un ingeniero que lo pensó con cuidado. Formalizar esos criterios es lo próximo que construiría, y sobre lo que más me gustaría que alguien me discutiera.">
+          <strong>The gate encodes judgment that ought to be quantitative</strong> — release criteria argued from a risk model rather than set by an engineer who has thought about it carefully. Formalizing those criteria is the piece I would build next, and the piece I would most want someone to argue with me about.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ COLOPHON ═══════════════ -->
-<section class="sec wrap" id="colophon">
-  <div class="rail">
-    <span class="num">§</span>
-    <span data-en="On what this page omits" data-es="Sobre lo que esta página omite">On what this page omits</span>
-  </div>
-  <div>
+<section class="sec" id="colophon">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">§</span>
+      <span class="rail-name" data-en="On what this page omits" data-es="Sobre lo que se omite">On what this page omits</span>
+    </div>
     <div class="colophon">
-      <div class="hd" data-en="Note on disclosure" data-es="Nota sobre divulgación">Note on disclosure</div>
+      <h2 class="h-min" data-en="Note on disclosure" data-es="Nota sobre divulgación">Note on disclosure</h2>
       <p data-en="The specific attributes transformed, the rule logic and the validation criteria are omitted from this public version <strong>by design</strong> — in a privacy system, the configuration is part of the attack surface. Publishing the map of what is treated, and how, hands a reader the shape of what is left."
          data-es="Los atributos específicos transformados, la lógica de las reglas y los criterios de validación se omiten en esta versión pública <strong>por diseño</strong> — en un sistema de privacidad, la configuración es parte de la superficie de ataque. Publicar el mapa de qué se trata y cómo le entrega al lector la forma de lo que queda.">
         The specific attributes transformed, the rule logic and the validation criteria are omitted from this public version <strong>by design</strong> — in a privacy system, the configuration is part of the attack surface. Publishing the map of what is treated, and how, hands a reader the shape of what is left.
       </p>
-      <p aria-hidden="true" style="margin-top:16px;line-height:2.1">
+      <p aria-hidden="true" style="line-height:2.2">
         <span class="redact" style="width:9ch"></span>&nbsp;
         <span class="redact" style="width:6ch"></span>&nbsp;
         <span class="redact" style="width:13ch"></span>&nbsp;
@@ -842,100 +409,216 @@ footer a:hover{color:var(--ink)}
 </section>
 
 <!-- ═══════════════ ONWARD ═══════════════ -->
-<section class="sec wrap" id="onward" style="padding-bottom:8px">
-  <div class="rail">
-    <span class="num">→</span>
-    <span data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
-  </div>
-  <div>
-    <div class="onward">
-      <a href="../agent-architecture/">
-        <div class="k" data-en="Sibling case study" data-es="Caso de estudio hermano">Sibling case study</div>
-        <div class="v" data-en="Agent architecture" data-es="Arquitectura de agentes">Agent architecture</div>
-        <div class="d" data-en="The system this pipeline protects — what sits above the boundary, and how it was evaluated."
-             data-es="El sistema que esta tubería protege — lo que está sobre la frontera, y cómo fue evaluado.">The system this pipeline protects — what sits above the boundary, and how it was evaluated.</div>
-        <span class="go" data-en="Read it →" data-es="Leerlo →">Read it →</span>
+<section class="sec" id="onward">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">→</span>
+      <span class="rail-name" data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
+    </div>
+    <div class="grid-cards">
+      <a class="ds-card" href="../agent-architecture/">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Sibling case study" data-es="Caso de estudio hermano">Sibling case study</span></div>
+        <h3 class="ds-card__title" data-en="Agent architecture" data-es="Arquitectura de agentes">Agent architecture</h3>
+        <p class="ds-card__body" data-en="The system this pipeline protects — what sits above the boundary, and how it was evaluated."
+           data-es="El sistema que esta tubería protege — lo que está sobre la frontera, y cómo fue evaluado.">The system this pipeline protects — what sits above the boundary, and how it was evaluated.</p>
+        <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
       </a>
-      <a href="../../">
-        <div class="k" data-en="Main site" data-es="Sitio principal">Main site</div>
-        <div class="v" data-en="Portfolio" data-es="Portafolio">Portfolio</div>
-        <div class="d" data-en="Physics, philosophy, credit risk and public-sector governance — four notations for one question about deciding under uncertainty."
-             data-es="Física, filosofía, riesgo de crédito y gobernanza pública — cuatro notaciones para una sola pregunta sobre decidir bajo incertidumbre.">Physics, philosophy, credit risk and public-sector governance — four notations for one question about deciding under uncertainty.</div>
-        <span class="go" data-en="Go to portfolio →" data-es="Ir al portafolio →">Go to portfolio →</span>
+      <a class="ds-card" href="../../">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Main site" data-es="Sitio principal">Main site</span></div>
+        <h3 class="ds-card__title" data-en="Portfolio" data-es="Portafolio">Portfolio</h3>
+        <p class="ds-card__body" data-en="Physics, philosophy, credit risk and public-sector governance — four notations for one question about deciding under uncertainty."
+           data-es="Física, filosofía, riesgo de crédito y gobernanza pública — cuatro notaciones para una sola pregunta sobre decidir bajo incertidumbre.">Physics, philosophy, credit risk and public-sector governance — four notations for one question about deciding under uncertainty.</p>
+        <span class="ds-card__link" data-en="Go to portfolio →" data-es="Ir al portafolio →">Go to portfolio →</span>
       </a>
-      <a href="../../assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
-        <div class="k" data-en="Document" data-es="Documento">Document</div>
-        <div class="v">CV</div>
-        <div class="d" data-en="Full record: roles, publications, teaching and the systems behind each number on this page."
-             data-es="Registro completo: cargos, publicaciones, docencia y los sistemas detrás de cada cifra de esta página.">Full record: roles, publications, teaching and the systems behind each number on this page.</div>
-        <span class="go" data-en="Download PDF →" data-es="Descargar PDF →">Download PDF →</span>
+      <a class="ds-card" href="../../assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
+        <div class="ds-card__meta"><span class="ds-label" data-en="Document" data-es="Documento">Document</span></div>
+        <h3 class="ds-card__title">CV</h3>
+        <p class="ds-card__body" data-en="Full record: roles, publications, teaching and the systems behind each number on this page."
+           data-es="Registro completo: cargos, publicaciones, docencia y los sistemas detrás de cada cifra de esta página.">Full record: roles, publications, teaching and the systems behind each number on this page.</p>
+        <span class="ds-card__link" data-en="Download PDF →" data-es="Descargar PDF →">Download PDF →</span>
       </a>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="wrap">
-  <div>© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
-  <div><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
-  <div data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+<footer class="site wrap">
+  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
+  <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
 </footer>
 
 <script>
-(function(){
-  var root = document.documentElement;
+window.SITE_FIGURES = [
+  {
+    slot: 'fig-glyph',
+    render: function (DS, R) {
+      return R.createElement(DS.HandGlyph, { name: 'flecha', size: 52, label: null });
+    }
+  },
 
-  /* ---------- language ---------- */
-  var nodes = document.querySelectorAll('[data-en]');
-  var langBtns = document.querySelectorAll('[data-lang]');
+  {
+    slot: 'fig-sets',
+    render: function (DS, R, lang) {
+      var en = {
+        title: 'The intersection is empty by construction, not by policy',
+        subtitle: 'fig. 1 · membership, not counts · 13 field classes',
+        anatomy: 'anatomy — the empty central region is the whole claim: nothing in the released layer is also identifying · the space outside both sets is auxiliary data held elsewhere in the world, which no release controls and this design cannot see',
+        ariaLabel: 'Two sets. The released layer contains hashed join keys, generalized values and suppressed columns. What identifies a person contains names, document numbers and exact addresses. Their intersection is labelled empty. Outside both sets sits auxiliary data held elsewhere in the world, which no release controls.',
+        /* Set names sit outside the circles and the frame clips at ~19
+           characters — keep them short; the title and the region labels
+           carry the rest of the argument. */
+        sets: [
+          { id: 'released', label: 'the released layer' },
+          { id: 'identifying', label: 'identifying data' }
+        ],
+        regions: [
+          { in: ['released'], label: 'hashed keys,\ngeneralized values' },
+          { in: ['identifying'], label: 'names, documents,\nexact addresses' },
+          { in: ['released', 'identifying'], label: '— empty —' }
+        ],
+        outside: 'auxiliary data elsewhere in the world, which no release controls'
+      };
+      var es = {
+        title: 'La intersección es vacía por construcción, no por política',
+        subtitle: 'fig. 1 · pertenencia, no conteos · 13 clases de campo',
+        anatomy: 'anatomía — la región central vacía es toda la afirmación: nada de lo publicado identifica · el espacio fuera de ambos conjuntos son los datos auxiliares del resto del mundo, que ninguna publicación controla',
+        ariaLabel: 'Dos conjuntos: la capa publicada, con llaves hasheadas y valores generalizados, y lo que identifica a una persona, con nombres, documentos y direcciones exactas. Su intersección está marcada como vacía. Fuera de ambos están los datos auxiliares del resto del mundo.',
+        sets: [
+          { id: 'released', label: 'la capa publicada' },
+          { id: 'identifying', label: 'lo que identifica' }
+        ],
+        regions: [
+          { in: ['released'], label: 'llaves hasheadas,\nvalores generalizados' },
+          { in: ['identifying'], label: 'nombres, documentos,\ndirecciones exactas' },
+          { in: ['released', 'identifying'], label: '— vacío —' }
+        ],
+        outside: 'datos auxiliares del resto del mundo, que ninguna publicación controla'
+      };
+      return R.createElement(DS.SetDiagram, lang === 'es' ? es : en);
+    }
+  },
 
-  function setLang(lang){
-    if(lang !== 'es') lang = 'en';
-    nodes.forEach(function(n){
-      var v = n.getAttribute('data-' + lang);
-      if(v !== null) n.innerHTML = v;
-    });
-    root.setAttribute('lang', lang);
-    langBtns.forEach(function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
-    });
-    try{ localStorage.setItem('site-lang', lang); }catch(e){}
+  {
+    slot: 'fig-pipeline',
+    render: function (DS, R, lang) {
+      var t = lang === 'es' ? {
+        relTag: 'PUBLICADO · ANONIMIZADO',
+        models: 'Modelos construidos encima', modelsS: 'derivados solo de datos publicados',
+        ai: 'Capa semántica · recuperación · agentes', aiS: 'consumidores no confiables, por diseño',
+        rel: 'Capa publicada anonimizada', relS: 'única superficie legible desde arriba',
+        band: 'FRONTERA DE UN SOLO SENTIDO · NADA REGRESA',
+        resTag: 'RESTRINGIDO · CRUDO',
+        gate: 'Compuerta de validación', gateS: 'identificadores residuales · riesgo de enlace',
+        hash: 'Hashing irreversible', hashS: 'el enlace sobrevive · la identidad no',
+        supp: 'Supresión', suppS: 'sin valor analítico · no se publica',
+        gen: 'Generalización', genS: 'se conserva la distribución · no el valor',
+        cls: 'Clasificación de atributos', clsS: 'técnica elegida por clase de atributo',
+        raw: 'Entrada cruda gobernada', rawS: 'nunca sale de este lado',
+        note: 'no hay camino de vuelta',
+        title: 'Nada regresa: la frontera es de un solo sentido por construcción',
+        sub: 'fig. 2 · tubería en producción · léase de abajo hacia arriba',
+        anatomy: 'anatomía — la estructura está reglada, 2px, ortogonal, y fluye hacia arriba · la única línea a mano es la tachadura sobre el camino de regreso, que afirma que ese camino fue considerado y descartado, no olvidado',
+        aria: 'La entrada cruda gobernada se clasifica, luego se transforma con una de tres técnicas — hashing irreversible, supresión o generalización — y se verifica en una compuerta de validación. Solo lo que pasa la compuerta cruza una frontera de un solo sentido hacia la capa publicada anonimizada, única superficie que la capa semántica, la recuperación y los agentes pueden leer. Ningún camino regresa a través de la frontera.'
+      } : {
+        relTag: 'RELEASED · ANONYMIZED',
+        models: 'Models built on top', modelsS: 'derived only from released data',
+        ai: 'Semantic layer · retrieval · agents', aiS: 'untrusted consumers, by design',
+        rel: 'Released anonymized layer', relS: 'the only surface anything above can read',
+        band: 'ONE-WAY BOUNDARY · NOTHING CROSSES BACK',
+        resTag: 'RESTRICTED · RAW',
+        gate: 'Validation gate', gateS: 'residual identifiers · linkage risk',
+        hash: 'Irreversible hashing', hashS: 'linkage survives · identity does not',
+        supp: 'Suppression', suppS: 'no analytic value · not published',
+        gen: 'Generalization', genS: 'distribution kept · exact value dropped',
+        cls: 'Classification of attributes', clsS: 'technique chosen per attribute class',
+        raw: 'Raw governed intake', rawS: 'never leaves this side',
+        note: 'there is no path back',
+        title: 'Nothing crosses back: the boundary is one-way by construction',
+        sub: 'fig. 2 · production pipeline · read from the bottom up',
+        anatomy: 'anatomy — structure is ruled, 2px, orthogonal, and flows upward · the only hand stroke is the cross over the return path, which claims that path was considered and ruled out, not forgotten',
+        aria: 'Raw governed intake is classified, then transformed by one of three techniques — irreversible hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary.'
+      };
+
+      var svg =
+        '<defs><marker id="ah-p" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto">' +
+        '<path d="M0,0 L8.5,3.5 L0,7 Z" fill="var(--ink)"/></marker></defs>' +
+
+        /* released zone, at the top */
+        '<rect class="fig-zone" x="10" y="10" width="500" height="234"/>' +
+        '<text class="fig-tag" x="26" y="32">' + t.relTag + '</text>' +
+        '<rect class="fig-box" x="70" y="44" width="380" height="52"/>' +
+        '<text class="fig-t" x="260" y="68" text-anchor="middle">' + t.models + '</text>' +
+        '<text class="fig-s" x="260" y="86" text-anchor="middle">' + t.modelsS + '</text>' +
+        '<path class="fig-flow" d="M260,110 L260,96" marker-end="url(#ah-p)"/>' +
+        '<rect class="fig-box" x="70" y="110" width="380" height="52"/>' +
+        '<text class="fig-t" x="260" y="134" text-anchor="middle">' + t.ai + '</text>' +
+        '<text class="fig-s" x="260" y="152" text-anchor="middle">' + t.aiS + '</text>' +
+        '<path class="fig-flow" d="M260,176 L260,162" marker-end="url(#ah-p)"/>' +
+        '<rect class="fig-box" x="70" y="176" width="380" height="52"/>' +
+        '<text class="fig-t" x="260" y="200" text-anchor="middle">' + t.rel + '</text>' +
+        '<text class="fig-s" x="260" y="218" text-anchor="middle">' + t.relS + '</text>' +
+
+        /* the one-way boundary */
+        '<path class="fig-flow" d="M260,262 L260,228" marker-end="url(#ah-p)"/>' +
+        '<rect class="fig-band" x="10" y="262" width="500" height="34"/>' +
+        '<text class="fig-band-t" x="240" y="284" text-anchor="middle">' + t.band + '</text>' +
+        /* the return path, drawn so it can be seen to be blocked */
+        '<path class="fig-rule" d="M438,240 L438,272" stroke-dasharray="5 4"/>' +
+        /* hand layer: el tachón — considered and ruled out, kept visible */
+        '<path class="ds-dg__hand fig-hand-on-hl" d="M424,266 L456,292 M456,264 L423,293"/>' +
+        '<text class="fig-note" x="336" y="316">' + t.note + '</text>' +
+
+        /* restricted zone, below */
+        '<rect class="fig-zone" x="10" y="326" width="500" height="466"/>' +
+        '<text class="fig-tag" x="26" y="348">' + t.resTag + '</text>' +
+
+        '<path class="fig-flow" d="M260,362 L260,300" marker-end="url(#ah-p)"/>' +
+        '<path class="fig-box" d="M124,362 L396,362 L410,388 L396,414 L124,414 L110,388 Z"/>' +
+        '<text class="fig-t" x="260" y="384" text-anchor="middle">' + t.gate + '</text>' +
+        '<text class="fig-s" x="260" y="402" text-anchor="middle">' + t.gateS + '</text>' +
+
+        '<path class="fig-rule" d="M430,478 L462,478 M430,542 L462,542 M430,606 L462,606"/>' +
+        '<path class="fig-flow" d="M462,606 L462,428 L260,428 L260,414" marker-end="url(#ah-p)"/>' +
+
+        '<rect class="fig-box" x="90" y="452" width="340" height="52"/>' +
+        '<text class="fig-t" x="260" y="476" text-anchor="middle">' + t.hash + '</text>' +
+        '<text class="fig-s" x="260" y="494" text-anchor="middle">' + t.hashS + '</text>' +
+        '<rect class="fig-box" x="90" y="516" width="340" height="52"/>' +
+        '<text class="fig-t" x="260" y="540" text-anchor="middle">' + t.supp + '</text>' +
+        '<text class="fig-s" x="260" y="558" text-anchor="middle">' + t.suppS + '</text>' +
+        '<rect class="fig-box" x="90" y="580" width="340" height="52"/>' +
+        '<text class="fig-t" x="260" y="604" text-anchor="middle">' + t.gen + '</text>' +
+        '<text class="fig-s" x="260" y="622" text-anchor="middle">' + t.genS + '</text>' +
+
+        '<path class="fig-rule" d="M260,672 L260,650 L58,650 L58,478"/>' +
+        '<path class="fig-flow" d="M58,478 L90,478" marker-end="url(#ah-p)"/>' +
+        '<path class="fig-flow" d="M58,542 L90,542" marker-end="url(#ah-p)"/>' +
+        '<path class="fig-flow" d="M58,606 L90,606" marker-end="url(#ah-p)"/>' +
+
+        '<rect class="fig-box" x="90" y="672" width="340" height="48"/>' +
+        '<text class="fig-t" x="260" y="694" text-anchor="middle">' + t.cls + '</text>' +
+        '<text class="fig-s" x="260" y="711" text-anchor="middle">' + t.clsS + '</text>' +
+        '<path class="fig-flow" d="M260,742 L260,720" marker-end="url(#ah-p)"/>' +
+        '<rect class="fig-box" x="120" y="742" width="280" height="48"/>' +
+        '<text class="fig-t" x="260" y="764" text-anchor="middle">' + t.raw + '</text>' +
+        '<text class="fig-s" x="260" y="781" text-anchor="middle">' + t.rawS + '</text>';
+
+      return R.createElement(DS.DiagramFrame, {
+        title: t.title,
+        subtitle: t.sub,
+        anatomy: t.anatomy,
+        ariaLabel: t.aria,
+        viewBox: '0 0 520 802'
+      }, R.createElement('g', { dangerouslySetInnerHTML: { __html: svg } }));
+    }
   }
-
-  langBtns.forEach(function(b){
-    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
-  });
-
-  var savedLang = null;
-  try{ savedLang = localStorage.getItem('site-lang'); }catch(e){}
-  if(!savedLang && navigator.language && navigator.language.toLowerCase().indexOf('es') === 0){
-    savedLang = 'es';
-  }
-  if(savedLang) setLang(savedLang);
-
-  /* ---------- theme ---------- */
-  var themeBtn = document.getElementById('themeBtn');
-
-  function setTheme(t){
-    if(t === 'dark') root.setAttribute('data-theme','dark');
-    else root.removeAttribute('data-theme');
-    try{ localStorage.setItem('site-theme', t); }catch(e){}
-  }
-
-  var savedTheme = null;
-  try{ savedTheme = localStorage.getItem('site-theme'); }catch(e){}
-  if(!savedTheme){
-    savedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  setTheme(savedTheme);
-
-  themeBtn.addEventListener('click', function(){
-    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-
-  /* ---------- year ---------- */
-  document.getElementById('yr').textContent = new Date().getFullYear();
-})();
+];
 </script>
+
+<script src="../../_ds/tabares/react.umd.js" defer></script>
+<script src="../../_ds/tabares/react-dom.umd.js" defer></script>
+<script src="../../_ds/tabares/_ds_bundle.js" defer></script>
+<script src="../../_ds/site.js" defer></script>
 </body>
 </html>

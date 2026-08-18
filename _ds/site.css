@@ -1,0 +1,632 @@
+/* ============================================================
+   puedesleerlo.github.io — page layer
+   Mario Alejandro Tabares Arango
+
+   Everything here is layout glue only. Colour, type, spacing,
+   stroke and radius come from the Tabares design system tokens
+   (_ds/tabares/styles.css). No literal colour, no font name, no
+   raw px where a token exists — that rule is what keeps dark
+   mode and the identity intact.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  /* .ds-paper carries ground, grain, body face, size and leading */
+  text-rendering: optimizeLegibility;
+}
+
+/* Paper grain, light mode. The system ships 0.85; this lifts it a step.
+   The theme is always stamped explicitly before first paint, so targeting
+   the attribute (rather than :root) leaves dark mode's 0.7 untouched. */
+[data-theme="light"] { --texture-opacity: 0.90; }
+
+::selection { background: var(--highlight-bg); color: var(--ink-on-highlight); }
+
+:focus-visible {
+  outline: var(--stroke-draw) solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---------- links ------------------------------------------------------ */
+
+a { color: inherit; }
+
+.prose a,
+.lead-in a {
+  text-decoration: underline;
+  text-decoration-thickness: var(--stroke-hair);
+  text-underline-offset: 3px;
+}
+.prose a:hover { text-decoration-thickness: var(--stroke-draw); }
+
+/* ---------- skip link -------------------------------------------------- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: var(--sp-2);
+  z-index: 50;
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--highlight-bg);
+  color: var(--ink-on-highlight);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.skip:focus { left: var(--sp-4); }
+
+/* ---------- measure ---------------------------------------------------- */
+
+.wrap {
+  width: min(100% - var(--sp-6), 1120px);
+  margin-inline: auto;
+}
+.wrap--narrow { width: min(100% - var(--sp-6), 760px); }
+
+/* ============================================================
+   Header bar
+   ============================================================ */
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: var(--stroke-hair) solid var(--rule);
+  background: var(--paper);
+}
+
+.bar__in {
+  width: min(100% - var(--sp-6), 1120px);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  min-height: 56px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: var(--track-tight);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--muted-ink);
+}
+
+.bar nav {
+  display: flex;
+  gap: var(--sp-4);
+  margin-inline-start: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.bar nav::-webkit-scrollbar { display: none; }
+
+.bar nav a {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--muted-ink);
+  text-decoration: none;
+  padding-block: var(--sp-2);
+  border-bottom: var(--stroke-draw) solid transparent;
+  white-space: nowrap;
+}
+.bar nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.controls { display: flex; align-items: center; gap: var(--sp-2); }
+.langgroup { display: flex; }
+
+.ctl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  line-height: 1;
+  padding: 6px var(--sp-2);
+  background: none;
+  color: var(--muted-ink);
+  border: var(--stroke-hair) solid var(--rule);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+.langgroup .ctl:first-child { border-start-end-radius: 0; border-end-end-radius: 0; }
+.langgroup .ctl:last-child  { border-start-start-radius: 0; border-end-start-radius: 0; margin-inline-start: -1px; }
+.ctl:hover { color: var(--ink); border-color: var(--ink); }
+.ctl[aria-pressed="true"] {
+  background: var(--highlight-bg);
+  color: var(--ink-on-highlight);
+  border-color: transparent;
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+
+.sec { padding-block: clamp(48px, 6vw, 96px); }
+.sec + .sec { border-top: var(--stroke-hair) solid var(--rule); }
+
+/* Two-column: a mono rail on the left, content on the right.
+   The rail is the instrument-panel margin — labels, never prose. */
+.rail-layout {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: clamp(var(--sp-5), 4vw, var(--sp-8));
+  align-items: start;
+}
+
+.rail {
+  display: grid;
+  gap: var(--sp-2);
+  position: sticky;
+  top: 84px;
+}
+/* Section markers are field labels, not hero metrics — the working mono,
+   not the dot-matrix face, which is illegible below 29px and turns a
+   roman "I" into a bare stroke. */
+.rail .num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: var(--lh-tight);
+}
+.rail .rail-name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+/* the annotation voice: a person interpreting, never a measurement */
+.rail .ds-note {
+  font-size: var(--fs-sm);
+  color: var(--muted-ink);
+  line-height: 1.45;
+}
+
+h1, h2, h3, h4 { margin: 0; }
+
+/* Sub-headings take the neutral display voice. The hand-lettered
+   title face is caged to the page's single h1. */
+.h-sec {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-tight);
+  max-width: 22ch;
+}
+.h-sub {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-tight);
+}
+.h-min {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-base);
+  letter-spacing: var(--track-tight);
+}
+
+/* ---------- prose ------------------------------------------------------ */
+
+.prose { max-width: 66ch; }
+.prose > p { margin: 0 0 var(--sp-5); }
+.prose > p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 700; }
+/* Quicksand has no italic — every italic in the system is the
+   serif annotation voice. */
+.prose em, .lead-in em, .deck em {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.lead-in {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  max-width: 46ch;
+  margin: 0 0 var(--sp-6);
+}
+
+.stack-sm > * + * { margin-top: var(--sp-3); }
+.stack   > * + * { margin-top: var(--sp-5); }
+.stack-lg > * + * { margin-top: var(--sp-7); }
+
+/* ============================================================
+   Masthead (case studies)
+   ============================================================ */
+
+.masthead { padding-block: clamp(40px, 5vw, 72px) clamp(32px, 4vw, 56px); }
+
+.dateline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  padding-bottom: var(--sp-3);
+}
+.dateline .lead { color: var(--ink); }
+
+.rule-pair {
+  border-top: var(--stroke-hand) solid var(--ink);
+  border-bottom: var(--stroke-hair) solid var(--ink);
+  height: 5px;
+  margin-bottom: clamp(var(--sp-5), 3vw, var(--sp-7));
+}
+
+.title-hand {
+  font-size: clamp(37px, 6.4vw, 61px);
+  max-width: 17ch;
+}
+.title-hand .thin {
+  display: block;
+  margin-top: var(--sp-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  letter-spacing: var(--track-tight);
+  color: var(--muted-ink);
+}
+
+.deck {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  max-width: 44ch;
+  margin: var(--sp-5) 0 0;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-3);
+  border-top: var(--stroke-hair) solid var(--rule);
+}
+.byline b { color: var(--ink); font-weight: 700; }
+
+/* the one-line claim under the masthead, marked by hand */
+.claim-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  margin-top: clamp(var(--sp-6), 3vw, var(--sp-7));
+}
+.claim-strip .glyph-slot { flex: none; margin-top: -6px; }
+.claim-strip p {
+  margin: 0;
+  font-size: var(--fs-lg);
+  line-height: 1.45;
+  max-width: 40ch;
+}
+.claim-strip b { font-weight: 700; }
+
+/* ============================================================
+   Hero (landing)
+   ============================================================ */
+
+.hero { padding-block: clamp(48px, 6vw, 88px) clamp(32px, 4vw, 56px); }
+.hero h1 { font-size: clamp(37px, 7vw, 61px); max-width: 14ch; }
+.hero .mark-slot { margin: clamp(var(--sp-5), 3vw, var(--sp-7)) 0 0; }
+
+.availability {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: baseline;
+  max-width: 62ch;
+  margin: var(--sp-6) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--muted-ink);
+}
+.availability strong { color: var(--ink); }
+.availability .dot {
+  flex: none;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translateY(-2px);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 10px var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: var(--stroke-hair) solid var(--rule);
+  border-radius: var(--r-sm);
+  color: var(--muted-ink);
+}
+.btn svg { width: 15px; height: 15px; flex: none; }
+.btn:hover { color: var(--ink); border-color: var(--ink); }
+.btn--primary {
+  border-color: var(--ink);
+  border-width: var(--stroke-draw);
+  color: var(--ink);
+}
+.btn--primary:hover { background: var(--highlight-bg); color: var(--ink-on-highlight); }
+
+/* ============================================================
+   Cards
+   ============================================================ */
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-4);
+}
+
+/* .ds-card supplies the frame; these are the link affordances */
+a.ds-card { text-decoration: none; }
+a.ds-card:hover { border-color: var(--ink); }
+.ds-card__link { text-decoration: none; }
+
+.card-stack { display: flex; flex-direction: column; gap: var(--sp-3); flex: 1; }
+
+/* ============================================================
+   Experience / entries
+   ============================================================ */
+
+.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: var(--sp-5); }
+.job + .job { margin-top: var(--sp-7); padding-top: var(--sp-7); border-top: var(--stroke-hair) solid var(--rule); }
+.job__when { display: grid; gap: 4px; }
+
+.org { font-size: var(--fs-sm); color: var(--muted-ink); margin-top: 4px; }
+.org b { color: var(--ink); font-weight: 700; }
+
+.frame {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--muted-ink);
+  max-width: 62ch;
+  margin: var(--sp-3) 0 var(--sp-4);
+}
+
+.bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); max-width: 68ch; }
+.bullets li {
+  position: relative;
+  padding-inline-start: var(--sp-5);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 10px;
+  height: var(--stroke-draw);
+  background: var(--ink);
+}
+
+.entries { display: grid; gap: var(--sp-5); }
+.entry { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: var(--sp-5); }
+.entry p { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--muted-ink); max-width: 66ch; }
+
+.edu { display: grid; gap: var(--sp-6); }
+.edu__item { display: grid; gap: 4px; }
+.edu__item .deg { font-size: var(--fs-sm); }
+.edu__item p { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); color: var(--muted-ink); max-width: 70ch; }
+
+/* ---------- skills ----------------------------------------------------- */
+
+.skillrow { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: var(--sp-5); }
+.skillrow + .skillrow { margin-top: var(--sp-5); }
+.tags { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  padding: 5px var(--sp-3);
+  border: var(--stroke-hair) solid var(--rule);
+  border-radius: var(--r-sm);
+  color: var(--muted-ink);
+}
+
+/* ---------- contact ---------------------------------------------------- */
+
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--sp-4); }
+.contact a {
+  display: grid;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  text-decoration: none;
+  border: var(--stroke-hair) solid var(--rule);
+  border-radius: var(--r-sm);
+}
+.contact a:hover { border-color: var(--ink); }
+.contact .val { font-family: var(--font-mono); font-size: var(--fs-sm); word-break: break-word; }
+
+/* ============================================================
+   Decision matrix (case studies)
+   ============================================================ */
+
+.matrix { display: grid; gap: 0; }
+
+.mhead {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: var(--sp-5);
+  padding-bottom: var(--sp-2);
+  border-bottom: var(--stroke-draw) solid var(--ink);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: var(--sp-5);
+  padding-block: var(--sp-5);
+  border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.row p { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); line-height: 1.6; }
+.row > div > p:first-child { margin-top: var(--sp-3); }
+.row .col-body { color: var(--muted-ink); }
+.row .col-body strong { color: var(--ink); }
+.row h3 { display: grid; gap: var(--sp-2); }
+.mk { color: var(--muted-ink); }
+
+/* the three inline "cannot / threat" cards */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--sp-4); }
+.cell {
+  display: grid;
+  gap: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: var(--stroke-draw) solid var(--ink);
+}
+.cell span { font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.6; }
+
+/* ============================================================
+   Figures
+   ============================================================ */
+
+.figure-slot { margin-block: var(--sp-6); max-width: 860px; }
+
+/* SVG drawn inside DiagramFrame. Three stroke weights, no fourth:
+   1px rules, 2px structure, 3px hand. */
+.fig-box  { fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); }
+.fig-zone { fill: none; stroke: var(--rule); stroke-width: var(--stroke-hair); }
+.fig-flow { fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); }
+.fig-rule { fill: none; stroke: var(--muted); stroke-width: var(--stroke-hair); }
+.fig-band { fill: var(--highlight-bg); stroke: none; }
+/* The waist is structure, so it is ruled at the structure weight like every
+   other box. Its emphasis comes from the hand circle drawn over it — 3px is
+   the annotation weight and never draws structure. */
+.fig-waist{ fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); }
+
+.ds-figure__body svg text.fig-t {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.ds-figure__body svg text.fig-s {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--muted-ink);
+}
+.ds-figure__body svg text.fig-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--muted-ink);
+  letter-spacing: var(--track-label);
+}
+.ds-figure__body svg text.fig-band-t {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  fill: var(--ink-on-highlight);
+  letter-spacing: var(--track-label);
+}
+/* A hand stroke drawn on top of the highlighter takes the dark ink, in both
+   modes — the mark is lit, the ink on it stays black. */
+.fig-hand-on-hl { stroke: var(--ink-on-highlight); }
+
+/* the annotation voice, inside a drawing */
+.ds-figure__body svg text.fig-note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-xs);
+  fill: var(--muted-ink);
+}
+
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: var(--sp-4); }
+.legend-grid dl { margin: 0; display: grid; gap: 6px; }
+.legend-grid dd { margin: 0; font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.55; }
+
+/* Figures need JS to draw; say so rather than showing a hole. */
+.figure-slot .fallback {
+  padding: var(--sp-5);
+  border: var(--stroke-hair) dashed var(--rule);
+  border-radius: var(--r-sm);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--muted-ink);
+}
+
+/* ============================================================
+   Colophon
+   ============================================================ */
+
+.colophon { max-width: 66ch; }
+.colophon p { margin: var(--sp-3) 0 0; font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.6; }
+.colophon strong { color: var(--ink); }
+
+.redact {
+  display: inline-block;
+  height: 0.82em;
+  background: var(--ink);
+  opacity: 0.82;
+  vertical-align: -0.08em;
+  border-radius: 1px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer.site {
+  padding-block: var(--sp-6) var(--sp-8);
+  border-top: var(--stroke-hair) solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  justify-content: space-between;
+}
+footer.site a { text-decoration: none; }
+footer.site a:hover { text-decoration: underline; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .row, .mhead { grid-template-columns: 1fr; }
+  .mhead { display: none; }
+  .row { gap: var(--sp-4); }
+}
+
+@media (max-width: 780px) {
+  .rail-layout { grid-template-columns: 1fr; }
+  .rail { position: static; }
+  .rail .num { font-size: var(--fs-lg); }
+  .job, .entry, .skillrow { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .bar nav { display: none; }
+  .bar__in { gap: var(--sp-3); }
+  .controls { margin-inline-start: auto; }
+  .h-sec { font-size: var(--fs-xl); }
+}
+
+@media print {
+  .bar, .skip, .controls { display: none; }
+  body { background: none; }
+  .ds-paper::before { display: none; }
+}
