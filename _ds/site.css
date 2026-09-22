@@ -115,15 +115,31 @@ a { color: inherit; }
 }
 .front__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-2) var(--sp-5);
   padding-bottom: var(--sp-3); border-bottom: var(--stroke-hair) solid var(--ink); }
+/* the author: a portrait in an arched window, the name beside it */
+.front__id {
+  display: grid;
+  grid-template-columns: clamp(118px, 13vw, 176px) minmax(0, 1fr);
+  gap: clamp(20px, 2.8vw, 40px);
+  align-items: end;
+  margin-top: clamp(28px, 4vw, 52px);
+}
+.front__portrait {
+  margin: 4px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-arch);
+  overflow: hidden;
+  background: var(--plate);
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--rule-strong);
+}
+.front__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .front h1 {
-  margin-top: clamp(28px, 4vw, 56px);
-  font-size: clamp(46px, 6.6vw, 90px);
-  line-height: 0.98;
-  letter-spacing: 0.06em;
+  font-size: clamp(34px, 4.1vw, 58px);
+  line-height: 1;
+  letter-spacing: 0.07em;
 }
 .front h1 span { display: block; }
-.front h1 span + span { padding-left: 0.9em; }
-.front__roles { margin-top: var(--sp-5); color: var(--ink); }
+.front h1 span + span { padding-left: 0.6em; }
+.front__roles { margin-top: var(--sp-4); color: var(--ink); line-height: 1.7; }
 .front .ds-claim {
   margin-top: clamp(28px, 3.4vw, 48px);
   font-family: var(--font-serif);
@@ -544,7 +560,8 @@ footer.site .made a { color: var(--hand); }
   .bar__in { gap: var(--sp-3); min-height: 60px; }
   .brand .ds-mark { --mark-size: 28px; }
   .controls { margin-inline-start: auto; }
-  .front h1 span + span { padding-left: 0.5em; }
+  .front h1 span + span { padding-left: 0.4em; }
+  .front__id { grid-template-columns: 104px minmax(0, 1fr); gap: var(--sp-4); }
 }
 
 @media (max-width: 520px) {
