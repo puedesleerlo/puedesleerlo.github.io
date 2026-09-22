@@ -14,23 +14,39 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://puedesleerlo.github.io/work/agent-architecture/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-34 -34 68 68'><rect x='-34' y='-34' width='68' height='68' fill='white'/><circle r='16' fill='none' stroke='%2319171A' stroke-width='3.2'/><ellipse rx='29' ry='9.5' transform='rotate(-18)' fill='none' stroke='%231E6AA3' stroke-width='3.2'/><circle cx='23.5' cy='-3.5' r='4.6' fill='%231E6AA3'/></svg>">
+<meta name="theme-color" content="#ffffff">
 
-<link rel="stylesheet" href="../../_ds/tabares/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+
+<link rel="stylesheet" href="../../_ds/cosmografia/styles.css">
 <link rel="stylesheet" href="../../_ds/site.css">
-
-<script>
-(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-</script>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 
-<body class="ds-paper ds-paper--fixed">
+<body class="ds-paper">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
   <div class="bar__in">
-    <a class="brand" href="../../">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
-    <nav>
+    <a class="brand" href="../../" aria-label="Alejandro Tabares — home">
+      <span class="ds-mark" style="--mark-size:34px">
+        <svg class="ds-mark__orbit" viewBox="-34 -34 68 68" aria-hidden="true">
+          <g transform="rotate(-18)"><path class="ds-orbit__path ds-orbit__back" d="M -29 0 A 29 9.5 0 0 1 29 0"/></g>
+          <circle class="ds-orbit__globe" r="17"/>
+          <ellipse class="ds-orbit__meridian" rx="6.5" ry="17"/>
+          <line class="ds-orbit__meridian" x1="-17" y1="0" x2="17" y2="0"/>
+          <g transform="rotate(-18)">
+            <path class="ds-orbit__path" d="M -29 0 A 29 9.5 0 0 0 29 0"/>
+            <circle class="ds-orbit__planet" r="2.8"><animateMotion dur="48s" repeatCount="indefinite" path="M -29 0 A 29 9.5 0 0 0 29 0 A 29 9.5 0 0 0 -29 0"/></circle>
+          </g>
+        </svg>
+        <span class="ds-mark__name"><span>Mario Alejandro</span><span>Tabares Arango</span></span>
+      </span>
+    </a>
+    <nav aria-label="Sections">
       <a href="../../" data-en="← Portfolio" data-es="← Portafolio">← Portfolio</a>
       <a href="#problem"   data-en="The problem"  data-es="El problema">The problem</a>
       <a href="#cannot"    data-en="Constraints"  data-es="Restricciones">Constraints</a>
@@ -43,9 +59,9 @@
         <button class="ctl" data-lang="en" aria-pressed="true">EN</button>
         <button class="ctl" data-lang="es" aria-pressed="false">ES</button>
       </div>
-      <button class="ctl" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
     </div>
   </div>
+  <span class="ds-horizon" aria-hidden="true"></span>
 </header>
 
 <main id="main">
@@ -58,6 +74,9 @@
     <span class="ds-label" data-en="Designed and built 2025—2026" data-es="Diseñada y construida 2025—2026">Designed and built 2025—2026</span>
   </div>
   <div class="rule-pair" role="presentation"></div>
+
+  <div class="masthead__grid">
+    <div class="masthead__text">
 
   <h1 class="ds-title title-hand"
       data-en="An Agent That<br>Cannot Write SQL<span class='thin'>Architecture of a municipal analytics agent</span>"
@@ -82,6 +101,19 @@
     <span class="glyph-slot" id="fig-glyph" aria-hidden="true"></span>
     <p data-en="Every hop takes a capability away. What reaches the data <b>can only ask, never construct.</b>"
        data-es="Cada salto quita una capacidad. Lo que llega a los datos <b>solo puede preguntar, nunca construir.</b>">Every hop takes a capability away. What reaches the data <b>can only ask, never construct.</b></p>
+  </div>
+    </div>
+    <div class="masthead__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="MAT·03" data-es="MAT·03">MAT·03</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../../assets/art/conduit.svg" data-alt="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." data-alt-en="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." data-alt-es="Corte de una torre en ruinas, angosta, en una llanura desértica. Desde un mirador de vidrio en lo alto, un único tubo de latón baja por cinco pisos y cinco máquinas-compuerta — una rueda clasificadora, una prensa, un tamiz, una válvula, un candado. Las escaleras se derrumbaron y las puertas están tapiadas; en la base el tubo llega a un archivo de cajones cubierto de arena." style="aspect-ratio:1120/1440">
+            <img src="../../assets/art/conduit.svg" alt="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." width="1120" height="1440" fetchpriority="high">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__title" data-en="One tube, five gates" data-es="Un tubo, cinco compuertas">One tube, five gates</span><span class="ds-atlas__caption" data-en="The stairs are gone and the doors are bricked. What reaches the archive can only ask." data-es="Las escaleras ya no están y las puertas están tapiadas. Lo que llega al archivo solo puede preguntar.">The stairs are gone and the doors are bricked. What reaches the archive can only ask.</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -383,7 +415,7 @@
 <section class="sec" id="colophon">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">§</span>
+      <span class="num is-arrow">§</span>
       <span class="rail-name" data-en="On what this page omits" data-es="Sobre lo que se omite">On what this page omits</span>
     </div>
     <div class="colophon">
@@ -412,7 +444,7 @@
 <section class="sec" id="onward">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">→</span>
+      <span class="num is-arrow">→</span>
       <span class="rail-name" data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
     </div>
     <div class="grid-cards">
@@ -450,9 +482,10 @@
 </main>
 
 <footer class="site wrap">
-  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label">© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
   <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
   <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+  <p class="made" data-en="Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web." data-es="Compuesto en Castoro Titling, Castoro, Instrument Sans y Martian Mono sobre <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, el sistema de diseño del autor. Ilustraciones generadas con Recraft a partir de referencias propias del autor, y preparadas a mano para la web.">Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href="https://github.com/puedesleerlo/cosmografia">Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web.</p>
 </footer>
 
 <script>
@@ -616,9 +649,9 @@ window.SITE_FIGURES = [
 ];
 </script>
 
-<script src="../../_ds/tabares/react.umd.js" defer></script>
-<script src="../../_ds/tabares/react-dom.umd.js" defer></script>
-<script src="../../_ds/tabares/_ds_bundle.js" defer></script>
+<script src="../../_ds/cosmografia/react.umd.js" defer></script>
+<script src="../../_ds/cosmografia/react-dom.umd.js" defer></script>
+<script src="../../_ds/cosmografia/cosmografia.js" defer></script>
 <script src="../../_ds/site.js" defer></script>
 </body>
 </html>

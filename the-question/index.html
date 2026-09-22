@@ -14,23 +14,39 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://puedesleerlo.github.io/the-question/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-34 -34 68 68'><rect x='-34' y='-34' width='68' height='68' fill='white'/><circle r='16' fill='none' stroke='%2319171A' stroke-width='3.2'/><ellipse rx='29' ry='9.5' transform='rotate(-18)' fill='none' stroke='%231E6AA3' stroke-width='3.2'/><circle cx='23.5' cy='-3.5' r='4.6' fill='%231E6AA3'/></svg>">
+<meta name="theme-color" content="#ffffff">
 
-<link rel="stylesheet" href="../_ds/tabares/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+
+<link rel="stylesheet" href="../_ds/cosmografia/styles.css">
 <link rel="stylesheet" href="../_ds/site.css">
-
-<script>
-(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-</script>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 
-<body class="ds-paper ds-paper--fixed">
+<body class="ds-paper">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
   <div class="bar__in">
-    <a class="brand" href="../">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
-    <nav>
+    <a class="brand" href="../" aria-label="Alejandro Tabares — home">
+      <span class="ds-mark" style="--mark-size:34px">
+        <svg class="ds-mark__orbit" viewBox="-34 -34 68 68" aria-hidden="true">
+          <g transform="rotate(-18)"><path class="ds-orbit__path ds-orbit__back" d="M -29 0 A 29 9.5 0 0 1 29 0"/></g>
+          <circle class="ds-orbit__globe" r="17"/>
+          <ellipse class="ds-orbit__meridian" rx="6.5" ry="17"/>
+          <line class="ds-orbit__meridian" x1="-17" y1="0" x2="17" y2="0"/>
+          <g transform="rotate(-18)">
+            <path class="ds-orbit__path" d="M -29 0 A 29 9.5 0 0 0 29 0"/>
+            <circle class="ds-orbit__planet" r="2.8"><animateMotion dur="48s" repeatCount="indefinite" path="M -29 0 A 29 9.5 0 0 0 29 0 A 29 9.5 0 0 0 -29 0"/></circle>
+          </g>
+        </svg>
+        <span class="ds-mark__name"><span>Mario Alejandro</span><span>Tabares Arango</span></span>
+      </span>
+    </a>
+    <nav aria-label="Sections">
       <a href="../" data-en="← Portfolio" data-es="← Portafolio">← Portfolio</a>
       <a href="#i"   data-en="Physics"    data-es="Física">Physics</a>
       <a href="#ii"  data-en="Philosophy" data-es="Filosofía">Philosophy</a>
@@ -43,9 +59,9 @@
         <button class="ctl" data-lang="en" aria-pressed="true">EN</button>
         <button class="ctl" data-lang="es" aria-pressed="false">ES</button>
       </div>
-      <button class="ctl" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
     </div>
   </div>
+  <span class="ds-horizon" aria-hidden="true"></span>
 </header>
 
 <main id="main">
@@ -88,7 +104,7 @@
 <section class="sec" id="division">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">§</span>
+      <span class="num is-arrow">§</span>
       <span class="rail-name" data-en="The division" data-es="La división">The division</span>
       <span class="ds-note" data-en="Where the uncertainty sits is what divides the four." data-es="Dónde está la incertidumbre es lo que divide a las cuatro.">Where the uncertainty sits is what divides the four.</span>
     </div>
@@ -117,7 +133,8 @@
       <span class="rail-name" data-en="Physics" data-es="Física">Physics</span>
       <span class="ds-note" data-en="The mathematics does not care about the substrate." data-es="A las matemáticas no les importa el sustrato.">The mathematics does not care about the substrate.</span>
     </div>
-    <div>
+    <div class="mv">
+      <div class="mv__text">
       <h2 class="h-sec" data-en="Mechanisms are portable" data-es="Los mecanismos son portátiles">Mechanisms are portable</h2>
       <div class="prose" style="margin-top:var(--sp-5)">
         <p data-en="I studied Physics Engineering to learn how systems evolve in time. What turned out to matter was not any particular system but a structural fact: <strong>the mathematics does not care about the substrate.</strong> A Markov process is indifferent to whether its state is a particle or a borrower. A diffusion equation does not know whether it is describing heat or the spread of a default."
@@ -129,6 +146,18 @@
           So when I later found Markov processes and diffusion models sitting at the center of credit risk, it read less as a surprise than as a confirmation. The mechanisms we already understand are transferable, and building real applications on top of mathematics that is already solved is itself a way of learning what decision-making is made of.
         </p>
       </div>
+      </div>
+      <aside class="mv__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="The observatory" data-es="El observatorio">The observatory</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../assets/art/lighthouse.svg" data-alt="Line drawing of an old wooden observation tower: an octagonal lantern room ringed by balconies, a tall plain shaft with a small bay window, and a porch at its foot." data-alt-en="Line drawing of an old wooden observation tower: an octagonal lantern room ringed by balconies, a tall plain shaft with a small bay window, and a porch at its foot." data-alt-es="Dibujo de línea de una vieja torre de observación de madera: una linterna octogonal rodeada de balcones, un fuste alto y sencillo con una pequeña ventana en saliente, y un porche a sus pies." style="aspect-ratio:1024/1280">
+            <img src="../assets/art/lighthouse.svg" alt="Line drawing of an old wooden observation tower: an octagonal lantern room ringed by balconies, a tall plain shaft with a small bay window, and a porch at its foot." width="1024" height="1280" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__caption" data-en="An instrument outlives what it was built to watch." data-es="Un instrumento sobrevive a lo que se construyó para observar.">An instrument outlives what it was built to watch.</span></figcaption>
+      </figure>
+      </aside>
     </div>
   </div>
 </section>
@@ -141,7 +170,8 @@
       <span class="rail-name" data-en="Philosophy" data-es="Filosofía">Philosophy</span>
       <span class="ds-note" data-en="A narrow, stubborn question: what actually counts as evidence?" data-es="Una pregunta estrecha y terca: ¿qué cuenta realmente como evidencia?">A narrow, stubborn question: what actually counts as evidence?</span>
     </div>
-    <div>
+    <div class="mv">
+      <div class="mv__text">
       <h2 class="h-sec" data-en="What counts as evidence" data-es="Qué cuenta como evidencia">What counts as evidence</h2>
       <div class="prose" style="margin-top:var(--sp-5)">
         <p data-en="I went back for a second degree, in philosophy, to work on epistemology: Popper and falsification, evolutionary epistemology, history and philosophy of science, philosophy of mind, logic. In my second semester I ran into a decision-making course and it never let go of me. The question I cared about was narrow and stubborn — <strong>what actually counts as evidence for or against a theory?</strong> History of science supplied the other half: how decisions about technology get made, and how technologies get built out of those decisions."
@@ -159,6 +189,18 @@
            data-es="Un principio que no puede fallar no es un principio. Es decoración.">A principle that cannot fail is not a principle. It is decoration.</p>
         <figcaption class="ds-pullquote__cite ds-label" data-en="Thesis — “How to Say No: Modeling the Precautionary Principle”, 2023 · Honorable Mention" data-es="Tesis — «Cómo decir no: modelando el principio de precaución», 2023 · Mención de Honor">Thesis — “How to Say No: Modeling the Precautionary Principle”, 2023 · Honorable Mention</figcaption>
       </figure>
+      </div>
+      <aside class="mv__plate">
+      <figure class="ds-atlas ds-atlas--arch">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="The threshold" data-es="El umbral">The threshold</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../assets/art/portal.svg" data-alt="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." data-alt-en="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." data-alt-es="Un gran anillo de piedra en un desierto de roca partida; a través de él, un cielo lavanda y una ciudad pastel de cascadas." style="aspect-ratio:1024/1280">
+            <img src="../assets/art/portal.svg" alt="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." width="1024" height="1280" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__caption" data-en="What stands on the far side of the ring is not evidence until you can say why." data-es="Lo que está del otro lado del anillo no es evidencia hasta que puedes decir por qué.">What stands on the far side of the ring is not evidence until you can say why.</span></figcaption>
+      </figure>
+      </aside>
     </div>
   </div>
 </section>
@@ -171,7 +213,8 @@
       <span class="rail-name" data-en="Risk" data-es="Riesgo">Risk</span>
       <span class="ds-note" data-en="As close to a laboratory as this question gets — and where it broke." data-es="Lo más cerca de un laboratorio a lo que llega esta pregunta — y donde se rompió.">As close to a laboratory as this question gets — and where it broke.</span>
     </div>
-    <div>
+    <div class="mv">
+      <div class="mv__text">
       <h2 class="h-sec" data-en="Where it broke" data-es="Donde se rompió">Where it broke</h2>
       <div class="prose" style="margin-top:var(--sp-5)">
         <p data-en="Banking is where I put that to work. Credit risk is decision-making under uncertainty with the uncertainty made explicit and priced, which is as close to a laboratory as this question gets. Two things happened there."
@@ -195,6 +238,18 @@
           I answered with what I had: experimentation and simulation, backtesting coverage pushed from <span class="ds-num">20%</span> to <span class="ds-num">90%</span>, Monte Carlo, thousands of model runs a week. I still have not found the answer. I had to report an expected risk; the expected risk could not be honestly derived from the evidence. <em>Decision-making under uncertainty</em> is the correct name for the problem, but no formal framework I could find actually handles decisions this complex inside an organization that expects evidence-based management.
         </p>
       </div>
+      </div>
+      <aside class="mv__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="The machine" data-es="La máquina">The machine</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../assets/art/tower.svg" data-alt="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops." data-alt-en="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops." data-alt-es="Dibujo de línea de una torre intrincada y remendada: paneles solares, escaleras, una antena de radar, tuberías y cuartos con persianas apilados sobre una planta baja de talleres." style="aspect-ratio:1024/1360">
+            <img src="../assets/art/tower.svg" alt="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops." width="1024" height="1360" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__caption" data-en="Every gauge kept reading. None of them could say the ground had moved." data-es="Todos los medidores siguieron marcando. Ninguno podía decir que el suelo se había movido.">Every gauge kept reading. None of them could say the ground had moved.</span></figcaption>
+      </figure>
+      </aside>
     </div>
   </div>
 </section>
@@ -207,7 +262,8 @@
       <span class="rail-name" data-en="Governance" data-es="Gobernanza">Governance</span>
       <span class="ds-note" data-en="If metrics cannot validate themselves, what is missing sits around them." data-es="Si las métricas no pueden validarse solas, lo que falta está alrededor de ellas.">If metrics cannot validate themselves, what is missing sits around them.</span>
     </div>
-    <div>
+    <div class="mv">
+      <div class="mv__text">
       <h2 class="h-sec" data-en="Building the layer" data-es="Construir la capa">Building the layer</h2>
       <div class="prose" style="margin-top:var(--sp-5)">
         <p data-en="That is where I stopped being only a builder. If technical decisions cannot be validated by their own metrics, then what is missing sits <em>around</em> them: <strong>a feedback and control loop bound to actual outcomes and aware of context, not just to metrics.</strong> A monitoring layer over technical decision-making, whatever the algorithms underneath happen to be."
@@ -232,6 +288,18 @@
           <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">65 000+</span><span class="ds-label ds-metric__label" data-en="individuals protected" data-es="personas protegidas">individuals protected</span></div>
         </div>
       </div>
+      </div>
+      <aside class="mv__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="The one who answers" data-es="Quien responde">The one who answers</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../assets/art/figure.svg" data-alt="A seated figure in a tall green-and-white robe, its face calm, one hand raised; beside it, a jointed staff holds up a white mask." data-alt-en="A seated figure in a tall green-and-white robe, its face calm, one hand raised; beside it, a jointed staff holds up a white mask." data-alt-es="Una figura sentada con una túnica alta verde y blanca, el rostro sereno, una mano en alto; a su lado, un báculo articulado sostiene una máscara blanca." style="aspect-ratio:1024/1280">
+            <img src="../assets/art/figure.svg" alt="A seated figure in a tall green-and-white robe, its face calm, one hand raised; beside it, a jointed staff holds up a white mask." width="1024" height="1280" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__caption" data-en="The institution wears a mask. Someone still has to answer for the decision." data-es="La institución lleva una máscara. Alguien todavía tiene que responder por la decisión.">The institution wears a mask. Someone still has to answer for the decision.</span></figcaption>
+      </figure>
+      </aside>
     </div>
   </div>
 </section>
@@ -244,7 +312,8 @@
       <span class="rail-name" data-en="What I don't know yet" data-es="Lo que todavía no sé">What I don't know yet</span>
       <span class="ds-note" data-en="The honest reason I am at Carnegie Mellon." data-es="La razón honesta por la que estoy en Carnegie Mellon.">The honest reason I am at Carnegie Mellon.</span>
     </div>
-    <div>
+    <div class="mv">
+      <div class="mv__text">
       <h2 class="h-sec" data-en="I ran out of formal apparatus" data-es="Se me acabó el aparato formal">I ran out of formal apparatus</h2>
       <div class="prose" style="margin-top:var(--sp-5)">
         <p data-en="That is the honest reason I am at Carnegie Mellon. I ran out of formal apparatus, and I needed better tools than the ones I had taught myself."
@@ -260,6 +329,18 @@
           I do not have it yet. That is what the next few years are for. Concretely, the next step is a <strong>Summer 2027 internship</strong> — somewhere this question is live, on AI/ML engineering, applied research, or AI governance and model risk treated as a technical discipline rather than a compliance function.
         </p>
       </div>
+      </div>
+      <aside class="mv__plate">
+      <figure class="ds-atlas ds-atlas--round">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no" data-en="No ground" data-es="Sin suelo">No ground</span><span class="ds-coord">40°26′N 79°58′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../assets/art/whales.svg" data-drift data-alt="Two humpback whales swimming through a blue sky among towering white clouds, with a flock of small birds." data-alt-en="Two humpback whales swimming through a blue sky among towering white clouds, with a flock of small birds." data-alt-es="Dos ballenas jorobadas nadando por un cielo azul entre enormes nubes blancas, con una bandada de pájaros pequeños." style="aspect-ratio:1200/1714">
+            <img src="../assets/art/whales.svg" alt="Two humpback whales swimming through a blue sky among towering white clouds, with a flock of small birds." width="1200" height="1714" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__caption" data-en="Where the formal apparatus ends, things still move." data-es="Donde se acaba el aparato formal, las cosas siguen moviéndose.">Where the formal apparatus ends, things still move.</span></figcaption>
+      </figure>
+      </aside>
     </div>
   </div>
 </section>
@@ -268,7 +349,7 @@
 <section class="sec" id="onward">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">→</span>
+      <span class="num is-arrow">→</span>
       <span class="rail-name" data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
     </div>
     <div class="grid-cards">
@@ -299,9 +380,10 @@
 </main>
 
 <footer class="site wrap">
-  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label">© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
   <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
   <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+  <p class="made" data-en="Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web." data-es="Compuesto en Castoro Titling, Castoro, Instrument Sans y Martian Mono sobre <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, el sistema de diseño del autor. Ilustraciones generadas con Recraft a partir de referencias propias del autor, y preparadas a mano para la web.">Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href="https://github.com/puedesleerlo/cosmografia">Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web.</p>
 </footer>
 
 <script>
@@ -376,9 +458,9 @@ window.SITE_FIGURES = [
 ];
 </script>
 
-<script src="../_ds/tabares/react.umd.js" defer></script>
-<script src="../_ds/tabares/react-dom.umd.js" defer></script>
-<script src="../_ds/tabares/_ds_bundle.js" defer></script>
+<script src="../_ds/cosmografia/react.umd.js" defer></script>
+<script src="../_ds/cosmografia/react-dom.umd.js" defer></script>
+<script src="../_ds/cosmografia/cosmografia.js" defer></script>
 <script src="../_ds/site.js" defer></script>
 </body>
 </html>

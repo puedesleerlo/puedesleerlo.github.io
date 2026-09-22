@@ -14,25 +14,41 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://puedesleerlo.github.io/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F4F2ED'/><path d='M62 18 L38 82' stroke='%231D1B16' stroke-width='9' stroke-linecap='round'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-34 -34 68 68'><rect x='-34' y='-34' width='68' height='68' fill='white'/><circle r='16' fill='none' stroke='%2319171A' stroke-width='3.2'/><ellipse rx='29' ry='9.5' transform='rotate(-18)' fill='none' stroke='%231E6AA3' stroke-width='3.2'/><circle cx='23.5' cy='-3.5' r='4.6' fill='%231E6AA3'/></svg>">
+<meta name="theme-color" content="#ffffff">
 
-<!-- Tabares design system: tokens, faces, component rules -->
-<link rel="stylesheet" href="_ds/tabares/styles.css">
+<!-- Cosmografía faces (SIL OFL) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+
+<!-- Cosmografía design system: tokens, component rules; then the page layer -->
+<link rel="stylesheet" href="_ds/cosmografia/styles.css">
 <link rel="stylesheet" href="_ds/site.css">
-
-<script>
-/* Stamp the theme before first paint so no reader sees the wrong ground. */
-(function(){try{var t=localStorage.getItem('site-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-</script>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 
-<body class="ds-paper ds-paper--fixed">
+<body class="ds-paper">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
   <div class="bar__in">
-    <a class="brand" href="#top">Alejandro&nbsp;Tabares <span>· AI/ML</span></a>
-    <nav>
+    <a class="brand" href="#top" aria-label="Alejandro Tabares — home">
+      <span class="ds-mark" style="--mark-size:34px">
+        <svg class="ds-mark__orbit" viewBox="-34 -34 68 68" aria-hidden="true">
+          <g transform="rotate(-18)"><path class="ds-orbit__path ds-orbit__back" d="M -29 0 A 29 9.5 0 0 1 29 0"/></g>
+          <circle class="ds-orbit__globe" r="17"/>
+          <ellipse class="ds-orbit__meridian" rx="6.5" ry="17"/>
+          <line class="ds-orbit__meridian" x1="-17" y1="0" x2="17" y2="0"/>
+          <g transform="rotate(-18)">
+            <path class="ds-orbit__path" d="M -29 0 A 29 9.5 0 0 0 29 0"/>
+            <circle class="ds-orbit__planet" r="2.8"><animateMotion dur="48s" repeatCount="indefinite" path="M -29 0 A 29 9.5 0 0 0 29 0 A 29 9.5 0 0 0 -29 0"/></circle>
+          </g>
+        </svg>
+        <span class="ds-mark__name"><span>Mario Alejandro</span><span>Tabares Arango</span></span>
+      </span>
+    </a>
+    <nav aria-label="Sections">
       <a href="#story"      data-en="The question" data-es="La pregunta">The question</a>
       <a href="#experience" data-en="Experience"   data-es="Experiencia">Experience</a>
       <a href="#work"       data-en="Work"         data-es="Proyectos">Work</a>
@@ -44,33 +60,37 @@
         <button class="ctl" data-lang="en" aria-pressed="true">EN</button>
         <button class="ctl" data-lang="es" aria-pressed="false">ES</button>
       </div>
-      <button class="ctl" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
     </div>
   </div>
+  <span class="ds-horizon" aria-hidden="true"></span>
 </header>
 
 <main id="main">
-<div id="top"></div>
+<!-- ═══════════════ FRONTISPIECE ═══════════════ -->
+<section class="front wrap" id="top">
+  <div class="front__grid">
+    <div class="front__text">
+      <div class="front__head">
+        <span class="ds-label" style="color:var(--ink)" data-en="Frontispiece · A cosmography of one question" data-es="Frontispicio · Cosmografía de una pregunta">Frontispiece · A cosmography of one question</span>
+        <span class="ds-coord">40°26′N 79°58′W — 6°15′N 75°34′W</span>
+      </div>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<section class="hero wrap">
-  <div class="ds-label" data-en="AI/ML Engineer · Physics · Philosophy · Carnegie Mellon" data-es="Ingeniero de IA/ML · Física · Filosofía · Carnegie Mellon">AI/ML Engineer · Physics · Philosophy · Carnegie Mellon</div>
+      <h1 class="ds-title"><span>Alejandro</span><span>Tabares</span></h1>
+      <div class="ds-label front__roles" data-en="AI/ML Engineer · Physics · Philosophy · Carnegie Mellon" data-es="Ingeniero de IA/ML · Física · Filosofía · Carnegie Mellon">AI/ML Engineer · Physics · Philosophy · Carnegie Mellon</div>
 
-  <h1 class="ds-title" style="margin-top:var(--sp-3)">Alejandro Tabares</h1>
-
-  <p class="ds-claim" style="margin-top:var(--sp-6)"
-     data-en="I have been working on one question since high school: <mark class='ds-hl'>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer."
-     data-es="Llevo desde el colegio trabajando en una sola pregunta: <mark class='ds-hl'>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla, y el costo de equivocarse recae sobre quienes no la eligieron?</mark> La física, la filosofía, el riesgo de crédito y la gobernanza pública han sido, cada una, un intento de respuesta.">
-    I have been working on one question since high school: <mark class="ds-hl">how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer.
+      <p class="ds-claim"
+     data-en="I have been working on one question since high school: <mark class='ds-hl ds-hl--draw'>how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer."
+     data-es="Llevo desde el colegio trabajando en una sola pregunta: <mark class='ds-hl ds-hl--draw'>¿cómo debe tomarse una decisión cuando la evidencia no puede resolverla, y el costo de equivocarse recae sobre quienes no la eligieron?</mark> La física, la filosofía, el riesgo de crédito y la gobernanza pública han sido, cada una, un intento de respuesta.">
+    I have been working on one question since high school: <mark class="ds-hl ds-hl--draw">how should a decision be made when the evidence cannot settle it, and the cost of being wrong falls on people who did not choose it?</mark> Physics, philosophy, credit risk and public-sector governance have each been an attempt at an answer.
   </p>
 
-  <p class="availability">
+      <p class="availability">
     <span class="dot" aria-hidden="true"></span>
     <span data-en="<strong>Seeking a Summer 2027 internship</strong> — AI/ML engineering, applied research, or AI governance and model risk. MS student at Carnegie Mellon, Heinz College; graduating December 2027."
           data-es="<strong>Busco una pasantía para el verano de 2027</strong> — ingeniería de IA/ML, investigación aplicada, o gobernanza de IA y riesgo de modelos. Estudiante de maestría en Carnegie Mellon, Heinz College; grado en diciembre de 2027."><strong>Seeking a Summer 2027 internship</strong> — AI/ML engineering, applied research, or AI governance and model risk. MS student at Carnegie Mellon, Heinz College; graduating December 2027.</span>
   </p>
 
-  <div class="actions">
+      <div class="actions">
     <a class="btn btn--primary" href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       <span data-en="Download CV" data-es="Descargar CV">Download CV</span>
@@ -89,36 +109,50 @@
     </a>
   </div>
 
-  <!-- the instrument readout -->
-  <div style="margin-top:clamp(32px,4vw,56px)" id="fig-metrics">
-    <div class="ds-metrics">
-      <div class="ds-metric">
-        <span class="ds-num ds-num--hero ds-metric__value">230+</span>
-        <span class="ds-label ds-metric__label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span>
-      </div>
-      <div class="ds-metric">
-        <span class="ds-num ds-num--hero ds-metric__value">8 / 0</span>
-        <span class="ds-label ds-metric__label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span>
-      </div>
-      <div class="ds-metric">
-        <span class="ds-num ds-num--hero ds-metric__value">USD 14B</span>
-        <span class="ds-label ds-metric__label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span>
-      </div>
-      <div class="ds-metric">
-        <span class="ds-num ds-num--hero ds-metric__value">2.5M</span>
-        <span class="ds-label ds-metric__label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span>
-      </div>
+    </div>
+
+    <div class="front__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head">
+          <span class="ds-label ds-atlas__no" data-en="Plate 0 · The instrument" data-es="Lám. 0 · El instrumento">Plate 0 · The instrument</span>
+          <span class="ds-coord" data-en="measured against" data-es="medido contra">measured against</span>
+        </header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="assets/art/tower.svg" data-alt="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops. Leader lines mark four measured results." data-alt-en="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops. Leader lines mark four measured results." data-alt-es="Dibujo de línea de una torre intrincada y remendada: paneles solares, escaleras, una antena de radar, tuberías y cuartos con persianas apilados sobre una planta baja de talleres. Líneas guía marcan cuatro resultados medidos." style="aspect-ratio:1024/1360">
+            <img src="assets/art/tower.svg" alt="Line drawing of an intricate, patched-together tower: solar panels, ladders, a radar dish, pipes and shuttered rooms stacked over a ground floor of workshops. Leader lines mark four measured results." width="1024" height="1360" fetchpriority="high">
+          </div>
+          <svg class="ds-atlas__leaders" viewBox="0 0 1024 1360" aria-hidden="true"><g><path pathLength="1" d="M707 213L966 196L1052 196"/><circle cx="707" cy="213" r="6.4"/><circle class="is-core" cx="707" cy="213" r="2.4"/></g><g><path pathLength="1" d="M842 578L1000 540L1052 540"/><circle cx="842" cy="578" r="6.4"/><circle class="is-core" cx="842" cy="578" r="2.4"/></g><g><path pathLength="1" d="M622 893L944 872L1052 872"/><circle cx="622" cy="893" r="6.4"/><circle class="is-core" cx="622" cy="893" r="2.4"/></g><g><path pathLength="1" d="M760 1158L979 1210L1052 1210"/><circle cx="760" cy="1158" r="6.4"/><circle class="is-core" cx="760" cy="1158" r="2.4"/></g></svg>
+          <div class="ds-atlas__callout is-right" style="left:102.73%;top:14.41%"><span class="ds-num ds-num--hero">USD 14B</span><span class="ds-label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span></div><div class="ds-atlas__callout is-right" style="left:102.73%;top:39.71%"><span class="ds-num ds-num--hero">8 / 0</span><span class="ds-label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span></div><div class="ds-atlas__callout is-right" style="left:102.73%;top:64.12%"><span class="ds-num ds-num--hero">230+</span><span class="ds-label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span></div><div class="ds-atlas__callout is-right" style="left:102.73%;top:88.97%"><span class="ds-num ds-num--hero">2.5M</span><span class="ds-label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span></div>
+          <span class="ds-atlas__key" style="left:69.04%;top:15.66%" aria-hidden="true">1</span><span class="ds-atlas__key" style="left:82.23%;top:42.50%" aria-hidden="true">2</span><span class="ds-atlas__key" style="left:60.74%;top:65.66%" aria-hidden="true">3</span><span class="ds-atlas__key" style="left:74.22%;top:85.15%" aria-hidden="true">4</span>
+          <span data-flock></span>
+        </div>
+        <ol class="ds-atlas__legend"><li><div><span class="ds-num ds-num--hero">USD 14B</span><span class="ds-label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span></div></li><li><div><span class="ds-num ds-num--hero">8 / 0</span><span class="ds-label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span></div></li><li><div><span class="ds-num ds-num--hero">230+</span><span class="ds-label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span></div></li><li><div><span class="ds-num ds-num--hero">2.5M</span><span class="ds-label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span></div></li></ol>
+        <figcaption class="ds-atlas__cap">
+          <span class="ds-atlas__title" data-en="A machine that outlived its builders" data-es="Una máquina que sobrevivió a quienes la hicieron">A machine that outlived its builders</span>
+          <span class="ds-atlas__caption" data-en="Patched, still running. The blue pencil marks what each part of it was measured against." data-es="Remendada, todavía en marcha. El lápiz azul marca contra qué se midió cada parte.">Patched, still running. The blue pencil marks what each part of it was measured against.</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ THE QUESTION ═══════════════ -->
+<!-- ═══════════════ I · THE QUESTION ═══════════════ -->
 <section class="sec" id="story">
   <div class="wrap rail-layout">
     <div class="rail">
       <span class="num">I</span>
       <span class="rail-name" data-en="The question" data-es="La pregunta">The question</span>
       <span class="ds-note" data-en="Physics, philosophy, risk, governance. Four notations, one problem." data-es="Física, filosofía, riesgo, gobernanza. Cuatro notaciones, un solo problema.">Physics, philosophy, risk, governance. Four notations, one problem.</span>
+      <figure class="ds-atlas ds-atlas--arch">
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="assets/art/portal.svg" data-alt="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." data-alt-en="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." data-alt-es="Un gran anillo de piedra en un desierto de roca partida; a través de él, un cielo lavanda y una ciudad pastel de cascadas." style="aspect-ratio:1024/1280">
+            <img src="assets/art/portal.svg" alt="A great stone ring standing in a desert of broken rock; through it, a lavender sky and a pastel city of waterfalls." width="1024" height="1280" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap">
+          <span class="ds-atlas__caption" data-en="The threshold: what counts as evidence at all." data-es="El umbral: qué cuenta como evidencia.">The threshold: what counts as evidence at all.</span>
+        </figcaption>
+      </figure>
     </div>
 
     <div>
@@ -145,16 +179,16 @@
            data-es="Figura 1 — un corchete ramista que divide «decidir bajo incertidumbre» primero por dónde está la incertidumbre: en el mundo (física, riesgo de crédito) o en qué cuenta como evidencia (filosofía, gobernanza).">Figure 1 — a Ramist bracket dividing “deciding under uncertainty” first by where the uncertainty sits: in the world (physics, credit risk) or in what counts as evidence (philosophy, governance).</p>
       </div>
 
-      <p style="margin-top:var(--sp-5)">
-        <a class="btn" href="the-question/">
-          <span data-en="Read the full note — five movements" data-es="Leer la nota completa — cinco movimientos">Read the full note — five movements</span>
+      <p style="margin:0">
+        <a class="more" href="the-question/">
+          <span data-en="Read the full note — five movements" data-es="Leer la nota completa — cinco movimientos">Read the full note — five movements</span> <span aria-hidden="true">→</span>
         </a>
       </p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ EXPERIENCE ═══════════════ -->
+<!-- ═══════════════ II · EXPERIENCE ═══════════════ -->
 <section class="sec" id="experience">
   <div class="wrap rail-layout">
     <div class="rail">
@@ -168,6 +202,7 @@
         <div class="job__when">
           <span class="ds-label" data-en="Jan 2025 — Jul 2026" data-es="Ene 2025 — Jul 2026">Jan 2025 — Jul 2026</span>
           <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
         </div>
         <div>
           <h3 class="h-sub" data-en="Associate Director of Data and Technology" data-es="Director Asociado de Datos y Tecnología">Associate Director of Data and Technology</h3>
@@ -198,6 +233,7 @@
         <div class="job__when">
           <span class="ds-label" data-en="Jul 2020 — Jan 2025" data-es="Jul 2020 — Ene 2025">Jul 2020 — Jan 2025</span>
           <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
         </div>
         <div>
           <h3 class="h-sub" data-en="Senior Data Scientist" data-es="Científico de Datos Senior">Senior Data Scientist</h3>
@@ -228,6 +264,7 @@
         <div class="job__when">
           <span class="ds-label" data-en="Mar 2019 — Jul 2020" data-es="Mar 2019 — Jul 2020">Mar 2019 — Jul 2020</span>
           <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
         </div>
         <div>
           <h3 class="h-sub" data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</h3>
@@ -249,6 +286,7 @@
 
 <!-- ═══════════════ SELECTED WORK ═══════════════ -->
 <section class="sec" id="work">
+  <div class="wrap vine-wrap"><span class="vine-host" data-vine="work-moss" data-reach="0.5"></span></div>
   <div class="wrap rail-layout">
     <div class="rail">
       <span class="num">III</span>
@@ -259,77 +297,138 @@
     <div>
       <h2 class="h-sec" data-en="Seven systems, two case studies" data-es="Siete sistemas, dos casos de estudio">Seven systems, two case studies</h2>
 
-      <div class="grid-cards" style="margin-top:var(--sp-6)">
-        <a class="ds-card" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">
-          <div class="ds-card__meta">
-            <span class="ds-label" data-en="Public asset · Ontology" data-es="Activo público · Ontología">Public asset · Ontology</span>
-          </div>
-          <h3 class="ds-card__title" data-en="Public Space domain ontology" data-es="Ontología de dominio de Espacio Público">Public Space domain ontology</h3>
-          <p class="ds-card__body" data-en="A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean."
-             data-es="Una ontología de dominio publicada que estandariza entidades y relaciones en los datos municipales de espacio público, actuando como capa semántica bajo los sistemas de IA — de modo que una pregunta se resuelva contra definiciones fijas y no contra lo que un modelo suponga que significa un término.">A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean.</p>
-          <p class="ds-card__finding ds-label">OWL · SKOS · Ontology design</p>
-          <span class="ds-card__link" data-en="View the ontology →" data-es="Ver la ontología →">View the ontology →</span>
-        </a>
-
-        <div class="ds-card">
-          <div class="ds-card__meta"><span class="ds-label">Graph RAG</span></div>
-          <h3 class="ds-card__title" data-en="Citizen petition retrieval system" data-es="Sistema de recuperación de peticiones">Citizen petition retrieval system</h3>
-          <p class="ds-card__body" data-en="Graph RAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class='ds-num'>15</span>-business-day legal limit went from <span class='ds-num'>300+</span> per month to <span class='ds-num'>0</span>."
-             data-es="Graph RAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, combinando un grafo de propiedades con recuperación densa. Las respuestas vencidas más allá del límite legal de <span class='ds-num'>15</span> días hábiles pasaron de más de <span class='ds-num'>300</span> al mes a <span class='ds-num'>0</span>.">Graph RAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class="ds-num">15</span>-business-day legal limit went from <span class="ds-num">300+</span> per month to <span class="ds-num">0</span>.</p>
-          <p class="ds-card__finding ds-label">Neo4j · Pinecone · LightRAG · Python</p>
-        </div>
-
-        <a class="ds-card" href="work/agent-architecture/">
-          <div class="ds-card__meta">
-            <span class="ds-label" data-en="Agent architecture · Case study" data-es="Arquitectura de agentes · Caso">Agent architecture · Case study</span>
-          </div>
-          <h3 class="ds-card__title" data-en="Municipal analytics agent" data-es="Agente analítico municipal">Municipal analytics agent</h3>
-          <p class="ds-card__body" data-en="An agent that answers complex spatial questions across <span class='ds-num'>34</span> historical data standards, cutting turnaround from an analyst-week to <span class='ds-num'>10 min</span> — and that cannot write SQL, hold a database credential, or sit in the request path of any platform."
+      <div class="work-plates">
+        <a class="work-plate" href="work/agent-architecture/">
+          <figure class="ds-atlas">
+            <header class="ds-atlas__head">
+              <span class="ds-label ds-atlas__no">MAT·03</span>
+              <span class="ds-coord">6°15′N 75°34′W</span>
+            </header>
+            <div class="ds-atlas__window">
+              <div class="ds-atlas__art" data-atlas-src="assets/art/conduit.svg" data-alt="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." data-alt-en="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." data-alt-es="Corte de una torre en ruinas, angosta, en una llanura desértica. Desde un mirador de vidrio en lo alto, un único tubo de latón baja por cinco pisos y cinco máquinas-compuerta — una rueda clasificadora, una prensa, un tamiz, una válvula, un candado. Las escaleras se derrumbaron y las puertas están tapiadas; en la base el tubo llega a un archivo de cajones cubierto de arena." style="aspect-ratio:1120/1440">
+                <img src="assets/art/conduit.svg" alt="Cross-section of a narrow ruined tower on a desert plain. From a glass lookout at the top, one brass tube descends through five floors and five gate machines — a sorting wheel, a press, a sieve, a valve, a lock. The stairs have collapsed and the doors are bricked up; at the base the tube reaches a sand-drifted archive of drawers." width="1120" height="1440" loading="lazy">
+              </div>
+            </div>
+            <figcaption class="ds-atlas__cap">
+              <span class="ds-atlas__caption" data-en="Every gate takes a capability away." data-es="Cada compuerta quita una capacidad.">Every gate takes a capability away.</span>
+            </figcaption>
+          </figure>
+          <div class="ds-card">
+            <div class="ds-card__meta"><span class="ds-label" data-en="Agent architecture · Case study" data-es="Arquitectura de agentes · Caso">Agent architecture · Case study</span></div>
+            <h3 class="ds-card__title" data-en="Municipal analytics agent" data-es="Agente analítico municipal">Municipal analytics agent</h3>
+            <p class="ds-card__body" data-en="An agent that answers complex spatial questions across <span class='ds-num'>34</span> historical data standards, cutting turnaround from an analyst-week to <span class='ds-num'>10 min</span> — and that cannot write SQL, hold a database credential, or sit in the request path of any platform."
              data-es="Un agente que responde preguntas espaciales complejas sobre <span class='ds-num'>34</span> estándares históricos de datos, reduciendo el tiempo de respuesta de una semana-analista a <span class='ds-num'>10 min</span> — y que no puede escribir SQL, ni tener una credencial de base de datos, ni situarse en la ruta de petición de ninguna plataforma.">An agent that answers complex spatial questions across <span class="ds-num">34</span> historical data standards, cutting turnaround from an analyst-week to <span class="ds-num">10 min</span> — and that cannot write SQL, hold a database credential, or sit in the request path of any platform.</p>
-          <p class="ds-card__finding ds-label">Semantic layer · LLM agents · Python</p>
-          <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
-        </a>
-
-        <div class="ds-card">
-          <div class="ds-card__meta"><span class="ds-label" data-en="Agent evaluation" data-es="Evaluación de agentes">Agent evaluation</span></div>
-          <h3 class="ds-card__title" data-en="Execution-accuracy benchmark" data-es="Benchmark de precisión de ejecución">Execution-accuracy benchmark</h3>
-          <p class="ds-card__body" data-en="A purpose-built <span class='ds-num'>96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke."
-             data-es="Un benchmark propio de <span class='ds-num'>96</span> preguntas que valida el sistema de agentes contra preguntas de negocio reales, no contra impresiones — y que además funciona como suite de regresión: si una pregunta deja de poder responderse, la capa semántica se rompió.">A purpose-built <span class="ds-num">96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke.</p>
-          <p class="ds-card__finding ds-label">Python · Evaluation · Regression testing</p>
-        </div>
-
-        <a class="ds-card" href="work/anonymization-pipeline/">
-          <div class="ds-card__meta">
-            <span class="ds-label" data-en="Privacy engineering · Case study" data-es="Ingeniería de privacidad · Caso">Privacy engineering · Case study</span>
+            <p class="ds-card__finding ds-label">Semantic layer · LLM agents · Python</p>
+            <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
           </div>
-          <h3 class="ds-card__title" data-en="PII anonymization pipeline" data-es="Tubería de anonimización de PII">PII anonymization pipeline</h3>
-          <p class="ds-card__body" data-en="Protects <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses by stripping <span class='ds-num'>13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data."
-             data-es="Protege a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones eliminando <span class='ds-num'>13</span> campos sensibles mediante hashing irreversible SHA-256, supresión y generalización — de modo que la capa de IA encima estructuralmente no puede alcanzar datos personales.">Protects <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses by stripping <span class="ds-num">13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data.</p>
-          <p class="ds-card__finding ds-label">Python · SHA-256 · Data governance</p>
-          <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
         </a>
+        <a class="work-plate" href="work/anonymization-pipeline/">
+          <figure class="ds-atlas">
+            <header class="ds-atlas__head">
+              <span class="ds-label ds-atlas__no">MAT·05</span>
+              <span class="ds-coord">6°15′N 75°34′W</span>
+            </header>
+            <div class="ds-atlas__window">
+              <div class="ds-atlas__art" data-atlas-src="assets/art/vault.svg" data-alt="Cross-section of an overgrown tower standing on a ground line. Above it, patched rooms full of cables and desks; below it, a sealed ultramarine vault of identical drawers with no door or stair. One thin pipe leaves the vault and feeds a hopper that grinds folders into identical cubes." data-alt-en="Cross-section of an overgrown tower standing on a ground line. Above it, patched rooms full of cables and desks; below it, a sealed ultramarine vault of identical drawers with no door or stair. One thin pipe leaves the vault and feeds a hopper that grinds folders into identical cubes." data-alt-es="Corte de una torre cubierta de vegetación sobre una línea de suelo. Arriba, cuartos remendados con cables y escritorios; abajo, una bóveda ultramar sellada de cajones idénticos, sin puerta ni escalera. Un único tubo delgado sale de la bóveda y alimenta una tolva que muele carpetas en cubos idénticos." style="aspect-ratio:1120/1440">
+                <img src="assets/art/vault.svg" alt="Cross-section of an overgrown tower standing on a ground line. Above it, patched rooms full of cables and desks; below it, a sealed ultramarine vault of identical drawers with no door or stair. One thin pipe leaves the vault and feeds a hopper that grinds folders into identical cubes." width="1120" height="1440" loading="lazy">
+              </div>
+            </div>
+            <figcaption class="ds-atlas__cap">
+              <span class="ds-atlas__caption" data-en="Above the line, the AI. Below it, nothing it can name." data-es="Arriba de la línea, la IA. Debajo, nada que pueda nombrar.">Above the line, the AI. Below it, nothing it can name.</span>
+            </figcaption>
+          </figure>
+          <div class="ds-card">
+            <div class="ds-card__meta"><span class="ds-label" data-en="Privacy engineering · Case study" data-es="Ingeniería de privacidad · Caso">Privacy engineering · Case study</span></div>
+            <h3 class="ds-card__title" data-en="PII anonymization pipeline" data-es="Tubería de anonimización de PII">PII anonymization pipeline</h3>
+            <p class="ds-card__body" data-en="Protects <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses by stripping <span class='ds-num'>13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data."
+             data-es="Protege a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones eliminando <span class='ds-num'>13</span> campos sensibles mediante hashing irreversible SHA-256, supresión y generalización — de modo que la capa de IA encima estructuralmente no puede alcanzar datos personales.">Protects <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses by stripping <span class="ds-num">13</span> sensitive fields through irreversible SHA-256 hashing, suppression and generalization — so the AI layer above it structurally cannot reach personal data.</p>
+            <p class="ds-card__finding ds-label">Python · SHA-256 · Data governance</p>
+            <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
+          </div>
+        </a>
+      </div>
 
-        <div class="ds-card">
-          <div class="ds-card__meta"><span class="ds-label" data-en="ML infrastructure" data-es="Infraestructura de ML">ML infrastructure</span></div>
-          <h3 class="ds-card__title" data-en="Change-based feature store" data-es="Feature store basado en cambios">Change-based feature store</h3>
-          <p class="ds-card__body" data-en="Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class='ds-num'>1 TB</span> into <span class='ds-num'>16 GB</span> and removed a <span class='ds-num'>3-hour</span> dataset rebuild from every single model run."
-             data-es="En lugar de materializar la historia completa de cada deudor por modelo, persistir sólo transiciones de estado. Comprimió ~<span class='ds-num'>1 TB</span> a <span class='ds-num'>16 GB</span> y eliminó una reconstrucción de dataset de <span class='ds-num'>3 horas</span> en cada corrida.">Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class="ds-num">1 TB</span> into <span class="ds-num">16 GB</span> and removed a <span class="ds-num">3-hour</span> dataset rebuild from every single model run.</p>
-          <p class="ds-card__finding ds-label">Impala · InfluxDB · Hadoop · SQL</p>
+      <div class="catalogue">
+        <div class="catalogue__head">
+          <span class="ds-label" style="color:var(--ink)" data-en="Catalog · five more systems" data-es="Catálogo · cinco sistemas más">Catalog · five more systems</span>
+          <span class="ds-label">MAT·01 — 07</span>
         </div>
-
-        <div class="ds-card">
-          <div class="ds-card__meta"><span class="ds-label" data-en="Experiment tracking" data-es="Seguimiento de experimentos">Experiment tracking</span></div>
-          <h3 class="ds-card__title" data-en="Lightweight experiment registry" data-es="Registro ligero de experimentos">Lightweight experiment registry</h3>
-          <p class="ds-card__body" data-en="Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling <span class='ds-num'>2,000</span> runs/week against a previous <span class='ds-num'>20</span>/month. The resulting specifications cut PD prediction error <span class='ds-num'>30%→5%</span> for natural persons."
+        <a class="cat" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">
+          <span data-seal="MAT·01" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·01</span>
+            <span class="ds-label" data-en="Public asset · Ontology" data-es="Activo público · Ontología">Public asset · Ontology</span>
+            <h3 class="ds-card__title" data-en="Public Space domain ontology" data-es="Ontología de dominio de Espacio Público">Public Space domain ontology</h3>
+          </div>
+          <div>
+            <p class="ds-card__body" data-en="A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean."
+             data-es="Una ontología de dominio publicada que estandariza entidades y relaciones en los datos municipales de espacio público, actuando como capa semántica bajo los sistemas de IA — de modo que una pregunta se resuelva contra definiciones fijas y no contra lo que un modelo suponga que significa un término.">A published domain ontology standardizing entities and relationships across municipal public-space data, acting as the semantic layer beneath downstream AI systems — so a question is resolved against fixed definitions rather than against whatever a model takes a term to mean.</p>
+            <p class="ds-card__finding ds-label">OWL · SKOS · Ontology design</p>
+            <span class="ds-card__link" data-en="View the ontology →" data-es="Ver la ontología →">View the ontology →</span>
+          </div>
+        </a>
+        <div class="cat">
+          <span data-seal="MAT·02" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·02</span>
+            <span class="ds-label">Graph RAG</span>
+            <h3 class="ds-card__title" data-en="Citizen petition retrieval system" data-es="Sistema de recuperación de peticiones">Citizen petition retrieval system</h3>
+          </div>
+          <div>
+            <p class="ds-card__body" data-en="Graph RAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class='ds-num'>15</span>-business-day legal limit went from <span class='ds-num'>300+</span> per month to <span class='ds-num'>0</span>."
+             data-es="Graph RAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, combinando un grafo de propiedades con recuperación densa. Las respuestas vencidas más allá del límite legal de <span class='ds-num'>15</span> días hábiles pasaron de más de <span class='ds-num'>300</span> al mes a <span class='ds-num'>0</span>.">Graph RAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, combining a property graph with dense retrieval. Overdue responses beyond the <span class="ds-num">15</span>-business-day legal limit went from <span class="ds-num">300+</span> per month to <span class="ds-num">0</span>.</p>
+            <p class="ds-card__finding ds-label">Neo4j · Pinecone · LightRAG · Python</p>
+            
+          </div>
+        </div>
+        <div class="cat">
+          <span data-seal="MAT·04" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·04</span>
+            <span class="ds-label" data-en="Agent evaluation" data-es="Evaluación de agentes">Agent evaluation</span>
+            <h3 class="ds-card__title" data-en="Execution-accuracy benchmark" data-es="Benchmark de precisión de ejecución">Execution-accuracy benchmark</h3>
+          </div>
+          <div>
+            <p class="ds-card__body" data-en="A purpose-built <span class='ds-num'>96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke."
+             data-es="Un benchmark propio de <span class='ds-num'>96</span> preguntas que valida el sistema de agentes contra preguntas de negocio reales, no contra impresiones — y que además funciona como suite de regresión: si una pregunta deja de poder responderse, la capa semántica se rompió.">A purpose-built <span class="ds-num">96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke.</p>
+            <p class="ds-card__finding ds-label">Python · Evaluation · Regression testing</p>
+            
+          </div>
+        </div>
+        <div class="cat">
+          <span data-seal="MAT·06" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·06</span>
+            <span class="ds-label" data-en="ML infrastructure" data-es="Infraestructura de ML">ML infrastructure</span>
+            <h3 class="ds-card__title" data-en="Change-based feature store" data-es="Feature store basado en cambios">Change-based feature store</h3>
+          </div>
+          <div>
+            <p class="ds-card__body" data-en="Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class='ds-num'>1 TB</span> into <span class='ds-num'>16 GB</span> and removed a <span class='ds-num'>3-hour</span> dataset rebuild from every single model run."
+             data-es="En lugar de materializar la historia completa de cada deudor por modelo, persistir sólo transiciones de estado. Comprimió ~<span class='ds-num'>1 TB</span> a <span class='ds-num'>16 GB</span> y eliminó una reconstrucción de dataset de <span class='ds-num'>3 horas</span> en cada corrida.">Rather than materializing full borrower history per model, persist only state transitions. Compressed ~<span class="ds-num">1 TB</span> into <span class="ds-num">16 GB</span> and removed a <span class="ds-num">3-hour</span> dataset rebuild from every single model run.</p>
+            <p class="ds-card__finding ds-label">Impala · InfluxDB · Hadoop · SQL</p>
+            
+          </div>
+        </div>
+        <div class="cat">
+          <span data-seal="MAT·07" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·07</span>
+            <span class="ds-label" data-en="Experiment tracking" data-es="Seguimiento de experimentos">Experiment tracking</span>
+            <h3 class="ds-card__title" data-en="Lightweight experiment registry" data-es="Registro ligero de experimentos">Lightweight experiment registry</h3>
+          </div>
+          <div>
+            <p class="ds-card__body" data-en="Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling <span class='ds-num'>2,000</span> runs/week against a previous <span class='ds-num'>20</span>/month. The resulting specifications cut PD prediction error <span class='ds-num'>30%→5%</span> for natural persons."
              data-es="Archivos SQLite de estado por corrida versionados con DVC y métricas en MLflow, habilitando <span class='ds-num'>2.000</span> corridas/semana frente a <span class='ds-num'>20</span>/mes. Las especificaciones resultantes redujeron el error de predicción de PD <span class='ds-num'>30%→5%</span> en persona natural.">Per-run SQLite state files versioned with DVC and metrics in MLflow, enabling <span class="ds-num">2,000</span> runs/week against a previous <span class="ds-num">20</span>/month. The resulting specifications cut PD prediction error <span class="ds-num">30%→5%</span> for natural persons.</p>
-          <p class="ds-card__finding ds-label">DVC · MLflow · SQLite · Python</p>
+            <p class="ds-card__finding ds-label">DVC · MLflow · SQLite · Python</p>
+            
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ SKILLS & EDUCATION ═══════════════ -->
+<!-- ═══════════════ IV · APPARATUS ═══════════════ -->
 <section class="sec" id="skills">
   <div class="wrap rail-layout">
     <div class="rail">
@@ -410,7 +509,7 @@
   </div>
 </section>
 
-<!-- ═══════════════ RESEARCH ═══════════════ -->
+<!-- ═══════════════ V · RESEARCH ═══════════════ -->
 <section class="sec" id="research">
   <div class="wrap rail-layout">
     <div class="rail">
@@ -506,7 +605,7 @@
 <section class="sec" id="contact">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">→</span>
+      <span class="num is-arrow">→</span>
       <span class="rail-name" data-en="Contact" data-es="Contacto">Contact</span>
     </div>
 
@@ -514,9 +613,9 @@
       <h2 class="h-sec" data-en="Get in touch" data-es="Escríbame">Get in touch</h2>
 
       <p class="lead-in" style="margin-top:var(--sp-5)"
-         data-en="<mark class='ds-hl'>I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it."
-         data-es="<mark class='ds-hl'>Busco una pasantía para el verano de 2027.</mark> Si algo de lo anterior es también un problema en el que usted trabaja — decisiones bajo incertidumbre, riesgo de modelos, gobernanza de IA como disciplina técnica — me gustaría saberlo.">
-        <mark class="ds-hl">I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it.
+         data-en="<mark class='ds-hl ds-hl--draw'>I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it."
+         data-es="<mark class='ds-hl ds-hl--draw'>Busco una pasantía para el verano de 2027.</mark> Si algo de lo anterior es también un problema en el que usted trabaja — decisiones bajo incertidumbre, riesgo de modelos, gobernanza de IA como disciplina técnica — me gustaría saberlo.">
+        <mark class="ds-hl ds-hl--draw">I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decision-making under uncertainty, model risk, AI governance as a technical discipline — I would like to hear about it.
       </p>
 
       <div class="contact" style="margin-top:var(--sp-6)">
@@ -540,12 +639,32 @@
     </div>
   </div>
 </section>
+
+<!-- ═══════════════ CLOSING PLATE ═══════════════ -->
+<section class="closing wrap" aria-label="Medellín — Pittsburgh">
+  <figure class="ds-atlas">
+    <header class="ds-atlas__head">
+      <span class="ds-label ds-atlas__no" data-en="Plate VI · Two hills" data-es="Lám. VI · Dos colinas">Plate VI · Two hills</span>
+      <span class="ds-coord">6°15′N 75°34′W · 40°26′N 79°58′W</span>
+    </header>
+    <div class="ds-atlas__window">
+      <div class="ds-atlas__art" data-atlas-src="assets/art/city.svg" data-alt="Panorama of one overgrown hillside city: brick houses stacked up a steep slope, draped in vines, with rooftop tanks and antennas; a cable-car gondola crossing the valley between lattice pylons; a riveted steel arch bridge and a funicular incline on a cliff over a calm river." data-alt-en="Panorama of one overgrown hillside city: brick houses stacked up a steep slope, draped in vines, with rooftop tanks and antennas; a cable-car gondola crossing the valley between lattice pylons; a riveted steel arch bridge and a funicular incline on a cliff over a calm river." data-alt-es="Panorama de una sola ciudad de ladera cubierta de vegetación: casas de ladrillo apiladas en una pendiente, colgadas de enredaderas, con tanques y antenas en los techos; una góndola de cable cruzando el valle entre torres de celosía; un puente de arco de acero remachado y un funicular en un acantilado sobre un río en calma." style="aspect-ratio:1600/800">
+        <img src="assets/art/city.svg" alt="Panorama of one overgrown hillside city: brick houses stacked up a steep slope, draped in vines, with rooftop tanks and antennas; a cable-car gondola crossing the valley between lattice pylons; a riveted steel arch bridge and a funicular incline on a cliff over a calm river." width="1600" height="800" loading="lazy">
+      </div>
+    </div>
+    <figcaption class="ds-atlas__cap">
+      <span class="ds-atlas__title">Medellín · Pittsburgh</span>
+      <span class="ds-atlas__caption" data-en="An impossible city of two hills — the comunas and the metrocable, the steel bridges and the incline — long after, still running. The two places this page is written from." data-es="Una ciudad imposible de dos colinas — las comunas y el metrocable, los puentes de acero y el funicular — mucho después, todavía en marcha. Los dos lugares desde donde se escribe esta página.">An impossible city of two hills — the comunas and the metrocable, the steel bridges and the incline — long after, still running. The two places this page is written from.</span>
+    </figcaption>
+  </figure>
+</section>
 </main>
 
 <footer class="site wrap">
-  <div class="ds-label">© <span id="yr">2026</span> Alejandro Tabares</div>
+  <div class="ds-label">© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
   <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
   <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+  <p class="made" data-en="Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web." data-es="Compuesto en Castoro Titling, Castoro, Instrument Sans y Martian Mono sobre <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, el sistema de diseño del autor. Ilustraciones generadas con Recraft a partir de referencias propias del autor, y preparadas a mano para la web.">Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href="https://github.com/puedesleerlo/cosmografia">Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web.</p>
 </footer>
 
 <script>
@@ -616,9 +735,9 @@ window.SITE_FIGURES = [
 ];
 </script>
 
-<script src="_ds/tabares/react.umd.js" defer></script>
-<script src="_ds/tabares/react-dom.umd.js" defer></script>
-<script src="_ds/tabares/_ds_bundle.js" defer></script>
+<script src="_ds/cosmografia/react.umd.js" defer></script>
+<script src="_ds/cosmografia/react-dom.umd.js" defer></script>
+<script src="_ds/cosmografia/cosmografia.js" defer></script>
 <script src="_ds/site.js" defer></script>
 </body>
 </html>

@@ -2,8 +2,8 @@
 
 Personal site for Mario Alejandro Tabares Arango — AI/ML engineer.
 
-Single self-contained `index.html`: no build step, no framework, no dependencies
-beyond three Google Fonts. Edit, commit, push; GitHub Pages redeploys.
+Static HTML: no build step, no framework. Edit, commit, push; GitHub Pages
+redeploys. The design system arrives as a prebuilt copy in `_ds/cosmografia/`.
 
 ## Structure
 
@@ -14,7 +14,7 @@ assets/Mario_Alejandro_Tabares_Arango_CV.pdf   linked from the hero and contact 
 
 ## The through-line
 
-The site is organised around one argument, not around a job history: *how should a
+The site is organized around one argument, not around a job history: *how should a
 decision be made when the evidence cannot settle it?* The **The question** section
 (`#story`) is a five-movement essay — physics, philosophy, risk, governance, and
 what remains unresolved. Everything else on the page is evidence for it:
@@ -26,17 +26,42 @@ what remains unresolved. Everything else on the page is evidence for it:
 
 If you edit one part, keep the argument consistent across the others.
 
+## The ask
+
+The page has one concrete request: **a Summer 2027 internship** as a CMU MS
+student (graduating Dec 2027). It appears in three places, which must stay in
+agreement — the `.availability` badge in the hero, the closing paragraph of
+movement V, and the Contact section intro (plus the two `<meta>` descriptions).
+When the target term changes, update all five.
+
 ## Design
 
-Conventional single-column layout optimised for a fast scan: hero with headline
-metrics → the question (essay) → experience → selected work → skills → education →
-research, teaching and awards → contact.
+Built on **[Cosmografía](https://github.com/puedesleerlo/cosmografia)**, the
+author's design system: a white atlas sheet, a post-apocalyptic organic world
+drawn on it, and one loud sky. The page reads as an atlas — a frontispiece, then
+numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
 
-- **Headings** Source Serif 4
-- **Body and UI** Inter
-- **Dates, labels, tags** JetBrains Mono
-- Accent is a deep teal (`--accent`), with a burnt-orange secondary (`--accent-2`)
-  used only for card category labels.
+- **Three inks.** Black (`--ink`) for structure, ultramarine (`--hand`) for
+  interpretation — leaders, notes, links — and ember (`--highlight-bg`) behind the
+  one finding per surface.
+- **Type.** Castoro Titling (titles, the name), Castoro italic (the annotating
+  voice), Instrument Sans (body), Martian Mono (every measured number, label,
+  coordinate and catalog code). Loaded from Google Fonts.
+- **Plates.** Illustrations live in `assets/art/` as optimized SVGs and are
+  presented as `.ds-atlas` plates. They assemble themselves ground-up when they
+  scroll in (`TabaresDS.mountPlates`); the frontispiece tower carries the four
+  headline metrics as blue-pencil callouts, which become numbered keys plus a
+  legend on phones. One plate per section, five on the landing page at most.
+- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as plates,
+  the rest as rows with a generated constellation seal.
+- **Motion** is slow and honors `prefers-reduced-motion`; without JavaScript every
+  drawing is a plain `<img>` and every highlight is simply on.
+
+`_ds/cosmografia/` is a copy of the design system's browser build
+(`dist/browser/` in the Cosmografía repo) plus React 18 UMD, used only to mount
+the idea diagrams (`SITE_FIGURES`). To update it, run `npm run build` in the design
+system and copy `dist/browser/cosmografia.js` and `styles.css` here. Page layout
+lives in `_ds/site.css`; behavior in `_ds/site.js`.
 
 ## Bilingual
 
@@ -54,11 +79,16 @@ keep it in sync with `data-en`.
 Language choice persists in `localStorage` under `site-lang`. On first visit the
 site defaults to Spanish if the browser locale starts with `es`, English otherwise.
 
+**Spelling: American English throughout.** The audience is US recruiting, so
+`center`, `behavior`, `organization`, `anonymization`, `analyze`, `program`,
+`judgment` — never the `-ise`/`-our`/`-re` forms. This includes both case-study
+directory names (`work/anonymization-pipeline/`), which are public URLs and must
+not be renamed casually.
+
 ## Theme
 
-Light by default, dark available via the `◐` button, respecting
-`prefers-color-scheme` on first visit. Persisted as `site-theme`. All colours are
-CSS custom properties in `:root` / `:root[data-theme="dark"]`.
+White, always — there is no dark mode. A theme stored by the previous version of
+the site (`site-theme`) is cleared on first load.
 
 ## Content accuracy
 
