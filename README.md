@@ -14,12 +14,14 @@ assets/Mario_Alejandro_Tabares_Arango_CV.pdf   linked from the hero and contact 
 
 ## The through-line
 
-The site is organized around one argument, not around a job history: *how should a
-decision be made when the evidence cannot settle it?* The **The question** section
-(`#story`) is a five-movement essay — physics, philosophy, risk, governance, and
-what remains unresolved. Everything else on the page is evidence for it:
+The site is organized around one argument, not around a job history: *how should we
+act when outcomes are uncertain — and our actions change them?* It moves from
+predicting outcomes to asking which interventions improve them, for whom, and under
+what conditions. The **The question** section (`#story`) is a five-movement essay —
+physics, philosophy, risk, governance, and what remains unresolved. Everything else
+on the page is evidence for it:
 
-- the hero states the question
+- the hero states the question and the turn toward causal inference and evaluation
 - **Selected work comes first** (Plate I), right after the frontispiece: the two
   case studies side by side, their drawings cut out on the inner edges so they meet in the middle, then the catalog
 - the question (Plate II) is the short version of the essay, beside the arched stair
@@ -31,8 +33,9 @@ If you edit one part, keep the argument consistent across the others.
 
 ## The ask
 
-The page has one concrete request: **a Summer 2027 internship** as a CMU MS
-student (graduating Dec 2027). It appears in three places, which must stay in
+The page has one concrete request: **a Summer 2027 internship** in applied AI,
+causal inference, and decision science, as a CMU MS student (graduating Dec 2027).
+It appears in three places, which must stay in
 agreement — the `.availability` badge in the hero, the closing paragraph of
 movement V, and the Contact section intro (plus the two `<meta>` descriptions).
 When the target term changes, update all five.
@@ -113,7 +116,13 @@ the site (`site-theme`) is cleared on first load.
 
 ## Content accuracy
 
-Every claim on the page is drawn from the CV in `assets/`. When the CV changes,
+Every claim on the page is drawn from the CV in `assets/`.
+
+Claims are scoped, not absolute. The privacy work is described as de-identification
+(hashed linkage keys, suppression, generalization, release checks, restricted
+access) with residual re-identification risk, never as irreversible anonymization;
+the agent never authors SQL, but its answers are only as correct as the source data
+and semantic definitions. The 240× turnaround assumes a 40-hour analyst-week. When the CV changes,
 update the PDF and the corresponding section here — the two should never disagree.
 
 Live figures currently on the page: 230+ credit-risk models, 8 audit cycles with

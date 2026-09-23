@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>An Agent That Cannot Write SQL — Architecture of a Municipal Analytics Agent</title>
-<meta name="description" content="Capability as an architectural property. How I designed a municipal analytics agent for public-space data in Medellín so that a correct answer never depends on the model behaving well.">
+<meta name="description" content="Capability as an architectural property. How I designed a municipal analytics agent for public-space data in Medellín that never writes SQL: requests go through predefined metrics and join paths, and correctness still rests on the data and definitions beneath them.">
 <meta name="author" content="Alejandro Tabares">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="An Agent That Cannot Write SQL — Architecture of a Municipal Analytics Agent">
-<meta property="og:description" content="Narrowing what an agent can express at every hop, so a correct answer never depends on it behaving well.">
+<meta property="og:description" content="Narrowing what an agent can express at every hop, so the SQL it runs is never written by the model.">
 <meta property="og:url" content="https://puedesleerlo.github.io/work/agent-architecture/">
 <meta name="twitter:card" content="summary">
 
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
 
 <link rel="stylesheet" href="../../_ds/cosmografia/styles.css?v=8c73df0c">
-<link rel="stylesheet" href="../../_ds/site.css?v=1cba8f3d">
+<link rel="stylesheet" href="../../_ds/site.css?v=2d5b4d4f">
 <link rel="stylesheet" href="../../_ds/figures.css?v=c14e93dd">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -146,9 +146,9 @@
       </figure>
 
       <div class="prose">
-        <p data-en="So I did not try to teach the agent to join correctly. Prompting is advice, and advice is something a model can decline to follow — under an unusual question, a long context, or instructions that arrived inside the data it read. I removed its ability to express a join at all. <mark class='ds-hl'>The agent asks for a metric by a dimension; something else decides what SQL that means.</mark> The question can still be wrong. The arithmetic cannot."
-           data-es="Así que no intenté enseñarle al agente a cruzar bien. Un prompt es un consejo, y un consejo es algo que un modelo puede no seguir — ante una pregunta inusual, un contexto largo o instrucciones que llegaron dentro de los datos que leyó. Le quité la capacidad de expresar un join. <mark class='ds-hl'>El agente pide una métrica por una dimensión; otra cosa decide qué SQL significa eso.</mark> La pregunta todavía puede estar mal. La aritmética no.">
-          So I did not try to teach the agent to join correctly. Prompting is advice, and advice is something a model can decline to follow — under an unusual question, a long context, or instructions that arrived inside the data it read. I removed its ability to express a join at all. <mark class="ds-hl">The agent asks for a metric by a dimension; something else decides what SQL that means.</mark> The question can still be wrong. The arithmetic cannot.
+        <p data-en="So I did not try to teach the agent to join correctly. Prompting is advice, and advice is something a model can decline to follow — under an unusual question, a long context, or instructions that arrived inside the data it read. I removed its ability to express a join at all. <mark class='ds-hl'>The agent asks for a metric by a dimension; something else decides what SQL that means.</mark> The agent never authors SQL: every request goes through predefined metrics and join paths. That removes one class of error, not every error — an answer is still only as correct as the source data, the semantic definitions and their implementation, and the question can still be the wrong one."
+           data-es="Así que no intenté enseñarle al agente a cruzar bien. Un prompt es un consejo, y un consejo es algo que un modelo puede no seguir — ante una pregunta inusual, un contexto largo o instrucciones que llegaron dentro de los datos que leyó. Le quité la capacidad de expresar un join. <mark class='ds-hl'>El agente pide una métrica por una dimensión; otra cosa decide qué SQL significa eso.</mark> El agente nunca escribe SQL: toda petición pasa por métricas y rutas de cruce predefinidas. Eso elimina una clase de error, no todos — una respuesta sigue siendo tan correcta como lo sean los datos fuente, las definiciones semánticas y su implementación, y la pregunta todavía puede ser la equivocada.">
+          So I did not try to teach the agent to join correctly. Prompting is advice, and advice is something a model can decline to follow — under an unusual question, a long context, or instructions that arrived inside the data it read. I removed its ability to express a join at all. <mark class="ds-hl">The agent asks for a metric by a dimension; something else decides what SQL that means.</mark> The agent never authors SQL: every request goes through predefined metrics and join paths. That removes one class of error, not every error — an answer is still only as correct as the source data, the semantic definitions and their implementation, and the question can still be the wrong one.
         </p>
       </div>
     </div>
@@ -446,8 +446,8 @@
 
       <p class="ds-footnote" style="margin-top:var(--sp-6)">
         <span class="ds-footnote__mark">[1]</span>
-        <span data-en="Turnaround measured against the prior manual process — one analyst-week of spreadsheet reconciliation to <span class='ds-num'>10 min</span> end to end. Execution accuracy is validated against a purpose-built <span class='ds-num'>96</span>-question benchmark, which doubles as the regression suite for the semantic layer."
-              data-es="El tiempo de respuesta se mide contra el proceso manual anterior — una semana-analista de reconciliación de hojas de cálculo frente a <span class='ds-num'>10 min</span> de extremo a extremo. La precisión de ejecución se valida contra un benchmark propio de <span class='ds-num'>96</span> preguntas, que además es la suite de regresión de la capa semántica.">Turnaround measured against the prior manual process — one analyst-week of spreadsheet reconciliation to <span class="ds-num">10 min</span> end to end. Execution accuracy is validated against a purpose-built <span class="ds-num">96</span>-question benchmark, which doubles as the regression suite for the semantic layer.</span>
+        <span data-en="Turnaround is measured against the prior manual process: one analyst-week of spreadsheet reconciliation, taken as <span class='ds-num'>40</span> working hours, against <span class='ds-num'>10 min</span> end to end (<span class='ds-num'>40 h ÷ 10 min = 240×</span>). Execution accuracy is checked against a purpose-built <span class='ds-num'>96</span>-question benchmark of real business questions, which doubles as the regression suite for the semantic layer."
+              data-es="El tiempo de respuesta se mide contra el proceso manual anterior: una semana-analista de reconciliación de hojas de cálculo, tomada como <span class='ds-num'>40</span> horas laborales, frente a <span class='ds-num'>10 min</span> de extremo a extremo (<span class='ds-num'>40 h ÷ 10 min = 240×</span>). La precisión de ejecución se verifica contra un benchmark propio de <span class='ds-num'>96</span> preguntas de negocio reales, que además es la suite de regresión de la capa semántica.">Turnaround is measured against the prior manual process: one analyst-week of spreadsheet reconciliation, taken as <span class="ds-num">40</span> working hours, against <span class="ds-num">10 min</span> end to end (<span class="ds-num">40 h ÷ 10 min = 240×</span>). Execution accuracy is checked against a purpose-built <span class="ds-num">96</span>-question benchmark of real business questions, which doubles as the regression suite for the semantic layer.</span>
       </p>
     </div>
   </div>
@@ -567,8 +567,8 @@
       <a class="ds-card" href="../anonymization-pipeline/">
         <div class="ds-card__meta"><span class="ds-label" data-en="Sibling case study" data-es="Caso de estudio hermano">Sibling case study</span></div>
         <h3 class="ds-card__title" data-en="The anonymization pipeline" data-es="La tubería de anonimización">The anonymization pipeline</h3>
-        <p class="ds-card__body" data-en="The layer beneath this one — how personal data is made structurally unreachable before any agent exists."
-           data-es="La capa que está debajo de esta — cómo los datos personales se vuelven estructuralmente inalcanzables antes de que exista ningún agente.">The layer beneath this one — how personal data is made structurally unreachable before any agent exists.</p>
+        <p class="ds-card__body" data-en="The layer beneath this one — how personal data is kept out of the agent's reach before any agent exists."
+           data-es="La capa que está debajo de esta — cómo los datos personales quedan fuera del alcance del agente antes de que exista ningún agente.">The layer beneath this one — how personal data is kept out of the agent's reach before any agent exists.</p>
         <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
       </a>
       <a class="ds-card" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">

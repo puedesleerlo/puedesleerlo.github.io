@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Data the AI Cannot Reach — A Municipal PII Anonymization Pipeline</title>
-<meta name="description" content="Privacy as an architectural property, not a policy promise. How I designed a production PII anonymization pipeline for municipal public-space data in Medellín, so that everything built above it is structurally unable to reach an identity.">
+<meta name="description" content="Privacy as an architectural property, not a policy promise. How I designed a production de-identification pipeline for municipal public-space data in Medellín — hashed linkage keys, suppression and generalization, release checks and restricted downstream access — and the re-identification risk that remains.">
 <meta name="author" content="Alejandro Tabares">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Data the AI Cannot Reach — A Municipal PII Anonymization Pipeline">
-<meta property="og:description" content="Privacy as an architectural property, not a policy promise — how to make personal data structurally unreachable by everything built on top.">
+<meta property="og:description" content="Privacy as an architectural property, not a policy promise — keeping personal data out of reach of everything built on top, and being honest about the risk that remains.">
 <meta property="og:url" content="https://puedesleerlo.github.io/work/anonymization-pipeline/">
 <meta name="twitter:card" content="summary">
 
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
 
 <link rel="stylesheet" href="../../_ds/cosmografia/styles.css?v=8c73df0c">
-<link rel="stylesheet" href="../../_ds/site.css?v=1cba8f3d">
+<link rel="stylesheet" href="../../_ds/site.css?v=2d5b4d4f">
 <link rel="stylesheet" href="../../_ds/figures.css?v=c14e93dd">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -86,9 +86,9 @@
   </h1>
 
   <p class="deck"
-     data-en="Privacy as an architectural property, not a policy promise — <em>how to make personal data structurally unreachable by everything built on top.</em>"
-     data-es="La privacidad como propiedad arquitectónica, no como promesa de política — <em>cómo lograr que los datos personales sean estructuralmente inalcanzables para todo lo que se construya encima.</em>">
-    Privacy as an architectural property, not a policy promise — <em>how to make personal data structurally unreachable by everything built on top.</em>
+     data-en="Privacy as an architectural property, not a policy promise — <em>how to keep personal data out of reach of everything built on top, and what risk remains.</em>"
+     data-es="La privacidad como propiedad arquitectónica, no como promesa de política — <em>cómo mantener los datos personales fuera del alcance de todo lo que se construya encima, y qué riesgo queda.</em>">
+    Privacy as an architectural property, not a policy promise — <em>how to keep personal data out of reach of everything built on top, and what risk remains.</em>
   </p>
 
   <div class="byline">
@@ -151,11 +151,15 @@
            data-es="Así que construí la garantía dentro de los datos y no en los permisos que los rodean. <mark class='ds-hl'>Garantía por construcción, no por permiso.</mark> Todo lo que sigue se deriva de ese único compromiso.">
           So I built the guarantee into the data rather than into the permissions around it. <mark class="ds-hl">Guarantee by construction, not by permission.</mark> Everything below follows from that one commitment.
         </p>
+        <p data-en="<strong>What that does and does not guarantee.</strong> The pipeline combines hashed linkage keys, suppression and generalization, with release checks and restricted downstream access. It keeps direct identifiers out of everything the AI layer can read. It does not make re-identification impossible: the residual risk depends on how predictable the identifiers are and on what auxiliary data an attacker holds. The last section says where that risk still sits."
+           data-es="<strong>Qué garantiza esto y qué no.</strong> La tubería combina llaves de enlace hasheadas, supresión y generalización, con verificaciones previas a la publicación y acceso restringido aguas abajo. Mantiene los identificadores directos fuera de todo lo que la capa de IA puede leer. No hace imposible la reidentificación: el riesgo residual depende de qué tan predecibles sean los identificadores y de qué datos auxiliares tenga un atacante. La última sección dice dónde sigue estando ese riesgo.">
+          <strong>What that does and does not guarantee.</strong> The pipeline combines hashed linkage keys, suppression and generalization, with release checks and restricted downstream access. It keeps direct identifiers out of everything the AI layer can read. It does not make re-identification impossible: the residual risk depends on how predictable the identifiers are and on what auxiliary data an attacker holds. The last section says where that risk still sits.
+        </p>
       </div>
 
       <div class="figure-slot" id="fig-sets">
         <figure class="ds-figure fx-figure" data-alt-en="Two sets. The released layer contains hashed join keys, generalized values and suppressed columns. What identifies a person contains names, document numbers and exact addresses. Their intersection is labelled empty. Outside both sets sits auxiliary data held elsewhere in the world, which no release controls." data-alt-es="Dos conjuntos: la capa publicada, con llaves hasheadas y valores generalizados, y lo que identifica a una persona, con nombres, documentos y direcciones exactas. Su intersección está marcada como vacía. Fuera de ambos están los datos auxiliares del resto del mundo.">
-          <p class="ds-figure__title" data-en="The intersection is empty by construction, not by policy" data-es="La intersección es vacía por construcción, no por política">The intersection is empty by construction, not by policy</p>
+          <p class="ds-figure__title" data-en="No direct identifier is released: by construction, not by policy" data-es="Ningún identificador directo se publica: por construcción, no por política">No direct identifier is released: by construction, not by policy</p>
           <span class="ds-label ds-figure__sub" data-en="fig. 1 · membership, not counts · 13 field classes" data-es="fig. 1 · pertenencia, no conteos · 13 clases de campo">fig. 1 · membership, not counts · 13 field classes</span>
           <div class="ds-figure__body">
             <div class="fx-wrap fx-wrap--wide" style="--vbw:760">
@@ -191,7 +195,7 @@
               </ol>
             </div>
           </div>
-          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy — the empty central region is the whole claim: nothing in the released layer is also identifying · the space outside both sets is auxiliary data held elsewhere in the world, which no release controls and this design cannot see" data-es="anatomía — la región central vacía es toda la afirmación: nada de lo publicado identifica · el espacio fuera de ambos conjuntos son los datos auxiliares del resto del mundo, que ninguna publicación controla">anatomy — the empty central region is the whole claim: nothing in the released layer is also identifying · the space outside both sets is auxiliary data held elsewhere in the world, which no release controls and this design cannot see</span></div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy — the empty central region is the claim: no direct identifier appears in the released layer · the space outside both sets is auxiliary data held elsewhere in the world, which no release controls and this design cannot see — and where residual re-identification risk lives" data-es="anatomía — la región central vacía es toda la afirmación: nada de lo publicado identifica · el espacio fuera de ambos conjuntos son los datos auxiliares del resto del mundo, que ninguna publicación controla">anatomy — the empty central region is the claim: no direct identifier appears in the released layer · the space outside both sets is auxiliary data held elsewhere in the world, which no release controls and this design cannot see — and where residual re-identification risk lives</span></div>
         </figure>
       </div>
     </div>
@@ -258,13 +262,13 @@
       </div>
 
       <div class="figure-slot" id="fig-pipeline">
-        <figure class="ds-figure fx-figure" data-alt-en="Raw governed intake is classified, then transformed by one of three techniques — irreversible hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary." data-alt-es="La entrada cruda gobernada se clasifica, luego se transforma con una de tres técnicas — hashing irreversible, supresión o generalización — y se verifica en una compuerta de validación. Solo lo que pasa la compuerta cruza una frontera de un solo sentido hacia la capa publicada anonimizada, única superficie que la capa semántica, la recuperación y los agentes pueden leer. Ningún camino regresa a través de la frontera.">
+        <figure class="ds-figure fx-figure" data-alt-en="Raw governed intake is classified, then transformed by one of three techniques — one-way hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary." data-alt-es="La entrada cruda gobernada se clasifica, luego se transforma con una de tres técnicas — hashing unidireccional, supresión o generalización — y se verifica en una compuerta de validación. Solo lo que pasa la compuerta cruza una frontera de un solo sentido hacia la capa publicada anonimizada, única superficie que la capa semántica, la recuperación y los agentes pueden leer. Ningún camino regresa a través de la frontera.">
           <p class="ds-figure__title" data-en="Nothing crosses back: the boundary is one-way by construction" data-es="Nada regresa: la frontera es de un solo sentido por construcción">Nothing crosses back: the boundary is one-way by construction</p>
           <span class="ds-label ds-figure__sub" data-en="fig. 2 · production pipeline · read from the bottom up" data-es="fig. 2 · tubería en producción · léase de abajo hacia arriba">fig. 2 · production pipeline · read from the bottom up</span>
           <div class="ds-figure__body">
             <div class="fx-wrap" style="--vbw:520">
               <div class="fx">
-                <svg viewBox="0 0 520 802" role="img" aria-label="Raw governed intake is classified, then transformed by one of three techniques — irreversible hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary.">
+                <svg viewBox="0 0 520 802" role="img" aria-label="Raw governed intake is classified, then transformed by one of three techniques — one-way hashing, suppression or generalization — and checked at a validation gate. Only what passes the gate crosses a one-way boundary into the released anonymized layer, which is the only surface the semantic layer, retrieval and agents can read. No path returns across the boundary.">
 <defs><pattern id="dots-pipe" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="var(--muted)" opacity="0.3"/></pattern><marker id="ah-p" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto"><path d="M0,0 L8.5,3.5 L0,7 Z" fill="var(--ink)"/></marker></defs>
 <rect x="1" y="1" width="518" height="800" fill="url(#dots-pipe)" stroke="var(--rule)" stroke-width="1"/>
 <!-- released zone, at the top -->
@@ -302,7 +306,7 @@
                   <div class="fx-l fx-l--start" style="left:5%;top:42.933%"><span class="fx-tag" data-en="RESTRICTED · RAW" data-es="RESTRINGIDO · CRUDO">RESTRICTED · RAW</span></div>
                   <div class="fx-l fx-l--mid" style="left:50%;top:95.511%;width:53.846%"><span class="fx-t" data-en="Raw governed intake" data-es="Entrada cruda gobernada">Raw governed intake</span><span class="fx-s" data-en="never leaves this side" data-es="nunca sale de este lado">never leaves this side</span></div>
                   <div class="fx-l fx-l--mid" style="left:50%;top:86.783%;width:65.385%"><span class="fx-t" data-en="Classification of attributes" data-es="Clasificación de atributos">Classification of attributes</span><span class="fx-s" data-en="technique chosen per attribute class" data-es="técnica elegida por clase de atributo">technique chosen per attribute class</span></div>
-                  <div class="fx-l fx-l--mid" style="left:50%;top:59.601%;width:65.385%"><span class="fx-t" data-en="Irreversible hashing" data-es="Hashing irreversible">Irreversible hashing</span><span class="fx-s" data-en="linkage survives · identity does not" data-es="el enlace sobrevive · la identidad no">linkage survives · identity does not</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:59.601%;width:65.385%"><span class="fx-t" data-en="One-way hashing" data-es="Hashing unidireccional">One-way hashing</span><span class="fx-s" data-en="linkage survives · raw value dropped" data-es="el enlace sobrevive · el valor crudo no">linkage survives · raw value dropped</span></div>
                   <div class="fx-l fx-l--mid" style="left:50%;top:67.581%;width:65.385%"><span class="fx-t" data-en="Suppression" data-es="Supresión">Suppression</span><span class="fx-s" data-en="no analytic value · not published" data-es="sin valor analítico · no se publica">no analytic value · not published</span></div>
                   <div class="fx-l fx-l--mid" style="left:50%;top:75.561%;width:65.385%"><span class="fx-t" data-en="Generalization" data-es="Generalización">Generalization</span><span class="fx-s" data-en="distribution kept · exact value dropped" data-es="se conserva la distribución · no el valor">distribution kept · exact value dropped</span></div>
                   <div class="fx-l fx-l--mid" style="left:50%;top:48.379%;width:57.692%"><span class="fx-t" data-en="Validation gate" data-es="Compuerta de validación">Validation gate</span><span class="fx-s fx-narrow" data-en="residual identifiers · linkage risk" data-es="identificadores residuales · riesgo de enlace">residual identifiers · linkage risk</span></div>
@@ -329,7 +333,7 @@
                 <li class="fx-legend__head"><span class="fx-tag" data-en="RESTRICTED · RAW" data-es="RESTRINGIDO · CRUDO">RESTRICTED · RAW</span></li>
                 <li><span class="fx-key">1</span><span class="fx-legend__body"><span class="fx-t" data-en="Raw governed intake" data-es="Entrada cruda gobernada">Raw governed intake</span><span class="fx-s" data-en="never leaves this side" data-es="nunca sale de este lado">never leaves this side</span></span></li>
                 <li><span class="fx-key">2</span><span class="fx-legend__body"><span class="fx-t" data-en="Classification of attributes" data-es="Clasificación de atributos">Classification of attributes</span><span class="fx-s" data-en="technique chosen per attribute class" data-es="técnica elegida por clase de atributo">technique chosen per attribute class</span></span></li>
-                <li><span class="fx-key">3</span><span class="fx-legend__body"><span class="fx-t" data-en="Irreversible hashing" data-es="Hashing irreversible">Irreversible hashing</span><span class="fx-s" data-en="linkage survives · identity does not" data-es="el enlace sobrevive · la identidad no">linkage survives · identity does not</span></span></li>
+                <li><span class="fx-key">3</span><span class="fx-legend__body"><span class="fx-t" data-en="One-way hashing" data-es="Hashing unidireccional">One-way hashing</span><span class="fx-s" data-en="linkage survives · raw value dropped" data-es="el enlace sobrevive · el valor crudo no">linkage survives · raw value dropped</span></span></li>
                 <li><span class="fx-key">4</span><span class="fx-legend__body"><span class="fx-t" data-en="Suppression" data-es="Supresión">Suppression</span><span class="fx-s" data-en="no analytic value · not published" data-es="sin valor analítico · no se publica">no analytic value · not published</span></span></li>
                 <li><span class="fx-key">5</span><span class="fx-legend__body"><span class="fx-t" data-en="Generalization" data-es="Generalización">Generalization</span><span class="fx-s" data-en="distribution kept · exact value dropped" data-es="se conserva la distribución · no el valor">distribution kept · exact value dropped</span></span></li>
                 <li><span class="fx-key">6</span><span class="fx-legend__body"><span class="fx-t" data-en="Validation gate" data-es="Compuerta de validación">Validation gate</span><span class="fx-s fx-narrow" data-en="residual identifiers · linkage risk" data-es="identificadores residuales · riesgo de enlace">residual identifiers · linkage risk</span></span></li>
@@ -389,10 +393,10 @@
           <div>
             <h3>
               <span class="ds-label mk" data-en="Decision A" data-es="Decisión A">Decision A</span>
-              <span class="h-min" data-en="Irreversibility over encryption" data-es="Irreversibilidad en vez de cifrado">Irreversibility over encryption</span>
+              <span class="h-min" data-en="One-way keys over reversible tokens" data-es="Llaves unidireccionales en vez de tokens reversibles">One-way keys over reversible tokens</span>
             </h3>
-            <p data-en="Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere."
-               data-es="Donde la identidad debe destruirse pero el enlace debe sobrevivir, aplico hashing irreversible con <strong>SHA-256</strong> en lugar de cifrar o tokenizar mediante un mapeo reversible. La misma persona produce el mismo token en cada corrida, así que los cruces y la deduplicación siguen funcionando — mientras que el valor en sí no lleva a ninguna parte.">Where identity must be destroyed but linkage must survive, I hash irreversibly with <strong>SHA-256</strong> rather than encrypt or tokenize through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — while the value itself leads nowhere.</p>
+            <p data-en="Where a value must stop being readable but linkage must survive, I replace it with a <strong>SHA-256</strong> hash rather than encrypt it or tokenize it through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — and the released layer holds no key or lookup table to steal."
+               data-es="Donde un valor debe dejar de ser legible pero el enlace debe sobrevivir, lo reemplazo por un hash <strong>SHA-256</strong> en lugar de cifrarlo o tokenizarlo mediante un mapeo reversible. La misma persona produce el mismo token en cada corrida, así que los cruces y la deduplicación siguen funcionando — y la capa publicada no guarda ninguna llave ni tabla de correspondencia que robar.">Where a value must stop being readable but linkage must survive, I replace it with a <strong>SHA-256</strong> hash rather than encrypt it or tokenize it through a reversible mapping. The same person yields the same token on every run, so joins and deduplication keep working — and the released layer holds no key or lookup table to steal.</p>
           </div>
           <div>
             <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
@@ -401,8 +405,8 @@
           </div>
           <div>
             <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
-            <p class="col-body" data-en="The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong>"
-               data-es="La capa publicada serían datos personales con una tapa delgada. Todo sistema aguas abajo hereda la obligación de custodiar datos personales, y una sola llave filtrada desanonimiza retroactivamente toda publicación jamás hecha. El hashing no tiene ese modo de falla: <strong>no hay nada que filtrar, y nadie — yo incluido — puede revertir una publicación.</strong>">The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing has no such failure mode: <strong>there is nothing to leak, and no one — including me — can reverse a release.</strong></p>
+            <p class="col-body" data-en="The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing removes that failure mode: there is no decryption key to leak. <strong>It does not remove the other one.</strong> A hash of a predictable identifier, such as a national ID number, can be matched by anyone who hashes every candidate value — so how much the tokens protect depends on how predictable the identifiers are and what auxiliary data an attacker holds."
+               data-es="La capa publicada serían datos personales con una tapa delgada. Todo sistema aguas abajo hereda la obligación de custodiar datos personales, y una sola llave filtrada desanonimiza retroactivamente toda publicación jamás hecha. El hashing elimina ese modo de falla: no hay llave de descifrado que filtrar. <strong>No elimina el otro.</strong> El hash de un identificador predecible, como un número de cédula, puede emparejarse por cualquiera que calcule el hash de cada valor candidato — así que cuánto protegen los tokens depende de qué tan predecibles sean los identificadores y de qué datos auxiliares tenga un atacante.">The released layer would be personal data under a thin cover. Every downstream system inherits the obligation of holding personal data, and a single leaked key retroactively de-anonymizes every release ever made. Hashing removes that failure mode: there is no decryption key to leak. <strong>It does not remove the other one.</strong> A hash of a predictable identifier, such as a national ID number, can be matched by anyone who hashes every candidate value — so how much the tokens protect depends on how predictable the identifiers are and what auxiliary data an attacker holds.</p>
           </div>
         </article>
 
@@ -509,12 +513,16 @@
     <div class="rail">
       <span class="num">VI</span>
       <span class="rail-name" data-en="What I'd probe next" data-es="Qué indagaría">What I'd probe next</span>
-      <span class="ds-note" data-en="Three things I would not defend as finished." data-es="Tres cosas que no defendería como terminadas.">Three things I would not defend as finished.</span>
+      <span class="ds-note" data-en="Four things I would not defend as finished." data-es="Cuatro cosas que no defendería como terminadas.">Four things I would not defend as finished.</span>
     </div>
     <div>
       <h2 class="h-sec" data-en="Where I think this is still weak" data-es="Dónde creo que esto sigue siendo débil">Where I think this is still weak</h2>
 
       <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="<strong>A hashed key is a pseudonym, not an anonymous value.</strong> Document numbers come from a small, structured space, so anyone who can read the released layer and enumerate candidates can hash them and match tokens. Keyed hashing, with the key held on the restricted side, closes that path; restricting who can query the released layer only narrows it. NIST treats hashed identifiers the same way: as pseudonymization, whose strength depends on what an attacker can guess."
+           data-es="<strong>Una llave hasheada es un seudónimo, no un valor anónimo.</strong> Los números de documento vienen de un espacio pequeño y estructurado, así que quien pueda leer la capa publicada y enumerar candidatos puede calcular sus hashes y emparejar tokens. Un hash con llave, guardada del lado restringido, cierra ese camino; restringir quién consulta la capa publicada sólo lo estrecha. NIST trata los identificadores hasheados igual: como seudonimización, cuya fuerza depende de lo que un atacante pueda adivinar.">
+          <strong>A hashed key is a pseudonym, not an anonymous value.</strong> Document numbers come from a small, structured space, so anyone who can read the released layer and enumerate candidates can hash them and match tokens. Keyed hashing, with the key held on the restricted side, closes that path; restricting who can query the released layer only narrows it. NIST treats hashed identifiers the same way: as pseudonymization, whose strength depends on what an attacker can guess.
+        </p>
         <p data-en="<strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies."
            data-es="<strong>El tratamiento es a nivel de campo.</strong> Razona sobre los atributos de uno en uno, y los ataques de reidentificación más filosos no — trabajan sobre combinaciones. Una garantía formal tipo <em>k</em>-anonimato o ℓ-diversidad sobre conjuntos de cuasi-identificadores diría algo que el diseño actual solo insinúa.">
           <strong>The treatment is field-level.</strong> It reasons about attributes one at a time, and the sharpest re-identification attacks do not — they work on combinations. A formal <em>k</em>-anonymity or ℓ-diversity style guarantee over quasi-identifier sets would say something the current design only implies.

@@ -148,6 +148,11 @@ a { color: inherit; }
   max-width: 30ch;
 }
 .front .ds-claim .ds-hl { font-style: italic; }
+.front__lede {
+  max-width: 52ch; margin: var(--sp-5) 0 0;
+  font-size: var(--fs-base); line-height: 1.55; color: var(--ink);
+  text-wrap: pretty;
+}
 
 .availability {
   display: flex; gap: var(--sp-3); align-items: baseline;
