@@ -20,6 +20,9 @@ decision be made when the evidence cannot settle it?* The **The question** secti
 what remains unresolved. Everything else on the page is evidence for it:
 
 - the hero states the question
+- **Selected work comes first** (Plate I), right after the frontispiece: the two
+  case studies as full-width spreads, then the catalog
+- the question (Plate II) is the short version of the essay, beside the arched stair
 - each Experience entry opens with a `.frame` line tying the role back to a movement
 - Selected work reports what each system was *measured against*, not just what it did
 - Education is presented as three chapters chosen in a deliberate order
@@ -47,19 +50,37 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
 - **Type.** Castoro Titling (titles, the name), Castoro italic (the annotating
   voice), Instrument Sans (body), Martian Mono (every measured number, label,
   coordinate and catalog code). Loaded from Google Fonts.
-- **Plates.** Illustrations live in `assets/art/` as optimized SVGs and are
-  presented as `.ds-atlas` plates. They assemble themselves ground-up when they
-  scroll in (`TabaresDS.mountPlates`); the frontispiece tower carries the four
-  headline metrics as blue-pencil callouts, which become numbered keys plus a
-  legend on phones. One plate per section, five on the landing page at most.
-- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as plates,
-  the rest as rows with a generated constellation seal.
+- **Plates.** Illustrations live in `assets/art/` as SVGs prepared with the design
+  system's `scripts/art/svgopt.py` and presented as `.ds-atlas` plates. They assemble
+  themselves ground-up when they scroll in (`TabaresDS.mountPlates`). The
+  frontispiece outpost carries the four headline metrics as blue-pencil callouts
+  (the dish, the solar array, the board of status lights, the ground floor), which
+  become numbered keys plus a legend on phones.
+- **No image appears twice across the site.** Landing: outpost (frontispiece),
+  conduit and vault (the case-study spreads, repeated only on their own case-study
+  page), stair (question), airship (experience), astrolabe (apparatus), zodiac
+  (research), keeper (contact), city (closing). Essay: lighthouse, cosmogram, cabin,
+  figure, whales. When you add a plate, check this list first.
+- **Figures in the margin move, slowly.** The airship floats and crosses its margin
+  as you scroll, the astrolabe swings from its ring, the star chart turns once every
+  four minutes, the keeper rises into view. Motion is always on the wrapper element,
+  never on the SVG, so the drawing is composited once and never repaints. All of it
+  stops under `prefers-reduced-motion`.
+- **Night plate.** Research (`#research`) is the one dark surface
+  (`data-theme="dark"` on the section), because it holds the star chart. The site
+  itself stays white.
+- **No text inside any SVG.** Diagrams draw only lines and shapes; every label is
+  HTML over or beside the drawing, so it swaps language and reflows. The division
+  on the essay page is an HTML bracket with text-free SVG braces (`.bracket` in
+  `_ds/site.css`); the case-study diagrams use `_ds/figures.css`.
+- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as
+  spreads, the rest as rows with a generated constellation seal.
 - **Motion** is slow and honors `prefers-reduced-motion`; without JavaScript every
   drawing is a plain `<img>` and every highlight is simply on.
 
 `_ds/cosmografia/` is a copy of the design system's browser build
-(`dist/browser/` in the Cosmografía repo) plus React 18 UMD, used only to mount
-the idea diagrams (`SITE_FIGURES`). To update it, run `npm run build` in the design
+(`dist/browser/` in the Cosmografía repo) plus React 18 UMD. The browser build
+needs React loaded before it even where no React figure is mounted. To update it, run `npm run build` in the design
 system and copy `dist/browser/cosmografia.js` and `styles.css` here. Page layout
 lives in `_ds/site.css`; behavior in `_ds/site.js`.
 

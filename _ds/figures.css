@@ -1,0 +1,133 @@
+/* ============================================================
+   Figures without type in the drawing
+
+   The SVG in a case-study figure carries only drawing: boxes, rules,
+   arrows, circles, the one hand stroke, the ember band. Every word is
+   an HTML element laid over it, positioned in percentages of the
+   viewBox, so the words and the drawing scale together at any width.
+
+   Markup (see work/…/index.html):
+
+     .fx-wrap  [style="--vbw: <viewBox width>"]   size container
+       .fx                                         drawing + overlay
+         svg[role=img]                             drawing only
+         .fx-labels[aria-hidden]                   .fx-l labels, .fx-key keys
+       ol.fx-legend                                the same words as a list
+
+   Sizes are given in viewBox units and converted with cqw, so a label
+   is exactly as large as it would have been as SVG text. When the
+   drawing gets too small for that to be legible, the labels give way
+   to numbered keys in the drawing and a legend below it.
+   ============================================================ */
+
+.fx-wrap { container: fx / inline-size; --vbw: 520; }
+.fx { position: relative; }
+.fx svg { display: block; width: 100%; height: auto; }
+.fx-labels { position: absolute; inset: 0; pointer-events: none; }
+
+/* one unit of the viewBox, in the rendered width */
+.fx-labels { --u: calc(100cqw / var(--vbw)); }
+
+/* ---- labels over the drawing ------------------------------------------ */
+
+.fx-l {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+.fx-l--mid   { transform: translate(-50%, -50%); }
+.fx-l--start { transform: translate(0, -50%);    align-items: flex-start; text-align: left; }
+.fx-l--end   { transform: translate(-100%, -50%); align-items: flex-end;  text-align: right; }
+
+.fx-l > span, .fx-legend__body > span { display: block; }
+
+/* mono voice: the design-system label face */
+.fx-t, .fx-s, .fx-tag, .fx-band, .fx-name, .fx-region {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" var(--mono-width);
+}
+.fx-t      { font-weight: 600; color: var(--ink); }
+.fx-s      { font-weight: 400; color: var(--muted-ink); }
+.fx-tag    { font-weight: 400; color: var(--muted-ink); letter-spacing: var(--track-label); text-transform: uppercase; }
+.fx-band   { font-weight: 700; color: var(--ink-on-highlight); letter-spacing: var(--track-label); }
+.fx-name   { font-weight: 700; color: var(--ink); }
+.fx-region { font-weight: 400; color: var(--muted-ink); }
+
+/* annotating voice: Castoro italic in blue pencil */
+.fx-note, .fx-out { font-family: var(--font-serif); font-style: italic; color: var(--hand); }
+
+/* sizes in viewBox units (the values the SVG text used) */
+.fx-labels .fx-t      { font-size: calc(12.5 * var(--u)); }
+.fx-labels .fx-s      { font-size: calc(10.5 * var(--u)); line-height: 1.55; }
+.fx-labels .fx-tag    { font-size: calc(10.5 * var(--u)); }
+.fx-labels .fx-band   { font-size: calc(11 * var(--u)); }
+.fx-labels .fx-note   { font-size: calc(13 * var(--u)); }
+.fx-labels .fx-name   { font-size: calc(13 * var(--u)); }
+.fx-labels .fx-region { font-size: calc(11.5 * var(--u)); line-height: 1.3; }
+.fx-labels .fx-out    { font-size: calc(15 * var(--u)); }
+
+/* set labels cross the circle strokes: lift them off the ink with a paper halo */
+.fx-labels .fx-name,
+.fx-labels .fx-region {
+  text-shadow: 0 0 2px var(--paper), 0 0 2px var(--paper), 0 0 3px var(--paper), 0 0 4px var(--paper);
+}
+
+/* set circles (drawn, not interactive) */
+.fx-set { fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); }
+
+/* ---- numbered keys + legend (small drawings) -------------------------- */
+
+.fx-key {
+  display: none;
+  place-items: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: var(--stroke-hair) solid var(--ink);
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" 75;
+  font-size: 10px; font-weight: 600; line-height: 1;
+  color: var(--ink);
+}
+.fx-labels .fx-key { position: absolute; transform: translate(-50%, -50%); }
+.fx-key--hand { border-color: var(--hand); color: var(--hand); }
+
+.fx-legend {
+  display: none;
+  list-style: none; margin: var(--sp-4) 0 0; padding: 0;
+  gap: var(--sp-2);
+}
+.fx-legend li {
+  display: grid; grid-template-columns: 18px minmax(0, 1fr);
+  gap: var(--sp-3); align-items: start;
+}
+.fx-legend li > .fx-key { display: grid; margin-top: 1px; }
+.fx-legend__head { margin-top: var(--sp-2); }
+.fx-legend__head:first-child { margin-top: 0; }
+.fx-legend__head .fx-tag { grid-column: 1 / -1; }
+.fx-legend__body { min-width: 0; font-size: var(--fs-2xs); line-height: 1.45; }
+.fx-legend .fx-t, .fx-legend .fx-name { font-size: var(--fs-xs); }
+.fx-legend .fx-s, .fx-legend .fx-region,
+.fx-legend .fx-tag, .fx-legend .fx-band { font-size: var(--fs-2xs); }
+.fx-legend .fx-band { color: var(--ink); }
+.fx-legend .fx-note, .fx-legend .fx-out { font-size: var(--fs-sm); }
+.fx-legend__body > .fx-region { display: inline; }
+.fx-legend__body > .fx-region + .fx-region::before { content: " "; }
+
+/* 520-wide drawings: below ~470px the 10.5-unit labels would fall under 9.5px */
+@container fx (max-width: 469px) {
+  .fx-labels .fx-l { display: none; }
+  .fx-labels .fx-key { display: grid; }
+  .fx-legend { display: grid; }
+}
+/* 760-wide set diagrams keep their labels only down to ~660px */
+@container fx (max-width: 659px) {
+  .fx-wrap--wide .fx-labels .fx-l { display: none; }
+  .fx-wrap--wide .fx-labels .fx-key { display: grid; }
+  .fx-wrap--wide .fx-legend { display: grid; }
+}
+
+/* a line too long for its box at the base width is set condensed, not smaller */
+.fx-labels .fx-narrow { font-variation-settings: "wdth" 75; letter-spacing: -0.03em; }

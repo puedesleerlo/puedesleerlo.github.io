@@ -114,14 +114,14 @@ a { color: inherit; }
   align-items: start;
 }
 .front__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-2) var(--sp-5);
-  padding-bottom: var(--sp-3); border-bottom: var(--stroke-hair) solid var(--ink); }
+  padding-bottom: var(--sp-3); margin-bottom: clamp(24px, 3vw, 44px);
+  border-bottom: var(--stroke-hair) solid var(--ink); }
 /* the author: a portrait in an arched window, the name beside it */
 .front__id {
   display: grid;
   grid-template-columns: clamp(118px, 13vw, 176px) minmax(0, 1fr);
   gap: clamp(20px, 2.8vw, 40px);
   align-items: end;
-  margin-top: clamp(28px, 4vw, 52px);
 }
 .front__portrait {
   margin: 4px;
@@ -133,7 +133,7 @@ a { color: inherit; }
 }
 .front__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .front h1 {
-  font-size: clamp(34px, 4.1vw, 58px);
+  font-size: clamp(38px, 4.6vw, 68px);
   line-height: 1;
   letter-spacing: 0.07em;
 }
@@ -185,8 +185,10 @@ a { color: inherit; }
 
 /* the frontispiece plate: the tower, and the pencil drawn out to the metrics */
 .front__plate { position: relative; }
-.front__plate .ds-atlas__window { width: 64%; }
-.front__plate .ds-flock { top: 1%; left: 30%; width: 110px; }
+.front__plate .ds-atlas__window { width: 62%; }
+.front__plate .ds-flock { top: 3%; left: 2%; width: 110px; }
+/* over a colour plate the blue pencil needs a paper halo to stay legible */
+.front__plate .ds-atlas__leaders path { filter: drop-shadow(0 0 1.2px var(--paper)) drop-shadow(0 0 1.2px var(--paper)); }
 .front__plate .ds-atlas__legend { display: none; }
 .front__plate .ds-atlas__key { display: none; }
 
@@ -394,20 +396,86 @@ a.ds-card:hover .ds-card__title, a.ds-card:hover .ds-card__link { color: var(--h
 }
 
 /* ============================================================
-   Selected work — two plates and a catalogue
+   Selected work — first, as spreads: plate and argument side by side
    ============================================================ */
 
-.work-plates { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.5vw, 56px); margin-top: var(--sp-7); }
-.work-plate { display: grid; gap: var(--sp-4); align-content: start; text-decoration: none; color: inherit; }
-.work-plate .ds-atlas__art { background: var(--paper); }
-.work-plate .ds-atlas__window { padding: var(--sp-4) var(--sp-6) 0; }
-.work-plate .ds-card { border-top: none; padding-top: 0; }
-.work-plate:hover .ds-card__title { color: var(--hand-deep); }
-.work-plate:hover .ds-card__link { color: var(--hand-deep); }
-.work-plate:hover .ds-atlas { transform: translateY(-3px); }
-.work-plate .ds-atlas { transition: transform 420ms var(--ease-build); }
+/* a section head without the rail: number and name above, title beside */
+.sec-head {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(var(--sp-6), 5vw, 96px);
+  align-items: end;
+  padding-bottom: var(--sp-5);
+  border-bottom: var(--stroke-hair) solid var(--ink);
+}
+.sec-head__rail { display: grid; gap: var(--sp-3); align-content: end; }
+.sec-head__note { margin: var(--sp-4) 0 0; max-width: 58ch; font-size: var(--fs-base); line-height: 1.5; }
+.sec-head__rail .num, .qgrid__plate .num {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" var(--mono-width);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: var(--sp-3);
+  border-bottom: var(--stroke-hair) solid var(--ink);
+  width: 64px;
+  white-space: nowrap;
+}
+html[lang="en"] .sec-head__rail .num::before { content: "Plate "; }
+html[lang="es"] .sec-head__rail .num::before { content: "Lám. "; }
+.sec-head__rail .rail-name {
+  font-family: var(--font-title);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
 
-.catalogue { margin-top: var(--sp-8); border-top: var(--stroke-hair) solid var(--ink); }
+.spread {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(28px, 6vw, 104px);
+  align-items: center;
+  padding-block: clamp(48px, 6vw, 96px);
+}
+.spread + .spread { border-top: var(--stroke-hair) solid var(--rule); }
+.spread--flip .spread__plate { order: 2; }
+.spread__plate { display: block; text-decoration: none; color: inherit; }
+.spread__plate .ds-atlas__window { padding-inline: clamp(0px, 4vw, 64px); }
+.spread__plate .ds-atlas { transition: transform 520ms var(--ease-build); }
+.spread:hover .spread__plate .ds-atlas { transform: translateY(-4px); }
+.spread__text { display: grid; gap: var(--sp-5); align-content: center; max-width: 520px; }
+.spread__no {
+  display: block;
+  font-size: clamp(46px, 6.4vw, 92px);
+  line-height: 0.9;
+  color: var(--ink);
+}
+.spread__title {
+  font-family: var(--font-title);
+  font-size: clamp(26px, 2.9vw, 40px);
+  line-height: 1.08;
+  letter-spacing: 0.07em;
+  text-wrap: balance;
+}
+.readout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: center;
+  padding-block: var(--sp-3);
+  border-top: var(--stroke-hair) solid var(--ink);
+  border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.readout .ds-num--hero { font-size: clamp(30px, 3vw, 40px); }
+.readout .ds-label { color: var(--hand); line-height: 1.45; }
+.spread__body { margin: 0; font-size: var(--fs-base); line-height: 1.62; text-wrap: pretty; }
+.spread__body em { font-family: var(--font-serif); font-style: italic; color: var(--hand); }
+.spread__stack { margin: 0; }
+.spread .more { margin-top: 0; justify-self: start; }
+.spread:hover .more { color: var(--hand-deep); }
+
+.catalogue { margin-top: var(--sp-6); border-top: var(--stroke-hair) solid var(--ink); }
 .catalogue__head { display: flex; justify-content: space-between; gap: var(--sp-4); padding: var(--sp-3) 0; }
 .cat {
   display: grid;
@@ -427,6 +495,84 @@ a.ds-card:hover .ds-card__title, a.ds-card:hover .ds-card__link { color: var(--h
 .cat .ds-card__finding { margin-top: var(--sp-3); color: var(--muted-ink); }
 .cat .ds-card__link { display: inline-block; margin-top: var(--sp-3); }
 a.cat:hover .ds-card__title { color: var(--hand-deep); }
+
+/* ============================================================
+   The question — the arched stair beside the argument
+   ============================================================ */
+
+.qgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 6vw, 104px);
+  align-items: start;
+}
+.qgrid__plate { display: grid; gap: var(--sp-5); position: sticky; top: 96px; }
+.qgrid__plate .rail-name {
+  font-family: var(--font-title); font-size: var(--fs-sm);
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.qgrid__plate .ds-atlas { max-width: 440px; }
+.qgrid__text .prose { margin-top: var(--sp-6); }
+.qgrid__text .more { margin-top: var(--sp-5); }
+
+/* the four landings of the stair, read as a legend */
+.landings {
+  list-style: none; margin: var(--sp-6) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: var(--stroke-hair) solid var(--ink);
+}
+.landings li {
+  display: grid; gap: var(--sp-1);
+  padding: var(--sp-3) var(--sp-3) var(--sp-3) 0;
+  font-family: var(--font-serif); font-style: italic; font-size: var(--fs-lg); color: var(--hand);
+}
+.landings li + li { padding-left: var(--sp-3); border-left: var(--stroke-hair) solid var(--rule); }
+
+/* ============================================================
+   Figures in the margin — they are allowed to move, slowly.
+   Motion is always on the wrapper, never on the drawing: the
+   wrapper is composited once, so thousands of paths never repaint.
+   ============================================================ */
+
+.rail-fig .ds-atlas__art, .keeper .ds-atlas__window { will-change: transform; }
+
+.rail-fig { margin-top: var(--sp-6); }
+.rail-fig .ds-atlas__cap { border-top: none; padding-top: 0; }
+.rail-fig--float .ds-atlas__window { margin-inline: -8% -14%; }
+.rail-fig--swing .ds-atlas__window { margin-inline: 4%; }
+.rail-fig--spin .ds-atlas__window { margin: 10px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the airship rides a slow thermal */
+  .rail-fig--float .ds-atlas__art { animation: fig-float var(--dur-drift) var(--ease-drift) infinite alternate; }
+  @keyframes fig-float {
+    from { transform: translate3d(0, 0, 0) rotate(0.6deg); }
+    to   { transform: translate3d(-3%, -4%, 0) rotate(-1.2deg); }
+  }
+  /* the astrolabe hangs from its ring and swings, a little */
+  .rail-fig--swing .ds-atlas__art { transform-origin: 50% 3%; animation: fig-swing 14s var(--ease-drift) infinite alternate; }
+  @keyframes fig-swing { from { transform: rotate(-2.4deg); } to { transform: rotate(2.4deg); } }
+  /* the star chart turns, one lap every four minutes */
+  .rail-fig--spin .ds-atlas__art { animation: fig-spin 240s linear infinite; transform-origin: 50% 50%; }
+  @keyframes fig-spin { to { transform: rotate(360deg); } }
+
+  /* scroll-linked: the airship crosses its margin as you read the roles;
+     the keeper rises into view. Progressive — ignored where unsupported. */
+  @supports (animation-timeline: view()) {
+    .rail-fig--float { animation: fig-cross linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+    @keyframes fig-cross { from { translate: 14% 0; } to { translate: -10% 0; } }
+    .keeper .ds-atlas__window { animation: fig-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+    @keyframes fig-rise { from { translate: 0 18%; } to { translate: 0 0; } }
+  }
+}
+
+/* ============================================================
+   The night plate — the one dark surface, for the star chart
+   ============================================================ */
+
+.night { background: var(--paper); color: var(--ink); }
+.night + .sec { border-top: none; }
+.night .ds-atlas--round .ds-atlas__window::after { border-color: var(--rule-strong); }
 
 /* ============================================================
    Contact + closing plate
@@ -450,7 +596,17 @@ a.cat:hover .ds-card__title { color: var(--hand-deep); }
   word-break: break-word;
 }
 
-.closing { padding-block: 0 clamp(48px, 6vw, 96px); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(170px, 20vw, 260px);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: end;
+}
+.contact--2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.keeper { margin-bottom: calc(-1 * clamp(64px, 8vw, 128px)); }
+.keeper .ds-atlas__cap { border-top: none; padding-top: 0; margin-top: var(--sp-2); padding-bottom: var(--sp-5); }
+
+.closing { padding-block: clamp(48px, 6vw, 96px) clamp(48px, 6vw, 96px); border-top: var(--stroke-hair) solid var(--rule); }
 .closing .ds-atlas__window { margin-inline: auto; }
 
 /* ============================================================
@@ -484,16 +640,40 @@ a.cat:hover .ds-card__title { color: var(--hand-deep); }
 .fig-band { fill: var(--highlight-bg); stroke: none; }
 .fig-waist{ fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); }
 
-.ds-figure__body svg text.fig-t { font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; fill: var(--ink); }
-.ds-figure__body svg text.fig-s { font-family: var(--font-mono); font-size: 10.5px; fill: var(--muted-ink); }
-.ds-figure__body svg text.fig-tag { font-family: var(--font-mono); font-size: 10.5px; fill: var(--muted-ink); letter-spacing: var(--track-label); }
-.ds-figure__body svg text.fig-band-t { font-family: var(--font-mono); font-size: 11px; font-weight: 700; fill: var(--ink-on-highlight); letter-spacing: var(--track-label); }
 .fig-hand-on-hl { stroke: var(--ink-on-highlight); }
-.ds-figure__body svg text.fig-note { font-family: var(--font-serif); font-style: italic; font-size: var(--fs-xs); fill: var(--hand); }
 
 .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: var(--sp-4); }
 .legend-grid dl { margin: 0; display: grid; gap: 6px; }
 .legend-grid dd { margin: 0; font-size: var(--fs-sm); color: var(--muted-ink); line-height: 1.55; }
+
+/* the division as a Ramist bracket: HTML labels, braces drawn in SVG
+   with no text in them. Braces stretch to whatever the labels need. */
+.bracket { display: block; overflow-x: auto; }
+.br-branch { display: grid; grid-template-columns: auto 18px minmax(0, 1fr); gap: 0 var(--sp-3); align-items: center; }
+.br-kids { display: grid; gap: var(--sp-4); padding-block: var(--sp-2); }
+.br-brace { width: 18px; height: 100%; align-self: stretch; overflow: visible; }
+.br-brace path { fill: none; stroke: var(--ink); stroke-width: var(--stroke-draw); vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.br-node { display: grid; gap: 2px; max-width: 26ch; }
+.br-label {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" var(--mono-width);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+.br-root > .br-node .br-label { font-weight: 700; }
+.br-root > .br-kids > .br-branch > .br-node { width: 27ch; max-width: none; }
+.br-node.is-leaf .br-label { color: var(--muted-ink); }
+.br-diff { font-family: var(--font-serif); font-style: italic; font-size: var(--fs-xs); color: var(--hand); line-height: 1.35; }
+.bracket.is-armed .br-brace path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.bracket.is-drawn .br-brace path { stroke-dashoffset: 0; transition: stroke-dashoffset var(--dur-draw) var(--ease-build); }
+@media (max-width: 620px) {
+  /* on a phone the bracket becomes an indented outline: the brace turns into a rule */
+  .br-branch { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .br-brace { display: none; }
+  .br-root > .br-kids > .br-branch > .br-node { width: auto; }
+  .br-kids { padding-left: var(--sp-4); border-left: var(--stroke-draw) solid var(--ink); gap: var(--sp-3); }
+}
 
 .figure-slot .fallback {
   padding: var(--sp-5);
@@ -546,7 +726,12 @@ footer.site .made a { color: var(--hand); }
   .front__plate .ds-atlas__key { display: grid; }
   .front__plate .ds-atlas__legend { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4) var(--sp-5); }
   .front__plate .ds-atlas__legend .ds-num--hero { display: block; font-size: 26px; }
-  .work-plates { grid-template-columns: 1fr; }
+  .spread, .qgrid { grid-template-columns: 1fr; }
+  .spread--flip .spread__plate { order: 0; }
+  .spread__plate .ds-atlas__window { padding-inline: clamp(0px, 8vw, 80px); }
+  .qgrid__plate { position: static; }
+  .qgrid__plate .ds-atlas { max-width: 380px; }
+  .sec-head { grid-template-columns: 1fr; gap: var(--sp-4); }
   .cat { grid-template-columns: 64px minmax(0, 1fr); }
   .cat > :last-child { grid-column: 2; }
 }
@@ -554,7 +739,13 @@ footer.site .made a { color: var(--hand); }
 @media (max-width: 780px) {
   .rail-layout { grid-template-columns: 1fr; gap: var(--sp-6); }
   .rail { position: static; }
-  .rail .ds-atlas { display: none; }
+  .rail .ds-atlas { max-width: 280px; }
+  .rail-fig--float .ds-atlas__window { margin-inline: 0; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .keeper { max-width: 200px; margin: 0 0 calc(-1 * clamp(64px, 8vw, 128px)) auto; }
+  .landings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .landings li:nth-child(3) { padding-left: 0; border-left: none; }
+  .landings li:nth-child(n+3) { border-top: var(--stroke-hair) solid var(--rule); }
   .job, .entry, .skillrow { grid-template-columns: 1fr; gap: var(--sp-3); }
   .bar nav { display: none; }
   .bar__in { gap: var(--sp-3); min-height: 60px; }
@@ -566,7 +757,10 @@ footer.site .made a { color: var(--hand); }
 
 @media (max-width: 520px) {
   .wrap, .bar__in { width: min(100% - 32px, 1200px); }
+  .contact--2 { grid-template-columns: 1fr !important; }
+  .readout { grid-template-columns: 1fr; gap: var(--sp-1); }
   .front__plate .ds-atlas__legend { grid-template-columns: 1fr; }
+  .front h1 { font-size: 34px; letter-spacing: 0.05em; }
   .brand .ds-mark__name { font-size: 9.5px; }
 }
 

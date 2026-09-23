@@ -23,6 +23,7 @@
 
 <link rel="stylesheet" href="../../_ds/cosmografia/styles.css">
 <link rel="stylesheet" href="../../_ds/site.css">
+<link rel="stylesheet" href="../../_ds/figures.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 
@@ -213,8 +214,86 @@
       </div>
 
       <div class="figure-slot" id="fig-arch">
-        <p class="fallback" data-en="Figure 1 — the architecture drawn as an hourglass: requests converge on an orchestration agent that holds no database credential, which delegates to an isolated analysis agent that can only query through a semantic layer. A detached panel shows the citizen-facing path, which contains no model at all."
-           data-es="Figura 1 — la arquitectura dibujada como un reloj de arena: las peticiones convergen en un agente de orquestación sin credencial, que delega en un agente de análisis aislado que solo puede consultar por una capa semántica. Un panel separado muestra la ruta ciudadana, que no contiene ningún modelo.">Figure 1 — the architecture drawn as an hourglass: requests converge on an orchestration agent that holds no database credential, which delegates to an isolated analysis agent that can only query through a semantic layer. A detached panel shows the citizen-facing path, which contains no model at all.</p>
+        <figure class="ds-figure fx-figure" data-alt-en="Requests from chat, scheduled tasks and analysts reach an orchestration agent running a self-hosted open-weights model, which holds no database credential. It delegates to an isolated analysis agent running a frontier model that never sees an identity. That agent can only query through a semantic layer, which cannot express a join. Below it sit the released read-only layer and the agent’s own separate workspace. A second, detached panel shows the citizen-facing path — browser to read-only API to published tables — which contains no model at all." data-alt-es="Las peticiones desde chat, tareas programadas y analistas llegan a un agente de orquestación con modelo de pesos abiertos autoalojado, que no tiene credencial de base de datos. Delega en un agente de análisis aislado con modelo frontera que nunca ve una identidad. Ese agente solo puede consultar a través de una capa semántica, que no puede expresar un join. Debajo están la capa publicada de solo lectura y el espacio de trabajo propio del agente. Un segundo panel separado muestra la ruta ciudadana — navegador, API de solo lectura, tablas publicadas — que no contiene ningún modelo.">
+          <p class="ds-figure__title" data-en="Every hop removes a capability; nothing below restores it" data-es="Cada salto quita una capacidad; nada la recupera más abajo">Every hop removes a capability; nothing below restores it</p>
+          <span class="ds-label ds-figure__sub" data-en="fig. 1 · production architecture · 2025—2026" data-es="fig. 1 · arquitectura en producción · 2025—2026">fig. 1 · production architecture · 2025—2026</span>
+          <div class="ds-figure__body">
+            <div class="fx-wrap" style="--vbw:520">
+              <div class="fx">
+                <svg viewBox="0 0 520 748" role="img" aria-label="Requests from chat, scheduled tasks and analysts reach an orchestration agent running a self-hosted open-weights model, which holds no database credential. It delegates to an isolated analysis agent running a frontier model that never sees an identity. That agent can only query through a semantic layer, which cannot express a join. Below it sit the released read-only layer and the agent’s own separate workspace. A second, detached panel shows the citizen-facing path — browser to read-only API to published tables — which contains no model at all.">
+<defs><pattern id="dots-arch" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="var(--muted)" opacity="0.3"/></pattern><marker id="ah-a" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto"><path d="M0,0 L8.5,3.5 L0,7 Z" fill="var(--ink)"/></marker></defs>
+<rect x="1" y="1" width="518" height="746" fill="url(#dots-arch)" stroke="var(--rule)" stroke-width="1"/>
+<rect class="fig-box" x="60" y="30" width="400" height="42"/>
+<path class="fig-flow" d="M260,72 L260,96" marker-end="url(#ah-a)"/>
+<rect class="fig-box" x="85" y="104" width="350" height="66"/>
+<path class="fig-flow" d="M260,170 L260,196" marker-end="url(#ah-a)"/>
+<rect class="fig-box" x="115" y="204" width="290" height="66"/>
+<path class="fig-flow" d="M260,270 L260,296" marker-end="url(#ah-a)"/>
+<!-- the waist: the only place a question becomes a query -->
+<rect class="fig-waist" x="150" y="304" width="220" height="72"/>
+<!-- hand layer: one circle, the whole annotation budget -->
+<path class="ds-dg__hand" d="M140,352 C136,310 196,286 262,287 C334,288 392,304 390,344 C388,382 328,402 258,400 C192,398 143,384 141,356"/>
+<path class="fig-flow" d="M260,388 L260,412" marker-end="url(#ah-a)"/>
+<rect class="fig-zone" x="40" y="420" width="440" height="118"/>
+<rect class="fig-box" x="60" y="454" width="190" height="66"/>
+<rect class="fig-box" x="270" y="454" width="190" height="66"/>
+<!-- detached: the citizen-facing path -->
+<rect class="fig-zone" x="10" y="586" width="500" height="152"/>
+<rect class="fig-box" x="30" y="620" width="140" height="46"/>
+<path class="fig-flow" d="M170,643 L190,643" marker-end="url(#ah-a)"/>
+<rect class="fig-box" x="200" y="620" width="140" height="46"/>
+<path class="fig-flow" d="M340,643 L360,643" marker-end="url(#ah-a)"/>
+<rect class="fig-box" x="370" y="620" width="120" height="46"/>
+<rect class="fig-band" x="30" y="688" width="460" height="30"/>
+                </svg>
+                <div class="fx-labels" aria-hidden="true">
+                  <div class="fx-l fx-l--start" style="left:5%;top:2.182%"><span class="fx-tag" data-en="WHO ASKS" data-es="QUIÉN PREGUNTA">WHO ASKS</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:6.818%;width:76.923%"><span class="fx-t" data-en="Chat · scheduled task · analyst" data-es="Chat · tarea programada · analista">Chat · scheduled task · analyst</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:18.316%;width:67.308%"><span class="fx-t" data-en="Orchestration agent" data-es="Agente de orquestación">Orchestration agent</span><span class="fx-s" data-en="self-hosted, open weights" data-es="autoalojado, pesos abiertos">self-hosted, open weights</span><span class="fx-s" data-en="holds no credential" data-es="no tiene credencial">holds no credential</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:31.684%;width:55.769%"><span class="fx-t" data-en="Analysis agent" data-es="Agente de análisis">Analysis agent</span><span class="fx-s" data-en="frontier model, isolated" data-es="modelo frontera, aislado">frontier model, isolated</span><span class="fx-s" data-en="never sees an identity" data-es="nunca ve una identidad">never sees an identity</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:45.455%;width:42.308%"><span class="fx-tag" data-en="THE ONLY INTERFACE" data-es="LA ÚNICA INTERFAZ">THE ONLY INTERFACE</span><span class="fx-t" data-en="Semantic layer" data-es="Capa semántica">Semantic layer</span><span class="fx-s" data-en="cannot write a join" data-es="no puede escribir un join">cannot write a join</span></div>
+                  <div class="fx-l fx-l--end" style="left:98.846%;top:39.499%"><span class="fx-note" data-en="everything passes here" data-es="todo pasa por aquí">everything passes here</span></div>
+                  <div class="fx-l fx-l--start" style="left:10.769%;top:58.6%"><span class="fx-tag" data-en="WHAT IT CAN REACH" data-es="LO QUE PUEDE ALCANZAR">WHAT IT CAN REACH</span></div>
+                  <div class="fx-l fx-l--mid" style="left:29.808%;top:65.107%;width:36.538%"><span class="fx-t" data-en="Released layer" data-es="Capa publicada">Released layer</span><span class="fx-s" data-en="read-only · anonymized" data-es="solo lectura · anonimizada">read-only · anonymized</span></div>
+                  <div class="fx-l fx-l--mid" style="left:70.192%;top:65.107%;width:36.538%"><span class="fx-t" data-en="Its own workspace" data-es="Su propio espacio">Its own workspace</span><span class="fx-s" data-en="write, isolated" data-es="escritura, aislado">write, isolated</span></div>
+                  <div class="fx-l fx-l--start" style="left:5%;top:80.792%"><span class="fx-tag" data-en="THE CITIZEN-FACING PATH · DETACHED" data-es="LA RUTA CIUDADANA · SEPARADA">THE CITIZEN-FACING PATH · DETACHED</span></div>
+                  <div class="fx-l fx-l--mid" style="left:19.231%;top:85.963%;width:26.923%"><span class="fx-t" data-en="Browser" data-es="Navegador">Browser</span></div>
+                  <div class="fx-l fx-l--mid" style="left:51.923%;top:85.963%;width:26.923%"><span class="fx-t" data-en="Read-only API" data-es="API solo lectura">Read-only API</span></div>
+                  <div class="fx-l fx-l--mid" style="left:82.692%;top:85.963%;width:23.077%"><span class="fx-t" data-en="Tables" data-es="Tablas">Tables</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:93.984%;width:88.462%"><span class="fx-band" data-en="NO MODEL IN THIS PATH" data-es="NINGÚN MODELO EN ESTA RUTA">NO MODEL IN THIS PATH</span></div>
+                  <span class="fx-key" style="left:50%;top:6.818%">1</span>
+                  <span class="fx-key" style="left:50%;top:18.316%">2</span>
+                  <span class="fx-key" style="left:50%;top:31.684%">3</span>
+                  <span class="fx-key" style="left:50%;top:45.455%">4</span>
+                  <span class="fx-key fx-key--hand" style="left:90.385%;top:39.439%">5</span>
+                  <span class="fx-key" style="left:29.808%;top:65.107%">6</span>
+                  <span class="fx-key" style="left:70.192%;top:65.107%">7</span>
+                  <span class="fx-key" style="left:19.231%;top:85.963%">8</span>
+                  <span class="fx-key" style="left:51.923%;top:85.963%">9</span>
+                  <span class="fx-key" style="left:82.692%;top:85.963%">10</span>
+                  <span class="fx-key" style="left:50%;top:93.984%">11</span>
+                </div>
+              </div>
+              <ol class="fx-legend">
+                <li class="fx-legend__head"><span class="fx-tag" data-en="WHO ASKS" data-es="QUIÉN PREGUNTA">WHO ASKS</span></li>
+                <li><span class="fx-key">1</span><span class="fx-legend__body"><span class="fx-t" data-en="Chat · scheduled task · analyst" data-es="Chat · tarea programada · analista">Chat · scheduled task · analyst</span></span></li>
+                <li><span class="fx-key">2</span><span class="fx-legend__body"><span class="fx-t" data-en="Orchestration agent" data-es="Agente de orquestación">Orchestration agent</span><span class="fx-s" data-en="self-hosted, open weights" data-es="autoalojado, pesos abiertos">self-hosted, open weights</span><span class="fx-s" data-en="holds no credential" data-es="no tiene credencial">holds no credential</span></span></li>
+                <li><span class="fx-key">3</span><span class="fx-legend__body"><span class="fx-t" data-en="Analysis agent" data-es="Agente de análisis">Analysis agent</span><span class="fx-s" data-en="frontier model, isolated" data-es="modelo frontera, aislado">frontier model, isolated</span><span class="fx-s" data-en="never sees an identity" data-es="nunca ve una identidad">never sees an identity</span></span></li>
+                <li><span class="fx-key">4</span><span class="fx-legend__body"><span class="fx-tag" data-en="THE ONLY INTERFACE" data-es="LA ÚNICA INTERFAZ">THE ONLY INTERFACE</span><span class="fx-t" data-en="Semantic layer" data-es="Capa semántica">Semantic layer</span><span class="fx-s" data-en="cannot write a join" data-es="no puede escribir un join">cannot write a join</span></span></li>
+                <li><span class="fx-key fx-key--hand">5</span><span class="fx-legend__body"><span class="fx-note" data-en="everything passes here" data-es="todo pasa por aquí">everything passes here</span></span></li>
+                <li class="fx-legend__head"><span class="fx-tag" data-en="WHAT IT CAN REACH" data-es="LO QUE PUEDE ALCANZAR">WHAT IT CAN REACH</span></li>
+                <li><span class="fx-key">6</span><span class="fx-legend__body"><span class="fx-t" data-en="Released layer" data-es="Capa publicada">Released layer</span><span class="fx-s" data-en="read-only · anonymized" data-es="solo lectura · anonimizada">read-only · anonymized</span></span></li>
+                <li><span class="fx-key">7</span><span class="fx-legend__body"><span class="fx-t" data-en="Its own workspace" data-es="Su propio espacio">Its own workspace</span><span class="fx-s" data-en="write, isolated" data-es="escritura, aislado">write, isolated</span></span></li>
+                <li class="fx-legend__head"><span class="fx-tag" data-en="THE CITIZEN-FACING PATH · DETACHED" data-es="LA RUTA CIUDADANA · SEPARADA">THE CITIZEN-FACING PATH · DETACHED</span></li>
+                <li><span class="fx-key">8</span><span class="fx-legend__body"><span class="fx-t" data-en="Browser" data-es="Navegador">Browser</span></span></li>
+                <li><span class="fx-key">9</span><span class="fx-legend__body"><span class="fx-t" data-en="Read-only API" data-es="API solo lectura">Read-only API</span></span></li>
+                <li><span class="fx-key">10</span><span class="fx-legend__body"><span class="fx-t" data-en="Tables" data-es="Tablas">Tables</span></span></li>
+                <li><span class="fx-key">11</span><span class="fx-legend__body"><span class="fx-band" data-en="NO MODEL IN THIS PATH" data-es="NINGÚN MODELO EN ESTA RUTA">NO MODEL IN THIS PATH</span></span></li>
+              </ol>
+            </div>
+          </div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy — structure is ruled, 2px, orthogonal · the only hand stroke is the circle on the waist, marking the one place that has to be correct · the lower panel is drawn detached because it touches no model" data-es="anatomía — la estructura está reglada, 2px, ortogonal · la única línea a mano es el círculo sobre la cintura, que señala el punto que debe estar correcto · el panel inferior está dibujado aparte porque no toca ningún modelo">anatomy — structure is ruled, 2px, orthogonal · the only hand stroke is the circle on the waist, marking the one place that has to be correct · the lower panel is drawn detached because it touches no model</span></div>
+        </figure>
       </div>
 
       <div class="legend-grid" style="margin-top:var(--sp-5)">
@@ -397,8 +476,45 @@
       </div>
 
       <div class="figure-slot" id="fig-express">
-        <p class="fallback" data-en="Figure 2 — two overlapping sets: the questions the office asks and the questions the declarative layer can express. The overlap is what gets reported; the region outside both — questions nobody thought to ask because the tool shaped them — is the part this design cannot measure."
-           data-es="Figura 2 — dos conjuntos superpuestos: las preguntas que la dependencia hace y las que la capa declarativa puede expresar. La intersección es lo que se reporta; la región fuera de ambos — preguntas que nadie pensó en hacer porque la herramienta las moldeó — es lo que este diseño no puede medir.">Figure 2 — two overlapping sets: the questions the office asks and the questions the declarative layer can express. The overlap is what gets reported; the region outside both is the part this design cannot measure.</p>
+        <figure class="ds-figure fx-figure" data-alt-en="Two overlapping sets. Questions the office asks contains, on its own, questions routed around the layer and answered another way. Questions the layer can express contains, on its own, cuts that are expressible but never requested. The overlap contains the questions the agent answers, which is the measured case. Outside both sets sit the questions nobody thought to ask because the tool shaped what felt askable." data-alt-es="Dos conjuntos superpuestos: las preguntas que hace la dependencia y las que la capa puede expresar. La intersección es lo que responde el agente. Fuera de ambos están las preguntas que nadie pensó en hacer porque la herramienta moldeó lo que parecía preguntable.">
+          <p class="ds-figure__title" data-en="The layer covers what is asked; what it made unaskable is unmeasured" data-es="La capa cubre lo que se pregunta; lo que volvió impreguntable no se mide">The layer covers what is asked; what it made unaskable is unmeasured</p>
+          <span class="ds-label ds-figure__sub" data-en="fig. 2 · membership, not counts · production use 2025—2026" data-es="fig. 2 · pertenencia, no conteos · uso en producción 2025—2026">fig. 2 · membership, not counts · production use 2025—2026</span>
+          <div class="ds-figure__body">
+            <div class="fx-wrap fx-wrap--wide" style="--vbw:760">
+              <div class="fx">
+                <svg viewBox="0 0 760 480" role="img" aria-label="Two overlapping sets. Questions the office asks contains, on its own, questions routed around the layer and answered another way. Questions the layer can express contains, on its own, cuts that are expressible but never requested. The overlap contains the questions the agent answers, which is the measured case. Outside both sets sit the questions nobody thought to ask because the tool shaped what felt askable.">
+<defs><pattern id="dots-express" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1.2" cy="1.2" r="1.2" fill="var(--muted)" opacity="0.3"/></pattern></defs>
+<rect x="1" y="1" width="758" height="478" fill="url(#dots-express)" stroke="var(--rule)" stroke-width="1"/>
+<circle class="fx-set" cx="307.62" cy="230" r="124.8"/>
+<circle class="fx-set" cx="452.38" cy="230" r="124.8"/>
+                </svg>
+                <div class="fx-labels" aria-hidden="true">
+                  <div class="fx-l fx-l--end" style="left:22.476%;top:29.197%"><span class="fx-name" data-en="what is asked" data-es="lo que se pregunta">what is asked</span></div>
+                  <div class="fx-l fx-l--mid" style="left:29.638%;top:47.917%"><span class="fx-region" data-en="routed around," data-es="esquivadas,">routed around,</span><span class="fx-region" data-en="answered elsewhere" data-es="respondidas aparte">answered elsewhere</span></div>
+                  <div class="fx-l fx-l--start" style="left:77.524%;top:29.197%"><span class="fx-name" data-en="what is expressible" data-es="lo que se expresa">what is expressible</span></div>
+                  <div class="fx-l fx-l--mid" style="left:70.362%;top:47.917%"><span class="fx-region" data-en="expressible," data-es="expresables,">expressible,</span><span class="fx-region" data-en="never requested" data-es="nunca pedidas">never requested</span></div>
+                  <div class="fx-l fx-l--mid" style="left:50%;top:47.917%"><span class="fx-region" data-en="what the agent" data-es="lo que el agente">what the agent</span><span class="fx-region" data-en="answers" data-es="responde">answers</span></div>
+                  <div class="fx-l fx-l--start" style="left:1.842%;top:96.667%"><span class="fx-out" data-en="outside every set — questions nobody thought to ask, because the tool shaped them" data-es="fuera de todo conjunto — preguntas que nadie pensó en hacer, porque la herramienta las moldeó">outside every set — questions nobody thought to ask, because the tool shaped them</span></div>
+                  <span class="fx-key" style="left:20.634%;top:29.197%">1</span>
+                  <span class="fx-key" style="left:29.638%;top:47.917%">2</span>
+                  <span class="fx-key" style="left:79.366%;top:29.197%">3</span>
+                  <span class="fx-key" style="left:70.362%;top:47.917%">4</span>
+                  <span class="fx-key" style="left:50%;top:47.917%">5</span>
+                  <span class="fx-key fx-key--hand" style="left:5.263%;top:92.917%">6</span>
+                </div>
+              </div>
+              <ol class="fx-legend">
+                <li><span class="fx-key">1</span><span class="fx-legend__body"><span class="fx-name" data-en="what is asked" data-es="lo que se pregunta">what is asked</span></span></li>
+                <li><span class="fx-key">2</span><span class="fx-legend__body"><span class="fx-region" data-en="routed around," data-es="esquivadas,">routed around,</span><span class="fx-region" data-en="answered elsewhere" data-es="respondidas aparte">answered elsewhere</span></span></li>
+                <li><span class="fx-key">3</span><span class="fx-legend__body"><span class="fx-name" data-en="what is expressible" data-es="lo que se expresa">what is expressible</span></span></li>
+                <li><span class="fx-key">4</span><span class="fx-legend__body"><span class="fx-region" data-en="expressible," data-es="expresables,">expressible,</span><span class="fx-region" data-en="never requested" data-es="nunca pedidas">never requested</span></span></li>
+                <li><span class="fx-key">5</span><span class="fx-legend__body"><span class="fx-region" data-en="what the agent" data-es="lo que el agente">what the agent</span><span class="fx-region" data-en="answers" data-es="responde">answers</span></span></li>
+                <li><span class="fx-key fx-key--hand">6</span><span class="fx-legend__body"><span class="fx-out" data-en="outside every set — questions nobody thought to ask, because the tool shaped them" data-es="fuera de todo conjunto — preguntas que nadie pensó en hacer, porque la herramienta las moldeó">outside every set — questions nobody thought to ask, because the tool shaped them</span></span></li>
+              </ol>
+            </div>
+          </div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy — the overlap is the part that gets reported · the region outside every set is the honest finding, and this design has no instrument for it" data-es="anatomía — la intersección es lo que se reporta · la región fuera de todo conjunto es el hallazgo honesto, y este diseño no tiene instrumento para medirla">anatomy — the overlap is the part that gets reported · the region outside every set is the honest finding, and this design has no instrument for it</span></div>
+        </figure>
       </div>
 
       <div class="prose" style="margin-top:var(--sp-6)">
@@ -499,151 +615,6 @@ window.SITE_FIGURES = [
     slot: 'fig-glyph',
     render: function (DS, R) {
       return R.createElement(DS.HandGlyph, { name: 'recorrido', size: 54, label: null });
-    }
-  },
-
-  {
-    slot: 'fig-arch',
-    render: function (DS, R, lang) {
-      var t = lang === 'es' ? {
-        who: 'QUIÉN PREGUNTA', asks: 'Chat · tarea programada · analista',
-        orch: 'Agente de orquestación', orchS: 'autoalojado, pesos abiertos', orchC: 'no tiene credencial',
-        ana: 'Agente de análisis', anaS: 'modelo frontera, aislado', anaC: 'nunca ve una identidad',
-        only: 'LA ÚNICA INTERFAZ', sem: 'Capa semántica', semC: 'no puede escribir un join',
-        reach: 'LO QUE PUEDE ALCANZAR',
-        rel: 'Capa publicada', relS: 'solo lectura · anonimizada',
-        ws: 'Su propio espacio', wsS: 'escritura, aislado',
-        cit: 'LA RUTA CIUDADANA · SEPARADA', br: 'Navegador', api: 'API solo lectura', tb: 'Tablas',
-        nomodel: 'NINGÚN MODELO EN ESTA RUTA',
-        note: 'todo pasa por aquí',
-        title: 'Cada salto quita una capacidad; nada la recupera más abajo',
-        sub: 'fig. 1 · arquitectura en producción · 2025—2026',
-        anatomy: 'anatomía — la estructura está reglada, 2px, ortogonal · la única línea a mano es el círculo sobre la cintura, que señala el punto que debe estar correcto · el panel inferior está dibujado aparte porque no toca ningún modelo',
-        aria: 'Las peticiones desde chat, tareas programadas y analistas llegan a un agente de orquestación con modelo de pesos abiertos autoalojado, que no tiene credencial de base de datos. Delega en un agente de análisis aislado con modelo frontera que nunca ve una identidad. Ese agente solo puede consultar a través de una capa semántica, que no puede expresar un join. Debajo están la capa publicada de solo lectura y el espacio de trabajo propio del agente. Un segundo panel separado muestra la ruta ciudadana — navegador, API de solo lectura, tablas publicadas — que no contiene ningún modelo.'
-      } : {
-        who: 'WHO ASKS', asks: 'Chat · scheduled task · analyst',
-        orch: 'Orchestration agent', orchS: 'self-hosted, open weights', orchC: 'holds no credential',
-        ana: 'Analysis agent', anaS: 'frontier model, isolated', anaC: 'never sees an identity',
-        only: 'THE ONLY INTERFACE', sem: 'Semantic layer', semC: 'cannot write a join',
-        reach: 'WHAT IT CAN REACH',
-        rel: 'Released layer', relS: 'read-only · anonymized',
-        ws: 'Its own workspace', wsS: 'write, isolated',
-        cit: 'THE CITIZEN-FACING PATH · DETACHED', br: 'Browser', api: 'Read-only API', tb: 'Tables',
-        nomodel: 'NO MODEL IN THIS PATH',
-        note: 'everything passes here',
-        title: 'Every hop removes a capability; nothing below restores it',
-        sub: 'fig. 1 · production architecture · 2025—2026',
-        anatomy: 'anatomy — structure is ruled, 2px, orthogonal · the only hand stroke is the circle on the waist, marking the one place that has to be correct · the lower panel is drawn detached because it touches no model',
-        aria: 'Requests from chat, scheduled tasks and analysts reach an orchestration agent running a self-hosted open-weights model, which holds no database credential. It delegates to an isolated analysis agent running a frontier model that never sees an identity. That agent can only query through a semantic layer, which cannot express a join. Below it sit the released read-only layer and the agent’s own separate workspace. A second, detached panel shows the citizen-facing path — browser to read-only API to published tables — which contains no model at all.'
-      };
-
-      var svg =
-        '<defs><marker id="ah-a" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto">' +
-        '<path d="M0,0 L8.5,3.5 L0,7 Z" fill="var(--ink)"/></marker></defs>' +
-
-        '<text class="fig-tag" x="26" y="20">' + t.who + '</text>' +
-        '<rect class="fig-box" x="60" y="30" width="400" height="42"/>' +
-        '<text class="fig-t" x="260" y="56" text-anchor="middle">' + t.asks + '</text>' +
-        '<path class="fig-flow" d="M260,72 L260,96" marker-end="url(#ah-a)"/>' +
-
-        '<rect class="fig-box" x="85" y="104" width="350" height="66"/>' +
-        '<text class="fig-t" x="260" y="128" text-anchor="middle">' + t.orch + '</text>' +
-        '<text class="fig-s" x="260" y="145" text-anchor="middle">' + t.orchS + '</text>' +
-        '<text class="fig-s" x="260" y="161" text-anchor="middle">' + t.orchC + '</text>' +
-        '<path class="fig-flow" d="M260,170 L260,196" marker-end="url(#ah-a)"/>' +
-
-        '<rect class="fig-box" x="115" y="204" width="290" height="66"/>' +
-        '<text class="fig-t" x="260" y="228" text-anchor="middle">' + t.ana + '</text>' +
-        '<text class="fig-s" x="260" y="245" text-anchor="middle">' + t.anaS + '</text>' +
-        '<text class="fig-s" x="260" y="261" text-anchor="middle">' + t.anaC + '</text>' +
-        '<path class="fig-flow" d="M260,270 L260,296" marker-end="url(#ah-a)"/>' +
-
-        /* the waist — the only place a question becomes a query */
-        '<rect class="fig-waist" x="150" y="304" width="220" height="72"/>' +
-        '<text class="fig-tag" x="260" y="324" text-anchor="middle">' + t.only + '</text>' +
-        '<text class="fig-t" x="260" y="345" text-anchor="middle">' + t.sem + '</text>' +
-        '<text class="fig-s" x="260" y="363" text-anchor="middle">' + t.semC + '</text>' +
-
-        /* hand layer: one circle, one note — the whole annotation budget.
-           Not quite closed, and clearly outside the box it marks, so it
-           reads as a gesture over the drawing rather than a second border. */
-        '<path class="ds-dg__hand" d="M140,352 C136,310 196,286 262,287 C334,288 392,304 390,344 C388,382 328,402 258,400 C192,398 143,384 141,356"/>' +
-        '<text class="fig-note" x="514" y="300" text-anchor="end">' + t.note + '</text>' +
-
-        '<path class="fig-flow" d="M260,388 L260,412" marker-end="url(#ah-a)"/>' +
-
-        '<rect class="fig-zone" x="40" y="420" width="440" height="118"/>' +
-        '<text class="fig-tag" x="56" y="442" >' + t.reach + '</text>' +
-        '<rect class="fig-box" x="60" y="454" width="190" height="66"/>' +
-        '<text class="fig-t" x="155" y="482" text-anchor="middle">' + t.rel + '</text>' +
-        '<text class="fig-s" x="155" y="500" text-anchor="middle">' + t.relS + '</text>' +
-        '<rect class="fig-box" x="270" y="454" width="190" height="66"/>' +
-        '<text class="fig-t" x="365" y="482" text-anchor="middle">' + t.ws + '</text>' +
-        '<text class="fig-s" x="365" y="500" text-anchor="middle">' + t.wsS + '</text>' +
-
-        /* detached: the citizen-facing path */
-        '<rect class="fig-zone" x="10" y="586" width="500" height="152"/>' +
-        '<text class="fig-tag" x="26" y="608">' + t.cit + '</text>' +
-        '<rect class="fig-box" x="30" y="620" width="140" height="46"/>' +
-        '<text class="fig-t" x="100" y="648" text-anchor="middle">' + t.br + '</text>' +
-        '<path class="fig-flow" d="M170,643 L190,643" marker-end="url(#ah-a)"/>' +
-        '<rect class="fig-box" x="200" y="620" width="140" height="46"/>' +
-        '<text class="fig-t" x="270" y="648" text-anchor="middle">' + t.api + '</text>' +
-        '<path class="fig-flow" d="M340,643 L360,643" marker-end="url(#ah-a)"/>' +
-        '<rect class="fig-box" x="370" y="620" width="120" height="46"/>' +
-        '<text class="fig-t" x="430" y="648" text-anchor="middle">' + t.tb + '</text>' +
-        '<rect class="fig-band" x="30" y="688" width="460" height="30"/>' +
-        '<text class="fig-band-t" x="260" y="708" text-anchor="middle">' + t.nomodel + '</text>';
-
-      return R.createElement(DS.DiagramFrame, {
-        title: t.title,
-        subtitle: t.sub,
-        anatomy: t.anatomy,
-        ariaLabel: t.aria,
-        viewBox: '0 0 520 748'
-      }, R.createElement('g', { dangerouslySetInnerHTML: { __html: svg } }));
-    }
-  },
-
-  {
-    slot: 'fig-express',
-    render: function (DS, R, lang) {
-      var en = {
-        title: 'The layer covers what is asked; what it made unaskable is unmeasured',
-        subtitle: 'fig. 2 · membership, not counts · production use 2025—2026',
-        anatomy: 'anatomy — the overlap is the part that gets reported · the region outside every set is the honest finding, and this design has no instrument for it',
-        ariaLabel: 'Two overlapping sets. Questions the office asks contains, on its own, questions routed around the layer and answered another way. Questions the layer can express contains, on its own, cuts that are expressible but never requested. The overlap contains the questions the agent answers, which is the measured case. Outside both sets sit the questions nobody thought to ask because the tool shaped what felt askable.',
-        /* Set names sit outside the circles and the frame clips at ~19
-           characters — keep them short and parallel; the title and the
-           region labels carry the rest of the argument. */
-        sets: [
-          { id: 'asked', label: 'what is asked' },
-          { id: 'expressible', label: 'what is expressible' }
-        ],
-        regions: [
-          { in: ['asked'], label: 'routed around,\nanswered elsewhere' },
-          { in: ['expressible'], label: 'expressible,\nnever requested' },
-          { in: ['asked', 'expressible'], label: 'what the agent\nanswers' }
-        ],
-        outside: 'questions nobody thought to ask, because the tool shaped them'
-      };
-      var es = {
-        title: 'La capa cubre lo que se pregunta; lo que volvió impreguntable no se mide',
-        subtitle: 'fig. 2 · pertenencia, no conteos · uso en producción 2025—2026',
-        anatomy: 'anatomía — la intersección es lo que se reporta · la región fuera de todo conjunto es el hallazgo honesto, y este diseño no tiene instrumento para medirla',
-        ariaLabel: 'Dos conjuntos superpuestos: las preguntas que hace la dependencia y las que la capa puede expresar. La intersección es lo que responde el agente. Fuera de ambos están las preguntas que nadie pensó en hacer porque la herramienta moldeó lo que parecía preguntable.',
-        sets: [
-          { id: 'asked', label: 'lo que se pregunta' },
-          { id: 'expressible', label: 'lo que se expresa' }
-        ],
-        regions: [
-          { in: ['asked'], label: 'esquivadas,\nrespondidas aparte' },
-          { in: ['expressible'], label: 'expresables,\nnunca pedidas' },
-          { in: ['asked', 'expressible'], label: 'lo que el agente\nresponde' }
-        ],
-        outside: 'preguntas que nadie pensó en hacer, porque la herramienta las moldeó'
-      };
-      return R.createElement(DS.SetDiagram, lang === 'es' ? es : en);
     }
   }
 ];

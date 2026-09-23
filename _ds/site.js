@@ -38,6 +38,10 @@
         var i = n.querySelector('img'); if (i) i.setAttribute('alt', v);
       }
     });
+    document.querySelectorAll('[data-aria-en]').forEach(function (n) {
+      var v = n.getAttribute('data-aria-' + lang);
+      if (v !== null) n.setAttribute('aria-label', v);
+    });
     root.setAttribute('lang', lang);
     langBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
     try { localStorage.setItem('site-lang', lang); } catch (e) {}
@@ -78,6 +82,9 @@
 
     document.querySelectorAll('[data-flock]').forEach(function (el) { el.innerHTML = DS.flockMarkup(); });
   }
+
+  /* braces of a bracket draw themselves in when the figure arrives */
+  if (DS) document.querySelectorAll('.bracket').forEach(function (b) { DS.watch(b, 'is-armed', 'is-drawn', 0.3); });
 
   /* the ember highlight draws itself in when its sentence arrives. It is
      re-armed after a language swap, because innerHTML replaced the mark. */
