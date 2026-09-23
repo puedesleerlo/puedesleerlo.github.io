@@ -126,3 +126,15 @@ standards, 96-question agent benchmark.
 ```sh
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
+
+## Cache stamps
+
+GitHub Pages lets browsers cache CSS and JS for ten minutes, so a visitor can
+get a new page with an old stylesheet and see the layout collapse. Every local
+stylesheet, script and drawing link therefore carries a hash of the file:
+`_ds/site.css?v=f385c892`. `tools/stamp_assets.py` rewrites the stamps, and the
+pre-commit hook runs it on every commit. After cloning, install the hook once:
+
+```sh
+./tools/install-hooks.sh
+```
