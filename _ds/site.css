@@ -133,12 +133,11 @@ a { color: inherit; }
 }
 .front__portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .front h1 {
-  font-size: clamp(38px, 4.6vw, 68px);
+  font-size: clamp(38px, 4.2vw, 62px);
   line-height: 1;
   letter-spacing: 0.07em;
 }
 .front h1 span { display: block; }
-.front h1 span + span { padding-left: 0.6em; }
 .front__roles { margin-top: var(--sp-4); color: var(--ink); line-height: 1.7; }
 .front .ds-claim {
   margin-top: clamp(28px, 3.4vw, 48px);
@@ -767,7 +766,6 @@ footer.site .made a { color: var(--hand); }
   .bar__in { gap: var(--sp-3); min-height: 60px; }
   .brand .ds-mark { --mark-size: 28px; }
   .controls { margin-inline-start: auto; }
-  .front h1 span + span { padding-left: 0.4em; }
   .front__id { grid-template-columns: 104px minmax(0, 1fr); gap: var(--sp-4); }
 }
 
