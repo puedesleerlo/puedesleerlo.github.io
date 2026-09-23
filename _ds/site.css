@@ -396,7 +396,7 @@ a.ds-card:hover .ds-card__title, a.ds-card:hover .ds-card__link { color: var(--h
 }
 
 /* ============================================================
-   Selected work — first, as spreads: plate and argument side by side
+   Selected work — first: a matched pair of case studies, then the catalog
    ============================================================ */
 
 /* a section head without the rail: number and name above, title beside */
@@ -431,49 +431,61 @@ html[lang="es"] .sec-head__rail .num::before { content: "Lám. "; }
   text-transform: uppercase;
 }
 
-.spread {
+/* the two case studies: a matched pair. Each drawing sits at the same
+   size on a bone mat inside an engraved frame, so the pair reads as two
+   plates of one atlas rather than two posters. */
+.cases {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  gap: clamp(28px, 6vw, 104px);
-  align-items: center;
-  padding-block: clamp(48px, 6vw, 96px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 72px);
+  padding-block: clamp(40px, 5vw, 72px) var(--sp-7);
 }
-.spread + .spread { border-top: var(--stroke-hair) solid var(--rule); }
-.spread--flip .spread__plate { order: 2; }
-.spread__plate { display: block; text-decoration: none; color: inherit; }
-.spread__plate .ds-atlas__window { padding-inline: clamp(0px, 4vw, 64px); }
-.spread__plate .ds-atlas { transition: transform 520ms var(--ease-build); }
-.spread:hover .spread__plate .ds-atlas { transform: translateY(-4px); }
-.spread__text { display: grid; gap: var(--sp-5); align-content: center; max-width: 520px; }
-.spread__no {
-  display: block;
-  font-size: clamp(46px, 6.4vw, 92px);
-  line-height: 0.9;
-  color: var(--ink);
+.case { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+.case__plate {
+  display: grid; place-items: center;
+  padding: clamp(20px, 2.6vw, 32px);
+  margin: 4px;
+  background: var(--plate);
+  border: var(--stroke-hair) solid var(--ink);
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--rule-strong);
+  text-decoration: none;
+  transition: transform 520ms var(--ease-build);
 }
-.spread__title {
+.case:hover .case__plate { transform: translateY(-3px); }
+.case__plate .ds-atlas__window { height: clamp(190px, 19vw, 250px); aspect-ratio: 1120 / 1440; }
+.case__plate .ds-atlas__art { height: 100%; }
+.case__plate .ds-atlas__art svg, .case__plate .ds-atlas__art img { width: 100%; height: 100%; }
+.case__meta {
+  display: flex; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap;
+  margin-top: var(--sp-3); padding-bottom: var(--sp-2);
+  border-bottom: var(--stroke-hair) solid var(--ink);
+}
+.case__code { color: var(--ink); }
+.case__title {
   font-family: var(--font-title);
-  font-size: clamp(26px, 2.9vw, 40px);
-  line-height: 1.08;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.1;
   letter-spacing: 0.07em;
   text-wrap: balance;
 }
+.case__cap { margin: calc(-1 * var(--sp-2)) 0 0; }
+.case__cap .ds-atlas__caption { font-size: var(--fs-sm); }
 .readout {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--sp-4);
   align-items: center;
   padding-block: var(--sp-3);
-  border-top: var(--stroke-hair) solid var(--ink);
+  border-top: var(--stroke-hair) solid var(--rule);
   border-bottom: var(--stroke-hair) solid var(--rule);
 }
-.readout .ds-num--hero { font-size: clamp(30px, 3vw, 40px); }
+.readout .ds-num--hero { font-size: clamp(26px, 2.4vw, 34px); }
 .readout .ds-label { color: var(--hand); line-height: 1.45; }
-.spread__body { margin: 0; font-size: var(--fs-base); line-height: 1.62; text-wrap: pretty; }
-.spread__body em { font-family: var(--font-serif); font-style: italic; color: var(--hand); }
-.spread__stack { margin: 0; }
-.spread .more { margin-top: 0; justify-self: start; }
-.spread:hover .more { color: var(--hand-deep); }
+.case__body { margin: 0; font-size: var(--fs-sm); line-height: 1.62; text-wrap: pretty; }
+.case__body em { font-family: var(--font-serif); font-style: italic; color: var(--hand); }
+.case__stack { margin: 0; }
+.case .more { margin-top: auto; align-self: flex-start; }
+.case:hover .more { color: var(--hand-deep); }
 
 .catalogue { margin-top: var(--sp-6); border-top: var(--stroke-hair) solid var(--ink); }
 .catalogue__head { display: flex; justify-content: space-between; gap: var(--sp-4); padding: var(--sp-3) 0; }
@@ -726,9 +738,8 @@ footer.site .made a { color: var(--hand); }
   .front__plate .ds-atlas__key { display: grid; }
   .front__plate .ds-atlas__legend { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4) var(--sp-5); }
   .front__plate .ds-atlas__legend .ds-num--hero { display: block; font-size: 26px; }
-  .spread, .qgrid { grid-template-columns: 1fr; }
-  .spread--flip .spread__plate { order: 0; }
-  .spread__plate .ds-atlas__window { padding-inline: clamp(0px, 8vw, 80px); }
+  .qgrid { grid-template-columns: 1fr; }
+  .cases { grid-template-columns: 1fr; }
   .qgrid__plate { position: static; }
   .qgrid__plate .ds-atlas { max-width: 380px; }
   .sec-head { grid-template-columns: 1fr; gap: var(--sp-4); }

@@ -21,7 +21,7 @@ what remains unresolved. Everything else on the page is evidence for it:
 
 - the hero states the question
 - **Selected work comes first** (Plate I), right after the frontispiece: the two
-  case studies as full-width spreads, then the catalog
+  case studies as a matched pair of small framed plates, then the catalog
 - the question (Plate II) is the short version of the essay, beside the arched stair
 - each Experience entry opens with a `.frame` line tying the role back to a movement
 - Selected work reports what each system was *measured against*, not just what it did
@@ -57,7 +57,7 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
   (the dish, the solar array, the board of status lights, the ground floor), which
   become numbered keys plus a legend on phones.
 - **No image appears twice across the site.** Landing: outpost (frontispiece),
-  conduit and vault (the case-study spreads, repeated only on their own case-study
+  conduit and vault (the case-study pair, repeated only on their own case-study
   page), stair (question), airship (experience), astrolabe (apparatus), zodiac
   (research), keeper (contact), city (closing). Essay: lighthouse, cosmogram, cabin,
   figure, whales. When you add a plate, check this list first.
@@ -73,8 +73,8 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
   HTML over or beside the drawing, so it swaps language and reflows. The division
   on the essay page is an HTML bracket with text-free SVG braces (`.bracket` in
   `_ds/site.css`); the case-study diagrams use `_ds/figures.css`.
-- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as
-  spreads, the rest as rows with a generated constellation seal.
+- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as a
+  framed pair, the rest as rows with a generated constellation seal.
 - **Motion** is slow and honors `prefers-reduced-motion`; without JavaScript every
   drawing is a plain `<img>` and every highlight is simply on.
 
