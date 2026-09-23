@@ -431,51 +431,54 @@ html[lang="es"] .sec-head__rail .num::before { content: "Lám. "; }
   text-transform: uppercase;
 }
 
-/* the two case studies: a matched pair. Each drawing sits at the same
-   size on a bone mat inside an engraved frame, so the pair reads as two
-   plates of one atlas rather than two posters. */
+/* the two case studies, side by side. Each drawing stands on the inner
+   side of its column, so the two meet in the middle, cut out on the white
+   sheet beside the case's head: code, title, caption, the one metric. */
 .cases {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(40px, 5vw, 72px);
   padding-block: clamp(40px, 5vw, 72px) var(--sp-7);
 }
-.case { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+.case {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(130px, 14vw, 200px);
+  grid-template-areas: "head art" "foot foot";
+  gap: var(--sp-5) clamp(16px, 2vw, 28px);
+  align-items: end;
+  min-width: 0;
+}
+.case + .case { grid-template-columns: clamp(130px, 14vw, 200px) minmax(0, 1fr); grid-template-areas: "art head" "foot foot"; }
+.case__head { grid-area: head; display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+.case__foot { grid-area: foot; display: flex; flex-direction: column; gap: var(--sp-4); }
 .case__plate {
+  grid-area: art;
   display: block;
-  width: 100%;
-  max-width: 440px;
-  padding: 0;
-  margin: 4px;
-  background: var(--plate);
-  border: var(--stroke-hair) solid var(--ink);
-  box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--rule-strong);
+  align-self: end;
   text-decoration: none;
   transition: transform 520ms var(--ease-build);
 }
-.case:hover .case__plate { transform: translateY(-3px); }
-/* the drawing fills its frame edge to edge */
-.case__plate .ds-atlas__window { width: 100%; }
-.case__plate .ds-atlas__art { width: 100%; }
+.case:hover .case__plate { transform: translateY(-4px); }
+.case__plate .ds-atlas__window, .case__plate .ds-atlas__art { width: 100%; }
 .case__meta {
-  display: flex; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap;
-  margin-top: var(--sp-3); padding-bottom: var(--sp-2);
+  display: grid; gap: 2px;
+  padding-bottom: var(--sp-2);
   border-bottom: var(--stroke-hair) solid var(--ink);
 }
 .case__code { color: var(--ink); }
 .case__title {
   font-family: var(--font-title);
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-size: clamp(21px, 2.1vw, 29px);
   line-height: 1.1;
   letter-spacing: 0.07em;
   text-wrap: balance;
 }
-.case__cap { margin: calc(-1 * var(--sp-2)) 0 0; }
+.case__cap { margin: 0; }
 .case__cap .ds-atlas__caption { font-size: var(--fs-sm); }
 .readout {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--sp-4);
+  grid-template-columns: 1fr;
+  gap: var(--sp-1);
   align-items: center;
   padding-block: var(--sp-3);
   border-top: var(--stroke-hair) solid var(--rule);
@@ -483,10 +486,10 @@ html[lang="es"] .sec-head__rail .num::before { content: "Lám. "; }
 }
 .readout .ds-num--hero { font-size: clamp(26px, 2.4vw, 34px); }
 .readout .ds-label { color: var(--hand); line-height: 1.45; }
-.case__body { margin: 0; font-size: var(--fs-sm); line-height: 1.62; text-wrap: pretty; }
+.case__body { margin: 0; font-size: var(--fs-sm); line-height: 1.62; text-wrap: pretty; max-width: 62ch; }
 .case__body em { font-family: var(--font-serif); font-style: italic; color: var(--hand); }
 .case__stack { margin: 0; }
-.case .more { margin-top: auto; align-self: flex-start; }
+.case .more { margin-top: 0; align-self: flex-start; }
 .case:hover .more { color: var(--hand-deep); }
 
 .catalogue { margin-top: var(--sp-6); border-top: var(--stroke-hair) solid var(--ink); }
@@ -771,7 +774,7 @@ footer.site .made a { color: var(--hand); }
 @media (max-width: 520px) {
   .wrap, .bar__in { width: min(100% - 32px, 1200px); }
   .contact--2 { grid-template-columns: 1fr !important; }
-  .readout { grid-template-columns: 1fr; gap: var(--sp-1); }
+  .case, .case + .case { grid-template-columns: minmax(0, 1fr) 118px; grid-template-areas: "head art" "foot foot"; }
   .front__plate .ds-atlas__legend { grid-template-columns: 1fr; }
   .front h1 { font-size: 34px; letter-spacing: 0.05em; }
   .brand .ds-mark__name { font-size: 9.5px; }

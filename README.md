@@ -21,7 +21,7 @@ what remains unresolved. Everything else on the page is evidence for it:
 
 - the hero states the question
 - **Selected work comes first** (Plate I), right after the frontispiece: the two
-  case studies as a matched pair of small framed plates, then the catalog
+  case studies side by side, their drawings cut out on the inner edges so they meet in the middle, then the catalog
 - the question (Plate II) is the short version of the essay, beside the arched stair
 - each Experience entry opens with a `.frame` line tying the role back to a movement
 - Selected work reports what each system was *measured against*, not just what it did
