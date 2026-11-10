@@ -78,6 +78,10 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
 - **Catalog.** Selected work is `MAT·01`–`MAT·08`: the two case studies as a
   framed pair, the rest as rows with a generated constellation seal. `MAT·08`
   is a row that links to its own case study, `work/cultural-adoption/`.
+- **Screenshots.** `assets/shots/` holds two captures of the leaderboard app
+  (reporting-lideres.web.app) used on the cultural-adoption page. They were
+  taken from a local mirror with every leader's name and photo replaced by a
+  placeholder; recapture the same way, never from the live data.
 - **HTML figures.** The cultural-adoption figures use no SVG at all (`.gx` in
   `_ds/figures.css`): tracks, markers and the clock are boxes, and any element
   with `data-arrive` plays once when it scrolls in.
