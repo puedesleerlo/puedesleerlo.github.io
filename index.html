@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alejandro Tabares — Decisions under uncertainty</title>
-<meta name="description" content="How should we act when outcomes are uncertain — and our actions change them? AI/ML engineer and MS student at Carnegie Mellon building models and AI systems for decisions under uncertainty. Seeking a Summer 2027 internship in applied AI, causal inference, and decision science.">
+<title>Alejandro Tabares — AI systems · Carnegie Mellon</title>
+<meta name="description" content="Carnegie Mellon MS student in Artificial Intelligence Systems Management. Python, ML workflows, agent evaluation, and AI strategy. Exploring causal ML and technical AI governance. Seeking a Summer 2027 internship.">
 <meta name="author" content="Alejandro Tabares">
 
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Alejandro Tabares — Decision-making under uncertainty">
-<meta property="og:description" content="How should we act when outcomes are uncertain — and our actions change them? Carnegie Mellon MS student seeking a Summer 2027 internship in applied AI, causal inference, and decision science.">
+<meta property="og:title" content="Alejandro Tabares — AI systems · Carnegie Mellon">
+<meta property="og:description" content="Carnegie Mellon MS student in Artificial Intelligence Systems Management. Python, ML workflows, agent evaluation, and AI strategy. Exploring causal ML and technical AI governance. Seeking a Summer 2027 internship.">
 <meta property="og:url" content="https://puedesleerlo.github.io/">
 <meta name="twitter:card" content="summary">
 
@@ -28,11 +28,11 @@
 
 <!-- Cosmografía design system: tokens, component rules; then the page layer -->
 <link rel="stylesheet" href="_ds/cosmografia/styles.css?v=8c73df0c">
-<link rel="stylesheet" href="_ds/site.css?v=2d5b4d4f">
+<link rel="stylesheet" href="_ds/site.css?v=e950fb3b">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 
-<body class="ds-paper">
+<body class="ds-paper portfolio">
 <a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
 
 <header class="bar">
@@ -52,12 +52,12 @@
         <span class="ds-mark__name"><span>Mario Alejandro</span><span>Tabares Arango</span></span>
       </span>
     </a>
-    <nav aria-label="Sections">
-      <a href="#work"       data-en="Work"         data-es="Proyectos">Work</a>
-      <a href="#story"      data-en="The question" data-es="La pregunta">The question</a>
-      <a href="#experience" data-en="Experience"   data-es="Experiencia">Experience</a>
-      <a href="#research"   data-en="Research"     data-es="Investigación">Research</a>
-      <a href="#contact"    data-en="Contact"      data-es="Contacto">Contact</a>
+    <nav aria-label="Sections" data-aria-en="Sections" data-aria-es="Secciones">
+      <a href="#work" data-en="Work" data-es="Proyectos">Work</a>
+      <a href="#skills" data-en="Skills" data-es="Competencias">Skills</a>
+      <a href="#story" data-en="Interests" data-es="Intereses">Interests</a>
+      <a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a>
+      <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
     <div class="controls">
       <div class="langgroup" role="group" aria-label="Language / Idioma">
@@ -70,100 +70,43 @@
 </header>
 
 <main id="main">
-<!-- ═══════════════ FRONTISPIECE ═══════════════ -->
-<section class="front wrap" id="top">
-  <div class="front__head">
-    <span class="ds-label" style="color:var(--ink)" data-en="Frontispiece · A cosmography of one question" data-es="Frontispicio · Cosmografía de una pregunta">Frontispiece · A cosmography of one question</span>
-    <span class="ds-coord">40°26′N 79°58′W — 6°15′N 75°34′W</span>
+<!-- A quick introduction: identity, skills, direction, and a next step. -->
+<section class="intro wrap" id="top" aria-labelledby="intro-name">
+  <div class="intro__identity">
+    <figure class="intro__portrait" data-alt-en="Portrait of Alejandro Tabares" data-alt-es="Retrato de Alejandro Tabares">
+      <img src="assets/portrait.webp" alt="Portrait of Alejandro Tabares" width="640" height="800" fetchpriority="high">
+    </figure>
+    <div>
+      <h1 id="intro-name">Alejandro Tabares</h1>
+      <p class="intro__school" data-en="Carnegie Mellon University" data-es="Universidad Carnegie Mellon">Carnegie Mellon University</p>
+      <p class="intro__degree" data-en="MS student, Artificial Intelligence Systems Management" data-es="Estudiante de maestría en Gestión de Sistemas de Inteligencia Artificial">MS student, Artificial Intelligence Systems Management</p>
+    </div>
   </div>
-
-  <div class="front__grid">
-    <div class="front__text">
-      <div class="front__id">
-        <figure class="front__portrait" data-alt-en="Portrait of Alejandro Tabares, smiling, in a white shirt, against out-of-focus trees." data-alt-es="Retrato de Alejandro Tabares, sonriendo, con camisa blanca, frente a árboles desenfocados.">
-          <img src="assets/portrait.webp" alt="Portrait of Alejandro Tabares, smiling, in a white shirt, against out-of-focus trees." width="640" height="800" fetchpriority="high">
-        </figure>
-        <div class="front__name">
-          <h1 class="ds-title"><span>Alejandro</span><span>Tabares</span></h1>
-          <div class="ds-label front__roles" data-en="AI/ML Engineer · Physics · Philosophy · Carnegie Mellon" data-es="Ingeniero de IA/ML · Física · Filosofía · Carnegie Mellon">AI/ML Engineer · Physics · Philosophy · Carnegie Mellon</div>
-        </div>
+  <div class="intro__grid">
+    <div class="intro__lead">
+      <p class="intro__claim" data-en="I build AI systems people can test and control." data-es="Construyo sistemas de IA que se pueden evaluar y controlar.">I build AI systems people can test and control.</p>
+      <p class="intro__context" data-en="Previously: credit-risk modeling at Bancolombia and public-sector AI in Medellín." data-es="Experiencia en modelos de riesgo de crédito en Bancolombia e IA para el sector público en Medellín.">Previously: credit-risk modeling at Bancolombia and public-sector AI in Medellín.</p>
+    </div>
+    <div class="intro__summary">
+      <div>
+        <h2 data-en="What I do" data-es="Lo que hago">What I do</h2>
+        <p data-en="Python &amp; ML workflows. Agent tooling, evaluation &amp; feedback loops. AI strategy." data-es="Python y flujos de ML. Herramientas para agentes, evaluación y ciclos de retroalimentación. Estrategia de IA.">Python &amp; ML workflows. Agent tooling, evaluation &amp; feedback loops. AI strategy.</p>
+        <a class="intro__link" href="#skills" data-en="See skills in practice" data-es="Ver competencias en práctica">See skills in practice</a>
       </div>
-
-      <p class="ds-claim"
-         data-en="<mark class='ds-hl ds-hl--draw'>How should we act when outcomes are uncertain — and our actions change them?</mark> I build models and AI systems to support decisions under uncertainty."
-         data-es="<mark class='ds-hl ds-hl--draw'>¿Cómo debemos actuar cuando los resultados son inciertos — y nuestras acciones los cambian?</mark> Construyo modelos y sistemas de IA para apoyar decisiones bajo incertidumbre.">
-        <mark class="ds-hl ds-hl--draw">How should we act when outcomes are uncertain — and our actions change them?</mark> I build models and AI systems to support decisions under uncertainty.
-      </p>
-
-      <p class="front__lede"
-         data-en="My work in credit risk and public-sector analytics has led me from predicting outcomes to a deeper question: which interventions improve them, for whom, and under what conditions? At Carnegie Mellon, I am developing the causal-inference and evaluation tools to pursue that question — connecting probabilistic modeling with evidence about what actions actually change."
-         data-es="Mi trabajo en riesgo de crédito y analítica del sector público me llevó de predecir resultados a una pregunta más profunda: ¿qué intervenciones los mejoran, para quién y bajo qué condiciones? En Carnegie Mellon estoy desarrollando las herramientas de inferencia causal y evaluación para perseguir esa pregunta — conectando el modelado probabilístico con evidencia sobre lo que las acciones realmente cambian.">
-        My work in credit risk and public-sector analytics has led me from predicting outcomes to a deeper question: which interventions improve them, for whom, and under what conditions? At Carnegie Mellon, I am developing the causal-inference and evaluation tools to pursue that question — connecting probabilistic modeling with evidence about what actions actually change.
-      </p>
-
-      <p class="availability">
-        <span class="dot" aria-hidden="true"></span>
-        <span data-en="<strong>Seeking a Summer 2027 internship</strong> — applied AI, causal inference, and decision science. MS student at Carnegie Mellon, Heinz College; graduating December 2027."
-              data-es="<strong>Busco una pasantía para el verano de 2027</strong> — IA aplicada, inferencia causal y ciencia de la decisión. Estudiante de maestría en Carnegie Mellon, Heinz College; grado en diciembre de 2027."><strong>Seeking a Summer 2027 internship</strong> — applied AI, causal inference, and decision science. MS student at Carnegie Mellon, Heinz College; graduating December 2027.</span>
-      </p>
-
-      <div class="actions">
-        <a class="btn btn--primary" href="#work">
-          <span data-en="See the work" data-es="Ver los proyectos">See the work</span> <span aria-hidden="true">↓</span>
-        </a>
-        <a class="btn" href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span data-en="Download CV" data-es="Descargar CV">Download CV</span>
-        </a>
-        <a class="btn" href="mailto:atabares@andrew.cmu.edu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-          Email
-        </a>
-        <a class="btn" href="https://www.linkedin.com/in/mario-tabares-arango/" rel="noopener" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg>
-          LinkedIn
-        </a>
-        <a class="btn" href="https://github.com/puedesleerlo" rel="noopener" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
-          GitHub
-        </a>
+      <div>
+        <h2 data-en="Where I’m headed" data-es="Hacia dónde voy">Where I’m headed</h2>
+        <p data-en="Causal ML, decisions under uncertainty, and technical controls over what AI can access and do." data-es="ML causal, decisiones bajo incertidumbre y controles técnicos sobre lo que la IA puede acceder y hacer.">Causal ML, decisions under uncertainty, and technical controls over what AI can access and do.</p>
+        <a class="intro__link" href="#story" data-en="Explore my interests" data-es="Explorar mis intereses">Explore my interests</a>
       </div>
     </div>
-
-    <div class="front__plate">
-      <figure class="ds-atlas">
-        <header class="ds-atlas__head">
-          <span class="ds-label ds-atlas__no" data-en="Plate 0 · The outpost" data-es="Lám. 0 · El puesto">Plate 0 · The outpost</span>
-          <span class="ds-coord" data-en="measured against" data-es="medido contra">measured against</span>
-        </header>
-        <div class="ds-atlas__window">
-          <div class="ds-atlas__art" data-atlas-src="assets/art/outpost.svg?v=52caf855"
-               data-alt="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables. Blue-pencil leaders mark four measured results."
-               data-alt-en="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables. Blue-pencil leaders mark four measured results."
-               data-alt-es="Una torre remendada en un desierto bajo un cielo azul intenso: paneles solares en el techo, una gran antena sobre un mástil de celosía verde, un tablero rojo de luces de estado y una planta baja de talleres, tanques y cables. Líneas de lápiz azul marcan cuatro resultados medidos."
-               style="aspect-ratio:928/1152">
-            <img src="assets/art/outpost.svg?v=52caf855" alt="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables. Blue-pencil leaders mark four measured results." width="928" height="1152" fetchpriority="high">
-          </div>
-          <svg class="ds-atlas__leaders" viewBox="0 0 928 1152" aria-hidden="true"><g><path pathLength="1" d="M565 185L780 150L956 150"/><circle cx="565" cy="185" r="6.4"/><circle class="is-core" cx="565" cy="185" r="2.4"/></g><g><path pathLength="1" d="M300 208L480 392L956 392"/><circle cx="300" cy="208" r="6.4"/><circle class="is-core" cx="300" cy="208" r="2.4"/></g><g><path pathLength="1" d="M352 782L700 740L956 740"/><circle cx="352" cy="782" r="6.4"/><circle class="is-core" cx="352" cy="782" r="2.4"/></g><g><path pathLength="1" d="M480 1004L760 1030L956 1030"/><circle cx="480" cy="1004" r="6.4"/><circle class="is-core" cx="480" cy="1004" r="2.4"/></g></svg>
-          <div class="ds-atlas__callout is-right" style="left:103%;top:13.02%"><span class="ds-num ds-num--hero">USD 14B</span><span class="ds-label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span></div>
-          <div class="ds-atlas__callout is-right" style="left:103%;top:34.03%"><span class="ds-num ds-num--hero">230+</span><span class="ds-label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span></div>
-          <div class="ds-atlas__callout is-right" style="left:103%;top:64.24%"><span class="ds-num ds-num--hero">8 / 0</span><span class="ds-label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span></div>
-          <div class="ds-atlas__callout is-right" style="left:103%;top:89.41%"><span class="ds-num ds-num--hero">2.5M</span><span class="ds-label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span></div>
-          <span class="ds-atlas__key" style="left:60.88%;top:16.06%" aria-hidden="true">1</span><span class="ds-atlas__key" style="left:32.33%;top:18.06%" aria-hidden="true">2</span><span class="ds-atlas__key" style="left:37.93%;top:67.88%" aria-hidden="true">3</span><span class="ds-atlas__key" style="left:51.72%;top:87.15%" aria-hidden="true">4</span>
-          <span data-flock></span>
-        </div>
-        <ol class="ds-atlas__legend">
-          <li><div><span class="ds-num ds-num--hero">USD 14B</span><span class="ds-label" data-en="credit exposure, four countries" data-es="exposición crediticia, cuatro países">credit exposure, four countries</span></div></li>
-          <li><div><span class="ds-num ds-num--hero">230+</span><span class="ds-label" data-en="production credit-risk models" data-es="modelos de riesgo en producción">production credit-risk models</span></div></li>
-          <li><div><span class="ds-num ds-num--hero">8 / 0</span><span class="ds-label" data-en="audit cycles / material findings" data-es="ciclos de auditoría / hallazgos">audit cycles / material findings</span></div></li>
-          <li><div><span class="ds-num ds-num--hero">2.5M</span><span class="ds-label" data-en="residents served by systems I led" data-es="habitantes servidos por mis sistemas">residents served by systems I led</span></div></li>
-        </ol>
-        <figcaption class="ds-atlas__cap">
-          <span class="ds-atlas__title" data-en="An outpost that outlived its builders" data-es="Un puesto que sobrevivió a quienes lo hicieron">An outpost that outlived its builders</span>
-          <span class="ds-atlas__caption" data-en="Patched, still running. The dish listens across four countries, the panels are the models, the board of lights is the audit, the ground floor is the city." data-es="Remendado, todavía en marcha. La antena escucha a través de cuatro países, los paneles son los modelos, el tablero de luces es la auditoría, la planta baja es la ciudad.">Patched, still running. The dish listens across four countries, the panels are the models, the board of lights is the audit, the ground floor is the city.</span>
-        </figcaption>
-      </figure>
+  </div>
+  <div class="intro__footer">
+    <div class="intro__actions">
+      <a class="intro__button intro__button--primary" href="#work" data-en="View selected work" data-es="Ver proyectos seleccionados">View selected work</a>
+      <a class="intro__button" href="assets/Mario_Alejandro_Tabares_Arango_CV.pdf" download data-en="Download CV" data-es="Descargar CV">Download CV</a>
+      <a class="intro__email" href="mailto:atabares@andrew.cmu.edu" data-en="Email me" data-es="Escríbeme">Email me</a>
     </div>
+    <p class="intro__availability" data-en="Seeking a Summer 2027 internship" data-es="Busco una pasantía para el verano de 2027">Seeking a Summer 2027 internship</p>
   </div>
 </section>
 
@@ -177,8 +120,8 @@
         <span class="rail-name" data-en="Selected work" data-es="Proyectos">Selected work</span>
       </div>
       <div>
-        <h2 class="h-sec" data-en="Seven systems, two case studies" data-es="Siete sistemas, dos casos de estudio">Seven systems, two case studies</h2>
-        <p class="ds-note sec-head__note" data-en="Systems I designed and built, and, because the argument of this page demands it, what each one was actually measured against." data-es="Sistemas que diseñé y construí y, porque el argumento de esta página lo exige, contra qué se midió realmente cada uno.">Systems I designed and built, and, because the argument of this page demands it, what each one was actually measured against.</p>
+        <h2 class="h-sec" data-en="Selected work" data-es="Proyectos seleccionados">Selected work</h2>
+        <p class="ds-note sec-head__note" data-en="Two case studies: what I built, how I evaluated it, and where its limits remain." data-es="Dos casos de estudio: qué construí, cómo lo evalué y cuáles son sus límites.">Two case studies: what I built, how I evaluated it, and where its limits remain.</p>
       </div>
     </header>
 
@@ -190,10 +133,10 @@
           <span class="ds-label" data-en="Case study · Agent architecture" data-es="Caso · Arquitectura de agentes">Case study · Agent architecture</span>
         </div>
         <h3 class="case__title" data-en="Municipal analytics agent" data-es="Agente analítico municipal">Municipal analytics agent</h3>
-        <p class="case__cap"><span class="ds-atlas__caption" data-en="Every gate takes a capability away." data-es="Cada compuerta quita una capacidad.">Every gate takes a capability away.</span></p>
+        <p class="case__cap"><span class="ds-atlas__caption" data-en="Answering city-data questions through defined tools and metrics." data-es="Responder preguntas sobre datos de la ciudad con herramientas y métricas definidas.">Answering city-data questions through defined tools and metrics.</span></p>
         <div class="readout">
           <span class="ds-num ds-num--hero">240×</span>
-          <span class="ds-label" data-en="an analyst-week to 10 minutes, on 96 real questions" data-es="de una semana-analista a 10 minutos, en 96 preguntas reales">an analyst-week to 10 minutes, on 96 real questions</span>
+          <span class="ds-label" data-en="40 analyst-hours to 10 minutes; evaluated on 96 questions" data-es="de 40 horas de analista a 10 minutos; evaluado con 96 preguntas">40 analyst-hours to 10 minutes; evaluated on 96 questions</span>
         </div>
         </div>
         <a class="case__plate ds-atlas" href="work/agent-architecture/" tabindex="-1" aria-hidden="true">
@@ -204,8 +147,7 @@
           </div>
         </a>
         <div class="case__foot">
-        <p class="case__body" data-en="An agent that answers complex spatial questions across <span class='ds-num'>34</span> historical data standards. It cannot write SQL, hold a database credential, or sit in the request path of any platform. <em>Every capability it lacks was removed on purpose.</em>"
-           data-es="Un agente que responde preguntas espaciales complejas sobre <span class='ds-num'>34</span> estándares históricos de datos. No puede escribir SQL, ni tener una credencial de base de datos, ni situarse en la ruta de petición de ninguna plataforma. <em>Cada capacidad que le falta se le quitó a propósito.</em>">An agent that answers complex spatial questions across <span class="ds-num">34</span> historical data standards. It cannot write SQL, hold a database credential, or sit in the request path of any platform. <em>Every capability it lacks was removed on purpose.</em></p>
+        <p class="case__body" data-en="I built an analytics agent over 34 historical data standards and evaluated it on 96 real questions. Requests go through predefined metrics and join paths; the agent never writes SQL. Answer quality still depends on the source data and definitions." data-es="Construí un agente analítico sobre 34 estándares históricos de datos y lo evalué con 96 preguntas reales. Las solicitudes pasan por métricas y rutas de unión predefinidas; el agente nunca escribe SQL. La calidad de las respuestas sigue dependiendo de los datos y las definiciones.">I built an analytics agent over 34 historical data standards and evaluated it on 96 real questions. Requests go through predefined metrics and join paths; the agent never writes SQL. Answer quality still depends on the source data and definitions.</p>
         <p class="ds-label case__stack">Semantic layer · LLM agents · Python</p>
         <a class="more" href="work/agent-architecture/"><span data-en="Read the case study" data-es="Leer el caso de estudio">Read the case study</span> <span aria-hidden="true">→</span></a>
         </div>
@@ -216,11 +158,11 @@
           <span class="ds-label case__code">MAT·05</span>
           <span class="ds-label" data-en="Case study · Privacy engineering" data-es="Caso · Ingeniería de privacidad">Case study · Privacy engineering</span>
         </div>
-        <h3 class="case__title" data-en="PII anonymization pipeline" data-es="Tubería de anonimización de PII">PII anonymization pipeline</h3>
-        <p class="case__cap"><span class="ds-atlas__caption" data-en="Above the line, the AI. Below it, nothing it can name." data-es="Arriba de la línea, la IA. Debajo, nada que pueda nombrar.">Above the line, the AI. Below it, nothing it can name.</span></p>
+        <h3 class="case__title" data-en="Personal-data de-identification" data-es="Desidentificación de datos personales">Personal-data de-identification</h3>
+        <p class="case__cap"><span class="ds-atlas__caption" data-en="Preparing sensitive records for downstream AI use." data-es="Preparar registros sensibles para su uso en sistemas de IA.">Preparing sensitive records for downstream AI use.</span></p>
         <div class="readout">
           <span class="ds-num ds-num--hero">65,000+</span>
-          <span class="ds-label" data-en="people protected · 400,000+ addresses · 13 fields" data-es="personas protegidas · 400.000+ direcciones · 13 campos">people protected · 400,000+ addresses · 13 fields</span>
+          <span class="ds-label" data-en="individuals covered by the pipeline" data-es="personas cubiertas por la tubería">individuals covered by the pipeline</span>
         </div>
         </div>
         <a class="case__plate ds-atlas" href="work/anonymization-pipeline/" tabindex="-1" aria-hidden="true">
@@ -231,8 +173,7 @@
           </div>
         </a>
         <div class="case__foot">
-        <p class="case__body" data-en="Treats <span class='ds-num'>13</span> sensitive field classes with hashed linkage keys, suppression and generalization, and checks every release before anything can read it. <em>The AI layer above it has no access to the raw data at all.</em> Residual re-identification risk depends on how predictable the identifiers are and on auxiliary data."
-           data-es="Trata <span class='ds-num'>13</span> clases de campos sensibles con llaves de enlace hasheadas, supresión y generalización, y verifica cada publicación antes de que algo pueda leerla. <em>La capa de IA encima no tiene ningún acceso a los datos crudos.</em> El riesgo residual de reidentificación depende de qué tan predecibles sean los identificadores y de los datos auxiliares.">Treats <span class="ds-num">13</span> sensitive field classes with hashed linkage keys, suppression and generalization, and checks every release before anything can read it. <em>The AI layer above it has no access to the raw data at all.</em> Residual re-identification risk depends on how predictable the identifiers are and on auxiliary data.</p>
+        <p class="case__body" data-en="I built a Python pipeline that transforms 13 classes of sensitive fields and checks each release before downstream use. The AI layer has no access to the raw records. Re-identification risk remains dependent on the identifiers and auxiliary data." data-es="Construí una tubería en Python que transforma 13 clases de campos sensibles y verifica cada publicación antes de su uso. La capa de IA no tiene acceso a los registros originales. El riesgo de reidentificación sigue dependiendo de los identificadores y los datos auxiliares.">I built a Python pipeline that transforms 13 classes of sensitive fields and checks each release before downstream use. The AI layer has no access to the raw records. Re-identification risk remains dependent on the identifiers and auxiliary data.</p>
         <p class="ds-label case__stack">Python · SHA-256 · Data governance</p>
         <a class="more" href="work/anonymization-pipeline/"><span data-en="Read the case study" data-es="Leer el caso de estudio">Read the case study</span> <span aria-hidden="true">→</span></a>
         </div>
@@ -241,8 +182,8 @@
 
       <div class="catalogue">
         <div class="catalogue__head">
-          <span class="ds-label" style="color:var(--ink)" data-en="Catalog · five more systems" data-es="Catálogo · cinco sistemas más">Catalog · five more systems</span>
-          <span class="ds-label">MAT·01 — 07</span>
+          <span class="ds-label" style="color:var(--ink)" data-en="Catalog · six more entries" data-es="Catálogo · seis entradas más">Catalog · six more entries</span>
+          <span class="ds-label">MAT·01 — 08</span>
         </div>
         <a class="cat" href="https://bottomuplabs.github.io/ep-ontology/" rel="noopener" target="_blank">
           <span data-seal="MAT·01" data-size="64"></span>
@@ -272,7 +213,7 @@
             
           </div>
         </div>
-        <div class="cat">
+        <div class="cat" id="agent-evaluation">
           <span data-seal="MAT·04" data-size="64"></span>
           <div class="cat__id">
             <span class="ds-label cat__code">MAT·04</span>
@@ -280,8 +221,7 @@
             <h3 class="ds-card__title" data-en="Execution-accuracy benchmark" data-es="Benchmark de precisión de ejecución">Execution-accuracy benchmark</h3>
           </div>
           <div>
-            <p class="ds-card__body" data-en="A purpose-built <span class='ds-num'>96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke."
-             data-es="Un benchmark propio de <span class='ds-num'>96</span> preguntas que valida el sistema de agentes contra preguntas de negocio reales, no contra impresiones — y que además funciona como suite de regresión: si una pregunta deja de poder responderse, la capa semántica se rompió.">A purpose-built <span class="ds-num">96</span>-question benchmark that validates the agent system against real business questions rather than vibes — and doubles as a regression suite: if a question stops being answerable, the semantic layer broke.</p>
+            <p class="ds-card__body" data-en="A 96-question benchmark built from real business questions to evaluate execution accuracy and catch regressions when the agent or its semantic layer changes." data-es="Un benchmark de 96 preguntas de negocio reales para evaluar la precisión de ejecución y detectar regresiones cuando cambia el agente o su capa semántica.">A 96-question benchmark built from real business questions to evaluate execution accuracy and catch regressions when the agent or its semantic layer changes.</p>
             <p class="ds-card__finding ds-label">Python · Evaluation · Regression testing</p>
             
           </div>
@@ -300,7 +240,7 @@
             
           </div>
         </div>
-        <div class="cat">
+        <div class="cat" id="ml-experiments">
           <span data-seal="MAT·07" data-size="64"></span>
           <div class="cat__id">
             <span class="ds-label cat__code">MAT·07</span>
@@ -314,175 +254,31 @@
             
           </div>
         </div>
-      </div>
-  </div>
-</section>
-
-<!-- ═══════════════ II · THE QUESTION ═══════════════ -->
-<section class="sec" id="story">
-  <div class="wrap qgrid">
-    <div class="qgrid__plate">
-      <div class="sec-head__rail">
-        <span class="num">II</span>
-        <span class="rail-name" data-en="The question" data-es="La pregunta">The question</span>
-      </div>
-      <figure class="ds-atlas ds-atlas--arch">
-        <div class="ds-atlas__window">
-          <div class="ds-atlas__art" data-atlas-src="assets/art/stair.svg?v=5a4f29d0" data-alt="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." data-alt-en="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." data-alt-es="Una escalera de caracol de concreto gastado y barandas de hierro que sube hacia nubes blancas sobre el mar; una figura está de pie en un descanso." style="aspect-ratio:848/1264">
-            <img src="assets/art/stair.svg?v=5a4f29d0" alt="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." width="848" height="1264" loading="lazy">
+        <a class="cat" href="work/cultural-adoption/">
+          <span data-seal="MAT·08" data-size="64"></span>
+          <div class="cat__id">
+            <span class="ds-label cat__code">MAT·08</span>
+            <span class="ds-label" data-en="Case study · AI adoption" data-es="Caso · Adopción de IA">Case study · AI adoption</span>
+            <h3 class="ds-card__title" data-en="Deciding with AI under time pressure" data-es="Decidir con IA bajo presión de tiempo">Deciding with AI under time pressure</h3>
           </div>
-        </div>
-        <figcaption class="ds-atlas__cap">
-          <span class="ds-atlas__title" data-en="The same stair, four landings" data-es="La misma escalera, cuatro descansos">The same stair, four landings</span>
-          <span class="ds-atlas__caption" data-en="Each turn looks like a new floor. It is the same stair, climbing the same question." data-es="Cada vuelta parece un piso nuevo. Es la misma escalera, subiendo la misma pregunta.">Each turn looks like a new floor. It is the same stair, climbing the same question.</span>
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="qgrid__text">
-      <h2 class="h-sec" data-en="Four notations, one problem" data-es="Cuatro notaciones, un solo problema">Four notations, one problem</h2>
-      <ol class="landings" aria-label="Four notations">
-        <li><span class="ds-label">I</span><span data-en="Physics" data-es="Física">Physics</span></li>
-        <li><span class="ds-label">II</span><span data-en="Philosophy" data-es="Filosofía">Philosophy</span></li>
-        <li><span class="ds-label">III</span><span data-en="Credit risk" data-es="Riesgo de crédito">Credit risk</span></li>
-        <li><span class="ds-label">IV</span><span data-en="Governance" data-es="Gobernanza">Governance</span></li>
-      </ol>
-      <div class="prose" style="margin-top:var(--sp-5)">
-        <p data-en="Every role on this page is the same question written in a different notation. <strong>Physics</strong> taught me that the mathematics does not care about the substrate — a Markov process is indifferent to whether its state is a particle or a borrower. <strong>Philosophy</strong> taught me the harder half: what counts as evidence at all, and how to decide about a technology when no evidence exists and the human cost is high."
-           data-es="Cada cargo de esta página es la misma pregunta escrita en otra notación. La <strong>física</strong> me enseñó que a las matemáticas no les importa el sustrato — a un proceso de Markov le da igual que su estado sea una partícula o un deudor. La <strong>filosofía</strong> me enseñó la mitad más difícil: qué cuenta como evidencia, y cómo decidir sobre una tecnología cuando no hay evidencia y el costo humano es alto.">
-          Every role on this page is the same question written in a different notation. <strong>Physics</strong> taught me that the mathematics does not care about the substrate — a Markov process is indifferent to whether its state is a particle or a borrower. <strong>Philosophy</strong> taught me the harder half: what counts as evidence at all, and how to decide about a technology when no evidence exists and the human cost is high.
-        </p>
-        <p data-en="<strong>Credit risk</strong> was the laboratory — uncertainty made explicit and priced. Then the pandemic moved micro and macro behavior in ways that did not correlate, and the models were still judged the way they always were: context-free, on their metrics. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> I answered with what I had — simulation, backtesting coverage pushed <span class='ds-num'>20%→90%</span>, thousands of runs a week — and still had to report an expected risk that could not be honestly derived from the evidence."
-           data-es="El <strong>riesgo de crédito</strong> fue el laboratorio — la incertidumbre hecha explícita y valorada. Luego la pandemia movió el comportamiento micro y macro de maneras que no correlacionaban, y los modelos se siguieron juzgando como siempre: sin contexto, contra sus métricas. <strong>Las métricas técnicas no son concluyentes cuando la base de evidencia desapareció.</strong> Respondí con lo que tenía — simulación, cobertura de backtesting llevada del <span class='ds-num'>20%→90%</span>, miles de corridas por semana — y aun así tuve que reportar un riesgo esperado que no podía derivarse honestamente de la evidencia.">
-          <strong>Credit risk</strong> was the laboratory — uncertainty made explicit and priced. Then the pandemic moved micro and macro behavior in ways that did not correlate, and the models were still judged the way they always were: context-free, on their metrics. <strong>Technical metrics are not conclusive once the evidence base has gone.</strong> I answered with what I had — simulation, backtesting coverage pushed <span class="ds-num">20%→90%</span>, thousands of runs a week — and still had to report an expected risk that could not be honestly derived from the evidence.
-        </p>
-        <p data-en="So I moved into <strong>public-sector governance</strong> to build the layer that was missing — a feedback and control loop bound to outcomes and context, not just to metrics — and built it for a city of <span class='ds-num'>2.5M</span>. On its own terms it worked. I still did not get the answer, which is the honest reason I am at Carnegie Mellon: I ran out of formal apparatus. What I want to understand now is which interventions actually improve outcomes where the human cost is high and the evidence is thin — for whom, and under what conditions."
-           data-es="Así que me pasé a la <strong>gobernanza pública</strong> para construir la capa que faltaba — un ciclo de retroalimentación y control atado a resultados y contexto, no sólo a métricas — y la construí para una ciudad de <span class='ds-num'>2,5M</span>. En sus propios términos funcionó. Aun así no obtuve la respuesta, que es la razón honesta por la que estoy en Carnegie Mellon: se me acabó el aparato formal. Lo que quiero entender ahora es qué intervenciones mejoran de verdad los resultados donde el costo humano es alto y la evidencia es escasa — para quién, y bajo qué condiciones.">
-          So I moved into <strong>public-sector governance</strong> to build the layer that was missing — a feedback and control loop bound to outcomes and context, not just to metrics — and built it for a city of <span class="ds-num">2.5M</span>. On its own terms it worked. I still did not get the answer, which is the honest reason I am at Carnegie Mellon: I ran out of formal apparatus. What I want to understand now is which interventions actually improve outcomes where the human cost is high and the evidence is thin — for whom, and under what conditions.
-        </p>
-      </div>
-      <p style="margin:0">
-        <a class="more" href="the-question/">
-          <span data-en="Read the full note — five movements" data-es="Leer la nota completa — cinco movimientos">Read the full note — five movements</span> <span aria-hidden="true">→</span>
+          <div>
+            <p class="ds-card__body" data-en="The adoption plan for the office's analytical observatory. Team leaders made timed decisions on the observatory's real outputs, and a leaderboard scored accuracy and how often they caught a wrong output. Assistance fades from <span class='ds-num'>100%</span> to on-demand over four phases. Third place in a city-wide project competition."
+             data-es="El plan de adopción del observatorio analítico de la oficina. Los líderes de equipo tomaron decisiones cronometradas sobre los resultados reales del observatorio, y una tabla de posiciones puntuó el acierto y cuántas veces detectaron un resultado equivocado. La asistencia baja de <span class='ds-num'>100%</span> a demanda en cuatro fases. Tercer puesto en un concurso de proyectos de ciudad.">The adoption plan for the office's analytical observatory. Team leaders made timed decisions on the observatory's real outputs, and a leaderboard scored accuracy and how often they caught a wrong output. Assistance fades from <span class='ds-num'>100%</span> to on-demand over four phases. Third place in a city-wide project competition.</p>
+            <p class="ds-card__finding ds-label">Human-AI decision making · Incentive design · DAMA-DMBOK</p>
+            <span class="ds-card__link" data-en="Read the case study →" data-es="Leer el caso de estudio →">Read the case study →</span>
+          </div>
         </a>
-      </p>
-    </div>
+      </div>
   </div>
 </section>
 
-<!-- ═══════════════ III · EXPERIENCE ═══════════════ -->
-<section class="sec" id="experience">
-  <div class="wrap rail-layout">
-    <div class="rail">
-      <span class="num">III</span>
-      <span class="rail-name" data-en="Experience" data-es="Experiencia">Experience</span>
-      <span class="ds-note" data-en="Each role is one of the movements above, with a budget attached." data-es="Cada cargo es uno de los movimientos de arriba, con presupuesto encima.">Each role is one of the movements above, with a budget attached.</span>
-      <figure class="ds-atlas rail-fig rail-fig--float">
-        <div class="ds-atlas__window">
-          <div class="ds-atlas__art" data-atlas-src="assets/art/airship.svg?v=a966d30c" data-alt="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." data-alt-en="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." data-alt-es="Un barco de vela de madera colgado bajo el esqueleto de costillas de un dirigible, cubierto de enredaderas y hojas enormes, con una hélice en la popa; una persona diminuta está de pie en el suelo." style="aspect-ratio:1/1">
-            <img src="assets/art/airship.svg?v=a966d30c" alt="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." width="1024" height="1024" loading="lazy">
-          </div>
-        </div>
-        <figcaption class="ds-atlas__cap">
-          <span class="ds-atlas__caption" data-en="Overgrown, patched, still airborne. Seven years between Medellín and Pittsburgh." data-es="Cubierto de hojas, remendado, todavía en el aire. Siete años entre Medellín y Pittsburgh.">Overgrown, patched, still airborne. Seven years between Medellín and Pittsburgh.</span>
-        </figcaption>
-      </figure>
-    </div>
-
-    <div>
-      <article class="job">
-        <div class="job__when">
-          <span class="ds-label" data-en="Jan 2025 — Jul 2026" data-es="Ene 2025 — Jul 2026">Jan 2025 — Jul 2026</span>
-          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
-          <span class="ds-coord">6°15′N 75°34′W</span>
-        </div>
-        <div>
-          <h3 class="h-sub" data-en="Associate Director of Data and Technology" data-es="Director Asociado de Datos y Tecnología">Associate Director of Data and Technology</h3>
-          <div class="org"><b>CORLIDE — Corporación Libertad y Democracia</b>
-            <span data-en="· Colombian nonprofit for institutional transparency" data-es="· ONG colombiana de transparencia institucional">· Colombian nonprofit for institutional transparency</span>
-          </div>
-          <p class="frame"
-             data-en="Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it."
-             data-es="Movimiento IV — construir la capa de monitoreo: información integrada, verdad de base establecida y contexto lo bastante explícito como para que un agente de IA pudiera razonar sobre él.">Movement IV — building the monitoring layer: integrated information, established ground truth, and context made explicit enough that an AI agent could reason over it.</p>
-          <ul class="bullets">
-            <li data-en="Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class='ds-num'>15</span> business days) from <span class='ds-num'>300+</span> to <span class='ds-num'>0</span> per month"
-                data-es="Construí un <strong>sistema de graph RAG</strong> con Neo4j, Pinecone y LightRAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, reduciendo las respuestas vencidas (&gt;<span class='ds-num'>15</span> días hábiles) de más de <span class='ds-num'>300</span> a <span class='ds-num'>0</span> al mes">Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class="ds-num">15</span> business days) from <span class="ds-num">300+</span> to <span class="ds-num">0</span> per month</li>
-            <li data-en="Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean"
-                data-es="Diseñé una <strong>ontología de dominio publicada como activo público</strong>, estandarizando entidades y relaciones como la capa semántica contra la que los sistemas de IA resuelven las preguntas, de modo que un término signifique una sola cosa en todo el ecosistema y no lo que un modelo infiera">Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean</li>
-            <li data-en="Cut complex spatial-question turnaround from one analyst-week (40 h) to <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class='ds-num'>96</span>-question execution-accuracy benchmark spanning <span class='ds-num'>34</span> historical data standards"
-                data-es="Reduje el tiempo de respuesta a preguntas espaciales complejas de una semana-analista (40 h) a <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> desplegando agentes geoespaciales de IA, validados contra un benchmark propio de <span class='ds-num'>96</span> preguntas de precisión de ejecución sobre <span class='ds-num'>34</span> estándares históricos de datos">Cut complex spatial-question turnaround from one analyst-week (40 h) to <strong><span class="ds-num">10 min</span> (<span class="ds-num">240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class="ds-num">96</span>-question execution-accuracy benchmark spanning <span class="ds-num">34</span> historical data standards</li>
-            <li data-en="Built a <strong>de-identification pipeline</strong> covering <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses, combining hashed linkage keys, suppression and generalization across <span class='ds-num'>13</span> sensitive fields, with release checks and restricted downstream access"
-                data-es="Construí una <strong>tubería de desidentificación</strong> que cubre a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones, combinando llaves de enlace hasheadas, supresión y generalización en <span class='ds-num'>13</span> campos sensibles, con verificaciones previas a la publicación y acceso restringido aguas abajo">Built a <strong>de-identification pipeline</strong> covering <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses, combining hashed linkage keys, suppression and generalization across <span class="ds-num">13</span> sensitive fields, with release checks and restricted downstream access</li>
-            <li data-en="Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class='ds-num'>2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class='ds-num'>250+</span> data sources"
-                data-es="Lideré la gobernanza de datos e IA de la Subsecretaría de Espacio Público, Alcaldía de Medellín (<span class='ds-num'>2,5M+</span> habitantes), implementando DAMA-DMBOK e ITIL para depurar e integrar más de <span class='ds-num'>250</span> fuentes de datos">Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class="ds-num">2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class="ds-num">250+</span> data sources</li>
-            <li data-en="Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy"
-                data-es="Coordiné con la <strong>Open Government Partnership</strong>, la Presidencia de Colombia y universidades colombianas (Externado, Los Andes) un modelo nacional de gobernanza de IA; y con el FCDO del Reino Unido la estrategia de Gobierno Abierto Local de Medellín">Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="job">
-        <div class="job__when">
-          <span class="ds-label" data-en="Jul 2020 — Jan 2025" data-es="Jul 2020 — Ene 2025">Jul 2020 — Jan 2025</span>
-          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
-          <span class="ds-coord">6°15′N 75°34′W</span>
-        </div>
-        <div>
-          <h3 class="h-sub" data-en="Senior Data Scientist" data-es="Científico de Datos Senior">Senior Data Scientist</h3>
-          <div class="org"><b>Bancolombia (Grupo Cibest)</b>
-            <span data-en="· Colombia's largest bank, NYSE: CIB" data-es="· el banco más grande de Colombia, NYSE: CIB">· Colombia's largest bank, NYSE: CIB</span>
-          </div>
-          <p class="frame"
-             data-en="Movements I and III — physical mathematics applied to behavioral data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid."
-             data-es="Movimientos I y III — matemáticas físicas aplicadas a datos conductuales, y la pandemia enseñándome que una métrica no puede avisarte cuándo la evidencia que la sostiene dejó de ser válida.">Movements I and III — physical mathematics applied to behavioral data, and the pandemic teaching me that a metric cannot tell you when the evidence beneath it has stopped being valid.</p>
-          <ul class="bullets">
-            <li data-en="Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class='ds-num'>8</span> audit cycles covering <span class='ds-num'>230+</span> credit risk models — closed every cycle with <span class='ds-num'>0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)"
-                data-es="Contraparte técnica principal ante <strong>PwC México, Auditoría Interna, Revisoría Fiscal y reguladores bancarios colombianos</strong> en <span class='ds-num'>8</span> ciclos de auditoría sobre más de <span class='ds-num'>230</span> modelos de riesgo de crédito — cerré cada ciclo con <span class='ds-num'>0</span> hallazgos materiales, en un entorno listado en NYSE y reportante ante la SEC (Form 20-F)">Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class="ds-num">8</span> audit cycles covering <span class="ds-num">230+</span> credit risk models — closed every cycle with <span class="ds-num">0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)</li>
-            <li data-en="Designed and built <strong><span class='ds-num'>230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class='ds-num'>3</span> on evaluation and data-cleaning methodology"
-                data-es="Diseñé y construí <strong>más de <span class='ds-num'>230</span> modelos de provisiones</strong> (pérdida esperada de por vida) bajo NIIF 9 — la contraparte internacional del CECL estadounidense — usando modelos multiestado de Aalen-Johansen con covariables dependientes del tiempo, riesgos proporcionales de Cox y cadenas multiestado semi-Markov; lideré un equipo de <span class='ds-num'>3</span> en metodología de evaluación y depuración de datos">Designed and built <strong><span class="ds-num">230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class="ds-num">3</span> on evaluation and data-cleaning methodology</li>
-            <li data-en="Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class='ds-num'>COP 56T</span> (<span class='ds-num'>USD 14B</span>) in credit exposure and <span class='ds-num'>14M+</span> borrower records"
-                data-es="Fui responsable del portafolio de modelos de provisiones en <strong>cuatro países</strong> (Colombia, Panamá, El Salvador, Guatemala), cubriendo ~<span class='ds-num'>COP 56B</span> (<span class='ds-num'>USD 14B</span>) de exposición crediticia y más de <span class='ds-num'>14M</span> de registros de deudores">Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class="ds-num">COP 56T</span> (<span class="ds-num">USD 14B</span>) in credit exposure and <span class="ds-num">14M+</span> borrower records</li>
-            <li data-en="Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class='ds-num'>20%</span> to <span class='ds-num'>90%</span>"
-                data-es="Apliqué simulación Monte Carlo y basada en Bernoulli para evaluar comportamiento de pérdidas y riesgo de concentración, ampliando la cobertura de backtesting (S2+) del <span class='ds-num'>20%</span> al <span class='ds-num'>90%</span>">Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class="ds-num">20%</span> to <span class="ds-num">90%</span></li>
-            <li data-en="Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class='ds-num'>1 TB</span> of borrower history into <span class='ds-num'>16 GB</span> and eliminating a <span class='ds-num'>3-hour</span> dataset rebuild per model"
-                data-es="Rediseñé la capa de datos de desarrollo de modelos como un <strong>feature store basado en cambios</strong>: extracción desde Impala sobre el warehouse corporativo, persistiendo sólo transiciones de estado en InfluxDB, comprimiendo ~<span class='ds-num'>1 TB</span> de historia de deudores a <span class='ds-num'>16 GB</span> y eliminando una reconstrucción de dataset de <span class='ds-num'>3 horas</span> por modelo">Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class="ds-num">1 TB</span> of borrower history into <span class="ds-num">16 GB</span> and eliminating a <span class="ds-num">3-hour</span> dataset rebuild per model</li>
-            <li data-en="Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class='ds-num'>2,000</span> runs/week vs. <span class='ds-num'>20</span>/month; resulting specifications cut PD prediction error from <span class='ds-num'>30%→5%</span> (natural-person) and ~<span class='ds-num'>50%→&lt;10%</span> (large-corporate)"
-                data-es="Construí un <strong>registro de experimentos</strong> ligero — archivos SQLite de estado por corrida versionados con DVC, métricas en MLflow — habilitando <span class='ds-num'>2.000</span> corridas/semana frente a <span class='ds-num'>20</span>/mes; las especificaciones resultantes redujeron el error de predicción de PD de <span class='ds-num'>30%→5%</span> (persona natural) y de ~<span class='ds-num'>50%→&lt;10%</span> (gran empresa)">Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class="ds-num">2,000</span> runs/week vs. <span class="ds-num">20</span>/month; resulting specifications cut PD prediction error from <span class="ds-num">30%→5%</span> (natural-person) and ~<span class="ds-num">50%→&lt;10%</span> (large-corporate)</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="job">
-        <div class="job__when">
-          <span class="ds-label" data-en="Mar 2019 — Jul 2020" data-es="Mar 2019 — Jul 2020">Mar 2019 — Jul 2020</span>
-          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
-          <span class="ds-coord">6°15′N 75°34′W</span>
-        </div>
-        <div>
-          <h3 class="h-sub" data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</h3>
-          <div class="org"><b>Telemetrik</b></div>
-          <p class="frame"
-             data-en="First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about."
-             data-es="Primer encuentro con la versión práctica del problema: una decisión sólo vale lo que vale el instrumento que observó aquello sobre lo que decide.">First encounter with the practical version of the problem: a decision is only as good as the instrument that observed the thing it is about.</p>
-          <ul class="bullets">
-            <li data-en="Led a data-architecture transformation enabling real-time analytics for <strong><span class='ds-num'>2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context"
-                data-es="Lideré una transformación de arquitectura de datos que habilitó analítica en tiempo real para <strong>más de <span class='ds-num'>2.000</span> dispositivos IoT</strong> (sensores de agua, alumbrado público, seguimiento de barrido) y tableros automatizados, reduciendo el monitoreo manual de interrupciones de servicio en un contexto de Ciudad Inteligente">Led a data-architecture transformation enabling real-time analytics for <strong><span class="ds-num">2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context</li>
-            <li data-en="Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class='ds-num'>10+</span> data streams"
-                data-es="Implementé controles automáticos de calidad de datos — validaciones de rango, monitoreo de nulos, detección estadística de atípicos — para identificar fallas de sensores y corrupción de datos en más de <span class='ds-num'>10</span> flujos">Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class="ds-num">10+</span> data streams</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ IV · APPARATUS ═══════════════ -->
+<!-- II · SKILLS AND EDUCATION -->
 <section class="sec" id="skills">
   <div class="wrap rail-layout">
     <div class="rail">
-      <span class="num">IV</span>
-      <span class="rail-name" data-en="Apparatus" data-es="Aparato">Apparatus</span>
-      <span class="ds-note" data-en="Tools and training. Three degrees, chosen in this order for the reason above." data-es="Herramientas y formación. Tres títulos, elegidos en este orden por la razón de arriba.">Tools and training. Three degrees, chosen in this order for the reason above.</span>
+      <span class="num">II</span>
+      <span class="rail-name" data-en="Skills &amp; education" data-es="Competencias y formación">Skills &amp; education</span>
+      <span class="ds-note" data-en="The work I can contribute, and the training behind it." data-es="El trabajo al que puedo contribuir y la formación que lo respalda.">The work I can contribute, and the training behind it.</span>
       <figure class="ds-atlas rail-fig rail-fig--swing">
         <div class="ds-atlas__window">
           <div class="ds-atlas__art" data-atlas-src="assets/art/astrolabe.svg?v=aeec6969" data-alt="A brass astrolabe with a pierced rete over a map of the world and a sliding rule across its face, hung from the carved head of a bearded man." data-alt-en="A brass astrolabe with a pierced rete over a map of the world and a sliding rule across its face, hung from the carved head of a bearded man." data-alt-es="Un astrolabio de latón con una red calada sobre un mapa del mundo y una regla deslizante sobre su cara, colgado de la cabeza tallada de un hombre barbado." style="aspect-ratio:928/1152">
@@ -496,39 +292,31 @@
     </div>
 
     <div>
-      <h2 class="h-sec" data-en="Skills" data-es="Competencias">Skills</h2>
+      <h2 class="h-sec" data-en="Skills in practice" data-es="Competencias en práctica">Skills in practice</h2>
 
-      <div style="margin-top:var(--sp-6)">
-        <div class="skillrow">
-          <span class="ds-label" data-en="AI systems" data-es="Sistemas de IA">AI systems</span>
-          <div class="tags">
-            <span class="tag">RAG</span><span class="tag" data-en="Knowledge Graphs" data-es="Grafos de conocimiento">Knowledge Graphs</span>
-            <span class="tag">Neo4j</span><span class="tag">Pinecone</span><span class="tag">LightRAG</span>
-            <span class="tag" data-en="Ontology Design" data-es="Diseño de ontologías">Ontology Design</span>
-            <span class="tag" data-en="Machine Learning" data-es="Aprendizaje automático">Machine Learning</span>
-            <span class="tag">SHAP</span><span class="tag" data-en="Explainable AI" data-es="IA explicable">Explainable AI</span>
-          </div>
-        </div>
-        <div class="skillrow">
-          <span class="ds-label" data-en="Programming &amp; data" data-es="Programación y datos">Programming &amp; data</span>
-          <div class="tags">
-            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Apache Spark</span>
-            <span class="tag">Impala</span><span class="tag">Hive</span><span class="tag">Hadoop</span>
-            <span class="tag">dbt</span><span class="tag">Git</span><span class="tag">MLflow</span><span class="tag">DVC</span>
-          </div>
-        </div>
-        <div class="skillrow">
-          <span class="ds-label" data-en="Model &amp; AI risk" data-es="Riesgo de modelos e IA">Model &amp; AI risk</span>
-          <div class="tags">
-            <span class="tag" data-en="Model Risk Management" data-es="Gestión de riesgo de modelos">Model Risk Management</span>
-            <span class="tag" data-en="Model Validation" data-es="Validación de modelos">Model Validation</span>
-            <span class="tag" data-en="Model Monitoring" data-es="Monitoreo de modelos">Model Monitoring</span>
-            <span class="tag" data-en="AI Governance" data-es="Gobernanza de IA">AI Governance</span>
-            <span class="tag" data-en="Statistical Modeling" data-es="Modelación estadística">Statistical Modeling</span>
-            <span class="tag" data-en="IFRS 9" data-es="NIIF 9">IFRS 9</span>
-            <span class="tag">SOX</span>
-          </div>
-        </div>
+      <div class="capabilities">
+        <article class="capability" id="python-ml">
+          <h3 data-en="Build Python &amp; ML workflows" data-es="Construir flujos de Python y ML">Build Python &amp; ML workflows</h3>
+          <p data-en="Prepare data, fit statistical models, compare results, and make experiments reproducible. Python, SQL, Spark, MLflow, and DVC." data-es="Preparar datos, ajustar modelos estadísticos, comparar resultados y hacer reproducibles los experimentos. Python, SQL, Spark, MLflow y DVC.">Prepare data, fit statistical models, compare results, and make experiments reproducible. Python, SQL, Spark, MLflow, and DVC.</p>
+          <a href="#ml-experiments" class="intro__link" data-en="See the experiment registry" data-es="Ver el registro de experimentos">See the experiment registry</a>
+        </article>
+        <article class="capability" id="agent-systems">
+          <h3 data-en="Design and evaluate agent workflows" data-es="Diseñar y evaluar flujos de agentes">Design and evaluate agent workflows</h3>
+          <p data-en="Harness and loop engineering: context, tool interfaces, evaluation, feedback, and stopping rules. My project work includes a constrained analytics agent and a 96-question benchmark." data-es="Harness y loop engineering: contexto, interfaces de herramientas, evaluación, retroalimentación y reglas de parada. Mis proyectos incluyen un agente analítico con capacidades delimitadas y un benchmark de 96 preguntas.">Harness and loop engineering: context, tool interfaces, evaluation, feedback, and stopping rules. My project work includes a constrained analytics agent and a 96-question benchmark.</p>
+          <a href="work/agent-architecture/" class="intro__link" data-en="Read the agent case study" data-es="Leer el caso del agente">Read the agent case study</a>
+        </article>
+        <article class="capability" id="automated-ml">
+          <h3 data-en="Automate ML experimentation" data-es="Automatizar experimentos de ML">Automate ML experimentation</h3>
+          <p data-en="My focus within autonomous ML is repeatable experiment workflows, result tracking, and model comparison. I built infrastructure supporting 2,000 runs per week." data-es="Mi enfoque dentro del ML autónomo es crear flujos de experimentación repetibles, registrar resultados y comparar modelos. Construí infraestructura que soportaba 2.000 corridas por semana.">My focus within autonomous ML is repeatable experiment workflows, result tracking, and model comparison. I built infrastructure supporting 2,000 runs per week.</p>
+          <a href="#ml-experiments" class="intro__link" data-en="See the ML workflow" data-es="Ver el flujo de ML">See the ML workflow</a>
+        </article>
+        <article class="capability" id="ai-strategy">
+          <h3 data-en="Connect AI strategy to implementation" data-es="Conectar la estrategia de IA con la implementación">Connect AI strategy to implementation</h3>
+          <p data-en="Translate use cases into data requirements, system choices, and review responsibilities. Experience with AI and data governance, model validation, and audit processes." data-es="Traducir casos de uso en requisitos de datos, decisiones de sistemas y responsabilidades de revisión. Experiencia en gobernanza de IA y datos, validación de modelos y auditorías.">Translate use cases into data requirements, system choices, and review responsibilities. Experience with AI and data governance, model validation, and audit processes.</p>
+          <a href="#experience" class="intro__link" data-en="See relevant experience" data-es="Ver experiencia relacionada">See relevant experience</a>
+        </article>
+      </div>
+      <div class="skill-languages">
         <div class="skillrow">
           <span class="ds-label" data-en="Languages" data-es="Idiomas">Languages</span>
           <div class="tags">
@@ -563,6 +351,152 @@
           <p data-en="Thesis: “Computational Spaces”" data-es="Tesis: «Espacios computacionales»">Thesis: “Computational Spaces”</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- III · INTERESTS -->
+<section class="sec" id="story">
+  <div class="wrap qgrid">
+    <div class="qgrid__plate">
+      <div class="sec-head__rail">
+        <span class="num">III</span>
+        <span class="rail-name" data-en="Interests" data-es="Intereses">Interests</span>
+      </div>
+      <figure class="ds-atlas ds-atlas--arch">
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="assets/art/stair.svg?v=5a4f29d0" data-alt="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." data-alt-en="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." data-alt-es="Una escalera de caracol de concreto gastado y barandas de hierro que sube hacia nubes blancas sobre el mar; una figura está de pie en un descanso." style="aspect-ratio:848/1264">
+            <img src="assets/art/stair.svg?v=5a4f29d0" alt="A spiral staircase of weathered concrete and iron railings climbing into white clouds above the sea; one figure stands on a landing." width="848" height="1264" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap">
+          <span class="ds-atlas__title" data-en="Questions I’m pursuing" data-es="Preguntas que estoy explorando">Questions I’m pursuing</span>
+          <span class="ds-atlas__caption" data-en="From predicting an outcome to choosing an action." data-es="De predecir un resultado a elegir una acción.">From predicting an outcome to choosing an action.</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="qgrid__text">
+      <h2 class="h-sec" data-en="What I want to work on next" data-es="Lo que quiero explorar">What I want to work on next</h2>
+      <p class="interests-intro" data-en="These are the questions I’m pursuing at Carnegie Mellon, building on my experience in credit risk and public-sector AI." data-es="Estas son las preguntas que exploro en Carnegie Mellon a partir de mi experiencia en riesgo de crédito e IA para el sector público.">These are the questions I’m pursuing at Carnegie Mellon, building on my experience in credit risk and public-sector AI.</p>
+      <div class="interests-list">
+        <div class="interest">
+          <h3 data-en="Causal machine learning" data-es="Aprendizaje automático causal">Causal machine learning</h3>
+          <p data-en="Which actions improve an outcome, for whom, and under what conditions? I’m developing the causal-inference and evaluation methods to investigate that." data-es="¿Qué acciones mejoran un resultado, para quién y bajo qué condiciones? Estoy desarrollando las herramientas de inferencia causal y evaluación para investigarlo.">Which actions improve an outcome, for whom, and under what conditions? I’m developing the causal-inference and evaluation methods to investigate that.</p>
+        </div>
+        <div class="interest">
+          <h3 data-en="Decisions under uncertainty" data-es="Decisiones bajo incertidumbre">Decisions under uncertainty</h3>
+          <p data-en="How should a decision change when evidence is incomplete or the environment shifts? I’m interested in connecting probabilistic models to the choices people actually face." data-es="¿Cómo debería cambiar una decisión cuando la evidencia es incompleta o el entorno cambia? Me interesa conectar los modelos probabilísticos con las decisiones reales de las personas.">How should a decision change when evidence is incomplete or the environment shifts? I’m interested in connecting probabilistic models to the choices people actually face.</p>
+        </div>
+        <div class="interest">
+          <h3 data-en="Technical governance of AI" data-es="Gobernanza técnica de la IA">Technical governance of AI</h3>
+          <p data-en="What can a system access and do, when should it stop, and who can intervene? I want to extend my work on data and tool boundaries into controls that can be tested." data-es="¿A qué puede acceder un sistema, qué puede hacer, cuándo debe detenerse y quién puede intervenir? Quiero ampliar mi trabajo sobre límites de datos y herramientas hacia controles que se puedan evaluar.">What can a system access and do, when should it stop, and who can intervene? I want to extend my work on data and tool boundaries into controls that can be tested.</p>
+        </div>
+      </div>
+      <div class="interests-note">
+        <p data-en="My background in physics and philosophy shapes how I think about evidence, uncertainty, and the limits of a model." data-es="Mi formación en física y filosofía orienta mi manera de pensar sobre la evidencia, la incertidumbre y los límites de un modelo.">My background in physics and philosophy shapes how I think about evidence, uncertainty, and the limits of a model.</p>
+        <a class="intro__link" href="the-question/" data-en="Read the longer story" data-es="Leer la historia completa">Read the longer story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IV · EXPERIENCE -->
+<section class="sec" id="experience">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">IV</span>
+      <span class="rail-name" data-en="Experience" data-es="Experiencia">Experience</span>
+      <span class="ds-note" data-en="Applied AI, credit-risk modeling, and data systems in practice." data-es="IA aplicada, modelos de riesgo de crédito y sistemas de datos en la práctica.">Applied AI, credit-risk modeling, and data systems in practice.</span>
+      <figure class="ds-atlas rail-fig rail-fig--float">
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="assets/art/airship.svg?v=a966d30c" data-alt="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." data-alt-en="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." data-alt-es="Un barco de vela de madera colgado bajo el esqueleto de costillas de un dirigible, cubierto de enredaderas y hojas enormes, con una hélice en la popa; una persona diminuta está de pie en el suelo." style="aspect-ratio:1/1">
+            <img src="assets/art/airship.svg?v=a966d30c" alt="A wooden sailing ship slung beneath the ribbed skeleton of an airship, overgrown with vines and huge leaves, a propeller at its stern; a tiny person stands on the ground below." width="1024" height="1024" loading="lazy">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap">
+          <span class="ds-atlas__caption" data-en="Overgrown, patched, still airborne. Seven years between Medellín and Pittsburgh." data-es="Cubierto de hojas, remendado, todavía en el aire. Siete años entre Medellín y Pittsburgh.">Overgrown, patched, still airborne. Seven years between Medellín and Pittsburgh.</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Jan 2025 — Jul 2026" data-es="Ene 2025 — Jul 2026">Jan 2025 — Jul 2026</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Associate Director of Data and Technology" data-es="Director Asociado de Datos y Tecnología">Associate Director of Data and Technology</h3>
+          <div class="org"><b>CORLIDE — Corporación Libertad y Democracia</b>
+            <span data-en="· Colombian nonprofit for institutional transparency" data-es="· ONG colombiana de transparencia institucional">· Colombian nonprofit for institutional transparency</span>
+          </div>
+          <p class="frame" data-en="Built analytics agents, evaluation tools, and data controls for municipal operations." data-es="Construí agentes analíticos, herramientas de evaluación y controles de datos para la gestión municipal.">Built analytics agents, evaluation tools, and data controls for municipal operations.</p>
+          <ul class="bullets">
+            <li data-en="Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class='ds-num'>500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class='ds-num'>15</span> business days) from <span class='ds-num'>300+</span> to <span class='ds-num'>0</span> per month"
+                data-es="Construí un <strong>sistema de graph RAG</strong> con Neo4j, Pinecone y LightRAG sobre tres años de más de <span class='ds-num'>500</span> peticiones ciudadanas anonimizadas, reduciendo las respuestas vencidas (&gt;<span class='ds-num'>15</span> días hábiles) de más de <span class='ds-num'>300</span> a <span class='ds-num'>0</span> al mes">Built a <strong>graph RAG system</strong> using Neo4j, Pinecone and LightRAG over three years of <span class="ds-num">500+</span> anonymized citizen petitions, driving overdue responses (&gt;<span class="ds-num">15</span> business days) from <span class="ds-num">300+</span> to <span class="ds-num">0</span> per month</li>
+            <li data-en="Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean"
+                data-es="Diseñé una <strong>ontología de dominio publicada como activo público</strong>, estandarizando entidades y relaciones como la capa semántica contra la que los sistemas de IA resuelven las preguntas, de modo que un término signifique una sola cosa en todo el ecosistema y no lo que un modelo infiera">Designed a <strong>domain ontology released as a public asset</strong>, standardizing entities and relationships as the semantic layer downstream AI systems resolve questions against, so a term means one thing across the whole estate rather than whatever a model infers it to mean</li>
+            <li data-en="Cut complex spatial-question turnaround from one analyst-week (40 h) to <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class='ds-num'>96</span>-question execution-accuracy benchmark spanning <span class='ds-num'>34</span> historical data standards"
+                data-es="Reduje el tiempo de respuesta a preguntas espaciales complejas de una semana-analista (40 h) a <strong><span class='ds-num'>10 min</span> (<span class='ds-num'>240×</span>)</strong> desplegando agentes geoespaciales de IA, validados contra un benchmark propio de <span class='ds-num'>96</span> preguntas de precisión de ejecución sobre <span class='ds-num'>34</span> estándares históricos de datos">Cut complex spatial-question turnaround from one analyst-week (40 h) to <strong><span class="ds-num">10 min</span> (<span class="ds-num">240×</span>)</strong> by deploying geospatial AI agents, validated against a purpose-built <span class="ds-num">96</span>-question execution-accuracy benchmark spanning <span class="ds-num">34</span> historical data standards</li>
+            <li data-en="Built a <strong>de-identification pipeline</strong> covering <span class='ds-num'>65,000+</span> individuals and <span class='ds-num'>400,000+</span> addresses, combining hashed linkage keys, suppression and generalization across <span class='ds-num'>13</span> sensitive fields, with release checks and restricted downstream access"
+                data-es="Construí una <strong>tubería de desidentificación</strong> que cubre a más de <span class='ds-num'>65.000</span> personas y <span class='ds-num'>400.000</span> direcciones, combinando llaves de enlace hasheadas, supresión y generalización en <span class='ds-num'>13</span> campos sensibles, con verificaciones previas a la publicación y acceso restringido aguas abajo">Built a <strong>de-identification pipeline</strong> covering <span class="ds-num">65,000+</span> individuals and <span class="ds-num">400,000+</span> addresses, combining hashed linkage keys, suppression and generalization across <span class="ds-num">13</span> sensitive fields, with release checks and restricted downstream access</li>
+            <li data-en="Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class='ds-num'>2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class='ds-num'>250+</span> data sources"
+                data-es="Lideré la gobernanza de datos e IA de la Subsecretaría de Espacio Público, Alcaldía de Medellín (<span class='ds-num'>2,5M+</span> habitantes), implementando DAMA-DMBOK e ITIL para depurar e integrar más de <span class='ds-num'>250</span> fuentes de datos">Led AI and data governance for the Undersecretariat of Public Space, Mayor's Office of Medellín (<span class="ds-num">2.5M+</span> residents), implementing DAMA-DMBOK and ITIL to clean and integrate <span class="ds-num">250+</span> data sources</li>
+            <li data-en="Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy"
+                data-es="Coordiné con la <strong>Open Government Partnership</strong>, la Presidencia de Colombia y universidades colombianas (Externado, Los Andes) un modelo nacional de gobernanza de IA; y con el FCDO del Reino Unido la estrategia de Gobierno Abierto Local de Medellín">Coordinated with the <strong>Open Government Partnership</strong>, Colombia's Presidency and Colombian universities (Externado, Los Andes) on a national AI governance model; partnered with the UK's FCDO on Medellín's Local Open Government strategy</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Jul 2020 — Jan 2025" data-es="Jul 2020 — Ene 2025">Jul 2020 — Jan 2025</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Senior Data Scientist" data-es="Científico de Datos Senior">Senior Data Scientist</h3>
+          <div class="org"><b>Bancolombia (Grupo Cibest)</b>
+            <span data-en="· Colombia's largest bank, NYSE: CIB" data-es="· el banco más grande de Colombia, NYSE: CIB">· Colombia's largest bank, NYSE: CIB</span>
+          </div>
+          <p class="frame" data-en="Developed and validated credit-risk models, automated experiments, and supported model audits across four countries." data-es="Desarrollé y validé modelos de riesgo de crédito, automaticé experimentos y apoyé auditorías de modelos en cuatro países.">Developed and validated credit-risk models, automated experiments, and supported model audits across four countries.</p>
+          <ul class="bullets">
+            <li data-en="Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class='ds-num'>8</span> audit cycles covering <span class='ds-num'>230+</span> credit risk models — closed every cycle with <span class='ds-num'>0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)"
+                data-es="Contraparte técnica principal ante <strong>PwC México, Auditoría Interna, Revisoría Fiscal y reguladores bancarios colombianos</strong> en <span class='ds-num'>8</span> ciclos de auditoría sobre más de <span class='ds-num'>230</span> modelos de riesgo de crédito — cerré cada ciclo con <span class='ds-num'>0</span> hallazgos materiales, en un entorno listado en NYSE y reportante ante la SEC (Form 20-F)">Primary technical counterpart to <strong>PwC México, Internal Audit, Statutory Audit and Colombian banking regulators</strong> across <span class="ds-num">8</span> audit cycles covering <span class="ds-num">230+</span> credit risk models — closed every cycle with <span class="ds-num">0</span> material findings, in an NYSE-listed, SEC-reporting environment (Form 20-F)</li>
+            <li data-en="Designed and built <strong><span class='ds-num'>230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class='ds-num'>3</span> on evaluation and data-cleaning methodology"
+                data-es="Diseñé y construí <strong>más de <span class='ds-num'>230</span> modelos de provisiones</strong> (pérdida esperada de por vida) bajo NIIF 9 — la contraparte internacional del CECL estadounidense — usando modelos multiestado de Aalen-Johansen con covariables dependientes del tiempo, riesgos proporcionales de Cox y cadenas multiestado semi-Markov; lideré un equipo de <span class='ds-num'>3</span> en metodología de evaluación y depuración de datos">Designed and built <strong><span class="ds-num">230+</span> loan-loss provisioning models</strong> (lifetime expected losses) under IFRS 9 — the international counterpart to US CECL — using Aalen-Johansen multistate survival models with time-dependent covariates, Cox proportional hazards and semi-Markov multistate chains; led a team of <span class="ds-num">3</span> on evaluation and data-cleaning methodology</li>
+            <li data-en="Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class='ds-num'>COP 56T</span> (<span class='ds-num'>USD 14B</span>) in credit exposure and <span class='ds-num'>14M+</span> borrower records"
+                data-es="Fui responsable del portafolio de modelos de provisiones en <strong>cuatro países</strong> (Colombia, Panamá, El Salvador, Guatemala), cubriendo ~<span class='ds-num'>COP 56B</span> (<span class='ds-num'>USD 14B</span>) de exposición crediticia y más de <span class='ds-num'>14M</span> de registros de deudores">Owned the provisioning model suite across <strong>four countries</strong> (Colombia, Panama, El Salvador, Guatemala), covering ~<span class="ds-num">COP 56T</span> (<span class="ds-num">USD 14B</span>) in credit exposure and <span class="ds-num">14M+</span> borrower records</li>
+            <li data-en="Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class='ds-num'>20%</span> to <span class='ds-num'>90%</span>"
+                data-es="Apliqué simulación Monte Carlo y basada en Bernoulli para evaluar comportamiento de pérdidas y riesgo de concentración, ampliando la cobertura de backtesting (S2+) del <span class='ds-num'>20%</span> al <span class='ds-num'>90%</span>">Applied Monte Carlo and Bernoulli-based simulation to assess loss behavior and concentration risk, expanding backtesting (S2+) coverage from <span class="ds-num">20%</span> to <span class="ds-num">90%</span></li>
+            <li data-en="Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class='ds-num'>1 TB</span> of borrower history into <span class='ds-num'>16 GB</span> and eliminating a <span class='ds-num'>3-hour</span> dataset rebuild per model"
+                data-es="Rediseñé la capa de datos de desarrollo de modelos como un <strong>feature store basado en cambios</strong>: extracción desde Impala sobre el warehouse corporativo, persistiendo sólo transiciones de estado en InfluxDB, comprimiendo ~<span class='ds-num'>1 TB</span> de historia de deudores a <span class='ds-num'>16 GB</span> y eliminando una reconstrucción de dataset de <span class='ds-num'>3 horas</span> por modelo">Re-architected the model-development data layer as a <strong>change-based feature store</strong>: pulled from Impala over the enterprise warehouse and persisted only state transitions into InfluxDB, compressing ~<span class="ds-num">1 TB</span> of borrower history into <span class="ds-num">16 GB</span> and eliminating a <span class="ds-num">3-hour</span> dataset rebuild per model</li>
+            <li data-en="Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class='ds-num'>2,000</span> runs/week vs. <span class='ds-num'>20</span>/month; resulting specifications cut PD prediction error from <span class='ds-num'>30%→5%</span> (natural-person) and ~<span class='ds-num'>50%→&lt;10%</span> (large-corporate)"
+                data-es="Construí un <strong>registro de experimentos</strong> ligero — archivos SQLite de estado por corrida versionados con DVC, métricas en MLflow — habilitando <span class='ds-num'>2.000</span> corridas/semana frente a <span class='ds-num'>20</span>/mes; las especificaciones resultantes redujeron el error de predicción de PD de <span class='ds-num'>30%→5%</span> (persona natural) y de ~<span class='ds-num'>50%→&lt;10%</span> (gran empresa)">Built a lightweight <strong>experiment registry</strong> — per-run SQLite state files versioned with DVC, metrics in MLflow — enabling <span class="ds-num">2,000</span> runs/week vs. <span class="ds-num">20</span>/month; resulting specifications cut PD prediction error from <span class="ds-num">30%→5%</span> (natural-person) and ~<span class="ds-num">50%→&lt;10%</span> (large-corporate)</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job__when">
+          <span class="ds-label" data-en="Mar 2019 — Jul 2020" data-es="Mar 2019 — Jul 2020">Mar 2019 — Jul 2020</span>
+          <span class="ds-label" data-en="Medellín, Colombia" data-es="Medellín, Colombia">Medellín, Colombia</span>
+          <span class="ds-coord">6°15′N 75°34′W</span>
+        </div>
+        <div>
+          <h3 class="h-sub" data-en="Data Analyst" data-es="Analista de Datos">Data Analyst</h3>
+          <div class="org"><b>Telemetrik</b></div>
+          <p class="frame" data-en="Built real-time analytics and automated data-quality checks for connected city infrastructure." data-es="Construí analítica en tiempo real y controles automáticos de calidad de datos para infraestructura urbana conectada.">Built real-time analytics and automated data-quality checks for connected city infrastructure.</p>
+          <ul class="bullets">
+            <li data-en="Led a data-architecture transformation enabling real-time analytics for <strong><span class='ds-num'>2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context"
+                data-es="Lideré una transformación de arquitectura de datos que habilitó analítica en tiempo real para <strong>más de <span class='ds-num'>2.000</span> dispositivos IoT</strong> (sensores de agua, alumbrado público, seguimiento de barrido) y tableros automatizados, reduciendo el monitoreo manual de interrupciones de servicio en un contexto de Ciudad Inteligente">Led a data-architecture transformation enabling real-time analytics for <strong><span class="ds-num">2,000+</span> IoT devices</strong> (water sensors, streetlights, sweep-tracking) and automated dashboards, reducing manual monitoring of service interruptions in a Smart City context</li>
+            <li data-en="Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class='ds-num'>10+</span> data streams"
+                data-es="Implementé controles automáticos de calidad de datos — validaciones de rango, monitoreo de nulos, detección estadística de atípicos — para identificar fallas de sensores y corrupción de datos en más de <span class='ds-num'>10</span> flujos">Implemented automated data-quality controls — range checks, null-rate monitoring, statistical outlier detection — to identify sensor failures and data corruption across <span class="ds-num">10+</span> data streams</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -679,13 +613,9 @@
 
     <div class="contact-grid">
       <div>
-      <h2 class="h-sec" data-en="Get in touch" data-es="Escríbame">Get in touch</h2>
+      <h2 class="h-sec" data-en="Let’s work on a concrete problem" data-es="Trabajemos en un problema concreto">Let’s work on a concrete problem</h2>
 
-      <p class="lead-in" style="margin-top:var(--sp-5)"
-         data-en="<mark class='ds-hl ds-hl--draw'>I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decisions under uncertainty, causal inference, evaluating what interventions actually change — I would like to hear about it."
-         data-es="<mark class='ds-hl ds-hl--draw'>Busco una pasantía para el verano de 2027.</mark> Si algo de lo anterior es también un problema en el que usted trabaja — decisiones bajo incertidumbre, inferencia causal, evaluar qué cambian realmente las intervenciones — me gustaría saberlo.">
-        <mark class="ds-hl ds-hl--draw">I am looking for a Summer 2027 internship.</mark> If any of the above is a problem you are also working on — decisions under uncertainty, causal inference, evaluating what interventions actually change — I would like to hear about it.
-      </p>
+      <p class="lead-in" style="margin-top:var(--sp-5)" data-en="&lt;strong&gt;I’m seeking a Summer 2027 internship in applied AI or ML systems.&lt;/strong&gt; If your team is building an AI workflow, evaluating an agent, or studying how to make better decisions, send me the problem you’re working on." data-es="&lt;strong&gt;Busco una pasantía para el verano de 2027 en IA aplicada o sistemas de ML.&lt;/strong&gt; Si tu equipo está construyendo un flujo de IA, evaluando un agente o estudiando cómo tomar mejores decisiones, escríbeme sobre el problema en el que trabajan."><strong>I’m seeking a Summer 2027 internship in applied AI or ML systems.</strong> If your team is building an AI workflow, evaluating an agent, or studying how to make better decisions, send me the problem you’re working on.</p>
 
       <div class="contact contact--2" style="margin-top:var(--sp-6)">
         <a href="mailto:atabares@andrew.cmu.edu">
@@ -750,6 +680,6 @@
 <script src="_ds/cosmografia/react.umd.js?v=e91b2616" defer></script>
 <script src="_ds/cosmografia/react-dom.umd.js?v=7d4842a9" defer></script>
 <script src="_ds/cosmografia/cosmografia.js?v=0fcef5b1" defer></script>
-<script src="_ds/site.js?v=444ee49f" defer></script>
+<script src="_ds/site.js?v=b3ee93fb" defer></script>
 </body>
 </html>

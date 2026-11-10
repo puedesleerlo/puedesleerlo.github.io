@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Before the Deadline — Teaching a Municipal Office to Decide with AI</title>
+<meta name="description" content="The adoption plan for an analytical observatory at the Public Space office of Medellín. Team leaders practiced timed decisions on the observatory's outputs, and a leaderboard scored accuracy and how often they caught a wrong output. Baselines, targets, and what remains unproven.">
+<meta name="author" content="Alejandro Tabares">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Practice Before the Deadline — Teaching a Municipal Office to Decide with AI">
+<meta property="og:description" content="Teaching team leaders to decide with AI under time pressure and uncertainty, without trusting it entirely: timed decisions, a leaderboard, and help that is scheduled to leave.">
+<meta property="og:url" content="https://puedesleerlo.github.io/work/cultural-adoption/">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://puedesleerlo.github.io/work/cultural-adoption/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-34 -34 68 68'><rect x='-34' y='-34' width='68' height='68' fill='white'/><circle r='16' fill='none' stroke='%2319171A' stroke-width='3.2'/><ellipse rx='29' ry='9.5' transform='rotate(-18)' fill='none' stroke='%231E6AA3' stroke-width='3.2'/><circle cx='23.5' cy='-3.5' r='4.6' fill='%231E6AA3'/></svg>">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+
+<link rel="stylesheet" href="../../_ds/cosmografia/styles.css?v=8c73df0c">
+<link rel="stylesheet" href="../../_ds/site.css?v=e950fb3b">
+<link rel="stylesheet" href="../../_ds/figures.css?v=130908b2">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body class="ds-paper">
+<a class="skip" href="#main" data-en="Skip to content" data-es="Ir al contenido">Skip to content</a>
+
+<header class="bar">
+  <div class="bar__in">
+    <a class="brand" href="../../" aria-label="Alejandro Tabares — home">
+      <span class="ds-mark" style="--mark-size:34px">
+        <svg class="ds-mark__orbit" viewBox="-34 -34 68 68" aria-hidden="true">
+          <g transform="rotate(-18)"><path class="ds-orbit__path ds-orbit__back" d="M -29 0 A 29 9.5 0 0 1 29 0"/></g>
+          <circle class="ds-orbit__globe" r="17"/>
+          <ellipse class="ds-orbit__meridian" rx="6.5" ry="17"/>
+          <line class="ds-orbit__meridian" x1="-17" y1="0" x2="17" y2="0"/>
+          <g transform="rotate(-18)">
+            <path class="ds-orbit__path" d="M -29 0 A 29 9.5 0 0 0 29 0"/>
+            <circle class="ds-orbit__planet" r="2.8"><animateMotion dur="48s" repeatCount="indefinite" path="M -29 0 A 29 9.5 0 0 0 29 0 A 29 9.5 0 0 0 -29 0"/></circle>
+          </g>
+        </svg>
+        <span class="ds-mark__name"><span>Mario Alejandro</span><span>Tabares Arango</span></span>
+      </span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="../../" data-en="← Portfolio" data-es="← Portafolio">← Portfolio</a>
+      <a href="#problem" data-en="The problem" data-es="El problema">The problem</a>
+      <a href="#rehearsal" data-en="Rehearsal" data-es="El ensayo">Rehearsal</a>
+      <a href="#fading" data-en="Fading help" data-es="Ayuda que se retira">Fading help</a>
+      <a href="#decisions" data-en="Decisions" data-es="Decisiones">Decisions</a>
+      <a href="#measures" data-en="Measures" data-es="Medición">Measures</a>
+      <a href="#next" data-en="What's next" data-es="Qué sigue">What's next</a>
+    </nav>
+    <div class="controls">
+      <div class="langgroup" role="group" aria-label="Language / Idioma">
+        <button class="ctl" data-lang="en" aria-pressed="true">EN</button>
+        <button class="ctl" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </div>
+  <span class="ds-horizon" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+<section class="masthead wrap">
+  <div class="dateline">
+    <span class="ds-label lead" data-en="Case study · AI adoption" data-es="Caso de estudio · Adopción de IA">Case study · AI adoption</span>
+    <span class="ds-label" data-en="Public space · Mayor's Office of Medellín" data-es="Espacio público · Alcaldía de Medellín">Public space · Mayor's Office of Medellín</span>
+    <span class="ds-label" data-en="Designed 2026 · twelve-month horizon" data-es="Diseñado en 2026 · horizonte de doce meses">Designed 2026 · twelve-month horizon</span>
+  </div>
+  <div class="rule-pair" role="presentation"></div>
+
+  <div class="masthead__grid">
+    <div class="masthead__text">
+
+  <h1 class="ds-title title-hand" data-en="Practice Before<br>the Deadline<span class='thin'>Teaching a municipal office to decide with AI it should not fully trust</span>" data-es="Ensayar antes<br>del plazo<span class='thin'>Enseñar a una oficina municipal a decidir con una IA en la que no debe confiar del todo</span>">Practice Before<br>the Deadline<span class='thin'>Teaching a municipal office to decide with AI it should not fully trust</span></h1>
+
+  <p class="deck" data-en="An analytical observatory can give a team leader an answer in minutes, but it cannot say when that answer is wrong. <em>Team leaders practiced that judgment in timed rounds on the observatory's real outputs. A leaderboard scored how accurate their decisions were and how often they caught a mistake.</em>" data-es="Un observatorio analítico puede darle una respuesta a un líder de equipo en minutos, pero no puede decirle cuándo esa respuesta está equivocada. <em>Los líderes practicaron ese juicio en rondas cronometradas sobre los resultados reales del observatorio. Una tabla de posiciones puntuaba qué tan acertadas eran sus decisiones y cuántas veces detectaban un error.</em>">An analytical observatory can give a team leader an answer in minutes, but it cannot say when that answer is wrong. <em>Team leaders practiced that judgment in timed rounds on the observatory's real outputs. A leaderboard scored how accurate their decisions were and how often they caught a mistake.</em></p>
+
+  <div class="byline">
+    <span class="ds-label" data-en="By <b>Alejandro Tabares</b>" data-es="Por <b>Alejandro Tabares</b>">By <b>Alejandro Tabares</b></span>
+    <span class="ds-label" data-en="Associate Director of Data &amp; Technology, <b>CORLIDE</b>" data-es="Director Asociado de Datos y Tecnología, <b>CORLIDE</b>">Associate Director of Data &amp; Technology, <b>CORLIDE</b></span>
+    <span class="ds-label" data-en="Analytical observatory, <b>Public Space office</b>" data-es="Observatorio analítico, <b>Subsecretaría de Espacio Público</b>">Analytical observatory, <b>Public Space office</b></span>
+    <span class="ds-label" data-en="<b>Third place</b>, city-wide project competition" data-es="<b>Tercer puesto</b>, concurso de proyectos de ciudad"><b>Third place</b>, city-wide project competition</span>
+  </div>
+
+  <div class="claim-strip">
+    <span class="glyph-slot" id="fig-glyph" aria-hidden="true"></span>
+    <p data-en="We ran the exercises with team leaders. The figures on this page come from the strategic plan, and any figure that is a target is labeled <b>a target, not a result.</b>" data-es="Hicimos los ejercicios con líderes de equipo. Las cifras de esta página vienen del plan estratégico, y toda cifra que es una meta está marcada como <b>meta, no como resultado.</b>">We ran the exercises with team leaders. The figures on this page come from the strategic plan, and any figure that is a target is labeled <b>a target, not a result.</b></p>
+  </div>
+    </div>
+    <div class="masthead__plate">
+      <figure class="ds-atlas">
+        <header class="ds-atlas__head"><span class="ds-label ds-atlas__no">MAT·08</span><span class="ds-coord">6°15′N 75°34′W</span></header>
+        <div class="ds-atlas__window">
+          <div class="ds-atlas__art" data-atlas-src="../../assets/art/outpost.svg?v=52caf855" data-alt="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables." data-alt-en="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables." data-alt-es="Una torre remendada en un desierto bajo un cielo azul intenso: paneles solares en el techo, una gran antena sobre un mástil verde de celosía, un tablero rojo de luces de estado y una planta baja de talleres, tanques y cables." style="aspect-ratio:928/1152">
+            <img src="../../assets/art/outpost.svg?v=52caf855" alt="A patched-together tower in a desert under a loud blue sky: solar panels on the roof, a great dish on a green lattice mast, a red board of status lights, and a ground floor of workshops, tanks and cables." width="928" height="1152" fetchpriority="high">
+          </div>
+        </div>
+        <figcaption class="ds-atlas__cap"><span class="ds-atlas__title" data-en="The board of lights" data-es="El tablero de luces">The board of lights</span><span class="ds-atlas__caption" data-en="A station keeps working because someone reads its status board every morning and knows what a red light means." data-es="Una estación sigue funcionando porque alguien lee su tablero cada mañana y sabe qué significa una luz roja.">A station keeps working because someone reads its status board every morning and knows what a red light means.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="problem">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">I</span>
+      <span class="rail-name" data-en="The problem" data-es="El problema">The problem</span>
+      <span class="ds-note" data-en="A diagnosis, and the hour before a committee." data-es="Un diagnóstico, y la hora antes de un comité.">A diagnosis, and the hour before a committee.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="The office had answers before it knew when to believe them" data-es="La oficina tuvo respuestas antes de saber cuándo creerles">The office had answers before it knew when to believe them</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="In 2026 the Public Space office of Medellín was building an analytical observatory: governed datasets, dashboards, and an AI agent that answers questions about the city's public space. I led its adoption plan. That meant designing the technical architecture, working out the incentives of the people who would use it, and setting the strategy for bringing it into daily work. We started with a diagnosis. The office scored <span class='ds-num'>1.83</span> out of <span class='ds-num'>5</span> across the twelve DAMA-DMBOK knowledge areas and had <span class='ds-num'>19</span> of the <span class='ds-num'>87</span> required controls in place. We also asked leaders and coordinators what the program needed most. Their top three answers were all about people: better data quality and ownership, an analytical mindset for decisions, and more willingness to adopt the project." data-es="En 2026 la Subsecretaría de Espacio Público de Medellín estaba construyendo un observatorio analítico: conjuntos de datos gobernados, tableros y un agente de IA que responde preguntas sobre el espacio público de la ciudad. Lideré su plan de adopción. Eso incluía diseñar la arquitectura técnica, entender los incentivos de quienes lo iban a usar y definir la estrategia para llevarlo al trabajo diario. Empezamos con un diagnóstico. La oficina obtuvo <span class='ds-num'>1,83</span> sobre <span class='ds-num'>5</span> en las doce áreas de conocimiento del DAMA-DMBOK y tenía en funcionamiento <span class='ds-num'>19</span> de los <span class='ds-num'>87</span> controles requeridos. También preguntamos a líderes y coordinadores qué era lo que más necesitaba el programa. Sus tres primeras respuestas hablaban de personas: mejor calidad y apropiación de los datos, mentalidad analítica para decidir y más disposición para adoptar el proyecto.">In 2026 the Public Space office of Medellín was building an analytical observatory: governed datasets, dashboards, and an AI agent that answers questions about the city's public space. I led its adoption plan. That meant designing the technical architecture, working out the incentives of the people who would use it, and setting the strategy for bringing it into daily work. We started with a diagnosis. The office scored <span class='ds-num'>1.83</span> out of <span class='ds-num'>5</span> across the twelve DAMA-DMBOK knowledge areas and had <span class='ds-num'>19</span> of the <span class='ds-num'>87</span> required controls in place. We also asked leaders and coordinators what the program needed most. Their top three answers were all about people: better data quality and ownership, an analytical mindset for decisions, and more willingness to adopt the project.</p>
+        <p data-en="The hardest case is a familiar one. A team leader has an hour before a committee, and the observatory's answer disagrees with the figure they remember. They can ignore the observatory and go back to a private spreadsheet. They can accept its answer because it came quickly and looks finished. Both are mistakes. We wanted leaders to learn to check an output quickly enough to still use it, and to know which kinds of output need checking." data-es="El caso más difícil es uno conocido. Una líder de equipo tiene una hora antes de un comité, y la respuesta del observatorio contradice la cifra que ella recuerda. Puede ignorar el observatorio y volver a una hoja de cálculo propia. Puede aceptar la respuesta porque llegó rápido y parece terminada. Las dos opciones son un error. Queríamos que los líderes aprendieran a revisar un resultado con la rapidez suficiente para alcanzar a usarlo, y a reconocer qué tipos de resultado necesitan revisión.">The hardest case is a familiar one. A team leader has an hour before a committee, and the observatory's answer disagrees with the figure they remember. They can ignore the observatory and go back to a private spreadsheet. They can accept its answer because it came quickly and looks finished. Both are mistakes. We wanted leaders to learn to check an output quickly enough to still use it, and to know which kinds of output need checking.</p>
+        <p data-en="The plan trains for that hour. <mark class='ds-hl'>Leaders rehearse the decision against a clock, on outputs that are sometimes wrong.</mark> The rest of this page explains how." data-es="El plan entrena para esa hora. <mark class='ds-hl'>Los líderes ensayan la decisión contra el reloj, con resultados que a veces están equivocados.</mark> El resto de esta página explica cómo.">The plan trains for that hour. <mark class='ds-hl'>Leaders rehearse the decision against a clock, on outputs that are sometimes wrong.</mark> The rest of this page explains how.</p>
+      </div>
+
+      <div class="figure-slot" id="fig-gap">
+        <figure class="ds-figure fx-figure">
+          <p class="ds-figure__title" data-en="Quality, metadata and analytics are furthest from their targets" data-es="Calidad, metadatos y analítica son las áreas más lejos de su meta">Quality, metadata and analytics are furthest from their targets</p>
+          <span class="ds-label ds-figure__sub" data-en="fig. 1 · DAMA-DMBOK maturity, levels 1–5 · 12 areas · mean today 1.83" data-es="fig. 1 · madurez DAMA-DMBOK, niveles 1–5 · 12 áreas · media actual 1,83">fig. 1 · DAMA-DMBOK maturity, levels 1–5 · 12 areas · mean today 1.83</span>
+          <div class="ds-figure__body">
+            <div class="gx" data-arrive>
+              <ol class="gap">
+                <li class="gap__row gap__row--axis" aria-hidden="true">
+                  <span class="gap__name fx-tag" data-en="Knowledge area" data-es="Área de conocimiento">Knowledge area</span>
+                  <span class="gap__track"><span class="gap__tick" style="left:0%">1</span><span class="gap__tick" style="left:25%">2</span><span class="gap__tick" style="left:50%">3</span><span class="gap__tick" style="left:75%">4</span><span class="gap__tick" style="left:100%">5</span></span>
+                  <span class="gap__val fx-tag" data-en="now → target" data-es="hoy → meta">now → target</span>
+                </li>
+                <li class="gap__row" style="--a:0%;--b:75%;--lo:0%;--w:75%">
+                  <span class="gap__name fx-s" data-en="Big data &amp; data science" data-es="Big data y ciencia de datos">Big data &amp; data science</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">1.00 → 4</span>
+                </li>
+                <li class="gap__row" style="--a:22.25%;--b:75%;--lo:22.25%;--w:52.75%">
+                  <span class="gap__name fx-s" data-en="Data quality" data-es="Calidad de datos">Data quality</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">1.89 → 4</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:75%;--lo:25%;--w:50%">
+                  <span class="gap__name fx-s" data-en="Metadata" data-es="Metadatos">Metadata</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 4</span>
+                </li>
+                <li class="gap__row" style="--a:5%;--b:50%;--lo:5%;--w:45%">
+                  <span class="gap__name fx-s" data-en="Integration &amp; interoperability" data-es="Integración e interoperabilidad">Integration &amp; interoperability</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">1.20 → 3</span>
+                </li>
+                <li class="gap__row" style="--a:20%;--b:50%;--lo:20%;--w:30%">
+                  <span class="gap__name fx-s" data-en="Data architecture" data-es="Arquitectura de datos">Data architecture</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">1.80 → 3</span>
+                </li>
+                <li class="gap__row" style="--a:21.25%;--b:50%;--lo:21.25%;--w:28.75%">
+                  <span class="gap__name fx-s" data-en="Data governance" data-es="Gobierno de datos">Data governance</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">1.85 → 3</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:50%;--lo:25%;--w:25%">
+                  <span class="gap__name fx-s" data-en="Storage &amp; operations" data-es="Almacenamiento y operaciones">Storage &amp; operations</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 3</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:25%;--lo:25%;--w:0%">
+                  <span class="gap__name fx-s" data-en="Data modeling" data-es="Modelado de datos">Data modeling</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 2</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:25%;--lo:25%;--w:0%">
+                  <span class="gap__name fx-s" data-en="Data security" data-es="Seguridad de datos">Data security</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 2</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:25%;--lo:25%;--w:0%">
+                  <span class="gap__name fx-s" data-en="Documents &amp; content" data-es="Documentos y contenido">Documents &amp; content</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 2</span>
+                </li>
+                <li class="gap__row" style="--a:25%;--b:25%;--lo:25%;--w:0%">
+                  <span class="gap__name fx-s" data-en="Warehousing &amp; BI" data-es="Bodega de datos y BI">Warehousing &amp; BI</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.00 → 2</span>
+                </li>
+                <li class="gap__row" style="--a:31.25%;--b:25%;--lo:25%;--w:6.25%">
+                  <span class="gap__name fx-s" data-en="Master data" data-es="Datos maestros">Master data</span>
+                  <span class="gap__track" aria-hidden="true"><i class="gap__bar"></i><i class="gap__a"></i><i class="gap__b"></i></span>
+                  <span class="gap__val">2.25 → 2</span>
+                </li>
+              </ol>
+              <div class="gap__key fx-s">
+                <span><i class="gap__a"></i><span data-en="level measured in the diagnosis" data-es="nivel medido en el diagnóstico">level measured in the diagnosis</span></span>
+                <span><i class="gap__b"></i><span data-en="target level" data-es="nivel meta">target level</span></span>
+                <span data-en="1 initial · 2 managed · 3 defined · 4 quantitative · 5 optimized" data-es="1 inicial · 2 gestionado · 3 definido · 4 cuantitativo · 5 optimizado">1 initial · 2 managed · 3 defined · 4 quantitative · 5 optimized</span>
+              </div>
+              <p class="gx__note fx-note" data-en="These three areas cover what a field means, how far to trust it, and what to do with it." data-es="Estas tres áreas cubren qué significa un campo, cuánto confiar en él y qué hacer con él.">These three areas cover what a field means, how far to trust it, and what to do with it.</p>
+            </div>
+          </div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy: each row is one knowledge area, sorted by distance to its target · targets come from the Analytics and Data Science scenario, which the governance committee approved · a square on top of a circle means the area is already at its target" data-es="anatomía: cada fila es un área de conocimiento, ordenada por distancia a su meta · las metas vienen del escenario Analítica y Ciencia de Datos, que aprobó el comité de gobierno · un cuadrado sobre un círculo indica que el área ya está en su meta">anatomy: each row is one knowledge area, sorted by distance to its target · targets come from the Analytics and Data Science scenario, which the governance committee approved · a square on top of a circle means the area is already at its target</span></div>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rehearsal">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">II</span>
+      <span class="rail-name" data-en="Rehearsal" data-es="El ensayo">Rehearsal</span>
+      <span class="ds-note" data-en="A clock, a score, a guide and a helper, taken from games and teaching labs." data-es="Un reloj, un puntaje, una guía y un ayudante, tomados de los juegos y de los laboratorios de enseñanza.">A clock, a score, a guide and a helper, taken from games and teaching labs.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="A clock, a score and a lab" data-es="Un reloj, un puntaje y un laboratorio">A clock, a score and a lab</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="We treated adoption as something to practice, and took the structure from games and teaching labs. The scoring needed as much care as the content. A leader who is rewarded only for agreeing with the system learns to agree with it, so the score had to reward doubt when the doubt was justified." data-es="Tratamos la adopción como algo que se practica, y tomamos la estructura de los juegos y de los laboratorios de enseñanza. La puntuación exigió tanto cuidado como el contenido. Un líder al que solo se le premia por coincidir con el sistema aprende a coincidir con él, así que el puntaje debía premiar la duda cuando la duda estaba justificada.">We treated adoption as something to practice, and took the structure from games and teaching labs. The scoring needed as much care as the content. A leader who is rewarded only for agreeing with the system learns to agree with it, so the score had to reward doubt when the doubt was justified.</p>
+        <p data-en="<strong>Two documents.</strong> The strategic plan covers the diagnosis, the roles, the four phases, the weekly habits and the metrics. The operating guides contain the exercises: their scripts, time limits and scoring. The figures on this page come from the strategic plan, and the exercises are described only in outline." data-es="<strong>Dos documentos.</strong> El plan estratégico cubre el diagnóstico, los roles, las cuatro fases, los hábitos semanales y las métricas. Las guías operativas contienen los ejercicios: sus guiones, límites de tiempo y puntuación. Las cifras de esta página vienen del plan estratégico, y los ejercicios se describen solo en líneas generales."><strong>Two documents.</strong> The strategic plan covers the diagnosis, the roles, the four phases, the weekly habits and the metrics. The operating guides contain the exercises: their scripts, time limits and scoring. The figures on this page come from the strategic plan, and the exercises are described only in outline.</p>
+      </div>
+      <div class="cols" style="margin-top:var(--sp-6)">
+        <div class="cell">
+          <b class="h-min" data-en="Timed decisions" data-es="Decisiones cronometradas">Timed decisions</b>
+          <span data-en="A leader receives a question from their own area together with the observatory's answer. Before time runs out they must use the answer, correct it, or send it back. The exercise is timed because the real decision is too." data-es="Un líder recibe una pregunta de su propia área junto con la respuesta del observatorio. Antes de que se acabe el tiempo debe usar la respuesta, corregirla o devolverla. El ejercicio es cronometrado porque la decisión real también lo es.">A leader receives a question from their own area together with the observatory's answer. Before time runs out they must use the answer, correct it, or send it back. The exercise is timed because the real decision is too.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="A leaderboard" data-es="Una tabla de posiciones">A leaderboard</b>
+          <span data-en="Every round is scored, and the group can see the scores. Leaders know the rule before they play: they earn points for an accurate decision and for catching a wrong output. A leader who accepts everything loses points on the wrong outputs. A leader who rejects everything loses points on accuracy." data-es="Cada ronda se puntúa, y el grupo puede ver los puntajes. Los líderes conocen la regla antes de jugar: ganan puntos por una decisión acertada y por detectar un resultado equivocado. Quien acepta todo pierde puntos con los resultados equivocados. Quien rechaza todo pierde puntos en acierto.">Every round is scored, and the group can see the scores. Leaders know the rule before they play: they earn points for an accurate decision and for catching a wrong output. A leader who accepts everything loses points on the wrong outputs. A leader who rejects everything loses points on accuracy.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="Guided exercises" data-es="Ejercicios guiados">Guided exercises</b>
+          <span data-en="In the first rounds a script says what to look at: where the figure comes from, how fresh the data is, and what its quality sheet says. Later rounds give less of the script, and the leader decides what to check." data-es="En las primeras rondas un guion dice qué mirar: de dónde sale la cifra, qué tan frescos son los datos y qué dice su hoja de calidad. Las rondas siguientes entregan menos guion, y el líder decide qué revisar.">In the first rounds a script says what to look at: where the figure comes from, how fresh the data is, and what its quality sheet says. Later rounds give less of the script, and the leader decides what to check.</span>
+        </div>
+        <div class="cell">
+          <b class="h-min" data-en="Lab assistance" data-es="Asistencia de laboratorio">Lab assistance</b>
+          <span data-en="Someone from the transformation team sits with the group, as a lab assistant would. They answer questions, step in when the group is stuck, and otherwise watch. The plan sets in advance how much of the work the assistant does in each phase." data-es="Alguien del equipo de transformación se sienta con el grupo, como lo haría un asistente de laboratorio. Responde preguntas, interviene cuando el grupo se atasca y el resto del tiempo observa. El plan fija de antemano cuánto del trabajo hace el asistente en cada fase.">Someone from the transformation team sits with the group, as a lab assistant would. They answer questions, step in when the group is stuck, and otherwise watch. The plan sets in advance how much of the work the assistant does in each phase.</span>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="<strong>Where intuition about quality comes from.</strong> The exercises are practice. The plan also builds the same judgment into the working week through two habits. In the data-health check, a steward looks at freshness, volumes and failed loads, then assigns each service one of four states. In triage, the team rates the severity of every incident, and a P0 or P1 needs a root-cause analysis within <span class='ds-num'>5</span> business days. Those analyses, together with the list of incidents that recurred within <span class='ds-num'>30</span> days, show the team which of its earlier calls were wrong." data-es="<strong>De dónde sale la intuición sobre la calidad.</strong> Los ejercicios son práctica. El plan además incorpora el mismo juicio a la semana de trabajo mediante dos hábitos. En la revisión de salud de datos, un gestor mira frescura, volúmenes y cargas fallidas, y asigna a cada servicio uno de cuatro estados. En el triaje, el equipo califica la severidad de cada incidente, y un P0 o P1 necesita un análisis de causa raíz en <span class='ds-num'>5</span> días hábiles. Esos análisis, junto con la lista de incidentes que se repitieron dentro de <span class='ds-num'>30</span> días, le muestran al equipo cuáles de sus decisiones anteriores estaban equivocadas."><strong>Where intuition about quality comes from.</strong> The exercises are practice. The plan also builds the same judgment into the working week through two habits. In the data-health check, a steward looks at freshness, volumes and failed loads, then assigns each service one of four states. In triage, the team rates the severity of every incident, and a P0 or P1 needs a root-cause analysis within <span class='ds-num'>5</span> business days. Those analyses, together with the list of incidents that recurred within <span class='ds-num'>30</span> days, show the team which of its earlier calls were wrong.</p>
+        <p data-en="<strong>Where deciding under uncertainty comes from.</strong> The third habit is called <em>use and fix</em>. A team works with a dataset as it is and keeps its quality sheet open. It reports whatever gets in the way and repairs it in the same weekly session. Nobody waits for clean data before deciding. The team learns how far the data it has can be relied on." data-es="<strong>De dónde sale decidir bajo incertidumbre.</strong> El tercer hábito se llama <em>usar y arreglar</em>. Un equipo trabaja con un conjunto de datos tal como está y mantiene abierta su hoja de calidad. Reporta lo que estorba y lo repara en la misma sesión semanal. Nadie espera datos limpios para decidir. El equipo aprende hasta dónde puede apoyarse en los datos que tiene."><strong>Where deciding under uncertainty comes from.</strong> The third habit is called <em>use and fix</em>. A team works with a dataset as it is and keeps its quality sheet open. It reports whatever gets in the way and repairs it in the same weekly session. Nobody waits for clean data before deciding. The team learns how far the data it has can be relied on.</p>
+      </div>
+
+      <div class="figure-slot" id="fig-loop">
+        <figure class="ds-figure fx-figure">
+          <p class="ds-figure__title" data-en="Four timed habits form a loop that runs from a daily check to a monthly decision" data-es="Cuatro hábitos cronometrados forman un ciclo que va de una revisión diaria a una decisión mensual">Four timed habits form a loop that runs from a daily check to a monthly decision</p>
+          <span class="ds-label ds-figure__sub" data-en="fig. 2 · session lengths as written in the plan" data-es="fig. 2 · duración de las sesiones según el plan">fig. 2 · session lengths as written in the plan</span>
+          <div class="ds-figure__body">
+            <div class="gx loop" data-arrive>
+              <div class="loop__ring" aria-hidden="true"></div>
+              <ol class="loop__stops">
+                <li class="loop__stop loop__stop--n">
+                  <span class="fx-tag" data-en="01 · detects" data-es="01 · detecta">01 · detects</span>
+                  <b class="fx-t" data-en="Data health" data-es="Salud de datos">Data health</b>
+                  <span class="loop__time">15–30 min</span>
+                  <span class="fx-s" data-en="daily · 45–60 min weekly" data-es="diario · 45–60 min semanal">daily · 45–60 min weekly</span>
+                  <span class="fx-note" data-en="the call: within service level, degraded, broken, or incident opened" data-es="la decisión: dentro del nivel de servicio, degradado, roto o incidente abierto">the call: within service level, degraded, broken, or incident opened</span>
+                </li>
+                <li class="loop__stop loop__stop--e">
+                  <span class="fx-tag" data-en="02 · prioritizes" data-es="02 · prioriza">02 · prioritizes</span>
+                  <b class="fx-t" data-en="Triage and incidents" data-es="Triaje e incidentes">Triage and incidents</b>
+                  <span class="loop__time">60–90 min</span>
+                  <span class="fx-s" data-en="weekly · root cause in 5 business days for P0 and P1" data-es="semanal · causa raíz en 5 días hábiles para P0 y P1">weekly · root cause in 5 business days for P0 and P1</span>
+                  <span class="fx-note" data-en="the call: P0 operations stopped … P3 an improvement" data-es="la decisión: P0 operación detenida … P3 una mejora">the call: P0 operations stopped … P3 an improvement</span>
+                </li>
+                <li class="loop__stop loop__stop--s">
+                  <span class="fx-tag" data-en="03 · certifies" data-es="03 · certifica">03 · certifies</span>
+                  <b class="fx-t" data-en="Use and fix" data-es="Usar y arreglar">Use and fix</b>
+                  <span class="loop__time">45–90 min</span>
+                  <span class="fx-s" data-en="weekly · and on every release" data-es="semanal · y en cada entrega">weekly · and on every release</span>
+                  <span class="fx-note" data-en="the call: does this indicator pass its tests, yes or no" data-es="la decisión: este indicador pasa sus pruebas, sí o no">the call: does this indicator pass its tests, yes or no</span>
+                </li>
+                <li class="loop__stop loop__stop--w">
+                  <span class="fx-tag" data-en="04 · governs" data-es="04 · gobierna">04 · governs</span>
+                  <b class="fx-t" data-en="Monthly committee" data-es="Comité mensual">Monthly committee</b>
+                  <span class="loop__time">60–90 min</span>
+                  <span class="fx-s" data-en="monthly · pre-read sent 24–48 h before" data-es="mensual · prelectura enviada 24–48 h antes">monthly · pre-read sent 24–48 h before</span>
+                  <span class="fx-note" data-en="the call: five to seven priorities, each with an owner and a date" data-es="la decisión: de cinco a siete prioridades, cada una con responsable y fecha">the call: five to seven priorities, each with an owner and a date</span>
+                </li>
+                <li class="loop__clock" aria-hidden="true"><span class="loop__hand"></span></li>
+              </ol>
+            </div>
+          </div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy: the four boxes are the habits, read clockwise from the top · the blue line in each box is the judgment that habit asks for, and the judgment is what gets rehearsed" data-es="anatomía: las cuatro cajas son los hábitos, leídos en el sentido del reloj desde arriba · la línea azul de cada caja es el juicio que ese hábito pide, y ese juicio es lo que se ensaya">anatomy: the four boxes are the habits, read clockwise from the top · the blue line in each box is the judgment that habit asks for, and the judgment is what gets rehearsed</span></div>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="fading">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">III</span>
+      <span class="rail-name" data-en="Fading help" data-es="Ayuda que se retira">Fading help</span>
+      <span class="ds-note" data-en="The helper's share is written down before the first session and only goes down." data-es="La parte del ayudante se escribe antes de la primera sesión y solo baja.">The helper's share is written down before the first session and only goes down.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Help that is scheduled to leave" data-es="Ayuda con fecha de salida">Help that is scheduled to leave</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="Assistance is the mechanic most likely to backfire, because a team that always has an expert in the room learns to ask the expert. The plan therefore sets how much of the operation the transformation team carries in each phase. It also gives the internal team a growing share of incidents and changes to resolve alone. A team moves to the next phase only when it meets those criteria, however much time has passed." data-es="La asistencia es la mecánica que más fácil se vuelve en contra, porque un equipo que siempre tiene un experto en la sala aprende a preguntarle al experto. Por eso el plan fija cuánto de la operación carga el equipo de transformación en cada fase. También le da al equipo interno una proporción creciente de incidentes y cambios que debe resolver solo. Un equipo pasa a la siguiente fase solo cuando cumple esos criterios, sin importar cuánto tiempo haya pasado.">Assistance is the mechanic most likely to backfire, because a team that always has an expert in the room learns to ask the expert. The plan therefore sets how much of the operation the transformation team carries in each phase. It also gives the internal team a growing share of incidents and changes to resolve alone. A team moves to the next phase only when it meets those criteria, however much time has passed.</p>
+      </div>
+
+      <div class="figure-slot" id="fig-fade">
+        <figure class="ds-figure fx-figure">
+          <p class="ds-figure__title" data-en="The assistant starts by doing all of the work and ends by being called when needed" data-es="El asistente empieza haciendo todo el trabajo y termina siendo llamado cuando hace falta">The assistant starts by doing all of the work and ends by being called when needed</p>
+          <span class="ds-label ds-figure__sub" data-en="fig. 3 · share of the operation carried by the transformation team, by phase" data-es="fig. 3 · proporción de la operación a cargo del equipo de transformación, por fase">fig. 3 · share of the operation carried by the transformation team, by phase</span>
+          <div class="ds-figure__body">
+            <div class="gx" data-arrive>
+              <ol class="fade">
+                <li class="fade__row" style="--lo:100%;--hi:100%">
+                  <span class="fade__phase"><span class="fx-tag" data-en="Phase 1 · 3 months" data-es="Fase 1 · 3 meses">Phase 1 · 3 months</span><b class="fx-t" data-en="Foundations" data-es="Fundamentos">Foundations</b></span>
+                  <span class="fade__track" aria-hidden="true"><i class="fade__hi"></i><i class="fade__lo"></i></span>
+                  <span class="fade__share">100%</span>
+                  <span class="fade__gate"><span class="fx-s" data-en="the team learns its roles and watches the operation" data-es="el equipo aprende sus roles y observa la operación">the team learns its roles and watches the operation</span><span class="fx-s" data-en="in-house target: none yet" data-es="meta interna: aún ninguna">in-house target: none yet</span></span>
+                </li>
+                <li class="fade__row" style="--lo:60%;--hi:80%">
+                  <span class="fade__phase"><span class="fx-tag" data-en="Phase 2 · 3–6 months" data-es="Fase 2 · 3–6 meses">Phase 2 · 3–6 months</span><b class="fx-t" data-en="Practice" data-es="Práctica">Practice</b></span>
+                  <span class="fade__track" aria-hidden="true"><i class="fade__hi"></i><i class="fade__lo"></i></span>
+                  <span class="fade__share">60–80%</span>
+                  <span class="fade__gate"><span class="fx-s" data-en="the team executes with a guide" data-es="el equipo ejecuta con guía">the team executes with a guide</span><span class="fx-s" data-en="in-house target: 30% of incidents" data-es="meta interna: 30% de los incidentes">in-house target: 30% of incidents</span></span>
+                </li>
+                <li class="fade__row" style="--lo:20%;--hi:30%">
+                  <span class="fade__phase"><span class="fx-tag" data-en="Phase 3 · 6 months" data-es="Fase 3 · 6 meses">Phase 3 · 6 months</span><b class="fx-t" data-en="Autonomy" data-es="Autonomía">Autonomy</b></span>
+                  <span class="fade__track" aria-hidden="true"><i class="fade__hi"></i><i class="fade__lo"></i></span>
+                  <span class="fade__share">20–30%</span>
+                  <span class="fade__gate"><span class="fx-s" data-en="the team operates and governs; help supervises" data-es="el equipo opera y gobierna; la ayuda supervisa">the team operates and governs; help supervises</span><span class="fx-s" data-en="in-house target: 80% of incidents" data-es="meta interna: 80% de los incidentes">in-house target: 80% of incidents</span></span>
+                </li>
+                <li class="fade__row" style="--lo:0%;--hi:0%">
+                  <span class="fade__phase"><span class="fx-tag" data-en="Phase 4 · onward" data-es="Fase 4 · en adelante">Phase 4 · onward</span><b class="fx-t" data-en="Maturity" data-es="Madurez">Maturity</b></span>
+                  <span class="fade__track" aria-hidden="true"><i class="fade__hi"></i><i class="fade__lo"></i></span>
+                  <span class="fade__share"><small data-en="on demand" data-es="a demanda">on demand</small></span>
+                  <span class="fade__gate"><span class="fx-s" data-en="the team is self-sufficient" data-es="el equipo es autosuficiente">the team is self-sufficient</span><span class="fx-s" data-en="in-house target: 95% of incidents" data-es="meta interna: 95% de los incidentes">in-house target: 95% of incidents</span></span>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="ds-figure__anatomy"><span class="ds-label" data-en="anatomy: the solid bar is the lower bound of the assistant's share and the hatched part is the range the plan allows · the right column shows what the internal team should be resolving alone by that phase" data-es="anatomía: la barra sólida es el límite inferior de la parte del asistente y la zona rayada es el rango que permite el plan · la columna derecha muestra lo que el equipo interno ya debería resolver solo en esa fase">anatomy: the solid bar is the lower bound of the assistant's share and the hatched part is the range the plan allows · the right column shows what the internal team should be resolving alone by that phase</span></div>
+        </figure>
+      </div>
+
+      <div class="legend-grid" style="margin-top:var(--sp-5)">
+        <dl>
+          <dt class="ds-label" data-en="Two tracks" data-es="Dos carriles">Two tracks</dt>
+          <dd data-en="Functional teams and technical teams go through the same four phases in parallel and synchronize at set points." data-es="Los equipos funcionales y los técnicos recorren las mismas cuatro fases en paralelo y se sincronizan en puntos definidos.">Functional teams and technical teams go through the same four phases in parallel and synchronize at set points.</dd>
+        </dl>
+        <dl>
+          <dt class="ds-label" data-en="A speed check" data-es="Una prueba de velocidad">A speed check</dt>
+          <dd data-en="By phase 3 the internal team should resolve an incident in no more than <span class='ds-num'>1.5×</span> the transformation team's time, and by phase 4 in no more than <span class='ds-num'>1.2×</span>." data-es="En la fase 3 el equipo interno debería resolver un incidente en no más de <span class='ds-num'>1,5×</span> el tiempo del equipo de transformación, y en la fase 4 en no más de <span class='ds-num'>1,2×</span>.">By phase 3 the internal team should resolve an incident in no more than <span class='ds-num'>1.5×</span> the transformation team's time, and by phase 4 in no more than <span class='ds-num'>1.2×</span>.</dd>
+        </dl>
+        <dl>
+          <dt class="ds-label" data-en="A route per role" data-es="Una ruta por rol">A route per role</dt>
+          <dd data-en="Training differs by what a person does with a record: capture it, register it, analyze it, or decide with it. Each route has its own exercises and deliverables." data-es="La formación cambia según lo que cada persona hace con un registro: capturarlo, registrarlo, analizarlo o decidir con él. Cada ruta tiene sus propios ejercicios y entregables.">Training differs by what a person does with a record: capture it, register it, analyze it, or decide with it. Each route has its own exercises and deliverables.</dd>
+        </dl>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="decisions">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">IV</span>
+      <span class="rail-name" data-en="Four design decisions" data-es="Cuatro decisiones">Four design decisions</span>
+      <span class="ds-note" data-en="Each decision responds to a common way training fails." data-es="Cada decisión responde a una forma común en que falla la formación.">Each decision responds to a common way training fails.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Four decisions and the reason for each" data-es="Cuatro decisiones y la razón de cada una">Four decisions and the reason for each</h2>
+
+      <div class="matrix" style="margin-top:var(--sp-6)">
+        <div class="mhead">
+          <span class="ds-label" data-en="Decision" data-es="Decisión">Decision</span>
+          <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+          <span class="ds-label" data-en="What would go wrong without it" data-es="Qué saldría mal sin ella">What would go wrong without it</span>
+        </div>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision A" data-es="Decisión A">Decision A</span>
+              <span class="h-min" data-en="Put the clock inside the exercise" data-es="Meter el reloj dentro del ejercicio">Put the clock inside the exercise</span>
+            </h3>
+            <p data-en="Leaders decide against a time limit from the first round, including the guided rounds." data-es="Los líderes deciden contra un límite de tiempo desde la primera ronda, incluidas las rondas guiadas.">Leaders decide against a time limit from the first round, including the guided rounds.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Some knowledge only works when there is time to think. A person can explain how to verify a figure and still accept the first answer when a meeting starts in ten minutes." data-es="Hay conocimiento que solo funciona cuando hay tiempo para pensar. Una persona puede explicar cómo verificar una cifra y aun así aceptar la primera respuesta cuando la reunión empieza en diez minutos.">Some knowledge only works when there is time to think. A person can explain how to verify a figure and still accept the first answer when a meeting starts in ten minutes.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="Leaders would score well on tests and decide the same way as before when time was short." data-es="Los líderes sacarían buenas notas en las pruebas y decidirían igual que antes cuando el tiempo fuera corto.">Leaders would score well on tests and decide the same way as before when time was short.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision B" data-es="Decisión B">Decision B</span>
+              <span class="h-min" data-en="Score the catch as well as the answer" data-es="Puntuar la detección además de la respuesta">Score the catch as well as the answer</span>
+            </h3>
+            <p data-en="The leaderboard counts whether the final decision was accurate and how often the leader caught a wrong output." data-es="La tabla de posiciones cuenta si la decisión final fue acertada y cuántas veces el líder detectó un resultado equivocado.">The leaderboard counts whether the final decision was accurate and how often the leader caught a wrong output.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Trust can be misplaced in either direction. A score for agreement alone teaches leaders to accept the system. A score for catches alone teaches them to reject it." data-es="La confianza puede estar mal puesta en cualquiera de los dos sentidos. Un puntaje que solo premia la coincidencia les enseña a los líderes a aceptar el sistema. Uno que solo premia las detecciones les enseña a rechazarlo.">Trust can be misplaced in either direction. A score for agreement alone teaches leaders to accept the system. A score for catches alone teaches them to reject it.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="<strong>Leaders would learn either to stop checking the observatory or to stop using it.</strong>" data-es="<strong>Los líderes aprenderían a dejar de revisar el observatorio o a dejar de usarlo.</strong>"><strong>Leaders would learn either to stop checking the observatory or to stop using it.</strong></p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision C" data-es="Decisión C">Decision C</span>
+              <span class="h-min" data-en="Practice on the observatory's real outputs" data-es="Practicar con los resultados reales del observatorio">Practice on the observatory's real outputs</span>
+            </h3>
+            <p data-en="The questions come from each leader's own area, and the answers are the ones the observatory gave." data-es="Las preguntas vienen del área de cada líder, y las respuestas son las que dio el observatorio.">The questions come from each leader's own area, and the answers are the ones the observatory gave.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="Sample cases teach the tool. Intuition about quality depends on local knowledge: which field is often blank, which source arrives late, and which kinds of question the agent tends to get wrong." data-es="Los casos de ejemplo enseñan la herramienta. La intuición sobre la calidad depende de conocimiento local: qué campo suele venir vacío, qué fuente llega tarde y qué tipos de pregunta suele responder mal el agente.">Sample cases teach the tool. Intuition about quality depends on local knowledge: which field is often blank, which source arrives late, and which kinds of question the agent tends to get wrong.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="Leaders would know the software and still not know which of their own numbers to doubt." data-es="Los líderes conocerían el programa y seguirían sin saber de cuáles de sus propios números dudar.">Leaders would know the software and still not know which of their own numbers to doubt.</p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div>
+            <h3>
+              <span class="ds-label mk" data-en="Decision D" data-es="Decisión D">Decision D</span>
+              <span class="h-min" data-en="Schedule the help to leave" data-es="Ponerle fecha de salida a la ayuda">Schedule the help to leave</span>
+            </h3>
+            <p data-en="The plan fixes the assistant's share of the operation for each phase, and a team advances on what it resolves alone." data-es="El plan fija la parte del asistente en la operación para cada fase, y un equipo avanza según lo que resuelve solo.">The plan fixes the assistant's share of the operation for each phase, and a team advances on what it resolves alone.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Risk it addresses" data-es="Riesgo que atiende">Risk it addresses</span>
+            <p class="col-body" data-en="The office could come to depend on the consulting team, and adoption would be measured while the helper was still in the room." data-es="La oficina podría terminar dependiendo del equipo consultor, y la adopción se mediría mientras el ayudante seguía en la sala.">The office could come to depend on the consulting team, and adoption would be measured while the helper was still in the room.</p>
+          </div>
+          <div>
+            <span class="ds-label" data-en="Without it" data-es="Sin ella">Without it</span>
+            <p class="col-body" data-en="The office would look capable while the contract lasted. The first incident it handled alone would show how much it had learned." data-es="La oficina parecería capaz mientras durara el contrato. El primer incidente que atendiera sola mostraría cuánto había aprendido.">The office would look capable while the contract lasted. The first incident it handled alone would show how much it had learned.</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="measures">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">V</span>
+      <span class="rail-name" data-en="Measures" data-es="Medición">Measures</span>
+      <span class="ds-note" data-en="Two baselines from the diagnosis, three targets from the plan." data-es="Dos líneas base del diagnóstico, tres metas del plan.">Two baselines from the diagnosis, three targets from the plan.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="What the plan will be measured against" data-es="Contra qué se medirá el plan">What the plan will be measured against</h2>
+
+      <div style="margin-top:var(--sp-6)">
+        <div class="ds-metrics">
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">1.83</span><span class="ds-label ds-metric__label" data-en="of 5 · maturity measured" data-es="de 5 · madurez medida">of 5 · maturity measured</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">22%</span><span class="ds-label ds-metric__label" data-en="controls in place · 19 of 87" data-es="controles en funcionamiento · 19 de 87">controls in place · 19 of 87</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">≥ 0.4</span><span class="ds-label ds-metric__label" data-en="target · learning gain" data-es="meta · ganancia de aprendizaje">target · learning gain</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">≥ 60%</span><span class="ds-label ds-metric__label" data-en="target · score at 30 days" data-es="meta · puntaje a los 30 días">target · score at 30 days</span></div>
+          <div class="ds-metric"><span class="ds-num ds-num--hero ds-metric__value">95%</span><span class="ds-label ds-metric__label" data-en="target · incidents resolved in-house, phase 4" data-es="meta · incidentes resueltos internamente, fase 4">target · incidents resolved in-house, phase 4</span></div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="Learning gain is the share of the possible improvement that a person achieved. It is the post-test score minus the pre-test score, divided by <span class='ds-num'>100</span> minus the pre-test score. The same test is repeated <span class='ds-num'>30</span> days later. The plan also tracks an application rate: the share of trained people still using the tools <span class='ds-num'>30–60</span> days later, with a target of <span class='ds-num'>70%</span>. Attendance and satisfaction are recorded, but the plan does not count them as evidence that anyone decides differently." data-es="La ganancia de aprendizaje es la parte de la mejora posible que una persona logró. Es el puntaje posterior menos el previo, dividido entre <span class='ds-num'>100</span> menos el previo. La misma prueba se repite <span class='ds-num'>30</span> días después. El plan también sigue una tasa de aplicación: la proporción de personas formadas que siguen usando las herramientas <span class='ds-num'>30–60</span> días después, con una meta de <span class='ds-num'>70%</span>. La asistencia y la satisfacción se registran, pero el plan no las cuenta como evidencia de que alguien decida distinto.">Learning gain is the share of the possible improvement that a person achieved. It is the post-test score minus the pre-test score, divided by <span class='ds-num'>100</span> minus the pre-test score. The same test is repeated <span class='ds-num'>30</span> days later. The plan also tracks an application rate: the share of trained people still using the tools <span class='ds-num'>30–60</span> days later, with a target of <span class='ds-num'>70%</span>. Attendance and satisfaction are recorded, but the plan does not count them as evidence that anyone decides differently.</p>
+      </div>
+
+      <p class="ds-footnote" style="margin-top:var(--sp-6)">
+        <span class="ds-footnote__mark">[1]</span>
+        <span data-en="The first two figures were measured in the diagnosis. The other three are targets from the plan, whose twelve-month horizon began in March 2026. This page reports no measured outcomes, for the plan or for the leaderboard exercises." data-es="Las dos primeras cifras se midieron en el diagnóstico. Las otras tres son metas del plan, cuyo horizonte de doce meses comenzó en marzo de 2026. Esta página no reporta resultados medidos, ni del plan ni de los ejercicios con tabla de posiciones.">The first two figures were measured in the diagnosis. The other three are targets from the plan, whose twelve-month horizon began in March 2026. This page reports no measured outcomes, for the plan or for the leaderboard exercises.</span>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="next">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num">VI</span>
+      <span class="rail-name" data-en="What I'd probe next" data-es="Qué indagaría">What I'd probe next</span>
+      <span class="ds-note" data-en="Four things I would not defend as finished." data-es="Cuatro cosas que no defendería como terminadas.">Four things I would not defend as finished.</span>
+    </div>
+    <div>
+      <h2 class="h-sec" data-en="Where I think this is still weak" data-es="Dónde creo que esto sigue siendo débil">Where I think this is still weak</h2>
+      <div class="prose" style="margin-top:var(--sp-5)">
+        <p data-en="<strong>A practice clock is weaker than real pressure.</strong> A timed exercise has a limit but no consequences. The design assumes that practice under a time limit carries over to a committee with a director in the room. None of the plan's metrics tests that assumption directly." data-es="<strong>Un reloj de práctica pesa menos que la presión real.</strong> Un ejercicio cronometrado tiene límite pero no tiene consecuencias. El diseño supone que practicar con límite de tiempo se traslada a un comité con un director en la sala. Ninguna métrica del plan pone a prueba ese supuesto de forma directa."><strong>A practice clock is weaker than real pressure.</strong> A timed exercise has a limit but no consequences. The design assumes that practice under a time limit carries over to a committee with a director in the room. None of the plan's metrics tests that assumption directly.</p>
+        <p data-en="<strong>Leaders can learn the game without learning the judgment.</strong> A leaderboard rewards whatever it counts. If wrong outputs turn up at a steady rate, a leader can score well by doubting at that rate, without learning to tell which outputs are wrong. The plan's own targets share the weakness, since a quota of reported incidents rewards reporting. Someone needs to review the cases behind the scores as well as the counts." data-es="<strong>Los líderes pueden aprender el juego sin aprender el juicio.</strong> Una tabla de posiciones premia lo que cuenta. Si los resultados equivocados aparecen a un ritmo constante, un líder puede puntuar bien dudando a ese ritmo, sin aprender a distinguir cuáles están mal. Las metas del plan comparten la debilidad, porque una cuota de incidentes reportados premia reportar. Alguien tiene que revisar los casos detrás de los puntajes, además de los conteos."><strong>Leaders can learn the game without learning the judgment.</strong> A leaderboard rewards whatever it counts. If wrong outputs turn up at a steady rate, a leader can score well by doubting at that rate, without learning to tell which outputs are wrong. The plan's own targets share the weakness, since a quota of reported incidents rewards reporting. Someone needs to review the cases behind the scores as well as the counts.</p>
+        <p data-en="<strong>The leaderboard counts catches but not confidence.</strong> It records whether a leader caught a wrong output. It does not record how sure they were, so it cannot tell a leader who knew from one who guessed. I would ask for a confidence rating with each decision and score calibration directly. I have also not found an established method for teaching this skill to government teams, and that is the research question I want to work on next." data-es="<strong>La tabla cuenta detecciones, pero no confianza.</strong> Registra si un líder detectó un resultado equivocado. No registra qué tan seguro estaba, así que no distingue a quien sabía de quien adivinó. Pediría un nivel de confianza con cada decisión y puntuaría la calibración directamente. Tampoco he encontrado un método establecido para enseñar esta habilidad a equipos de gobierno, y esa es la pregunta de investigación en la que quiero trabajar."><strong>The leaderboard counts catches but not confidence.</strong> It records whether a leader caught a wrong output. It does not record how sure they were, so it cannot tell a leader who knew from one who guessed. I would ask for a confidence rating with each decision and score calibration directly. I have also not found an established method for teaching this skill to government teams, and that is the research question I want to work on next.</p>
+        <p data-en="<strong>Practice cannot stand in for a mandate.</strong> The diagnosis found the same root cause in <span class='ds-num'>4</span> of the <span class='ds-num'>6</span> life-cycle stages: nobody had been formally assigned roles and responsibilities. Teams can rehearse the habits without that mandate, but the habits will not last without it." data-es="<strong>La práctica no sustituye un mandato.</strong> El diagnóstico encontró la misma causa raíz en <span class='ds-num'>4</span> de las <span class='ds-num'>6</span> etapas del ciclo de vida: nadie tenía roles y responsabilidades asignados formalmente. Los equipos pueden ensayar los hábitos sin ese mandato, pero los hábitos no durarán sin él."><strong>Practice cannot stand in for a mandate.</strong> The diagnosis found the same root cause in <span class='ds-num'>4</span> of the <span class='ds-num'>6</span> life-cycle stages: nobody had been formally assigned roles and responsibilities. Teams can rehearse the habits without that mandate, but the habits will not last without it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="onward">
+  <div class="wrap rail-layout">
+    <div class="rail">
+      <span class="num is-arrow">→</span>
+      <span class="rail-name" data-en="Elsewhere" data-es="En otra parte">Elsewhere</span>
+    </div>
+    <div class="grid-cards">
+      <a class="ds-card" href="../agent-architecture/">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Case study" data-es="Caso de estudio">Case study</span></div>
+        <h3 class="ds-card__title" data-en="Agent architecture" data-es="Arquitectura de agentes">Agent architecture</h3>
+        <p class="ds-card__body" data-en="The observatory's analytics agent, whose answers the leaders practiced on, and how it was evaluated." data-es="El agente analítico del observatorio, sobre cuyas respuestas practicaron los líderes, y cómo fue evaluado.">The observatory's analytics agent, whose answers the leaders practiced on, and how it was evaluated.</p>
+        <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
+      </a>
+      <a class="ds-card" href="../anonymization-pipeline/">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Case study" data-es="Caso de estudio">Case study</span></div>
+        <h3 class="ds-card__title" data-en="De-identification pipeline" data-es="Tubería de desidentificación">De-identification pipeline</h3>
+        <p class="ds-card__body" data-en="How personal data is kept out of reach of everything built on top, and what risk remains." data-es="Cómo se mantienen los datos personales fuera del alcance de todo lo construido encima, y qué riesgo queda.">How personal data is kept out of reach of everything built on top, and what risk remains.</p>
+        <span class="ds-card__link" data-en="Read it →" data-es="Leerlo →">Read it →</span>
+      </a>
+      <a class="ds-card" href="../../">
+        <div class="ds-card__meta"><span class="ds-label" data-en="Main site" data-es="Sitio principal">Main site</span></div>
+        <h3 class="ds-card__title" data-en="Portfolio" data-es="Portafolio">Portfolio</h3>
+        <p class="ds-card__body" data-en="Selected work, skills, experience and research." data-es="Proyectos, habilidades, experiencia e investigación.">Selected work, skills, experience and research.</p>
+        <span class="ds-card__link" data-en="Go to portfolio →" data-es="Ir al portafolio →">Go to portfolio →</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site wrap">
+  <div class="ds-label">© <span id="yr">2026</span> Mario Alejandro Tabares Arango</div>
+  <div class="ds-label"><a href="mailto:atabares@andrew.cmu.edu">atabares@andrew.cmu.edu</a></div>
+  <div class="ds-label" data-en="Pittsburgh, PA · Medellín, Colombia" data-es="Pittsburgh, PA · Medellín, Colombia">Pittsburgh, PA · Medellín, Colombia</div>
+  <p class="made" data-en="Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web." data-es="Compuesto en Castoro Titling, Castoro, Instrument Sans y Martian Mono sobre <a href='https://github.com/puedesleerlo/cosmografia'>Cosmografía</a>, el sistema de diseño del autor. Ilustraciones generadas con Recraft a partir de referencias propias del autor, y preparadas a mano para la web.">Set in Castoro Titling, Castoro, Instrument Sans and Martian Mono on <a href="https://github.com/puedesleerlo/cosmografia">Cosmografía</a>, the author’s design system. Illustrations generated with Recraft from the author’s own references, then prepared by hand for the web.</p>
+</footer>
+
+<script>
+window.SITE_FIGURES = [
+  {
+    slot: 'fig-glyph',
+    render: function (DS, R) {
+      return R.createElement(DS.HandGlyph, { name: 'flecha', size: 52, label: null });
+    }
+  }
+];
+</script>
+
+<script src="../../_ds/cosmografia/react.umd.js?v=e91b2616" defer></script>
+<script src="../../_ds/cosmografia/react-dom.umd.js?v=7d4842a9" defer></script>
+<script src="../../_ds/cosmografia/cosmografia.js?v=0fcef5b1" defer></script>
+<script src="../../_ds/site.js?v=b3ee93fb" defer></script>
+</body>
+</html>

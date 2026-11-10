@@ -131,3 +131,157 @@
 
 /* a line too long for its box at the base width is set condensed, not smaller */
 .fx-labels .fx-narrow { font-variation-settings: "wdth" 75; letter-spacing: -0.03em; }
+
+/* ============================================================
+   Figures built from HTML only (work/cultural-adoption)
+
+   No SVG at all: tracks, markers and rings are boxes, every word is
+   text. `data-arrive` (site.js) arms a figure and switches it on when
+   it scrolls in; only transforms and `left` are animated.
+   ============================================================ */
+
+.gx { container: gx / inline-size; }
+.gx ol { list-style: none; margin: 0; padding: 0; }
+.gx .fx-t { font-size: var(--fs-xs); }
+.gx .fx-s, .gx .fx-tag { font-size: var(--fs-2xs); line-height: 1.5; }
+.gx .fx-note { font-size: var(--fs-sm); line-height: 1.4; }
+.gx__note { margin: var(--sp-4) 0 0; max-width: 60ch; }
+
+/* ---- fig. 1 · current level → target, one row per area ---------------- */
+
+.gap__row {
+  display: grid; grid-template-columns: minmax(0, 15.5em) minmax(0, 1fr) 6.5em;
+  gap: var(--sp-4); align-items: center;
+  padding-block: 7px; border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.gap__row--axis { border-bottom-color: var(--ink); padding-block: 0 6px; }
+.gap__track { position: relative; height: 14px; }
+/* level gridlines at 1…5 */
+.gap__track::before {
+  content: ""; position: absolute; inset: -8px 0;
+  background: repeating-linear-gradient(to right, var(--rule) 0 1px, transparent 1px 25%);
+  border-right: 1px solid var(--rule);
+}
+.gap__row--axis .gap__track::before { display: none; }
+.gap__tick {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--muted-ink);
+}
+.gap__bar {
+  position: absolute; top: 6px; height: 2px; left: var(--lo); width: var(--w);
+  background: var(--data-1); transform-origin: left center;
+}
+.gap__a, .gap__b { position: absolute; top: 50%; width: 10px; height: 10px; transform: translate(-50%, -50%); }
+.gap__a { left: var(--a); border: 2px solid var(--ink); border-radius: 50%; background: var(--paper); }
+.gap__b { left: var(--b); background: var(--data-1); }
+.gap__val { font-family: var(--font-mono); font-size: var(--fs-xs); text-align: right; white-space: nowrap; }
+.gap__key { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); margin-top: var(--sp-4); }
+.gap__key span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.gap__key i { position: static; transform: none; flex: none; }
+
+.gx.is-armed:not(.is-on) .gap__bar { transform: scaleX(0); }
+.gx.is-armed:not(.is-on) .gap__b { left: var(--a); }
+.gx.is-on .gap__bar { transition: transform 1100ms cubic-bezier(.2,.7,.2,1); }
+.gx.is-on .gap__b { transition: left 1100ms cubic-bezier(.2,.7,.2,1); }
+
+@container gx (max-width: 560px) {
+  .gap__row { grid-template-columns: minmax(0, 1fr) 6.5em; row-gap: 6px; }
+  .gap__row > .gap__name { grid-column: 1; }
+  .gap__row > .gap__val { grid-column: 2; grid-row: 1; }
+  .gap__row > .gap__track { grid-column: 1 / -1; }
+  .gap__row--axis > .gap__name, .gap__row--axis > .gap__val { display: none; }
+  .gap__row--axis .gap__track { height: 18px; }
+}
+
+/* ---- fig. 2 · four timed habits around a clock ------------------------ */
+
+.loop { position: relative; }
+.loop__stops {
+  position: relative; display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: ". n ." "w c e" ". s .";
+  gap: var(--sp-5) var(--sp-4); align-items: center;
+}
+/* the ring the habits sit on; the cards cover it where they stand */
+.loop__ring {
+  position: absolute; inset: 14% 16%;
+  border: var(--stroke-draw) solid var(--ink); border-radius: 50%;
+}
+.loop__stop {
+  display: grid; gap: 4px; align-content: start;
+  padding: var(--sp-4); background: var(--paper);
+  border: var(--stroke-draw) solid var(--ink);
+}
+.loop__stop--n { grid-area: n; } .loop__stop--e { grid-area: e; }
+.loop__stop--s { grid-area: s; } .loop__stop--w { grid-area: w; }
+.loop__time { font-family: var(--font-mono); font-weight: 250; font-size: 24px; line-height: 1.15; white-space: nowrap; }
+.loop__stop .fx-note { margin-top: 4px; }
+.loop__clock {
+  grid-area: c; justify-self: center; position: relative;
+  width: min(132px, 60%); aspect-ratio: 1; border-radius: 50%;
+  border: var(--stroke-hair) solid var(--ink); background: var(--paper);
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--ocre, #B6AA8D);
+}
+.loop__clock::before {            /* twelve ticks */
+  content: ""; position: absolute; inset: 5px; border-radius: 50%;
+  background: repeating-conic-gradient(var(--ink) 0 1.2deg, transparent 1.2deg 30deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 84%, #000 85%);
+          mask: radial-gradient(closest-side, transparent 84%, #000 85%);
+  transform: rotate(-0.6deg);
+}
+.loop__hand { position: absolute; inset: 0; animation: loop-turn 120s linear infinite; }
+.loop__hand::before {             /* the hand is the blue pencil */
+  content: ""; position: absolute; left: calc(50% - 1.25px); top: 14%; width: 2.5px; height: 36%;
+  background: var(--hand); border-radius: 2px;
+}
+.loop__hand::after {
+  content: ""; position: absolute; left: calc(50% - 4px); top: calc(50% - 4px); width: 8px; height: 8px;
+  border-radius: 50%; background: var(--hand);
+}
+@keyframes loop-turn { to { transform: rotate(360deg); } }
+.gx.is-armed:not(.is-on) .loop__stop { opacity: 0; transform: translateY(10px); }
+.gx.is-on .loop__stop { transition: opacity 700ms ease, transform 700ms ease; }
+.gx.is-on .loop__stop--e { transition-delay: 250ms; }
+.gx.is-on .loop__stop--s { transition-delay: 500ms; }
+.gx.is-on .loop__stop--w { transition-delay: 750ms; }
+
+@container gx (max-width: 640px) {
+  .loop__stops { grid-template-columns: minmax(0, 1fr); grid-template-areas: "c" "n" "e" "s" "w"; gap: var(--sp-3); }
+  .loop__ring { display: none; }
+  .loop__clock { width: 96px; }
+}
+
+/* ---- fig. 3 · the assistant's share, phase by phase ------------------- */
+
+.fade__row {
+  display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr) 5.5em minmax(0, 13em);
+  gap: var(--sp-4); align-items: center;
+  padding-block: var(--sp-4); border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.fade__row:first-child { border-top: var(--stroke-hair) solid var(--ink); }
+.fade__phase, .fade__gate { display: grid; gap: 2px; }
+.fade__track { position: relative; height: 18px; border: var(--stroke-hair) solid var(--ink); }
+.fade__hi, .fade__lo { position: absolute; inset: 0 auto 0 0; transform-origin: left center; }
+.fade__lo { width: var(--lo); background: var(--data-1); }
+.fade__hi {
+  width: var(--hi);
+  background: repeating-linear-gradient(135deg, var(--data-1) 0 1.5px, transparent 1.5px 5px);
+}
+.fade__share { font-family: var(--font-mono); font-weight: 250; font-size: 22px; white-space: nowrap; }
+.fade__share small { font-size: var(--fs-2xs); font-weight: 400; color: var(--muted-ink); }
+.gx.is-armed:not(.is-on) .fade__hi, .gx.is-armed:not(.is-on) .fade__lo { transform: scaleX(0); }
+.gx.is-on .fade__hi, .gx.is-on .fade__lo { transition: transform 1200ms cubic-bezier(.2,.7,.2,1); }
+.gx.is-on .fade__row:nth-child(2) i { transition-delay: 200ms; }
+.gx.is-on .fade__row:nth-child(3) i { transition-delay: 400ms; }
+
+@container gx (max-width: 700px) {
+  .fade__row { grid-template-columns: minmax(0, 1fr) 5.5em; row-gap: var(--sp-2); }
+  .fade__phase, .fade__gate { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loop__hand { animation: none; }
+  .gx.is-armed .gap__bar, .gx.is-armed .fade__hi, .gx.is-armed .fade__lo { transform: none; transition: none; }
+  .gx.is-armed .gap__b { left: var(--b); transition: none; }
+  .gx.is-armed .loop__stop { opacity: 1; transform: none; transition: none; }
+}

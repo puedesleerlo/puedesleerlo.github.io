@@ -12,33 +12,32 @@ index.html                              the whole site
 assets/Mario_Alejandro_Tabares_Arango_CV.pdf   linked from the hero and contact block
 ```
 
-## The through-line
+## The first fifteen seconds
 
-The site is organized around one argument, not around a job history: *how should we
-act when outcomes are uncertain — and our actions change them?* It moves from
-predicting outcomes to asking which interventions improve them, for whom, and under
-what conditions. The **The question** section (`#story`) is a five-movement essay —
-physics, philosophy, risk, governance, and what remains unresolved. Everything else
-on the page is evidence for it:
+The opening should answer who Alejandro is, what he can contribute, and what he
+wants to explore next. Lead with his Carnegie Mellon MS program and the statement
+“I build AI systems people can test and control.” Keep the primary actions visible:
+view selected work, download the CV, or send an email.
 
-- the hero states the question and the turn toward causal inference and evaluation
-- **Selected work comes first** (Plate I), right after the frontispiece: the two
-  case studies side by side, their drawings cut out on the inner edges so they meet in the middle, then the catalog
-- the question (Plate II) is the short version of the essay, beside the arched stair
-- each Experience entry opens with a `.frame` line tying the role back to a movement
-- Selected work reports what each system was *measured against*, not just what it did
-- Education is presented as three chapters chosen in a deliberate order
+- **Selected work** (Plate I) provides two case studies and five more systems.
+- **Skills and education** (Plate II) describes actions, tools, and links to evidence.
+  Explain harness and loop engineering through context, tools, evaluation,
+  feedback, and stopping rules. Describe autonomous ML through experiment workflows.
+- **Interests** (Plate III, `#story`) explicitly presents causal ML, decisions under
+  uncertainty, and technical AI governance as directions being pursued. The longer
+  personal argument remains available at `the-question/`.
+- **Experience** (Plate IV) and **Research** (Plate V) supply the detailed record.
 
-If you edit one part, keep the argument consistent across the others.
+Keep demonstrated work distinct from developing interests. Avoid expertise labels,
+unqualified safety guarantees, or claims that automation removes human judgment.
 
 ## The ask
 
-The page has one concrete request: **a Summer 2027 internship** in applied AI,
-causal inference, and decision science, as a CMU MS student (graduating Dec 2027).
-It appears in three places, which must stay in
-agreement — the `.availability` badge in the hero, the closing paragraph of
-movement V, and the Contact section intro (plus the two `<meta>` descriptions).
-When the target term changes, update all five.
+The page has one concrete request: **a Summer 2027 internship** in applied AI or
+ML systems, as a CMU MS student (graduating Dec 2027). The hero availability line,
+Contact section, two meta descriptions, and the longer essay's closing ask must
+agree on the term. Research interests describe the direction of study, not a claim
+of established specialization.
 
 ## Design
 
@@ -56,14 +55,14 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
 - **Plates.** Illustrations live in `assets/art/` as SVGs prepared with the design
   system's `scripts/art/svgopt.py` and presented as `.ds-atlas` plates. They assemble
   themselves ground-up when they scroll in (`TabaresDS.mountPlates`). The
-  frontispiece outpost carries the four headline metrics as blue-pencil callouts
-  (the dish, the solar array, the board of status lights, the ground floor), which
-  become numbered keys plus a legend on phones.
-- **No image appears twice across the site.** Landing: outpost (frontispiece),
-  conduit and vault (the case-study pair, repeated only on their own case-study
-  page), stair (question), airship (experience), astrolabe (apparatus), zodiac
+  homepage opening uses a compact portrait and text so the introduction and next
+  actions are immediately visible. Larger illustrations accompany the evidence.
+- **No image appears twice across the site.** Landing: conduit and vault
+  (the case-study pair, repeated only on their own case-study page), stair
+  (interests), airship (experience), astrolabe (skills and education), zodiac
   (research), keeper (contact), city (closing). Essay: lighthouse, cosmogram, cabin,
-  figure, whales. When you add a plate, check this list first.
+  figure, whales. Cultural-adoption case study: outpost (formerly the hero).
+  When you add a plate, check this list first.
 - **Figures in the margin move, slowly.** The airship floats and crosses its margin
   as you scroll, the astrolabe swings from its ring, the star chart turns once every
   four minutes, the keeper rises into view. Motion is always on the wrapper element,
@@ -76,14 +75,18 @@ numbered plates (`Plate I…` / `Lám. I…`) in the rail beside each section.
   HTML over or beside the drawing, so it swaps language and reflows. The division
   on the essay page is an HTML bracket with text-free SVG braces (`.bracket` in
   `_ds/site.css`); the case-study diagrams use `_ds/figures.css`.
-- **Catalog.** Selected work is `MAT·01`–`MAT·07`: the two case studies as a
-  framed pair, the rest as rows with a generated constellation seal.
+- **Catalog.** Selected work is `MAT·01`–`MAT·08`: the two case studies as a
+  framed pair, the rest as rows with a generated constellation seal. `MAT·08`
+  is a row that links to its own case study, `work/cultural-adoption/`.
+- **HTML figures.** The cultural-adoption figures use no SVG at all (`.gx` in
+  `_ds/figures.css`): tracks, markers and the clock are boxes, and any element
+  with `data-arrive` plays once when it scrolls in.
 - **Motion** is slow and honors `prefers-reduced-motion`; without JavaScript every
   drawing is a plain `<img>` and every highlight is simply on.
 
 `_ds/cosmografia/` is a copy of the design system's browser build
 (`dist/browser/` in the Cosmografía repo) plus React 18 UMD. The browser build
-needs React loaded before it even where no React figure is mounted. To update it, run `npm run build` in the design
+needs React loaded before it even where no React figure is mounted. To update it, run `pnpm run build` in the design
 system and copy `dist/browser/cosmografia.js` and `styles.css` here. Page layout
 lives in `_ds/site.css`; behavior in `_ds/site.js`.
 
@@ -116,7 +119,9 @@ the site (`site-theme`) is cleared on first load.
 
 ## Content accuracy
 
-Every claim on the page is drawn from the CV in `assets/`.
+Employment and quantitative claims are drawn from the CV in `assets/`. Current
+skills and developing interests also reflect the author's own description; keep
+those separate from measured project outcomes.
 
 Claims are scoped, not absolute. The privacy work is described as de-identification
 (hashed linkage keys, suppression, generalization, release checks, restricted
@@ -128,7 +133,11 @@ update the PDF and the corresponding section here — the two should never disag
 Live figures currently on the page: 230+ credit-risk models, 8 audit cycles with
 zero material findings, USD 14B credit exposure across four countries, 2.5M+
 residents, 65,000+ individuals protected by the PII pipeline, 34 historical data
-standards, 96-question agent benchmark.
+standards, 96-question agent benchmark. The cultural-adoption case study draws
+its figures from the plan document (DAMA maturity 1.83 of 5, 19 of 87 controls)
+and labels every plan target as a target; it reports no measured outcomes.
+The timed-decision exercises and their leaderboard are the author's own
+description; their scripts live in the operating guides, not in the plan.
 
 ## Local preview
 

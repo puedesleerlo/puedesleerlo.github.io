@@ -86,6 +86,9 @@
   /* braces of a bracket draw themselves in when the figure arrives */
   if (DS) document.querySelectorAll('.bracket').forEach(function (b) { DS.watch(b, 'is-armed', 'is-drawn', 0.3); });
 
+  /* HTML figures (figures.css, `.gx`) play once when they scroll in */
+  if (DS) document.querySelectorAll('[data-arrive]').forEach(function (f) { DS.watch(f, 'is-armed', 'is-on', 0.2); });
+
   /* the ember highlight draws itself in when its sentence arrives. It is
      re-armed after a language swap, because innerHTML replaced the mark. */
   function armHighlights() {
